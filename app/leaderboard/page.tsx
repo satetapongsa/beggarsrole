@@ -5,11 +5,13 @@ import Link from "next/link";
 import Flag from "@/components/Flag";
 import type { BoardEntry } from "@/app/api/leaderboard/route";
 import { DATA } from "@/lib/data";
+import { dailyDate, dailyNumber } from "@/lib/daily";
 import { formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { loadLastRun } from "@/lib/storage";
 
-type Board = "all" | "week" | "city";
+type Board = "daily" | "week" | "all" | "city";
+const BOARDS: Board[] = ["daily", "week", "all", "city"];
 
 interface Stats {
   players: number;
@@ -29,6 +31,8 @@ export default function LeaderboardPage() {
   const [mine, setMine] = useState<string | undefined>();
 
   useEffect(() => {
+    const b = new URLSearchParams(window.location.search).get("board") as Board | null;
+    if (b && BOARDS.includes(b)) setBoard(b);
     setMine(loadLastRun()?.name);
     fetch("/api/stats")
       .then((r) => r.json())
@@ -96,14 +100,14 @@ export default function LeaderboardPage() {
           )}
 
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            {(["all", "week", "city"] as Board[]).map((b) => (
+            {BOARDS.map((b) => (
               <button
                 key={b}
                 type="button"
                 onClick={() => setBoard(b)}
                 className={`rounded-full px-4 py-1.5 text-sm ${board === b ? "bg-lamp-500 font-semibold text-black" : "border border-night-600 text-stone-300 hover:bg-night-800"}`}
               >
-                {t(`lb.board.${b}`)}
+                {b === "daily" ? `📅 ${t("lb.board.daily", { n: dailyNumber(dailyDate()) })}` : t(`lb.board.${b}`)}
               </button>
             ))}
             {board === "city" && (

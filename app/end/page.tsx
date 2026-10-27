@@ -1,19 +1,22 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CharacterSprite from "@/components/CharacterSprite";
 import CityBadge from "@/components/CityBadge";
 import RunPanel from "@/components/RunPanel";
+import SurvivorPoster from "@/components/SurvivorPoster";
 import Timeline from "@/components/Timeline";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
+import { dailyNumber } from "@/lib/daily";
 import { lifeStats } from "@/lib/engine";
 import { fill, formatMoney, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { startLife } from "@/lib/online";
 import { makeSeed } from "@/lib/rng";
-import { loadEndingsFound, loadLastLife } from "@/lib/storage";
+import { loadEndingsFound, loadLastLife, type LastRun } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 import type { GameState } from "@/types/game";
 
@@ -23,6 +26,7 @@ export default function EndPage() {
   const [life, setLife] = useState<GameState | null | undefined>(undefined);
   const [found, setFound] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
+  const [run, setRun] = useState<LastRun | null>(null);
 
   useEffect(() => {
     setLife(loadLastLife());
@@ -50,8 +54,14 @@ export default function EndPage() {
       s2: `${st.friends} ${t("og.friends")}`,
       s3: `${st.mealsGiven} ${t("og.meals")}`,
     });
+    if (run?.score) {
+      p.set("score", formatNumber(run.score));
+      p.set("scoreLabel", t("og.score"));
+      if (run.daily && run.dailyRank) p.set("rank", t("daily.rank", { n: dailyNumber(run.daily), rank: formatNumber(run.dailyRank) }));
+      else if (run.rank) p.set("rank", t("lb.rank", { rank: formatNumber(run.rank) }));
+    }
     return `/api/og?${p.toString()}`;
-  }, [life, ending, lang, t]);
+  }, [life, ending, lang, t, run]);
 
   if (life === undefined) return <div className="flex min-h-dvh items-center justify-center text-stone-500">…</div>;
 
@@ -76,7 +86,8 @@ export default function EndPage() {
     ending: lang === "th" ? ending.title_th : ending.title_en,
     rarity: t(`rarity.${ending.rarity}`),
     line: fill(lang === "th" ? ending.line_th : ending.line_en, life, lang),
-  });
+  }) + (run?.score ? `
+🏆 ${t("end.shareScore", { score: formatNumber(run.score) })}${run.daily ? ` · 📅 ${t("daily.badge", { n: dailyNumber(run.daily) })}` : ""}` : "");
 
   const start = (seed: number) => {
     sfx("good");
@@ -127,8 +138,16 @@ export default function EndPage() {
       </div>
 
       <section className="animate-fadeIn text-center">
-        <div className="mb-2 text-xs uppercase tracking-[0.3em] text-stone-500">{t("end.title")}</div>
-        <div className="mx-auto mb-3 flex justify-center">
+        {deathEnding ? (
+          <div className="mx-auto mb-3 inline-block rounded-full border border-red-900 bg-red-950/60 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-red-300">
+            🕯️ {t("end.gameOver")}
+          </div>
+        ) : (
+          <div className="mx-auto mb-3 inline-block rounded-full border border-emerald-800 bg-emerald-950/50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">
+            🌅 {t("end.survived")}
+          </div>
+        )}
+        <div className={`mx-auto mb-3 flex justify-center ${deathEnding ? "opacity-60 grayscale" : ""}`}>
           <CharacterSprite appearance={life.character.appearance} hygiene={life.stats.hygiene} size={56} dog={!!life.companion} />
         </div>
         <div className="text-xl font-semibold">{lang === "th" ? life.character.name_th : life.character.name_en}</div>
@@ -138,7 +157,7 @@ export default function EndPage() {
         <div className="mt-6 animate-popIn text-6xl" aria-hidden>
           {ending.icon}
         </div>
-        <h1 className="lamp-glow mt-2 text-3xl font-bold text-lamp-300">{lang === "th" ? ending.title_th : ending.title_en}</h1>
+        <h1 className={`mt-2 text-3xl font-bold ${deathEnding ? "text-red-200" : "lamp-glow text-lamp-300"}`}>{lang === "th" ? ending.title_th : ending.title_en}</h1>
         <div className="mt-2 flex items-center justify-center gap-2">
           <span className={`rounded-full px-3 py-0.5 text-xs font-semibold uppercase tracking-wide ${RARITY_STYLE[ending.rarity]}`}>
             {t(`rarity.${ending.rarity}`)}
@@ -148,10 +167,14 @@ export default function EndPage() {
         <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-stone-300">
           {fill(lang === "th" ? ending.epitaph_th : ending.epitaph_en, life, lang)}
         </p>
-        <p className="mt-3 text-xs text-stone-500">{t("end.endingsFound", { n: found.length, total: DATA.endings.length })}</p>
+        <Link href="/endings" className="mt-3 inline-block text-xs text-stone-500 underline-offset-2 hover:text-stone-300 hover:underline">
+          📖 {t("end.endingsFound", { n: found.length, total: DATA.endings.length })}
+        </Link>
       </section>
 
-      <RunPanel life={life} />
+      <RunPanel life={life} onResult={setRun} />
+
+      {!deathEnding && <SurvivorPoster life={life} ending={ending} run={run} />}
 
       <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-5">
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-lamp-300">{t("end.stats")}</h2>

@@ -76,13 +76,16 @@ export async function GET(req: Request) {
   const rarityLabel = get("rarityLabel", rarity);
   const line = get("line");
   const stats = [get("s1"), get("s2"), get("s3")].filter(Boolean);
+  const score = get("score");
+  const scoreLabel = get("scoreLabel", "score");
+  const rank = get("rank");
   const tagline =
     lang === "th"
       ? "คุณเลือกไม่ได้ว่าจะล้มลงตรงไหน เลือกได้แค่ว่าจะทำอะไรต่อ"
       : "You don't choose where you fall. Only what you do next.";
   const subtitle = lang === "th" ? "จำลองชีวิตบนทางเท้า" : "A Street Life Simulator";
 
-  const allText = [city, name, age, ending, rarityLabel, line, ...stats, tagline, subtitle, host, "SPARE CHANGE“”·อ่้๊๋์"].join(" ");
+  const allText = [city, name, age, ending, rarityLabel, line, ...stats, score, scoreLabel, rank, tagline, subtitle, host, "SPARE CHANGE“”·#🏆อ่้๊๋์"].join(" ");
   const fonts = (
     await Promise.all([
       googleFont("Kanit", 400, allText),
@@ -176,6 +179,12 @@ export async function GET(req: Request) {
             </div>
             {line && (
               <Txt text={`“${line}”`} size={32} style={{ marginTop: 26, color: "#f5f5f4", maxWidth: 720 }} />
+            )}
+            {score && (
+              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginTop: 24 }}>
+                <div style={{ display: "flex", fontSize: 54, fontWeight: 700, color: "#fbbf24" }}>{`🏆 ${score}`}</div>
+                <Txt text={rank ? `${scoreLabel} · ${rank}` : scoreLabel} size={24} style={{ color: "#d6d3d1" }} />
+              </div>
             )}
           </div>
         </div>

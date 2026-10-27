@@ -6,10 +6,10 @@ import { CharacterPixels } from "@/components/CharacterSprite";
 import Flag from "@/components/Flag";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
-import { startLife } from "@/lib/online";
+import { fetchDaily, startLife, type DailyInfo } from "@/lib/online";
 import { useSettings } from "@/lib/i18n";
 import { makeSeed } from "@/lib/rng";
-import { loadGame, loadLastLife } from "@/lib/storage";
+import { loadDailyStarted, loadGame, loadLastLife, markDailyStarted } from "@/lib/storage";
 import type { GameState } from "@/types/game";
 
 const DEMO = { skin: "#c98e62", hair: "#1b1410", shirt: "#b4443a", pants: "#3a3f4b", hairStyle: 2 };
@@ -30,11 +30,26 @@ export default function TitlePage() {
   const [last, setLast] = useState<GameState | null>(null);
   const [seed, setSeed] = useState("");
   const [showSeed, setShowSeed] = useState(false);
+  const [daily, setDaily] = useState<DailyInfo | null>(null);
+  const [dailyDone, setDailyDone] = useState(false);
 
   useEffect(() => {
     setSave(loadGame());
     setLast(loadLastLife());
+    fetchDaily().then((d) => {
+      if (!d.ok) return;
+      setDaily(d);
+      setDailyDone(loadDailyStarted().includes(d.date));
+    });
   }, []);
+
+  const startDaily = () => {
+    if (!daily || dailyDone) return;
+    sfx("good");
+    markDailyStarted(daily.date);
+    startLife(daily.seed, daily.date);
+    router.push("/play");
+  };
 
   const start = () => {
     sfx("good");
@@ -83,6 +98,17 @@ export default function TitlePage() {
         <button type="button" onClick={start} className="rounded-lg bg-lamp-500 px-6 py-3 text-lg font-semibold text-black shadow-lg shadow-amber-900/40 hover:bg-lamp-400">
           🎲 {t("title.start")}
         </button>
+        {daily &&
+          (dailyDone ? (
+            <button type="button" onClick={() => router.push("/leaderboard?board=daily")} className="rounded-lg border border-sky-800 bg-sky-950/40 px-6 py-2.5 text-sm text-sky-200 hover:bg-sky-900/40">
+              📅 {t("daily.done", { n: daily.number })}
+            </button>
+          ) : (
+            <button type="button" onClick={startDaily} className="rounded-lg border border-sky-600 bg-sky-900/50 px-6 py-3 font-semibold text-sky-100 hover:bg-sky-800/60">
+              📅 {t("daily.play", { n: daily.number })}
+              <span className="block text-xs font-normal text-sky-300/80">{t("daily.hint")}</span>
+            </button>
+          ))}
         {save && !save.ended && (
           <button type="button" onClick={() => router.push("/play")} className="rounded-lg border border-night-600 bg-night-800 px-6 py-3 hover:bg-night-700">
             ▶ {t("title.continue")}
@@ -102,6 +128,9 @@ export default function TitlePage() {
         )}
         <button type="button" onClick={() => router.push("/leaderboard")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
           🏆 {t("title.leaderboard")}
+        </button>
+        <button type="button" onClick={() => router.push("/endings")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
+          📖 {t("title.endings")}
         </button>
         <button type="button" onClick={() => setShowSeed((v) => !v)} className="text-xs text-stone-500 hover:text-stone-300">
           {t("title.seed")}

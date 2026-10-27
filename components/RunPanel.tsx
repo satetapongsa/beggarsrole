@@ -5,16 +5,19 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { dailyNumber } from "@/lib/daily";
 import { formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
-import { claimRun, submitRun } from "@/lib/online";
+import { claimRun, submitRun, syncEndings } from "@/lib/online";
 import type { ScoreBreakdown } from "@/lib/score";
 import { loadLastRun, loadNickname, saveLastRun, saveNickname, type LastRun } from "@/lib/storage";
 import type { GameState } from "@/types/game";
 
 type Status = "sending" | "ready" | "claiming" | "claimed" | "offline" | "invalid";
 
-export default function RunPanel({ life }: { life: GameState }) {
+const ERRORS: Record<string, string> = { bad_request: "lb.error.name", name_blocked: "lb.error.blocked" };
+
+export default function RunPanel({ life, onResult }: { life: GameState; onResult?: (run: LastRun) => void }) {
   const { t } = useSettings();
   const [status, setStatus] = useState<Status>("sending");
   const [run, setRun] = useState<LastRun | null>(null);
@@ -22,31 +25,49 @@ export default function RunPanel({ life }: { life: GameState }) {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
+  const update = (next: LastRun) => {
+    saveLastRun(next);
+    setRun(next);
+    onResult?.(next);
+  };
+
   useEffect(() => {
     setName(loadNickname());
     const endingDay = life.ended?.day ?? 0;
     const saved = loadLastRun();
-    if (saved && saved.seed === life.seed && saved.endingDay === endingDay && saved.runId) {
-      setRun(saved);
-      setStatus(saved.name ? "claimed" : "ready");
+    const same = saved && saved.seed === life.seed && saved.endingDay === endingDay && saved.runId ? saved : null;
+    if (same) {
+      setRun(same);
+      onResult?.(same);
+      setStatus(same.name ? "claimed" : "ready");
     }
     // always (re)submit: it's idempotent on the server and returns the full score breakdown
     let alive = true;
     submitRun(life).then((res) => {
       if (!alive) return;
       if (!res.ok) {
-        if (!saved?.runId) setStatus(res.error === "invalid_run" ? "invalid" : "offline");
+        if (!same) setStatus(res.error === "invalid_run" ? "invalid" : "offline");
         return;
       }
-      const next: LastRun = { ...(saved?.runId === res.runId ? saved : {}), seed: life.seed, endingDay, runId: res.runId, score: res.score.total, rank: saved?.name ? saved.rank : res.rank };
-      saveLastRun(next);
-      setRun(next);
+      void syncEndings();
+      const keep = same?.runId === res.runId && same.name ? same : null;
+      update({
+        ...(keep ?? {}),
+        seed: life.seed,
+        endingDay,
+        runId: res.runId,
+        score: res.score.total,
+        rank: keep ? keep.rank : res.rank,
+        daily: res.daily ?? undefined,
+        dailyRank: keep ? keep.dailyRank : res.dailyRank ?? undefined,
+      });
       setScore(res.score);
-      setStatus(next.name ? "claimed" : "ready");
+      setStatus(keep ? "claimed" : "ready");
     });
     return () => {
       alive = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [life]);
 
   const claim = async () => {
@@ -56,13 +77,16 @@ export default function RunPanel({ life }: { life: GameState }) {
     const res = await claimRun(run.runId, name);
     if (!res.ok && res.error !== "already_claimed") {
       setStatus("ready");
-      setError(t(`lb.error.${res.error === "bad_request" ? "name" : "generic"}`));
+      setError(t(ERRORS[res.error] ?? "lb.error.generic"));
       return;
     }
     saveNickname(name.trim());
-    const next = { ...run, name: name.trim(), rank: res.ok ? res.rank ?? run.rank : run.rank };
-    saveLastRun(next);
-    setRun(next);
+    update({
+      ...run,
+      name: name.trim(),
+      rank: res.ok ? res.rank : run.rank,
+      dailyRank: res.ok ? res.dailyRank ?? undefined : run.dailyRank,
+    });
     setStatus("claimed");
   };
 
@@ -78,7 +102,7 @@ export default function RunPanel({ life }: { life: GameState }) {
     <section className="mt-6 rounded-xl border border-lamp-500/40 bg-night-900 p-5">
       <div className="flex items-baseline justify-between">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-lamp-300">🏆 {t("lb.score")}</h2>
-        <Link href="/leaderboard" className="text-xs text-stone-400 hover:text-stone-200">
+        <Link href={run?.daily ? `/leaderboard?board=daily` : "/leaderboard"} className="text-xs text-stone-400 hover:text-stone-200">
           {t("lb.view")} →
         </Link>
       </div>
@@ -86,10 +110,16 @@ export default function RunPanel({ life }: { life: GameState }) {
         <p className="mt-3 text-sm text-stone-400">{t("lb.sending")}</p>
       ) : (
         <>
-          <div className="mt-2 flex items-baseline gap-3">
+          <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <span className="text-4xl font-bold tabular-nums text-lamp-300">{formatNumber(run?.score ?? 0)}</span>
+            {run?.daily && run.dailyRank && (
+              <span className="rounded-full bg-sky-900/60 px-2.5 py-0.5 text-xs text-sky-200">
+                📅 {t("daily.rank", { n: dailyNumber(run.daily), rank: formatNumber(run.dailyRank) })}
+              </span>
+            )}
             {run?.rank && <span className="text-sm text-stone-400">{t("lb.rank", { rank: formatNumber(run.rank) })}</span>}
           </div>
+          {life.daily && !run?.daily && <p className="mt-1 text-xs text-stone-500">{t("daily.notCounted")}</p>}
           {score && (
             <p className="mt-1 text-xs text-stone-500">
               {t("lb.breakdown", {

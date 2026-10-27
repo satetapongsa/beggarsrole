@@ -114,6 +114,9 @@ export interface LastRun {
   score?: number;
   rank?: number;
   name?: string;
+  /** Set when the server counted this life for that day's daily board. */
+  daily?: string;
+  dailyRank?: number;
 }
 
 export function loadLastRun(): LastRun | null {

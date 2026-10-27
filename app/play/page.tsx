@@ -16,6 +16,7 @@ import Timeline from "@/components/Timeline";
 import { SkipButtons, SummaryModal } from "@/components/SkipPanel";
 import { DATA } from "@/lib/data";
 import { activeFestivals, ageGroupOf, cityOf } from "@/lib/conditions";
+import { dailyNumber } from "@/lib/daily";
 import { actionViews, step } from "@/lib/engine";
 import { fill, formatMoney } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
@@ -145,6 +146,9 @@ export default function PlayPage() {
       <header className="sticky top-0 z-30 -mx-3 mb-3 border-b border-night-700 bg-night-950/90 px-3 py-2 backdrop-blur sm:-mx-4 sm:px-4">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <CityBadge city={city} />
+          {state.daily && (
+            <span className="rounded-full bg-sky-900/60 px-2 py-0.5 text-xs text-sky-200">📅 {t("daily.badge", { n: dailyNumber(state.daily) })}</span>
+          )}
           <span className="text-sm text-stone-300">
             {t("hud.day", { day: state.day })} · <span className="text-lamp-300">{t(`phase.${state.phase}`)}</span> ·{" "}
             {WEATHER_ICON[state.weather]} {t(`weather.${state.weather}`)}

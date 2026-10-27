@@ -1,13 +1,17 @@
 // Headless balance check: plays many lives with the auto-sim and reports outcomes.
-// Run: npm run simulate -- [lives=200] [strategy=balanced]
+// Run: npm run simulate -- [lives=200] [strategy=balanced] [farm]
+// "farm" never takes life-changing actions — the player who avoids escaping to rack up days.
 
 import { newGame, simulateDays, step } from "../lib/engine";
 import { DATA } from "../lib/data";
+import { scoreLife } from "../lib/score";
 import type { GameState, Strategy } from "../types/game";
 
 const lives = Number(process.argv[2] ?? 200);
 const strategy = (process.argv[3] ?? "balanced") as Strategy;
-const MAX_DAYS = 365 * 12;
+const farm = process.argv[4] === "farm";
+const MAX_DAYS = 365 * 60;
+const scores: { escaped: number[]; died: number[] } = { escaped: [], died: [] };
 
 const endings: Record<string, number> = {};
 const days: number[] = [];
@@ -37,7 +41,7 @@ for (let n = 0; n < lives; n++) {
       s = step(s, { type: "dismiss" });
       continue;
     }
-    s = simulateDays(s, 30, strategy);
+    s = simulateDays(s, 30, strategy, !farm);
     s = step(s, { type: "clearSummary" });
   }
   Object.keys(s.eventHistory).forEach((id) => eventsSeen.add(id));
@@ -45,16 +49,24 @@ for (let n = 0; n < lives; n++) {
   endings[id] = (endings[id] ?? 0) + 1;
   const d = s.ended?.day ?? s.day;
   days.push(d);
+  const sc = s.ended && scoreLife(s);
+  if (sc) (DATA.ending[s.ended!.endingId].death ? scores.died : scores.escaped).push(sc.total);
   (cityDeaths[s.citiesLived[0]] ??= []).push(d);
 }
 
 days.sort((a, b) => a - b);
 const q = (p: number) => days[Math.floor(days.length * p)];
-console.log(`${lives} lives, strategy=${strategy}`);
+console.log(`${lives} lives, strategy=${strategy}${farm ? " (farm)" : ""}`);
 console.log(`days survived — p10: ${q(0.1)}  median: ${q(0.5)}  p90: ${q(0.9)}`);
 Object.entries(endings)
   .sort((a, b) => b[1] - a[1])
   .forEach(([k, v]) => console.log(`${String(v).padStart(4)}  ${k}`));
+for (const [k, arr] of Object.entries(scores)) {
+  if (!arr.length) continue;
+  arr.sort((a, b) => a - b);
+  const p = (x: number) => arr[Math.floor(arr.length * x)];
+  console.log(`score (${k}, n=${arr.length}) — p10: ${p(0.1)}  median: ${p(0.5)}  p90: ${p(0.9)}  max: ${arr[arr.length - 1]}`);
+}
 console.log("median days by starting city:");
 Object.entries(cityDeaths).forEach(([c, arr]) => {
   arr.sort((a, b) => a - b);

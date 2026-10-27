@@ -250,7 +250,7 @@
   "lb.view": "View leaderboard",
   "lb.sending": "Verifying this life with the server…",
   "lb.rank": "Rank #{rank} worldwide",
-  "lb.breakdown": "days {days} + got off the street {escape} + kindness {kindness} × city difficulty {mult}",
+  "lb.breakdown": "survival {survival} + got off the street {escape} + speed {speed} + kindness {kindness} × city difficulty {mult}",
   "lb.namePlaceholder": "Nickname for the board",
   "lb.submit": "Submit",
   "lb.claimed": "On the board as {name}",
@@ -268,5 +268,5 @@
   "lb.stat.ended": "Lives finished",
   "lb.stat.today": "Players today",
   "lb.commonEndings": "Most common endings",
-  "lb.howScore": "Score = (days survived × 10 + escape bonus by ending rarity + friends/help/meals shared) × difficulty of your starting city. Every score is verified by the server replaying your life from its seed."
+  "lb.howScore": "Score = (survival points, which slow down the longer you last + escape bonus by ending rarity + speed bonus for escaping sooner + kindness, max 1,500) × difficulty of your starting city. Every score is verified by the server replaying your life from its seed."
 }

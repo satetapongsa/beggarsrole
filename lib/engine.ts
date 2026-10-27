@@ -1284,13 +1284,14 @@ function autoSim(s: GameState, rng: Rng, days: number, strategy: Strategy, bigSt
 
 /**
  * Pure auto-simulation without the day-30/180 unlock gate (used by tests/tools).
- * Unlike the in-game skip, it also takes life-changing actions (rent a room, open a stall).
+ * Unlike the in-game skip, it also takes life-changing actions (rent a room, open a stall)
+ * unless lifeChanging is false.
  */
-export function simulateDays(state: GameState, days: number, strategy: Strategy): GameState {
+export function simulateDays(state: GameState, days: number, strategy: Strategy, lifeChanging = true): GameState {
   if (state.ended || state.pendingEvent || state.eventResult) return state;
   const s = clone(state);
   const rng = new Rng(s.rngState);
-  autoSim(s, rng, days, strategy, true);
+  autoSim(s, rng, days, strategy, lifeChanging);
   s.rngState = rng.state;
   return s;
 }

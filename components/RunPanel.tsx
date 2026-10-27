@@ -93,8 +93,9 @@ export default function RunPanel({ life }: { life: GameState }) {
           {score && (
             <p className="mt-1 text-xs text-stone-500">
               {t("lb.breakdown", {
-                days: formatNumber(score.days),
+                survival: formatNumber(score.survival),
                 escape: formatNumber(score.escape),
+                speed: formatNumber(score.speed),
                 kindness: formatNumber(score.kindness),
                 mult: score.mult,
               })}

@@ -128,9 +128,11 @@ pure engine (`lib/replay.ts`) and computes the score itself (`lib/score.ts`). Id
 deduplicated, and every endpoint is rate-limited per IP. If you change the engine in a way that
 changes outcomes, bump `SAVE_VERSION` — old in-progress lives can no longer be verified.
 
-**Score** = (days survived × 10 + escape bonus by ending rarity [0 for death endings] + friends × 20
-+ times helped × 15 + meals shared × 5) × starting-city difficulty (easy 1 · normal 1.25 · hard 1.5 ·
-brutal 2).
+**Score** (`lib/score.ts`) = (survival `1200·ln(1 + days/60)` + escape bonus by ending rarity
+[2000–9000, 0 for death endings] + speed bonus `3000·(1 − days/730)` for escapes + kindness
+[friends × 20 + helped × 15 + meals shared × 5, max 1500]) × starting-city difficulty (easy 1 · normal
+1.25 · hard 1.5 · brutal 2). The log curve makes escaping beat farming days — check with
+`npm run simulate -- 300 safe x farm`.
 
 **Database:** [Upstash Redis](https://upstash.com) (free tier is plenty). Set either
 `KV_REST_API_URL` + `KV_REST_API_TOKEN` (added automatically by Vercel’s Upstash integration) or

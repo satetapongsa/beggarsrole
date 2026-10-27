@@ -29,7 +29,9 @@ type Act = GameAction | { type: "load"; state: GameState };
 function reducer(s: GameState | null, a: Act): GameState | null {
   if (a.type === "load") return a.state;
   if (!s) return s;
-  return step(s, a);
+  const next = step(s, a);
+  // record only actions that did something, so the server can replay this life exactly
+  return next === s ? s : { ...next, actions: [...(s.actions ?? []), a] };
 }
 
 const CATS: ActionCategory[] = ["earn", "survive", "people", "future"];

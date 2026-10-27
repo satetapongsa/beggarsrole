@@ -4,14 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import CharacterSprite from "@/components/CharacterSprite";
 import CityBadge from "@/components/CityBadge";
+import RunPanel from "@/components/RunPanel";
 import Timeline from "@/components/Timeline";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
-import { lifeStats, newGame } from "@/lib/engine";
+import { lifeStats } from "@/lib/engine";
 import { fill, formatMoney, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
+import { startLife } from "@/lib/online";
 import { makeSeed } from "@/lib/rng";
-import { loadEndingsFound, loadLastLife, saveGame } from "@/lib/storage";
+import { loadEndingsFound, loadLastLife } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 import type { GameState } from "@/types/game";
 
@@ -78,7 +80,7 @@ export default function EndPage() {
 
   const start = (seed: number) => {
     sfx("good");
-    saveGame(newGame(seed));
+    startLife(seed);
     router.push("/play");
   };
 
@@ -149,7 +151,9 @@ export default function EndPage() {
         <p className="mt-3 text-xs text-stone-500">{t("end.endingsFound", { n: found.length, total: DATA.endings.length })}</p>
       </section>
 
-      <section className="mt-8 rounded-xl border border-night-700 bg-night-900 p-5">
+      <RunPanel life={life} />
+
+      <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-5">
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-lamp-300">{t("end.stats")}</h2>
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {stats.map(([icon, label, value]) => (

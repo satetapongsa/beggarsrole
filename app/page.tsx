@@ -6,10 +6,10 @@ import { CharacterPixels } from "@/components/CharacterSprite";
 import Flag from "@/components/Flag";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
-import { newGame } from "@/lib/engine";
+import { startLife } from "@/lib/online";
 import { useSettings } from "@/lib/i18n";
 import { makeSeed } from "@/lib/rng";
-import { loadGame, loadLastLife, saveGame } from "@/lib/storage";
+import { loadGame, loadLastLife } from "@/lib/storage";
 import type { GameState } from "@/types/game";
 
 const DEMO = { skin: "#c98e62", hair: "#1b1410", shirt: "#b4443a", pants: "#3a3f4b", hairStyle: 2 };
@@ -38,8 +38,7 @@ export default function TitlePage() {
 
   const start = () => {
     sfx("good");
-    const s = newGame(parseSeed(seed));
-    saveGame(s);
+    startLife(parseSeed(seed));
     router.push("/play");
   };
 
@@ -101,6 +100,9 @@ export default function TitlePage() {
             {t("title.viewLast")}: {lastEnding.icon} {lang === "th" ? lastEnding.title_th : lastEnding.title_en}
           </button>
         )}
+        <button type="button" onClick={() => router.push("/leaderboard")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
+          🏆 {t("title.leaderboard")}
+        </button>
         <button type="button" onClick={() => setShowSeed((v) => !v)} className="text-xs text-stone-500 hover:text-stone-300">
           {t("title.seed")}
         </button>

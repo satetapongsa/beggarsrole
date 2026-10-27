@@ -8,6 +8,9 @@ const SAVE_KEY = "spare-change:save";
 const LAST_KEY = "spare-change:last-life";
 const SETTINGS_KEY = "spare-change:settings";
 const ENDINGS_KEY = "spare-change:endings";
+const PLAYER_KEY = "spare-change:player";
+const RUN_KEY = "spare-change:last-run";
+const NICK_KEY = "spare-change:nickname";
 
 function read<T>(key: string): T | null {
   try {
@@ -68,6 +71,44 @@ export function saveLastLife(s: GameState) {
 export function loadEndingsFound(): string[] {
   const v = read<string[]>(ENDINGS_KEY);
   return Array.isArray(v) ? v : [];
+}
+
+/** Anonymous random id, so the server can count unique players without a login. */
+export function loadPlayerId(): string {
+  const existing = read<string>(PLAYER_KEY);
+  if (existing) return existing;
+  const id =
+    typeof crypto !== "undefined" && "randomUUID" in crypto
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
+  write(PLAYER_KEY, id);
+  return id;
+}
+
+/** Leaderboard submission for the last life: runId once verified, name once claimed. */
+export interface LastRun {
+  seed: number;
+  endingDay: number;
+  runId?: string;
+  score?: number;
+  rank?: number;
+  name?: string;
+}
+
+export function loadLastRun(): LastRun | null {
+  return read<LastRun>(RUN_KEY);
+}
+
+export function saveLastRun(r: LastRun) {
+  write(RUN_KEY, r);
+}
+
+export function loadNickname(): string {
+  return read<string>(NICK_KEY) ?? "";
+}
+
+export function saveNickname(n: string) {
+  write(NICK_KEY, n);
 }
 
 export interface Settings {

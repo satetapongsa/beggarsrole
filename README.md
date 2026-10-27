@@ -3,8 +3,9 @@
 A browser life-sim where you're rolled into a random life on the streets of one of 15 real cities.
 Survive day by day, find your people, and maybe find a way out. Every life ends differently.
 
-Thai is the primary language (toggle to English any time). No login, no database, no external
-APIs for gameplay — everything runs in the browser and autosaves to `localStorage`.
+Thai is the primary language (toggle to English any time). No login and no external APIs for
+gameplay — everything runs in the browser and autosaves to `localStorage`. An optional Redis
+database adds play statistics and a verified leaderboard (see [Online features](#online-features)).
 
 ## Run locally
 
@@ -19,20 +20,24 @@ Other scripts:
 | --- | --- |
 | `npm run build` / `npm start` | Production build / serve |
 | `npm run validate` | Validates every JSON data file + cross-references (items, actions, traits, flags, i18n parity) |
+| `npm run verify-replay -- 100` | Plays N lives through `step()` like the UI does, then checks the server-side replay reproduces each one — run it after changing the engine |
 | `npm run simulate -- 300 balanced` | Plays N lives headlessly with the auto-pilot (`safe` / `balanced` / `risky`) and prints ending distribution — use it to check balance after changing data |
 
 ## Project layout
 
 ```
-app/            page.tsx (title) · play/ (game) · end/ (life summary) · api/og/ (share card image)
+app/            page.tsx (title) · play/ (game) · end/ (life summary) · leaderboard/
+                api/og/ (share card) · api/track · api/runs · api/leaderboard · api/stats
 components/     StatBar, ChoiceCard, EventModal, PixelScene, CharacterSprite, Timeline,
-                InventoryPanel, CityBadge, Flag, RevealScreen, SpotPicker, SkipPanel, DeltaChips
+                InventoryPanel, CityBadge, Flag, RevealScreen, SpotPicker, SkipPanel, DeltaChips,
+                RunPanel
 data/           cities, origins, actions, events, endings, traits, items (JSON)
 lib/            engine.ts (pure game logic) · rng.ts (seeded mulberry32) · conditions.ts
                 format.ts · data.ts (load + validate) · storage.ts · i18n.tsx · sound.ts · ui.ts
+                score.ts · replay.ts · online.ts (client API calls) · redis.ts (server only)
 i18n/           th.json · en.json (UI strings)
 types/game.ts   all shared types
-scripts/        validate-data.ts · simulate.ts
+scripts/        validate-data.ts · simulate.ts · verify-replay.ts
 ```
 
 **Engine rules:** `lib/engine.ts` is pure — `step(state, action) => newState`, no React, no
@@ -108,12 +113,39 @@ cheap meal), `dailyIncome`, `milestoneCash`, seasons (`hotMonths / wetMonths / c
 `tourists`, optional `minRep`), 2–3 `festivals` and 6 `names`. Then add an SVG flag case in
 `components/Flag.tsx` (keyed by city id) — flag emoji don't render on Windows.
 
+## Online features
+
+All optional — without a database the game runs exactly as before and online panels say so.
+
+- **Play stats** (`/api/track`, `/api/stats`): lives started/finished, unique players (an anonymous
+  random id in `localStorage`, counted with HyperLogLog), players today, ending and city counts.
+- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): all-time, this week
+  (ISO week, UTC) and per starting city, top 50 shown, best 1000 kept.
+
+**Anti-cheat:** the play page records every action that changed the state (`GameState.actions`).
+When a life ends, the client sends only `seed` + `actions`; `/api/runs` replays them with the same
+pure engine (`lib/replay.ts`) and computes the score itself (`lib/score.ts`). Identical runs are
+deduplicated, and every endpoint is rate-limited per IP. If you change the engine in a way that
+changes outcomes, bump `SAVE_VERSION` — old in-progress lives can no longer be verified.
+
+**Score** = (days survived × 10 + escape bonus by ending rarity [0 for death endings] + friends × 20
++ times helped × 15 + meals shared × 5) × starting-city difficulty (easy 1 · normal 1.25 · hard 1.5 ·
+brutal 2).
+
+**Database:** [Upstash Redis](https://upstash.com) (free tier is plenty). Set either
+`KV_REST_API_URL` + `KV_REST_API_TOKEN` (added automatically by Vercel’s Upstash integration) or
+`UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`. For local dev put them in `.env.local`.
+
+Page views and visitors come from Vercel Web Analytics (`<Analytics />` in `app/layout.tsx`) —
+enable it under the project’s **Analytics** tab.
+
 ## Deploy to Vercel
 
 1. Push this folder to a GitHub repository.
-2. In Vercel: **Add New → Project → Import** the repo. Framework is detected as Next.js; no
-   environment variables or settings are needed.
-3. Deploy. The share card (`/api/og`) runs on the Edge runtime and fetches the Kanit font from
+2. In Vercel: **Add New → Project → Import** the repo. Framework is detected as Next.js.
+3. Project → **Storage → Create Database → Upstash (Redis)**, connect it to the project. This adds
+   the `KV_REST_API_*` env vars. Redeploy so they take effect.
+4. Deploy. The share card (`/api/og`) runs on the Edge runtime and fetches the Kanit font from
    Google Fonts at render time; if that fetch fails it falls back to the default font.
 
 Or from the CLI: `npx vercel` (preview) / `npx vercel --prod`.

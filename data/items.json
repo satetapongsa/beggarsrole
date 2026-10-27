@@ -1,0 +1,22 @@
+[
+  { "id": "goods", "icon": "🧻", "name_th": "ของขายเล็กๆ", "name_en": "Small goods", "desc_th": "ทิชชู่ พวงมาลัย ขนมห่อเล็ก สำหรับขายข้างทาง", "desc_en": "Tissues, flowers, little snacks to sell on the street." },
+  { "id": "blanket", "icon": "🧣", "name_th": "ผ้าห่ม", "name_en": "Blanket", "desc_th": "ช่วยให้อุ่นขึ้นในคืนที่หนาว", "desc_en": "Keeps the worst of the cold away." },
+  { "id": "sleeping_bag", "icon": "🛌", "name_th": "ถุงนอน", "name_en": "Sleeping bag", "desc_th": "สมบัติล้ำค่าในหน้าหนาว", "desc_en": "A treasure in winter." },
+  { "id": "warm_coat", "icon": "🧥", "name_th": "เสื้อโค้ทอุ่นๆ", "name_en": "Warm coat", "desc_th": "เก่าแต่หนา", "desc_en": "Old, but thick." },
+  { "id": "cardboard", "icon": "📦", "name_th": "แผ่นลังกระดาษ", "name_en": "Cardboard", "desc_th": "ที่นอน ป้าย และกำแพงกันลม", "desc_en": "Bed, sign and windbreak in one." },
+  { "id": "raincoat", "icon": "🌧️", "name_th": "เสื้อกันฝน", "name_en": "Raincoat", "desc_th": "เสื้อกันฝนพลาสติกบางๆ แต่ได้ผล", "desc_en": "Thin plastic, but it works." },
+  { "id": "umbrella", "icon": "☂️", "name_th": "ร่ม", "name_en": "Umbrella", "desc_th": "ซี่หักไปหนึ่งซี่ ยังใช้ได้", "desc_en": "One broken spoke. Still works." },
+  { "id": "guitar", "icon": "🎸", "name_th": "กีตาร์เก่า", "name_en": "Old guitar", "desc_th": "สายขาดไปเส้นหนึ่ง แต่ยังร้องเพลงได้", "desc_en": "Missing a string. Still sings." },
+  { "id": "sketchbook", "icon": "📒", "name_th": "สมุดสเก็ตช์", "name_en": "Sketchbook", "desc_th": "เต็มไปด้วยใบหน้าของคนแปลกหน้า", "desc_en": "Full of strangers' faces." },
+  { "id": "family_photo", "icon": "🖼️", "name_th": "รูปครอบครัว", "name_en": "Family photo", "desc_th": "ขอบยับ แต่ทุกคนยังยิ้มอยู่ในนั้น", "desc_en": "Creased at the edges. Everyone's still smiling in it." },
+  { "id": "phone", "icon": "📱", "name_th": "มือถือเก่า", "name_en": "Old phone", "desc_th": "จอแตก แบตหมดเร็ว แต่โทรได้", "desc_en": "Cracked screen, weak battery, still makes calls." },
+  { "id": "medicine", "icon": "💊", "name_th": "ยา", "name_en": "Medicine", "desc_th": "ใช้แทนการไปคลินิกได้หนึ่งครั้ง", "desc_en": "Replaces one clinic visit." },
+  { "id": "id_card", "icon": "🪪", "name_th": "บัตรประชาชน", "name_en": "ID card", "desc_th": "กระดาษใบเล็กที่เปิดประตูใหญ่", "desc_en": "A small card that opens big doors." },
+  { "id": "old_medal", "icon": "🏅", "name_th": "เหรียญรางวัลเก่า", "name_en": "Old medal", "desc_th": "จากชีวิตก่อนหน้านี้", "desc_en": "From a life before this one." },
+  { "id": "drawing", "icon": "🖍️", "name_th": "ภาพวาดของเด็ก", "name_en": "A child's drawing", "desc_th": "รูปคุณยิ้ม ตัวโตกว่าตึก", "desc_en": "You, smiling, taller than the buildings." },
+  { "id": "book", "icon": "📖", "name_th": "หนังสือมือสอง", "name_en": "Used book", "desc_th": "อ่านซ้ำเป็นรอบที่ห้าแล้ว", "desc_en": "On your fifth reread." },
+  { "id": "lottery_ticket", "icon": "🎟️", "name_th": "ลอตเตอรี่", "name_en": "Lottery ticket", "desc_th": "ความฝันราคาถูก", "desc_en": "A cheap dream." },
+  { "id": "backpack", "icon": "🎒", "name_th": "เป้ใบเก่า", "name_en": "Old backpack", "desc_th": "ทุกอย่างที่คุณมีอยู่ในนี้", "desc_en": "Everything you own is in here." },
+  { "id": "letter", "icon": "✉️", "name_th": "จดหมายจากบ้าน", "name_en": "Letter from home", "desc_th": "อ่านจนกระดาษนิ่ม", "desc_en": "Read so often the paper's gone soft." },
+  { "id": "chalk", "icon": "🖍️", "name_th": "ชอล์กสี", "name_en": "Colored chalk", "desc_th": "สำหรับวาดบนทางเท้า", "desc_en": "For pavement art." }
+]

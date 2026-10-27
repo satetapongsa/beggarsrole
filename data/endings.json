@@ -1,0 +1,423 @@
+[
+  {
+    "id": "dog_and_home",
+    "title_th": "บ้านที่มีหมารอ",
+    "title_en": "A Home With a Dog Waiting",
+    "rarity": "epic",
+    "icon": "🏡",
+    "priority": 95,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "has_job",
+        "has_id",
+        "has_housing"
+      ],
+      "companion": true
+    },
+    "epitaph_th": "ห้องเล็กนิดเดียว เจ้าของห้องบ่นเรื่องหมาอยู่สองสัปดาห์ แล้วก็เริ่มแอบให้ขนม {dog}นอนขวางประตูทุกคืน เหมือนเฝ้าไม่ให้ถนนตามเข้ามา คุณออกจากถนนมาได้ และไม่ได้มาคนเดียว",
+    "epitaph_en": "The room is tiny. The landlord complained about the dog for two weeks, then started sneaking it treats. {dog} sleeps across the doorway every night, as if guarding against the street following you in. You got off the street — and you didn't come alone.",
+    "line_th": "เราสองคนออกจากถนนมาด้วยกัน",
+    "line_en": "We both got off the street together."
+  },
+  {
+    "id": "a_good_turn",
+    "title_th": "ความดีที่วนกลับมา",
+    "title_en": "A Good Turn Returned",
+    "rarity": "epic",
+    "icon": "👛",
+    "priority": 92,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "good_turn"
+      ]
+    },
+    "epitaph_th": "กระเป๋าสตางค์ใบนั้นมีเงินพอให้คุณกินได้เป็นเดือน แต่คุณเดินไปคืน หลายเดือนต่อมา เจ้าของกลับมาตามหาคุณ พร้อมงานและห้องพัก \"ผมไม่เคยลืมคนที่ไม่ต้องซื่อสัตย์ก็ได้ แต่เลือกจะซื่อสัตย์\"",
+    "epitaph_en": "That wallet held enough to feed you for a month, and you walked it back. Months later, its owner came looking for you — with a job and a room. \"I never forgot the person who didn't have to be honest, and chose to be.\"",
+    "line_th": "ฉันคืนกระเป๋าสตางค์ แล้วชีวิตก็คืนบางอย่างให้ฉัน",
+    "line_en": "I returned a wallet. Life returned the favor."
+  },
+  {
+    "id": "moved_abroad",
+    "title_th": "ข้ามฟ้าไปเริ่มใหม่",
+    "title_en": "Moved Abroad",
+    "rarity": "legendary",
+    "icon": "✈️",
+    "priority": 90,
+    "conditions": {
+      "flags": [
+        "moved_abroad"
+      ]
+    },
+    "epitaph_th": "จดหมายรับรองจากมูลนิธิ วีซ่าที่รอมาเกือบปี และตั๋วเครื่องบินใบแรกในชีวิต คุณมองเมืองจากหน้าต่างเครื่องบิน เห็นมุมที่เคยนั่ง เล็กเท่าเม็ดทราย ที่โน่นมีงานรออยู่ และคนที่รู้ชื่อคุณ",
+    "epitaph_en": "A sponsorship letter, a visa that took nearly a year, and the first plane ticket of your life. From the window you spot the corner where you used to sit, small as a grain of sand. Over there, a job is waiting — and people who already know your name.",
+    "line_th": "มุมที่ฉันเคยนั่ง มองจากบนฟ้าเล็กนิดเดียว",
+    "line_en": "From the sky, my old corner looked so small."
+  },
+  {
+    "id": "viral_one",
+    "title_th": "คนที่โด่งดังในข้ามคืน",
+    "title_en": "The Viral One",
+    "rarity": "epic",
+    "icon": "📱",
+    "priority": 88,
+    "conditions": {
+      "flags": [
+        "viral_life_changed"
+      ]
+    },
+    "epitaph_th": "คลิปสามนาทีมีคนดูสิบสองล้านครั้ง คนแปลกหน้าทั่วโลกระดมทุนช่วย สื่อมาสัมภาษณ์ คุณใช้เงินก้อนแรกเช่าห้อง ก้อนที่สองซื้อข้าวเลี้ยงทุกคนที่เคยนั่งข้างคุณ อินเทอร์เน็ตลืมคุณในสามสัปดาห์ แต่ห้องนั้นยังอยู่",
+    "epitaph_en": "A three-minute clip, twelve million views. Strangers worldwide chipped in. Reporters came. You spent the first money on a room, and the second on dinner for everyone who ever sat beside you. The internet forgot you in three weeks. The room is still there.",
+    "line_th": "อินเทอร์เน็ตลืมฉันในสามสัปดาห์ แต่ห้องนั้นยังอยู่",
+    "line_en": "The internet forgot me in three weeks. The room stayed."
+  },
+  {
+    "id": "signed_musician",
+    "title_th": "เพลงจากทางเท้า",
+    "title_en": "Songs From the Sidewalk",
+    "rarity": "legendary",
+    "icon": "🎤",
+    "priority": 87,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "signed_deal"
+      ]
+    },
+    "epitaph_th": "อัลบั้มแรกอัดในสตูดิโอจริง แต่เพลงทุกเพลงแต่งบนทางเท้า เพลงเปิดอัลบั้มชื่อเดียวกับมุมที่คุณเคยนั่ง และทุกครั้งที่เล่นสด คุณจะวางหมวกใบเก่าไว้หน้าเวที เพื่อไม่ให้ลืม",
+    "epitaph_en": "The first album was recorded in a real studio, but every song was written on the pavement. The opening track is named after your old corner. At every live show, you set your old hat in front of the stage — so you never forget.",
+    "line_th": "ทุกเพลงของฉันแต่งบนทางเท้า",
+    "line_en": "Every song I have was written on a sidewalk."
+  },
+  {
+    "id": "lucky_ticket",
+    "title_th": "ลอตเตอรี่ใบนั้น",
+    "title_en": "That One Ticket",
+    "rarity": "legendary",
+    "icon": "🎟️",
+    "priority": 86,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "lottery_win"
+      ]
+    },
+    "epitaph_th": "เลขตรงทุกตัว คุณอ่านซ้ำสิบเจ็ดรอบ แล้วก็ร้องไห้ ร้องเหมือนไม่เคยร้องมาก่อน คุณซื้อบ้านหนึ่งหลัง และเปิดครัวหนึ่งแห่งที่ไม่เคยไล่ใครออก",
+    "epitaph_en": "Every number matched. You read it seventeen times, then you cried like you never had before. You bought one house — and opened one kitchen that never turns anyone away.",
+    "line_th": "ฉันอ่านเลขซ้ำสิบเจ็ดรอบ",
+    "line_en": "I checked the numbers seventeen times."
+  },
+  {
+    "id": "ordained",
+    "title_th": "ผ้าเหลืองใต้ร่มโพธิ์",
+    "title_en": "Saffron Under the Bodhi Tree",
+    "rarity": "epic",
+    "icon": "🙏",
+    "priority": 85,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "ordained"
+      ]
+    },
+    "epitaph_th": "หลวงพ่อที่เคยตักข้าวให้คุณทุกเช้าถามว่าอยากบวชไหม วันนี้คุณเดินบิณฑบาตผ่านมุมที่เคยนั่งขอทาน แม่ค้าคนเดิมใส่บาตร และยิ้มแบบที่คุณจำได้",
+    "epitaph_en": "The old monk who served you rice every morning asked if you'd like to ordain. Now you walk the alms round past the corner where you used to beg. The same vendor fills your bowl and smiles the smile you remember.",
+    "line_th": "ฉันเดินบิณฑบาตผ่านมุมที่เคยนั่งขอทาน",
+    "line_en": "I walk the alms round past the corner where I begged."
+  },
+  {
+    "id": "street_school",
+    "title_th": "โรงเรียนใต้สะพาน",
+    "title_en": "The School Under the Bridge",
+    "rarity": "epic",
+    "icon": "🏫",
+    "priority": 84,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "street_school"
+      ]
+    },
+    "epitaph_th": "ห้องเรียนชอล์กบนกำแพงกลายเป็นโรงเรียนจริงที่มูลนิธิสร้างให้ คุณได้เงินเดือน ได้ห้องพัก และได้เห็นเด็กคนแรกที่คุณสอนอ่าน เดินเข้ามหาวิทยาลัย",
+    "epitaph_en": "The chalk-on-the-wall classroom became a real school, built by a foundation. You got a salary, a room — and watched the first child you taught to read walk into university.",
+    "line_th": "ห้องเรียนแรกของฉันคือกำแพงใต้สะพาน",
+    "line_en": "My first classroom was a wall under a bridge."
+  },
+  {
+    "id": "found_a_home",
+    "title_th": "ได้บ้านใหม่",
+    "title_en": "Found a Home",
+    "rarity": "rare",
+    "icon": "🧸",
+    "priority": 83,
+    "conditions": {
+      "flags": [
+        "child_home"
+      ]
+    },
+    "epitaph_th": "บ้านเด็กของมูลนิธิมีเตียงสองชั้น มีการบ้าน มีคนเตือนให้แปรงฟัน คืนแรกคุณนอนไม่หลับเพราะมันเงียบเกินไป คืนที่สองคุณหลับยาวจนเช้า เป็นครั้งแรกในรอบหลายปี",
+    "epitaph_en": "The foundation's children's home has bunk beds, homework, and someone reminding you to brush your teeth. The first night, you couldn't sleep — it was too quiet. The second night you slept straight through to morning, for the first time in years.",
+    "line_th": "คืนที่สอง ฉันหลับยาวจนถึงเช้า",
+    "line_en": "On the second night, I slept until morning."
+  },
+  {
+    "id": "came_home",
+    "title_th": "กลับบ้าน",
+    "title_en": "Came Home",
+    "rarity": "uncommon",
+    "icon": "🏠",
+    "priority": 82,
+    "conditions": {
+      "flags": [
+        "family_reunion"
+      ]
+    },
+    "epitaph_th": "ประตูเปิดออก ไม่มีใครพูดอะไรอยู่นาน แล้วก็มีคนหนึ่งร้องไห้ อีกคนหนึ่งตามไปตั้งหม้อข้าว ทุกอย่างยังไม่หายดี แต่มีเก้าอี้ว่างตัวหนึ่งที่โต๊ะ และมันเป็นของคุณ",
+    "epitaph_en": "The door opened. For a long time nobody spoke. Then someone cried, and someone else went to put the rice on. Not everything is healed. But there's an empty chair at the table, and it's yours.",
+    "line_th": "มีเก้าอี้ว่างตัวหนึ่งที่โต๊ะ และมันเป็นของฉัน",
+    "line_en": "There was an empty chair at the table, and it was mine."
+  },
+  {
+    "id": "helper",
+    "title_th": "จากผู้รับ สู่ผู้ให้",
+    "title_en": "Became a Helper",
+    "rarity": "epic",
+    "icon": "🤝",
+    "priority": 81,
+    "conditions": {
+      "flags": [
+        "joined_ngo"
+      ]
+    },
+    "epitaph_th": "ตอนนี้คุณใส่เสื้อกั๊กของมูลนิธิ เดินออกไปตอนกลางคืนพร้อมกระติกชาร้อน คุณรู้ว่ามุมไหนลมแรง รู้ว่าใครไม่ชอบให้ปลุก และรู้ว่าบางครั้ง การนั่งลงข้างใครสักคนก็สำคัญกว่าอะไรทั้งหมด",
+    "epitaph_en": "Now you wear the foundation's vest and walk out at night with a flask of hot tea. You know which corners catch the wind, who hates being woken, and that sometimes sitting down beside someone matters more than anything else.",
+    "line_th": "ฉันรู้ว่ามุมไหนลมแรง เพราะเคยนอนที่นั่น",
+    "line_en": "I know which corners catch the wind. I've slept there."
+  },
+  {
+    "id": "off_street",
+    "title_th": "ลุกจากทางเท้า",
+    "title_en": "Got Off the Street",
+    "rarity": "uncommon",
+    "icon": "🔑",
+    "priority": 80,
+    "conditions": {
+      "flags": [
+        "has_job",
+        "has_id",
+        "has_housing"
+      ]
+    },
+    "epitaph_th": "บัตรประชาชน งานประจำ และกุญแจหนึ่งดอก สามสิ่งธรรมดาที่ใช้เวลาเป็นปี บางคืนคุณยังตื่นมาตกใจที่มีหลังคา แล้วก็หลับต่อ ยิ้มอยู่ในความมืด",
+    "epitaph_en": "An ID, a steady job, and one key. Three ordinary things that took so long. Some nights you still wake up startled by the ceiling — then fall back asleep, smiling in the dark.",
+    "line_th": "บางคืนฉันยังตื่นมาตกใจที่มีหลังคา",
+    "line_en": "Some nights I still wake up surprised there's a roof."
+  },
+  {
+    "id": "small_stall",
+    "title_th": "แผงเล็กๆ ของฉัน",
+    "title_en": "Opened a Small Stall",
+    "rarity": "uncommon",
+    "icon": "🏪",
+    "priority": 78,
+    "conditions": {
+      "flags": [
+        "opened_stall"
+      ]
+    },
+    "epitaph_th": "แผงเล็กกว้างสองเมตร ป้ายเขียนมือ ลูกค้าประจำเป็นคนที่เคยหย่อนเหรียญใส่ถ้วยคุณ คุณมีกฎข้อเดียว คนที่ไม่มีเงินได้กินฟรี และไม่ต้องอธิบายอะไร",
+    "epitaph_en": "A two-meter stall with a hand-painted sign. Your regulars are the same people who used to drop coins in your cup. You have one rule: anyone without money eats free, no explanations needed.",
+    "line_th": "ที่แผงฉัน คนไม่มีเงินกินฟรี ไม่ต้องอธิบาย",
+    "line_en": "At my stall, if you can't pay, you eat free. No questions."
+  },
+  {
+    "id": "street_legend",
+    "title_th": "ตำนานแห่งถนน",
+    "title_en": "Street Legend",
+    "rarity": "legendary",
+    "icon": "👑",
+    "priority": 75,
+    "conditions": {
+      "minDay": 3650,
+      "min": {
+        "rep": 95
+      }
+    },
+    "epitaph_th": "สิบปีบนถนนเดิม แม่ค้าทุกร้านรู้จักชื่อคุณ ตำรวจใหม่ถูกสอนว่า \"คนนี้ไม่ต้องไล่\" เด็กใหม่ทุกคนถูกพามาหาคุณก่อน ไกด์ทัวร์ยังเล่าเรื่องคุณ แม้แต่ฉบับที่แต่งเติมจนเกินจริง",
+    "epitaph_en": "Ten years on the same streets. Every vendor knows your name. New officers are told \"leave that one be.\" Every newcomer gets brought to you first. Tour guides tell your story — even the exaggerated versions.",
+    "line_th": "ตำรวจใหม่ถูกสอนว่า \"คนนี้ไม่ต้องไล่\"",
+    "line_en": "New cops get told: \"Leave that one be.\""
+  },
+  {
+    "id": "behind_bars",
+    "title_th": "หลังลูกกรง",
+    "title_en": "Behind Bars",
+    "rarity": "uncommon",
+    "icon": "⛓️",
+    "priority": 70,
+    "conditions": {
+      "flags": [
+        "arrested_serious"
+      ]
+    },
+    "epitaph_th": "เงินง่ายๆ มักไม่เคยง่ายจริง คนที่จ้างคุณหายไปตั้งแต่ไซเรนดัง คุณคนเดียวที่ยืนอยู่ตรงนั้น ในห้องขัง คุณนับวันอีกครั้ง และสัญญากับตัวเองว่าคราวหน้าจะเลือกใหม่",
+    "epitaph_en": "Easy money is never easy. The people who hired you vanished at the first siren; you were the only one left standing there. In the cell, you start counting days again — and promise yourself you'll choose differently next time.",
+    "line_th": "เงินง่ายๆ ไม่เคยง่ายจริง",
+    "line_en": "Easy money is never easy."
+  },
+  {
+    "id": "sent_back",
+    "title_th": "ถูกส่งกลับ",
+    "title_en": "Sent Back",
+    "rarity": "uncommon",
+    "icon": "🚐",
+    "priority": 70,
+    "conditions": {
+      "flags": [
+        "deported"
+      ]
+    },
+    "epitaph_th": "รถตู้สีขาวพาคุณไปที่ด่าน ไม่มีโอกาสบอกลาใคร เพื่อนข้างถนนคงสงสัยว่าคุณหายไปไหน บนฝั่งโน้น คุณเหลือแค่รูปถ่ายหนึ่งใบกับชื่อที่จำได้ไม่กี่ชื่อ แต่คุณรู้ว่าจะเริ่มใหม่ได้ เพราะเคยทำมาแล้ว",
+    "epitaph_en": "A white van took you to the border. No chance to say goodbye; your street friends must wonder where you went. On the other side, all you have is a photo and a few remembered names. But you know how to start over. You've done it before.",
+    "line_th": "ฉันรู้ว่าจะเริ่มใหม่ได้ เพราะเคยทำมาแล้ว",
+    "line_en": "I know how to start over. I've done it before."
+  },
+  {
+    "id": "remembered_by_block",
+    "title_th": "ทั้งย่านยังจำ",
+    "title_en": "Remembered by the Block",
+    "rarity": "rare",
+    "icon": "🕯️",
+    "priority": 65,
+    "hidden": true,
+    "death": [
+      "cold",
+      "heat",
+      "illness",
+      "hunger",
+      "storm"
+    ],
+    "conditions": {
+      "counters": {
+        "friends": 5
+      },
+      "min": {
+        "rep": 60
+      }
+    },
+    "epitaph_th": "เช้าวันนั้น มุมของคุณว่างเปล่า แม่ค้าวางพวงมาลัย เพื่อนข้างถนนจุดเทียนในขวดพลาสติก คนแปลกหน้าที่ไม่เคยรู้ชื่อคุณถามว่าเกิดอะไรขึ้น และหยุดยืนนิ่งไปนาน ทั้งย่านเงียบไปหนึ่งวัน เพื่อคนที่เคยทำให้มันอุ่นขึ้น",
+    "epitaph_en": "That morning your corner was empty. A vendor left flowers. Your street friends lit candles in plastic bottles. Strangers who never knew your name asked what happened, and stood quietly for a long time. The whole block fell silent for a day, for someone who'd made it warmer.",
+    "line_th": "ทั้งย่านเงียบไปหนึ่งวัน เพื่อฉัน",
+    "line_en": "The whole block went quiet for a day, for me."
+  },
+  {
+    "id": "old_age_corner",
+    "title_th": "แก่เฒ่าที่มุมเดิม",
+    "title_en": "Old Age on the Same Corner",
+    "rarity": "rare",
+    "icon": "🌅",
+    "priority": 60,
+    "death": [
+      "age"
+    ],
+    "conditions": {
+      "minDay": 1095
+    },
+    "epitaph_th": "คุณจากไปอย่างสงบ ตอนพระอาทิตย์ขึ้น ที่มุมเดิมที่นั่งมาหลายปี ไม่ใช่ชีวิตที่ใครฝันถึง แต่มันเป็นชีวิตทั้งชีวิต มีเพื่อน มีเสียงหัวเราะ มีคนที่จะคิดถึง และนั่นไม่ใช่เรื่องเล็ก",
+    "epitaph_en": "You passed peacefully at sunrise, on the same corner you'd kept for years. Not the life anyone dreams of — but a whole life all the same: friends, laughter, people who'll miss you. That's not a small thing.",
+    "line_th": "ไม่ใช่ชีวิตในฝัน แต่เป็นชีวิตทั้งชีวิต",
+    "line_en": "Not a dream life. But a whole one."
+  },
+  {
+    "id": "quiet_goodbye",
+    "title_th": "ลาก่อนอย่างเงียบงัน",
+    "title_en": "A Quiet Goodbye",
+    "rarity": "uncommon",
+    "icon": "🍂",
+    "priority": 55,
+    "death": [
+      "age"
+    ],
+    "epitaph_th": "ร่างกายที่ทำงานหนักมาทั้งชีวิตขอพัก คุณหลับไปในคืนที่อากาศดี ลมเย็น และไม่มีใครมาไล่ เป็นคืนที่ใจดีที่สุดในรอบหลายเดือน",
+    "epitaph_en": "A body that had worked hard its whole life asked to rest. You fell asleep on a mild night, cool breeze, nobody moving you along — the kindest night in months.",
+    "line_th": "คืนสุดท้าย ไม่มีใครมาไล่",
+    "line_en": "On the last night, nobody moved me along."
+  },
+  {
+    "id": "lost_cold",
+    "title_th": "หลับไปในความหนาว",
+    "title_en": "Lost to the Cold",
+    "rarity": "common",
+    "icon": "❄️",
+    "priority": 40,
+    "death": [
+      "cold"
+    ],
+    "epitaph_th": "คืนนั้นหนาวกว่าที่พยากรณ์บอก คุณหลับไปใต้กองลังกระดาษ และไม่ได้ตื่นมาเห็นเช้าวันใหม่ เช้านั้น มีคนเอาผ้าห่มมาวางไว้ที่มุมของคุณ ช้าไปหนึ่งคืน",
+    "epitaph_en": "That night was colder than the forecast promised. You fell asleep under your cardboard and didn't wake for the morning. Someone left a blanket at your corner the next day — one night too late.",
+    "line_th": "มีคนเอาผ้าห่มมาให้ ช้าไปหนึ่งคืน",
+    "line_en": "Someone brought a blanket. One night too late."
+  },
+  {
+    "id": "lost_heat",
+    "title_th": "แดดที่ร้อนเกินไป",
+    "title_en": "Lost to the Heat",
+    "rarity": "common",
+    "icon": "☀️",
+    "priority": 40,
+    "death": [
+      "heat"
+    ],
+    "epitaph_th": "ปรอทแตะสี่สิบองศา ไม่มีร่มไม้ ไม่มีน้ำ ร่างกายที่เหนื่อยล้าทนไม่ไหว คนแปลกหน้าคนหนึ่งนั่งลงข้างคุณ จับมือไว้จนรถพยาบาลมาถึง คุณไม่ได้จากไปคนเดียว",
+    "epitaph_en": "The thermometer hit forty. No shade, no water, and a tired body that couldn't hold on. A stranger sat down beside you and held your hand until the ambulance came. You didn't go alone.",
+    "line_th": "คนแปลกหน้าจับมือฉันไว้ ฉันไม่ได้ไปคนเดียว",
+    "line_en": "A stranger held my hand. I didn't go alone."
+  },
+  {
+    "id": "lost_illness",
+    "title_th": "ไข้ที่ไม่ยอมลด",
+    "title_en": "Lost to Illness",
+    "rarity": "common",
+    "icon": "🌧️",
+    "priority": 40,
+    "death": [
+      "illness",
+      "injury"
+    ],
+    "epitaph_th": "ไข้เริ่มจากนิดเดียว แล้วก็ไม่ยอมลด ไม่มีเงินไปหาหมอ ไม่มีเตียงให้นอนพัก คุณจากไปในโรงพยาบาลรัฐ พยาบาลกะดึกนั่งอยู่ข้างเตียงจนถึงตอนจบ เธอเป็นคนสุดท้ายที่เรียกชื่อคุณ",
+    "epitaph_en": "The fever started small and never broke. No money for a doctor, no bed to rest in. You passed in a public hospital, a night-shift nurse at your side until the end. She was the last person to say your name.",
+    "line_th": "พยาบาลกะดึกเป็นคนสุดท้ายที่เรียกชื่อฉัน",
+    "line_en": "A night nurse was the last to say my name."
+  },
+  {
+    "id": "lost_hunger",
+    "title_th": "ท้องที่ว่างนานเกินไป",
+    "title_en": "Lost to Hunger and Thirst",
+    "rarity": "common",
+    "icon": "🍚",
+    "priority": 40,
+    "death": [
+      "hunger"
+    ],
+    "epitaph_th": "ในเมืองที่ทิ้งอาหารวันละหลายตัน คุณจากไปเพราะท้องว่างนานเกินไป ร่างกายค่อยๆ ยอมแพ้ ทีละนิด เงียบๆ เหมือนที่คนส่วนใหญ่ไม่เคยสังเกตเห็นคุณ",
+    "epitaph_en": "In a city that throws away tons of food every day, you went too long without. Your body gave up a little at a time, quietly — the same way most people never noticed you.",
+    "line_th": "เมืองนี้ทิ้งอาหารวันละหลายตัน",
+    "line_en": "This city throws away tons of food a day."
+  },
+  {
+    "id": "lost_storm",
+    "title_th": "พายุคืนนั้น",
+    "title_en": "Taken by the Storm",
+    "rarity": "common",
+    "icon": "⛈️",
+    "priority": 40,
+    "death": [
+      "storm"
+    ],
+    "epitaph_th": "พายุมาเร็วกว่าที่ใครคาด น้ำขึ้นสูงในไม่กี่นาที คนที่มีบ้านปิดหน้าต่าง คนที่ไม่มีบ้านได้แต่เกาะอะไรสักอย่างไว้ หลังพายุผ่าน เพื่อนข้างถนนออกตามหาคุณทั้งวัน",
+    "epitaph_en": "The storm came faster than anyone expected; the water rose in minutes. People with homes shut their windows. People without them held on to whatever they could. Afterward, your street friends searched for you all day.",
+    "line_th": "หลังพายุผ่าน เพื่อนๆ ตามหาฉันทั้งวัน",
+    "line_en": "After the storm, my friends searched for me all day."
+  }
+]

@@ -1,0 +1,853 @@
+[
+  {
+    "id": "beg",
+    "kind": "beg",
+    "category": "earn",
+    "icon": "🥣",
+    "name_th": "ขอทาน",
+    "name_en": "Beg",
+    "desc_th": "เลือกมุมประจำ วางถ้วย แล้วรอน้ำใจ",
+    "desc_en": "Pick a spot, set down your cup, wait for kindness.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 12,
+    "pickSpot": true,
+    "eventChance": 0.3,
+    "flavor_th": [
+      "คุณนั่งที่{spot} คนเดินผ่านเป็นร้อย มีบางคนหยุด ได้มา {amount}",
+      "เหรียญตกลงในถ้วยเป็นจังหวะ เหมือนเพลงที่ช้ามาก ที่{spot}วันนี้ได้ {amount}",
+      "ส่วนใหญ่ไม่มองหน้า แต่คนที่มองมักจะยิ้ม ได้ {amount} จาก{spot}",
+      "เด็กคนหนึ่งโบกมือให้ แม่ของเขาหย่อนเหรียญลงถ้วย รวมทั้งวันที่{spot} ได้ {amount}"
+    ],
+    "flavor_en": [
+      "You sit at {spot}. Hundreds pass; a few stop. You make {amount}.",
+      "Coins drop into the cup like a very slow song. {spot} gives you {amount} today.",
+      "Most people don't meet your eyes, but the ones who do usually smile. {amount} from {spot}.",
+      "A kid waves at you and their mother drops a coin. All told, {spot} gives {amount}."
+    ]
+  },
+  {
+    "id": "busk",
+    "kind": "busk",
+    "category": "earn",
+    "icon": "🎶",
+    "name_th": "เปิดหมวก / วาดรูป",
+    "name_en": "Busk / perform",
+    "desc_th": "เล่นดนตรีหรือวาดรูปให้คนดู ได้เงินและได้ศักดิ์ศรี",
+    "desc_en": "Play music or draw for the crowd — money with dignity.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 15,
+    "pickSpot": true,
+    "requires": {
+      "anyTraits": [
+        "musician",
+        "artist"
+      ],
+      "min": {
+        "hope": 5
+      }
+    },
+    "effects": {
+      "hope": 3
+    },
+    "eventChance": 0.3,
+    "flavor_th": [
+      "คนเริ่มมุงที่{spot} มีคนปรบมือ มีคนอัดคลิป หมวกได้ {amount}",
+      "เพลงที่สามมีคนร้องตาม ที่{spot}วันนี้ได้ {amount}",
+      "คุณวาดหน้าคุณป้าคนหนึ่ง เธอหัวเราะจนน้ำตาไหลแล้วจ่ายเกินราคา รวมได้ {amount}"
+    ],
+    "flavor_en": [
+      "A small crowd gathers at {spot}. Someone claps, someone films. The hat collects {amount}.",
+      "By the third song, people are singing along. {spot} pays {amount} today.",
+      "You sketch an auntie who laughs until she cries and overpays. {amount} in total."
+    ]
+  },
+  {
+    "id": "sell",
+    "kind": "sell",
+    "category": "earn",
+    "icon": "💐",
+    "name_th": "ขายของเล็กๆ",
+    "name_en": "Sell small goods",
+    "desc_th": "ขายทิชชู่ พวงมาลัย หรือขนม รายได้มั่นคงกว่า ตำรวจสนใจน้อยกว่า",
+    "desc_en": "Sell tissues, flowers or snacks. Steadier, less police attention.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 12,
+    "pickSpot": true,
+    "requires": {
+      "items": [
+        "goods"
+      ]
+    },
+    "effects": {
+      "hope": 2
+    },
+    "eventChance": 0.22,
+    "flavor_th": [
+      "คุณเดินขายของที่{spot} มีคนซื้อเพราะสงสาร มีคนซื้อเพราะต้องใช้จริงๆ ได้ {amount}",
+      "\"ทิชชู่ค่ะ/ครับ\" พูดไปสองร้อยครั้ง ที่{spot} ได้ {amount}"
+    ],
+    "flavor_en": [
+      "You walk {spot} with your goods. Some buy out of pity, some because they need tissues. {amount}.",
+      "\"Tissues?\" — said two hundred times at {spot}. You make {amount}."
+    ]
+  },
+  {
+    "id": "buy_stock",
+    "kind": "buy_stock",
+    "category": "earn",
+    "icon": "📦",
+    "name_th": "ซื้อของมาขาย",
+    "name_en": "Buy stock to sell",
+    "desc_th": "ซื้อทิชชู่และดอกไม้ราคาส่งมา 10 ชิ้น",
+    "desc_en": "Buy 10 tissues/flowers wholesale.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 4,
+    "cost": 3,
+    "effects": {
+      "items": {
+        "goods": 10
+      }
+    },
+    "eventChance": 0.05,
+    "flavor_th": [
+      "คุณต่อราคากับยี่ปั๊วจนได้ของมาสิบชิ้น เริ่มเป็นนักธุรกิจแล้ว"
+    ],
+    "flavor_en": [
+      "You haggle with the wholesaler and walk away with ten items. Basically an entrepreneur now."
+    ]
+  },
+  {
+    "id": "recycle",
+    "kind": "recycle",
+    "category": "earn",
+    "icon": "♻️",
+    "name_th": "เก็บของรีไซเคิล",
+    "name_en": "Collect recyclables",
+    "desc_th": "เก็บขวดและกระป๋องไปขาย เงินน้อยแต่ปลอดภัย",
+    "desc_en": "Gather bottles and cans to sell. Low pay, but safe.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 20,
+    "effects": {
+      "hygiene": -8
+    },
+    "eventChance": 0.2,
+    "flavor_th": [
+      "กระสอบเต็มไปด้วยขวดพลาสติก ร้านรับซื้อของเก่าให้ {amount}",
+      "คุณเดินไล่เก็บกระป๋องตามถังขยะทั้งย่าน ได้ {amount} กับมือที่เหนียวไปหมด"
+    ],
+    "flavor_en": [
+      "A full sack of plastic bottles. The scrap shop gives you {amount}.",
+      "You work every bin in the neighborhood for cans. {amount} and very sticky hands."
+    ]
+  },
+  {
+    "id": "labor",
+    "kind": "labor",
+    "category": "earn",
+    "icon": "🧱",
+    "name_th": "รับจ้างรายวัน",
+    "name_en": "Day labor",
+    "desc_th": "ยืนรอที่หัวมุมให้รถกระบะมารับ งานหนัก เงินดี อาจได้งานประจำ",
+    "desc_en": "Wait at the corner for a pickup truck. Hard work, good pay, maybe a steady job.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 35,
+    "visible": {
+      "notFlags": [
+        "has_job"
+      ]
+    },
+    "requires": {
+      "minAge": 15,
+      "min": {
+        "health": 50,
+        "hope": 5
+      }
+    },
+    "effects": {
+      "hygiene": -10,
+      "hunger": -8
+    },
+    "eventChance": 0.3,
+    "flavor_th": [
+      "แบกปูนทั้งวันจนแขนสั่น หัวหน้าคนงานยัดเงินใส่มือ {amount}",
+      "ขนของขึ้นรถบรรทุกจนเย็น ได้ {amount} และหลังที่ปวดไปอีกสามวัน"
+    ],
+    "flavor_en": [
+      "You haul cement all day until your arms shake. The foreman presses {amount} into your hand.",
+      "Loading trucks until dusk: {amount}, plus a back that'll complain for three days."
+    ]
+  },
+  {
+    "id": "work",
+    "kind": "work",
+    "category": "earn",
+    "icon": "👷",
+    "name_th": "ไปทำงานประจำ",
+    "name_en": "Go to work",
+    "desc_th": "งานประจำของคุณ เงินแน่นอน มีคนรอคุณอยู่",
+    "desc_en": "Your steady job. Reliable pay. Someone's expecting you.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 28,
+    "visible": {
+      "flags": [
+        "has_job"
+      ]
+    },
+    "effects": {
+      "hope": 2,
+      "hygiene": -4
+    },
+    "eventChance": 0.12,
+    "flavor_th": [
+      "ตอกบัตรเข้างานตรงเวลา หัวหน้าพยักหน้าให้ วันนี้ได้ {amount}",
+      "เพื่อนร่วมงานแบ่งข้าวกลางวันให้ ทำงานเสร็จได้ {amount}"
+    ],
+    "flavor_en": [
+      "You clock in on time. The supervisor nods at you. {amount} today.",
+      "A coworker shares their lunch. Shift done: {amount}."
+    ]
+  },
+  {
+    "id": "gamble",
+    "kind": "gamble",
+    "category": "earn",
+    "icon": "🎲",
+    "name_th": "เล่นพนัน",
+    "name_en": "Gamble",
+    "desc_th": "วงไพ่หลังตลาด เสี่ยงสูง ได้สูง เสียก็สูง",
+    "desc_en": "The card game behind the market. High risk, high reward, high regret.",
+    "phases": [
+      "afternoon",
+      "night"
+    ],
+    "energy": 5,
+    "requires": {
+      "minAge": 15,
+      "min": {
+        "cash": 1
+      }
+    },
+    "effects": {
+      "heat": 3
+    },
+    "eventChance": 0.3,
+    "flavor_th": [
+      "ไพ่ถูกแจกบนลังเบียร์คว่ำ",
+      "ลูกเต๋ากลิ้งบนแผ่นลัง ทุกคนกลั้นหายใจ"
+    ],
+    "flavor_en": [
+      "Cards are dealt on an upturned beer crate.",
+      "The dice roll across cardboard. Everyone holds their breath."
+    ]
+  },
+  {
+    "id": "charity",
+    "kind": "charity",
+    "category": "survive",
+    "icon": "🍲",
+    "name_th": "ไปรับอาหารฟรี",
+    "name_en": "Free meal line",
+    "desc_th": "ต่อแถวรับอาหารที่{charity} อิ่มท้องและอุ่นใจ",
+    "desc_en": "Queue for food at {charity}. A full belly and a little peace.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 6,
+    "effects": {
+      "hunger": 30,
+      "thirst": 20,
+      "hope": 3,
+      "counters": {
+        "charityVisits": 1
+      }
+    },
+    "eventChance": 0.25,
+    "flavor_th": [
+      "แถวยาว แต่ข้าวร้อนๆ ที่{charity}คุ้มกับการรอ",
+      "อาสาสมัครจำชื่อคุณได้ และตักแกงให้เพิ่มอีกนิด",
+      "คุณนั่งกินข้าวข้างคนแปลกหน้า ไม่มีใครพูดอะไร แต่ก็ไม่มีใครเหงา"
+    ],
+    "flavor_en": [
+      "The line is long, but the hot rice at {charity} is worth it.",
+      "A volunteer remembers your name and adds an extra scoop.",
+      "You eat beside strangers. Nobody talks, but nobody's lonely either."
+    ]
+  },
+  {
+    "id": "buy_food",
+    "kind": "buy_food",
+    "category": "survive",
+    "icon": "🍜",
+    "name_th": "ซื้อข้าวกิน",
+    "name_en": "Buy food",
+    "desc_th": "ข้าวหนึ่งจานจากรถเข็นข้างทาง",
+    "desc_en": "One plate from a street cart.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 0,
+    "cost": 1,
+    "effects": {
+      "hunger": 40,
+      "thirst": 10,
+      "hope": 1
+    },
+    "eventChance": 0.08,
+    "flavor_th": [
+      "อิ่มแล้ว โลกดูใจดีขึ้นนิดหนึ่ง",
+      "แม่ค้าตักให้พูนจานเหมือนรู้ว่าวันนี้คุณเหนื่อย"
+    ],
+    "flavor_en": [
+      "A full stomach. The world looks a little kinder.",
+      "The vendor heaps the plate like she knows it's been a long day."
+    ]
+  },
+  {
+    "id": "buy_water",
+    "kind": "buy_water",
+    "category": "survive",
+    "icon": "💧",
+    "name_th": "ซื้อน้ำ",
+    "name_en": "Buy water",
+    "desc_th": "น้ำเย็นหนึ่งขวด",
+    "desc_en": "One cold bottle of water.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 0,
+    "cost": 0.25,
+    "effects": {
+      "thirst": 45
+    },
+    "eventChance": 0.03,
+    "flavor_th": [
+      "น้ำเย็นไหลลงคอ ชื่นใจที่สุดในวันนี้"
+    ],
+    "flavor_en": [
+      "Cold water down your throat. Best moment of the day."
+    ]
+  },
+  {
+    "id": "wash",
+    "kind": "wash",
+    "category": "survive",
+    "icon": "🧼",
+    "name_th": "ล้างตัว",
+    "name_en": "Wash up",
+    "desc_th": "ก๊อกน้ำสาธารณะหรือห้องน้ำสถานี ความสะอาดทำให้คนกล้าเข้าใกล้",
+    "desc_en": "A public tap or station bathroom. Being clean helps people approach you.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 5,
+    "effects": {
+      "hygiene": 30,
+      "hope": 2
+    },
+    "eventChance": 0.08,
+    "flavor_th": [
+      "คุณล้างหน้า ล้างแขน สระผมใต้ก๊อกน้ำ รู้สึกเป็นคนอีกครั้ง",
+      "ยามห้องน้ำทำเป็นไม่เห็นห้านาที ห้านาทีที่มีค่ามาก"
+    ],
+    "flavor_en": [
+      "You wash your face, arms, hair under the tap. You feel like a person again.",
+      "The bathroom attendant looks away for five minutes. Five very valuable minutes."
+    ]
+  },
+  {
+    "id": "rest",
+    "kind": "rest",
+    "category": "survive",
+    "icon": "🌳",
+    "name_th": "พักในที่ร่ม",
+    "name_en": "Rest in the shade",
+    "desc_th": "นั่งพักใต้ต้นไม้หรือใต้สะพาน ฟื้นแรง",
+    "desc_en": "Sit under a tree or a bridge. Recover energy.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 0,
+    "effects": {
+      "energy": 25,
+      "health": 2
+    },
+    "eventChance": 0.12,
+    "flavor_th": [
+      "คุณหลับไปครู่หนึ่ง ฝันถึงอะไรที่จำไม่ได้แต่อบอุ่น",
+      "ใบไม้ไหว ลมเย็น สามสิบนาทีที่โลกไม่เร่งคุณ"
+    ],
+    "flavor_en": [
+      "You doze off and dream something warm you can't remember.",
+      "Leaves rustle, cool breeze. Thirty minutes where the world doesn't rush you."
+    ]
+  },
+  {
+    "id": "sleep",
+    "kind": "sleep",
+    "category": "survive",
+    "icon": "🌙",
+    "name_th": "นอน",
+    "name_en": "Sleep",
+    "desc_th": "หาที่ซุกตัวจนเช้า ฟื้นพลังงาน ระวังของหายถ้านอนข้างถนน",
+    "desc_en": "Find a corner until morning. Restores energy — watch your things if sleeping rough.",
+    "phases": [
+      "night"
+    ],
+    "energy": 0,
+    "eventChance": 0.3,
+    "flavor_th": [
+      "คุณปูลังกระดาษ หนุนเป้ แล้วนับดาวที่มองไม่เห็นเพราะไฟเมือง",
+      "เสียงรถค่อยๆ เบาลง คุณหลับไปพร้อมเมือง"
+    ],
+    "flavor_en": [
+      "You lay out cardboard, pillow your bag, and count stars the city lights hide.",
+      "The traffic slowly quiets. You fall asleep with the city."
+    ]
+  },
+  {
+    "id": "clinic",
+    "kind": "clinic",
+    "category": "survive",
+    "icon": "🏥",
+    "name_th": "ไปคลินิก / ซื้อยา",
+    "name_en": "Clinic / medicine",
+    "desc_th": "รักษาไข้และแผล (ใช้ยาที่มีได้ฟรี)",
+    "desc_en": "Treat fever and wounds (uses your medicine for free).",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 8,
+    "cost": 3,
+    "effects": {
+      "health": 20
+    },
+    "eventChance": 0.05,
+    "flavor_th": [
+      "หมอคลินิกเล็กๆ ตรวจละเอียดกว่าที่คิด และไม่ถามอะไรที่ไม่จำเป็น",
+      "เภสัชกรอธิบายวิธีกินยาสามรอบ เหมือนห่วงจริงๆ"
+    ],
+    "flavor_en": [
+      "The little clinic's doctor is more thorough than expected, and asks nothing unnecessary.",
+      "The pharmacist explains the dosage three times, like they actually care."
+    ]
+  },
+  {
+    "id": "ngo",
+    "kind": "ngo",
+    "category": "people",
+    "icon": "🏠",
+    "name_th": "ไปศูนย์ช่วยเหลือ / NGO",
+    "name_en": "Visit NGO / shelter",
+    "desc_th": "ลุ้นเตียงคืนนี้ อาบน้ำ หาหมอ และขอคำแนะนำเรื่องเอกสาร",
+    "desc_en": "A chance at a bed tonight, a shower, a medic, help with paperwork.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 10,
+    "effects": {
+      "hope": 2,
+      "counters": {
+        "ngoVisits": 1
+      }
+    },
+    "eventChance": 0.3,
+    "flavor_th": [
+      "เจ้าหน้าที่ยิ้มให้และจดชื่อคุณลงสมุด",
+      "ศูนย์แออัด แต่กาแฟฟรีและห้องน้ำสะอาด"
+    ],
+    "flavor_en": [
+      "A caseworker smiles and writes your name in the ledger.",
+      "The center is packed, but the coffee is free and the bathroom is clean."
+    ]
+  },
+  {
+    "id": "talk",
+    "kind": "talk",
+    "category": "people",
+    "icon": "💬",
+    "name_th": "คุยกับคนข้างถนน",
+    "name_en": "Talk to street people",
+    "desc_th": "แลกข่าว แลกเรื่อง แลกน้ำใจ สร้างชื่อเสียงและเพื่อน",
+    "desc_en": "Trade news, stories and favors. Builds rep and friendships.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 5,
+    "effects": {
+      "rep": [
+        2,
+        5
+      ],
+      "hope": 3,
+      "counters": {
+        "talks": 1
+      }
+    },
+    "eventChance": 0.35,
+    "flavor_th": [
+      "ลุงผมขาวเล่าเรื่องเมืองนี้เมื่อสามสิบปีก่อน คุณฟังจนลืมหิว",
+      "คุณได้รู้ว่าร้านไหนแจกข้าวเหลือ และยามคนไหนใจดี",
+      "หัวเราะกันจนท้องแข็งเรื่องนกพิราบที่ขโมยขนมปังทั้งก้อน"
+    ],
+    "flavor_en": [
+      "A white-haired man tells you about this city thirty years ago. You forget you're hungry.",
+      "You learn which shop gives away leftovers and which guard is kind.",
+      "You all laugh until it hurts about the pigeon that stole a whole loaf."
+    ]
+  },
+  {
+    "id": "dog_care",
+    "kind": "dog",
+    "category": "people",
+    "icon": "🐕",
+    "name_th": "ดูแลหมาจร",
+    "name_en": "Look after a stray dog",
+    "desc_th": "แบ่งข้าวให้หมาจรที่ชอบมานอนข้างคุณ ถ้าดูแลบ่อยๆ มันอาจเลือกคุณ",
+    "desc_en": "Share food with the stray who sleeps near you. Keep at it and it may choose you.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 5,
+    "cost": 0.3,
+    "visible": {
+      "companion": false
+    },
+    "effects": {
+      "hope": 4
+    },
+    "eventChance": 0.15,
+    "flavor_th": [
+      "หมาสีน้ำตาลหูตกกินข้าวจากมือคุณ หางกระดิกช้าๆ",
+      "มันยังระวังตัว แต่วันนี้นั่งใกล้คุณขึ้นอีกนิด"
+    ],
+    "flavor_en": [
+      "A brown, floppy-eared dog eats from your hand, tail wagging slowly.",
+      "Still wary, but today it sits a little closer."
+    ]
+  },
+  {
+    "id": "dog_play",
+    "kind": "dog",
+    "category": "people",
+    "icon": "🐶",
+    "name_th": "เล่นกับ{dog}",
+    "name_en": "Play with {dog}",
+    "desc_th": "ซื้อขนมให้{dog} แล้วเล่นด้วยกัน ใจฟูขึ้นทันที",
+    "desc_en": "Buy {dog} a treat and play together. Instant heart repair.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 3,
+    "cost": 0.2,
+    "visible": {
+      "companion": true
+    },
+    "effects": {
+      "rep": 1
+    },
+    "eventChance": 0.15,
+    "flavor_th": [
+      "{dog}วิ่งไล่ฝาขวดอย่างกับเป็นเรื่องสำคัญที่สุดในโลก"
+    ],
+    "flavor_en": [
+      "{dog} chases a bottle cap like it's the most important job in the world."
+    ]
+  },
+  {
+    "id": "teach",
+    "kind": "teach",
+    "category": "people",
+    "icon": "✏️",
+    "name_th": "สอนหนังสือเด็กข้างถนน",
+    "name_en": "Teach street kids",
+    "desc_th": "ใช้ชอล์กกับกำแพงเป็นกระดาน สอนอ่านเขียนให้เด็กๆ",
+    "desc_en": "A wall and some chalk become a classroom. Teach kids to read.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 12,
+    "requires": {
+      "traits": [
+        "former_teacher"
+      ],
+      "min": {
+        "hope": 10
+      }
+    },
+    "effects": {
+      "rep": 4,
+      "hope": 6,
+      "counters": {
+        "taught": 1
+      }
+    },
+    "eventChance": 0.25,
+    "flavor_th": [
+      "เด็กหญิงคนหนึ่งอ่านคำว่า \"บ้าน\" ได้เป็นครั้งแรก ทุกคนปรบมือ",
+      "ห้องเรียนใต้สะพานมีนักเรียนเพิ่มอีกสองคน"
+    ],
+    "flavor_en": [
+      "A little girl reads the word \"home\" for the first time. Everyone claps.",
+      "The classroom under the bridge gains two more students."
+    ]
+  },
+  {
+    "id": "call_family",
+    "kind": "call_family",
+    "category": "people",
+    "icon": "📞",
+    "name_th": "โทรหาครอบครัว",
+    "name_en": "Call family",
+    "desc_th": "ตู้โทรศัพท์ บัตรเติมเงิน และความกล้า",
+    "desc_en": "A payphone, a phone card, and some courage.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 0,
+    "cost": 0.5,
+    "requires": {
+      "hasFamily": true,
+      "notFlags": [
+        "lost_contact",
+        "family_reunion"
+      ]
+    },
+    "eventChance": 0.15,
+    "flavor_th": [
+      "สัญญาณดังสามครั้งก่อนมีคนรับ"
+    ],
+    "flavor_en": [
+      "It rings three times before someone picks up."
+    ]
+  },
+  {
+    "id": "save",
+    "kind": "save",
+    "category": "future",
+    "icon": "🫙",
+    "name_th": "ซ่อนเงินเก็บ",
+    "name_en": "Stash your cash",
+    "desc_th": "ซ่อนเงินทั้งหมดในที่ลับ ปลอดภัยจากขโมยตอนนอน (แต่อาจมีคนเจอ)",
+    "desc_en": "Hide all your cash. Safe from night theft — unless someone finds the spot.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 0,
+    "requires": {
+      "min": {
+        "cash": 0.5
+      }
+    },
+    "eventChance": 0,
+    "flavor_th": [
+      "คุณม้วนแบงก์ใส่ถุงพลาสติก ซุกไว้ในรอยแตกของกำแพง"
+    ],
+    "flavor_en": [
+      "You roll the bills into a plastic bag and tuck it into a crack in the wall."
+    ]
+  },
+  {
+    "id": "withdraw",
+    "kind": "withdraw",
+    "category": "future",
+    "icon": "👛",
+    "name_th": "หยิบเงินเก็บออกมา",
+    "name_en": "Take out your stash",
+    "desc_th": "เอาเงินที่ซ่อนไว้ออกมาใช้",
+    "desc_en": "Take your hidden money back out.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 0,
+    "visible": {
+      "min": {
+        "stash": 0.01
+      }
+    },
+    "eventChance": 0,
+    "flavor_th": [
+      "ถุงพลาสติกยังอยู่ที่เดิม โล่งอก"
+    ],
+    "flavor_en": [
+      "The plastic bag is still there. Relief."
+    ]
+  },
+  {
+    "id": "apply_id",
+    "kind": "apply_id",
+    "category": "future",
+    "icon": "🪪",
+    "name_th": "ทำบัตร / เอกสาร",
+    "name_en": "Apply for ID papers",
+    "desc_th": "หลายขั้นตอน หลายแถว หลายตราประทับ แต่ไม่มีบัตรก็ไม่มีงานจริง",
+    "desc_en": "Many steps, many queues, many stamps — but no ID, no real job.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 15,
+    "cost": 1,
+    "visible": {
+      "notFlags": [
+        "has_id"
+      ]
+    },
+    "requires": {
+      "min": {
+        "hope": 5
+      }
+    },
+    "eventChance": 0.15,
+    "flavor_th": [
+      "คุณต่อแถวที่สำนักงานเขตตั้งแต่เช้ามืด"
+    ],
+    "flavor_en": [
+      "You join the queue at the district office before dawn."
+    ]
+  },
+  {
+    "id": "move_city",
+    "kind": "move_city",
+    "category": "future",
+    "icon": "🚌",
+    "name_th": "ย้ายไปเมืองอื่น",
+    "name_en": "Move to another city",
+    "desc_th": "ตั๋วเที่ยวเดียวไปที่ไหนสักแห่ง เริ่มใหม่หมด ชื่อเสียงหายหมด",
+    "desc_en": "A one-way ticket somewhere. Start over — rep resets.",
+    "phases": [
+      "morning"
+    ],
+    "energy": 30,
+    "cost": 20,
+    "visible": {
+      "minDay": 14
+    },
+    "eventChance": 0,
+    "flavor_th": [
+      "คุณมองเมืองเก่าผ่านกระจกจนมันเล็กลงและหายไป"
+    ],
+    "flavor_en": [
+      "You watch the old city through the window until it shrinks and disappears."
+    ]
+  },
+  {
+    "id": "rent_room",
+    "kind": "rent_room",
+    "category": "future",
+    "icon": "🔑",
+    "name_th": "เช่าห้อง",
+    "name_en": "Rent a room",
+    "desc_th": "ห้องเล็กๆ มีประตู มีกุญแจ มีชื่อคุณในสัญญา",
+    "desc_en": "A tiny room with a door, a key, and your name on the lease.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 10,
+    "cost": 40,
+    "visible": {
+      "flags": [
+        "has_job"
+      ],
+      "notFlags": [
+        "has_housing"
+      ]
+    },
+    "requires": {
+      "flags": [
+        "has_id"
+      ]
+    },
+    "effects": {
+      "hope": 25
+    },
+    "eventChance": 0,
+    "flavor_th": [
+      "เจ้าของห้องยื่นกุญแจให้ คุณกำมันแน่นจนเป็นรอยบนฝ่ามือ"
+    ],
+    "flavor_en": [
+      "The landlord hands you a key. You grip it so hard it leaves a mark on your palm."
+    ]
+  },
+  {
+    "id": "open_stall",
+    "kind": "open_stall",
+    "category": "future",
+    "icon": "🏪",
+    "name_th": "เปิดแผงเล็กๆ",
+    "name_en": "Open a small stall",
+    "desc_th": "ใช้เงินเก็บทั้งหมดเปิดแผงขายของเป็นของตัวเอง",
+    "desc_en": "Spend your savings on a stall of your own.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 20,
+    "visible": {
+      "min": {
+        "wealth": 70
+      }
+    },
+    "requires": {
+      "min": {
+        "wealth": 150,
+        "rep": 45
+      }
+    },
+    "eventChance": 0,
+    "flavor_th": [
+      "คุณทาสีป้ายชื่อร้านด้วยมือตัวเอง ตัวหนังสือเบี้ยวนิดหน่อย แต่สวยที่สุดในโลก"
+    ],
+    "flavor_en": [
+      "You paint the stall's sign by hand. The letters are a bit crooked. It's the most beautiful thing in the world."
+    ]
+  }
+]

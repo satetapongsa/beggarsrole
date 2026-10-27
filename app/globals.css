@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #0b0907;
+  color: #f3eadf;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-image:
+    radial-gradient(ellipse at 20% -10%, rgba(255, 181, 71, 0.10), transparent 55%),
+    radial-gradient(ellipse at 90% 110%, rgba(217, 119, 6, 0.08), transparent 50%);
+  min-height: 100dvh;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  shape-rendering: crispEdges;
+}
+
+.lamp-glow {
+  text-shadow: 0 0 12px rgba(255, 181, 71, 0.55), 0 0 2px rgba(255, 181, 71, 0.9);
+}
+
+.card-lift {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.card-lift:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -8px rgba(255, 181, 71, 0.45);
+  border-color: rgba(255, 181, 71, 0.6);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #3a3026;
+  border-radius: 3px;
+}
+
+/* ----- weather overlays in PixelScene ----- */
+@keyframes rainfall {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0%); }
+}
+@keyframes snowfall {
+  from { transform: translate(0, -100%); }
+  to { transform: translate(-6%, 0%); }
+}
+@keyframes shimmer {
+  0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.18; }
+  50% { transform: translateY(-1.5px) scaleY(1.03); opacity: 0.3; }
+}
+@keyframes flash {
+  0%, 92%, 100% { opacity: 0; }
+  93%, 95% { opacity: 0.55; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+@keyframes wag {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(18deg); }
+}
+.anim-rain { animation: rainfall 0.6s linear infinite; }
+.anim-snow { animation: snowfall 5s linear infinite; }
+.anim-shimmer { animation: shimmer 2.4s ease-in-out infinite; transform-origin: bottom; }
+.anim-flash { animation: flash 5s linear infinite; }
+.anim-bob { animation: bob 2.6s ease-in-out infinite; }
+.anim-wag { animation: wag 0.5s ease-in-out infinite; transform-box: fill-box; transform-origin: left center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rain, .anim-snow, .anim-shimmer, .anim-flash, .anim-bob, .anim-wag,
+  .animate-pulseCrit, .animate-spinFlag, .animate-flicker {
+    animation: none !important;
+  }
+}

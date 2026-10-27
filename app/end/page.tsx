@@ -1,0 +1,200 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import CharacterSprite from "@/components/CharacterSprite";
+import CityBadge from "@/components/CityBadge";
+import Timeline from "@/components/Timeline";
+import { DATA } from "@/lib/data";
+import { cityOf } from "@/lib/conditions";
+import { lifeStats, newGame } from "@/lib/engine";
+import { fill, formatMoney, formatNumber } from "@/lib/format";
+import { useSettings } from "@/lib/i18n";
+import { makeSeed } from "@/lib/rng";
+import { loadEndingsFound, loadLastLife, saveGame } from "@/lib/storage";
+import { RARITY_STYLE } from "@/lib/ui";
+import type { GameState } from "@/types/game";
+
+export default function EndPage() {
+  const router = useRouter();
+  const { lang, setLang, t, sfx } = useSettings();
+  const [life, setLife] = useState<GameState | null | undefined>(undefined);
+  const [found, setFound] = useState<string[]>([]);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setLife(loadLastLife());
+    setFound(loadEndingsFound());
+  }, []);
+
+  const ending = life?.ended ? DATA.ending[life.ended.endingId] : null;
+
+  const ogUrl = useMemo(() => {
+    if (!life || !ending) return "";
+    const city = cityOf(life);
+    const st = lifeStats(life);
+    const p = new URLSearchParams({
+      lang,
+      flag: city.flag,
+      city: lang === "th" ? city.name_th : city.name_en,
+      name: lang === "th" ? life.character.name_th : life.character.name_en,
+      age: `${life.character.ageStart}–${life.ended!.age}`,
+      ending: lang === "th" ? ending.title_th : ending.title_en,
+      icon: ending.icon,
+      rarity: ending.rarity,
+      rarityLabel: t(`rarity.${ending.rarity}`),
+      line: fill(lang === "th" ? ending.line_th : ending.line_en, life, lang),
+      s1: `${formatNumber(st.days)} ${t("og.days")}`,
+      s2: `${st.friends} ${t("og.friends")}`,
+      s3: `${st.mealsGiven} ${t("og.meals")}`,
+    });
+    return `/api/og?${p.toString()}`;
+  }, [life, ending, lang, t]);
+
+  if (life === undefined) return <div className="flex min-h-dvh items-center justify-center text-stone-500">…</div>;
+
+  if (!life || !ending || !life.ended) {
+    return (
+      <main className="flex min-h-dvh flex-col items-center justify-center gap-4 p-6 text-center">
+        <p className="text-stone-400">{t("end.noLife")}</p>
+        <button type="button" onClick={() => router.push("/")} className="rounded-lg bg-lamp-500 px-5 py-2 font-medium text-black">
+          {t("end.home")}
+        </button>
+      </main>
+    );
+  }
+
+  const city = cityOf(life);
+  const st = lifeStats(life);
+  const deathEnding = !!ending.death;
+  const shareText = t("end.shareText", {
+    days: formatNumber(st.days),
+    city: lang === "th" ? city.name_th : city.name_en,
+    flag: city.flag,
+    ending: lang === "th" ? ending.title_th : ending.title_en,
+    rarity: t(`rarity.${ending.rarity}`),
+    line: fill(lang === "th" ? ending.line_th : ending.line_en, life, lang),
+  });
+
+  const start = (seed: number) => {
+    sfx("good");
+    saveGame(newGame(seed));
+    router.push("/play");
+  };
+
+  const share = async () => {
+    const abs = `${window.location.origin}${ogUrl}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "SPARE CHANGE", text: shareText, url: abs });
+        return;
+      }
+    } catch {
+      /* user cancelled or unsupported — fall through */
+    }
+    window.open(abs, "_blank", "noopener");
+  };
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(`${shareText}\n${window.location.origin}`);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked */
+    }
+  };
+
+  const stats: [string, string, string][] = [
+    ["📅", t("end.days"), formatNumber(st.days)],
+    ["💰", t("end.earned"), formatMoney(st.earned, city)],
+    ["🍚", t("end.mealsGiven"), String(st.mealsGiven)],
+    ["🤝", t("end.friends"), String(st.friends)],
+    ["🌍", t("end.cities"), String(st.cities)],
+    ["🫶", t("end.helped"), String(st.helped)],
+    ["🛏️", t("end.nights"), String(st.nightsShelter)],
+  ];
+
+  return (
+    <main className="mx-auto max-w-2xl px-4 py-8">
+      <div className="mb-6 flex items-center justify-between">
+        <CityBadge city={city} showDifficulty={false} />
+        <button type="button" onClick={() => setLang(lang === "th" ? "en" : "th")} className="rounded border border-night-600 px-2.5 py-1 text-xs hover:bg-night-800">
+          {t("lang.toggle")}
+        </button>
+      </div>
+
+      <section className="animate-fadeIn text-center">
+        <div className="mb-2 text-xs uppercase tracking-[0.3em] text-stone-500">{t("end.title")}</div>
+        <div className="mx-auto mb-3 flex justify-center">
+          <CharacterSprite appearance={life.character.appearance} hygiene={life.stats.hygiene} size={56} dog={!!life.companion} />
+        </div>
+        <div className="text-xl font-semibold">{lang === "th" ? life.character.name_th : life.character.name_en}</div>
+        <div className="text-sm text-stone-400">
+          {deathEnding ? t("end.died", { age: life.ended.age }) : t("end.age", { age: life.ended.age })}
+        </div>
+        <div className="mt-6 animate-popIn text-6xl" aria-hidden>
+          {ending.icon}
+        </div>
+        <h1 className="lamp-glow mt-2 text-3xl font-bold text-lamp-300">{lang === "th" ? ending.title_th : ending.title_en}</h1>
+        <div className="mt-2 flex items-center justify-center gap-2">
+          <span className={`rounded-full px-3 py-0.5 text-xs font-semibold uppercase tracking-wide ${RARITY_STYLE[ending.rarity]}`}>
+            {t(`rarity.${ending.rarity}`)}
+          </span>
+          {ending.hidden && <span className="rounded-full border border-fuchsia-700 px-3 py-0.5 text-xs text-fuchsia-300">✨ {t("end.hidden")}</span>}
+        </div>
+        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-stone-300">
+          {fill(lang === "th" ? ending.epitaph_th : ending.epitaph_en, life, lang)}
+        </p>
+        <p className="mt-3 text-xs text-stone-500">{t("end.endingsFound", { n: found.length, total: DATA.endings.length })}</p>
+      </section>
+
+      <section className="mt-8 rounded-xl border border-night-700 bg-night-900 p-5">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-lamp-300">{t("end.stats")}</h2>
+        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {stats.map(([icon, label, value]) => (
+            <div key={label} className="rounded-lg bg-night-800 p-3">
+              <dt className="text-[11px] text-stone-400">
+                {icon} {label}
+              </dt>
+              <dd className="font-medium tabular-nums text-lg text-stone-100">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-5">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-lamp-300">{t("end.timeline")}</h2>
+        <div className="scrollbar-thin max-h-[28rem] overflow-y-auto pr-2">
+          <Timeline entries={life.timeline} fill={(s) => fill(s, life, lang)} />
+        </div>
+      </section>
+
+      <section className="mt-6 space-y-3">
+        {ogUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={ogUrl} alt={lang === "th" ? ending.title_th : ending.title_en} className="w-full rounded-xl border border-night-700" />
+        )}
+        <div className="grid gap-2 sm:grid-cols-2">
+          <button type="button" onClick={share} className="rounded-lg bg-lamp-500 px-4 py-3 font-semibold text-black hover:bg-lamp-400">
+            📤 {t("end.share")}
+          </button>
+          <button type="button" onClick={copy} className="rounded-lg border border-night-600 bg-night-800 px-4 py-3 hover:bg-night-700">
+            📋 {copied ? t("end.copied") : t("end.copy")}
+          </button>
+          <button type="button" onClick={() => start(makeSeed())} className="rounded-lg border border-night-600 bg-night-800 px-4 py-3 hover:bg-night-700">
+            🎲 {t("end.again")}
+          </button>
+          <button type="button" onClick={() => start(life.seed)} className="rounded-lg border border-night-600 bg-night-800 px-4 py-3 hover:bg-night-700">
+            🔁 {t("end.replay")} <span className="font-medium tabular-nums text-xs text-stone-500">#{life.seed}</span>
+          </button>
+        </div>
+        <button type="button" onClick={() => router.push("/")} className="w-full py-2 text-sm text-stone-500 hover:text-stone-300">
+          {t("end.home")}
+        </button>
+      </section>
+
+      <p className="mx-auto mt-8 max-w-md text-center text-[11px] leading-relaxed text-stone-500">{t("end.note")}</p>
+    </main>
+  );
+}

@@ -2005,7 +2005,10 @@
           "text_en": "They shove you down and escape with most of your cash.",
           "effects": {
             "cashPct": -0.7,
-            "health": -5,
+            "health": [
+              -12,
+              -22
+            ],
             "cause": "injury",
             "hope": -6,
             "counters": {
@@ -2089,7 +2092,10 @@
           "text_th": "มีการผลักกันไปมา คุณล้มลงศอกถลอก แล้วตำรวจก็มาไล่ทั้งคู่",
           "text_en": "There's some shoving. You fall and scrape your elbow, and the police chase you both off.",
           "effects": {
-            "health": -8,
+            "health": [
+              -25,
+              -40
+            ],
             "cause": "injury",
             "heat": 8,
             "hope": -4
@@ -2242,7 +2248,10 @@
           "text_th": "“ไปๆ อย่ามายืนหน้าร้าน” คุณเดินต่อไปทั้งที่ตาพร่า",
           "text_en": "“Go on, don't block the door.” You stumble on, vision blurring.",
           "effects": {
-            "health": -10,
+            "health": [
+              -15,
+              -25
+            ],
             "cause": "heat",
             "hope": -5
           }
@@ -2293,7 +2302,10 @@
               "blanket": -1,
               "cardboard": -1
             },
-            "health": -6,
+            "health": [
+              -25,
+              -45
+            ],
             "cause": "storm",
             "flags": [
               "injured"
@@ -2527,7 +2539,10 @@
           "text_th": "ยามไม่ออกมา คนหนึ่งผลักคุณก่อนเดินจากไป",
           "text_en": "The guard never comes. One of them shoves you before they leave.",
           "effects": {
-            "health": -5,
+            "health": [
+              -12,
+              -20
+            ],
             "cause": "injury",
             "hope": -6
           }
@@ -2581,7 +2596,10 @@
           "text_th": "มันงับน่องคุณหนึ่งที แผลไม่ลึก แต่ต้องดูแลให้ดี",
           "text_en": "It nips your calf. Not deep, but it needs looking after.",
           "effects": {
-            "health": -6,
+            "health": [
+              -8,
+              -14
+            ],
             "cause": "injury",
             "flags": [
               "injured"
@@ -2934,7 +2952,10 @@
           "text_en": "They take more than before, and leave a bruise as a warning.",
           "effects": {
             "cashPct": -0.6,
-            "health": -8,
+            "health": [
+              -30,
+              -45
+            ],
             "cause": "injury",
             "hope": -8
           }
@@ -3985,7 +4006,10 @@
             "flags": [
               "sick"
             ],
-            "health": -8,
+            "health": [
+              -15,
+              -25
+            ],
             "cause": "illness"
           }
         }
@@ -6225,7 +6249,10 @@
             "unflags": [
               "shady_member"
             ],
-            "health": -10,
+            "health": [
+              -25,
+              -40
+            ],
             "cause": "injury",
             "hope": 3
           }
@@ -8866,6 +8893,341 @@
         },
         "text_th": "ยายของบ้านตักอาหารให้คุณจนล้นจาน สามครั้ง",
         "text_en": "The family grandmother fills your plate to overflowing. Three times."
+      }
+    ]
+  },
+  {
+    "id": "ledge_sleep",
+    "icon": "🧱",
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "danger"
+    ],
+    "cooldown": 40,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "weather": [
+        "rain",
+        "storm"
+      ],
+      "sheltered": false
+    },
+    "title_th": "ขอบตึกที่ฝนสาดไม่ถึง",
+    "title_en": "A Ledge Out of the Rain",
+    "text_th": "ฝนตกหนักจนทางเท้ากลายเป็นแอ่งน้ำ เหนือคลองมีขอบปูนแคบๆ ใต้ชายคาที่แห้งสนิท แต่กว้างแค่พอให้ตัวคนหนึ่งคน ถ้าพลิกตัวผิดจังหวะ ข้างล่างคือน้ำดำๆ ที่ไหลแรง",
+    "text_en": "The rain has turned the pavement into a puddle. Above the canal there's a narrow concrete ledge under the eaves, bone dry — just wide enough for one body. Roll the wrong way in your sleep and below is black, fast water.",
+    "choices": [
+      {
+        "label_th": "ปีนขึ้นไปนอนบนขอบตึก",
+        "label_en": "Climb up and sleep on the ledge",
+        "chance": 0.7,
+        "success": {
+          "text_th": "คุณนอนตัวแข็งทั้งคืน ไม่กล้าขยับ แต่ตื่นมาแห้งสนิทเป็นครั้งแรกในรอบหลายวัน",
+          "text_en": "You lie rigid all night, not daring to move — but wake up dry for the first time in days.",
+          "effects": {
+            "energy": 20,
+            "hope": 4,
+            "hygiene": 3
+          }
+        },
+        "fail": {
+          "text_th": "ตอนตีสาม คุณพลิกตัวหนีเสียงฟ้าผ่า มือคว้าอะไรไม่ทัน",
+          "text_en": "Around 3 a.m. you flinch at a thunderclap and roll. Your hand finds nothing to grab.",
+          "effects": {
+            "health": -200,
+            "cause": "injury",
+            "flags": [
+              "fell_ledge"
+            ]
+          }
+        }
+      },
+      {
+        "label_th": "ทนนอนเปียกบนทางเท้า",
+        "label_en": "Sleep wet on the pavement",
+        "effects": {
+          "energy": -10,
+          "hygiene": -10,
+          "health": -3,
+          "cause": "cold",
+          "hope": -3
+        },
+        "text_th": "คุณขดตัวใต้กล่องลังเปียก หนาวสั่นทั้งคืน แต่ยังอยู่ตรงนี้ตอนเช้า",
+        "text_en": "You curl under soggy cardboard and shiver all night — but you're still here in the morning."
+      }
+    ]
+  },
+  {
+    "id": "swollen_canal",
+    "icon": "🌊",
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "danger"
+    ],
+    "cooldown": 40,
+    "conditions": {
+      "weather": [
+        "rain",
+        "storm"
+      ],
+      "inSeason": [
+        "wet"
+      ]
+    },
+    "title_th": "คลองที่เอ่อล้น",
+    "title_en": "The Swollen Canal",
+    "text_th": "มีคนตะโกนว่าโรงทานฝั่งโน้นกำลังแจกข้าวกล่อง แต่สะพานอยู่ไกลไปอีกเกือบชั่วโมง ส่วนคลองตรงหน้ากว้างแค่ยี่สิบเมตร น้ำสีน้ำตาลไหลเชี่ยวจนพาท่อนไม้ลอยผ่านไป",
+    "text_en": "Someone shouts that the charity kitchen across the water is handing out meals. The bridge is nearly an hour's walk. The canal in front of you is only twenty meters wide — brown water racing past, carrying logs.",
+    "choices": [
+      {
+        "label_th": "ว่ายข้ามคลองไปเลย",
+        "label_en": "Swim straight across",
+        "chance": 0.55,
+        "success": {
+          "text_th": "คุณขึ้นฝั่งได้ หอบจนตัวสั่น แต่ยังทันข้าวกล่องสุดท้าย",
+          "text_en": "You haul yourself out, gasping and shaking — just in time for the last meal.",
+          "effects": {
+            "hunger": 40,
+            "energy": -20,
+            "hygiene": -15,
+            "hope": 3
+          }
+        },
+        "fail": {
+          "text_th": "กลางคลอง กระแสน้ำดึงขาคุณลงไป คนบนฝั่งเห็นแค่มือที่โผล่ขึ้นมาครั้งเดียว",
+          "text_en": "Halfway across, the current takes your legs. People on the bank see a hand break the surface once.",
+          "effects": {
+            "health": -200,
+            "cause": "storm",
+            "flags": [
+              "drowned"
+            ]
+          }
+        }
+      },
+      {
+        "label_th": "เดินอ้อมไปทางสะพาน",
+        "label_en": "Walk the long way to the bridge",
+        "effects": {
+          "energy": -15,
+          "hunger": 15,
+          "hope": -2
+        },
+        "text_th": "กว่าจะไปถึง ข้าวหมดไปนานแล้ว แต่ป้าคนแจกยังเหลือขนมปังให้คุณก้อนหนึ่ง",
+        "text_en": "By the time you arrive the meals are long gone — but the volunteer saved you a bread roll."
+      }
+    ]
+  },
+  {
+    "id": "homemade_liquor",
+    "icon": "🍶",
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "danger"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "max": {
+        "hope": 55
+      }
+    },
+    "title_th": "เหล้าขวดไม่มียี่ห้อ",
+    "title_en": "The Bottle With No Label",
+    "text_th": "กลุ่มคนรอบกองไฟส่งขวดพลาสติกใสวนมาถึงมือคุณ กลิ่นแรงจนแสบจมูก “เหล้าต้มเอง อุ่นท้องดี ลืมทุกอย่างได้” เมื่อเดือนก่อนมีข่าวคนแถวนี้ตาบอดเพราะเหล้าเถื่อน",
+    "text_en": "The group around the fire passes you a clear plastic bottle. The smell stings your nose. “Homemade. Warms you up. Makes you forget.” Last month someone around here went blind from bootleg liquor.",
+    "choices": [
+      {
+        "label_th": "ยกดื่มให้หายหนาว",
+        "label_en": "Drink to forget the cold",
+        "chance": 0.75,
+        "success": {
+          "text_th": "ไฟลุกในอก คืนนี้หัวเราะได้เป็นครั้งแรกในรอบหลายสัปดาห์ แม้พรุ่งนี้หัวจะแตก",
+          "text_en": "Fire in your chest. You laugh for the first time in weeks, even if tomorrow your head will split.",
+          "effects": {
+            "hope": 10,
+            "energy": -10,
+            "thirst": -15,
+            "health": -4,
+            "cause": "illness"
+          }
+        },
+        "fail": {
+          "text_th": "ชั่วโมงต่อมา ภาพตรงหน้าเริ่มพร่ามัว ท้องบิดเป็นเกลียว เหล้าล็อตนั้นมีเมทานอล",
+          "text_en": "An hour later your vision blurs and your stomach knots. That batch was cut with methanol.",
+          "effects": {
+            "health": -200,
+            "cause": "illness",
+            "flags": [
+              "poisoned"
+            ]
+          }
+        }
+      },
+      {
+        "label_th": "ส่งขวดต่อ ไม่ดื่ม",
+        "label_en": "Pass the bottle on",
+        "effects": {
+          "hope": -2,
+          "rep": 1
+        },
+        "text_th": "มีคนหัวเราะเยาะว่าคุณขี้ขลาด แต่คุณนั่งผิงไฟต่ออย่างเงียบๆ",
+        "text_en": "Someone laughs at you for being scared. You keep warming your hands in silence."
+      }
+    ]
+  },
+  {
+    "id": "broken_bottle",
+    "icon": "🍾",
+    "weight": 2,
+    "trigger": "action",
+    "tags": [
+      "danger"
+    ],
+    "cooldown": 35,
+    "conditions": {
+      "afterActions": [
+        "beg",
+        "sell",
+        "busk"
+      ],
+      "minDay": 10
+    },
+    "title_th": "ขวดแตกในมือ",
+    "title_en": "A Broken Bottle",
+    "text_th": "ชายเมาคนหนึ่งเดินโซเซมาหยุดตรงหน้า ในมือถือคอขวดแตกแหลมคม “ที่ตรงนี้ของกู ไสหัวไป” คนเดินผ่านรีบเบือนหน้าหนี",
+    "text_en": "A drunk man staggers up and stops in front of you, the jagged neck of a broken bottle in his hand. “This spot's mine. Get lost.” Passers-by quickly look away.",
+    "choices": [
+      {
+        "label_th": "สู้กลับ ไม่ยอมเสียที่",
+        "label_en": "Fight back — it's your spot",
+        "chance": 0.45,
+        "success": {
+          "text_th": "คุณบิดข้อมือเขาจนขวดหลุด เขาเซถอยไปแล้ววิ่งหนี มือคุณสั่นอยู่นาน",
+          "text_en": "You twist his wrist until the bottle drops. He stumbles back and runs. Your hands shake for a long time.",
+          "effects": {
+            "rep": 8,
+            "hope": 3,
+            "health": -5,
+            "cause": "injury",
+            "heat": 6
+          }
+        },
+        "fail": {
+          "text_th": "ทุกอย่างเกิดขึ้นเร็วมาก คุณรู้สึกแค่ความอุ่นที่ไหลลงข้างลำตัว แล้วทางเท้าก็เย็นลง",
+          "text_en": "It happens fast. You feel only warmth running down your side, and then the pavement grows cold.",
+          "effects": {
+            "health": -200,
+            "cause": "injury",
+            "flags": [
+              "stabbed"
+            ]
+          }
+        }
+      },
+      {
+        "label_th": "ตะโกนเรียกให้คนช่วย",
+        "label_en": "Shout for help",
+        "chance": 0.6,
+        "success": {
+          "text_th": "คนขายของสามสี่คนวิ่งเข้ามา ชายเมาสบถแล้วเดินจากไป",
+          "text_en": "Three or four vendors come running. The drunk swears and wanders off.",
+          "effects": {
+            "rep": 3,
+            "hope": 2
+          }
+        },
+        "fail": {
+          "text_th": "ไม่มีใครมา เขาเหวี่ยงขวดใส่ทีหนึ่งก่อนเดินไป แผลที่แขนลึกกว่าที่คิด",
+          "text_en": "Nobody comes. He swings once before leaving. The cut on your arm is deeper than it looks.",
+          "effects": {
+            "health": [
+              -15,
+              -25
+            ],
+            "cause": "injury",
+            "flags": [
+              "injured"
+            ],
+            "hope": -6
+          }
+        }
+      },
+      {
+        "label_th": "ยอมลุกไปหาที่ใหม่",
+        "label_en": "Get up and find another spot",
+        "effects": {
+          "hope": -6,
+          "energy": -5
+        },
+        "text_th": "คุณเก็บของเงียบๆ แล้วเดินไป ศักดิ์ศรีเจ็บ แต่ร่างกายยังครบ",
+        "text_en": "You pack up quietly and leave. Your pride hurts; your body doesn't."
+      }
+    ]
+  },
+  {
+    "id": "red_light_dash",
+    "icon": "🚦",
+    "weight": 2,
+    "trigger": "action",
+    "tags": [
+      "danger"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "afterActions": [
+        "sell",
+        "beg"
+      ]
+    },
+    "title_th": "สามสิบวินาทีของไฟแดง",
+    "title_en": "Thirty Seconds of Red",
+    "text_th": "ไฟแดงที่แยกใหญ่นานพอให้เดินขายพวงมาลัยได้สามสี่คัน คนขับในรถติดฟิล์มกำลังลดกระจกเรียกคุณ แต่ไฟใกล้เขียวแล้ว และมอเตอร์ไซค์มักพุ่งออกมาจากช่องข้าง",
+    "text_en": "The red light at the big junction lasts long enough to work three or four cars. A driver behind tinted glass is rolling down the window, waving you over — but the light is about to turn, and motorbikes always shoot out of the side lane.",
+    "choices": [
+      {
+        "label_th": "รีบวิ่งแทรกไปให้ทันก่อนไฟเขียว",
+        "label_en": "Dash between the cars before it turns",
+        "chance": 0.85,
+        "success": {
+          "text_th": "คุณยื่นของ รับเงิน แล้วกระโดดกลับขึ้นฟุตบาทพอดีตอนรถเริ่มเคลื่อน",
+          "text_en": "You hand it over, take the money and hop back onto the curb just as traffic moves.",
+          "effects": {
+            "cash": [
+              1,
+              2
+            ],
+            "hope": 2,
+            "energy": -5
+          }
+        },
+        "fail": {
+          "text_th": "คุณไม่เห็นมอเตอร์ไซค์คันนั้นเลย ได้ยินแค่เสียงแตรยาวเสียงเดียว",
+          "text_en": "You never see the motorbike. You only hear one long horn.",
+          "effects": {
+            "health": -200,
+            "cause": "injury",
+            "flags": [
+              "hit_by_car"
+            ]
+          }
+        }
+      },
+      {
+        "label_th": "รอบนฟุตบาท ไว้คันหน้า",
+        "label_en": "Wait on the curb for the next light",
+        "effects": {
+          "hope": -1
+        },
+        "text_th": "คนขับปิดกระจกไปแล้ว ไม่เป็นไร ไฟแดงรอบหน้ายังมี",
+        "text_en": "The window rolls back up. That's okay — there's always another red light."
       }
     ]
   }

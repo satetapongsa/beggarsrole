@@ -419,5 +419,113 @@
     "epitaph_en": "The storm came faster than anyone expected; the water rose in minutes. People with homes shut their windows. People without them held on to whatever they could. Afterward, your street friends searched for you all day.",
     "line_th": "หลังพายุผ่าน เพื่อนๆ ตามหาฉันทั้งวัน",
     "line_en": "After the storm, my friends searched for me all day."
+  },
+  {
+    "id": "fell_ledge",
+    "title_th": "ขอบตึกเหนือคลอง",
+    "title_en": "The Ledge Above the Canal",
+    "icon": "🧱",
+    "death": [
+      "injury",
+      "illness"
+    ],
+    "epitaph_th": "คืนนั้นคุณแค่อยากนอนให้แห้งสักคืน เช้าวันต่อมา เพื่อนข้างถนนเจอกล่องลังของคุณวางอยู่บนขอบตึก เรียบร้อยเหมือนคนเจ้าของกำลังจะกลับมา",
+    "epitaph_en": "That night you only wanted to sleep dry for once. The next morning your street friends found your cardboard folded neatly on the ledge, as if its owner were coming back.",
+    "line_th": "ฉันแค่อยากนอนให้แห้งสักคืน",
+    "line_en": "I only wanted one dry night.",
+    "rarity": "uncommon",
+    "priority": 70,
+    "conditions": {
+      "flags": [
+        "fell_ledge"
+      ]
+    },
+    "hidden": true
+  },
+  {
+    "id": "drowned",
+    "title_th": "ยี่สิบเมตรที่ไม่เคยถึง",
+    "title_en": "Twenty Meters Short",
+    "icon": "🌊",
+    "death": [
+      "storm"
+    ],
+    "epitaph_th": "ยี่สิบเมตรดูใกล้เสมอเวลาหิว ข้าวกล่องอยู่อีกฝั่ง สะพานอยู่ไกลไปหนึ่งชั่วโมง คุณเลือกทางที่สั้นกว่า และคลองก็ไม่คืนอะไรกลับมา",
+    "epitaph_en": "Twenty meters always looks close when you're hungry. The meal was on the other side; the bridge was an hour away. You took the short way, and the canal gave nothing back.",
+    "line_th": "ฉันเลือกทางที่สั้นกว่า",
+    "line_en": "I took the shorter way.",
+    "rarity": "uncommon",
+    "priority": 69,
+    "conditions": {
+      "flags": [
+        "drowned"
+      ]
+    },
+    "hidden": true
+  },
+  {
+    "id": "poisoned",
+    "title_th": "ขวดที่ไม่มียี่ห้อ",
+    "title_en": "The Bottle With No Label",
+    "icon": "🍶",
+    "death": [
+      "illness"
+    ],
+    "epitaph_th": "เหล้าเถื่อนล็อตนั้นคร่าชีวิตคนไปสามคนในคืนเดียว ข่าวลงแค่ย่อหน้าเดียวท้ายหน้า ไม่มีชื่อใครสักคน มีแค่คำว่า “คนไร้บ้าน”",
+    "epitaph_en": "That bootleg batch killed three people in one night. The news gave it a single paragraph at the bottom of a page — no names, just the words “homeless people.”",
+    "line_th": "ฉันแค่อยากลืมความหนาวสักคืน",
+    "line_en": "I just wanted to forget the cold for one night.",
+    "rarity": "uncommon",
+    "priority": 68,
+    "conditions": {
+      "flags": [
+        "poisoned"
+      ]
+    },
+    "hidden": true
+  },
+  {
+    "id": "stabbed",
+    "title_th": "เพื่อทางเท้าแค่หนึ่งเมตร",
+    "title_en": "For One Meter of Pavement",
+    "icon": "🍾",
+    "death": [
+      "injury",
+      "illness"
+    ],
+    "epitaph_th": "ที่ตรงนั้นกว้างแค่หนึ่งเมตร มีกล่องลัง ผ้าห่ม และถ้วยใส่เหรียญ คุณไม่ยอมเสียมันไป เพราะมันคือทั้งหมดที่คุณมี บางครั้งการไม่ยอมก็มีราคาแพงเกินไป",
+    "epitaph_en": "That spot was one meter wide: some cardboard, a blanket, a cup for coins. You wouldn't give it up because it was everything you had. Sometimes standing your ground costs too much.",
+    "line_th": "มันคือทั้งหมดที่ฉันมี ฉันเลยไม่ยอม",
+    "line_en": "It was everything I had, so I wouldn't give it up.",
+    "rarity": "uncommon",
+    "priority": 67,
+    "conditions": {
+      "flags": [
+        "stabbed"
+      ]
+    },
+    "hidden": true
+  },
+  {
+    "id": "hit_by_car",
+    "title_th": "ไฟเขียวมาก่อน",
+    "title_en": "The Light Turned Green",
+    "icon": "🚦",
+    "death": [
+      "injury",
+      "illness"
+    ],
+    "epitaph_th": "รถติดยาวไปสองกิโลเพราะอุบัติเหตุที่แยกใหญ่ มีคนบ่นว่าไปทำงานสาย มีคนวางพวงมาลัยไว้ข้างทางในเช้าวันต่อมา พวงที่คุณยังขายไม่หมด",
+    "epitaph_en": "Traffic backed up two kilometers because of an accident at the big junction. People complained about being late for work. The next morning someone laid a garland by the road — one of the ones you never got to sell.",
+    "line_th": "อีกแค่คันเดียว แล้วไฟก็เขียว",
+    "line_en": "Just one more car, and then the light turned green.",
+    "rarity": "uncommon",
+    "priority": 66,
+    "conditions": {
+      "flags": [
+        "hit_by_car"
+      ]
+    },
+    "hidden": true
   }
 ]

@@ -4,7 +4,7 @@ A browser life-sim where you're rolled into a random life on the streets of one 
 Survive day by day, find your people, and maybe find a way out. Every life ends differently.
 
 Thai is the primary language (toggle to English any time). No login and no external APIs for
-gameplay — everything runs in the browser and autosaves to `localStorage`. An optional Redis
+gameplay — everything runs in the browser and autosaves to `localStorage`. An optional Postgres
 database adds play statistics and a verified leaderboard (see [Online features](#online-features)).
 
 ## Run locally
@@ -118,9 +118,16 @@ cheap meal), `dailyIncome`, `milestoneCash`, seasons (`hotMonths / wetMonths / c
 All optional — without a database the game runs exactly as before and online panels say so.
 
 - **Play stats** (`/api/track`, `/api/stats`): lives started/finished, unique players (an anonymous
-  random id in `localStorage`, counted with HyperLogLog), players today, ending and city counts.
-- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): all-time, this week
-  (ISO week, UTC) and per starting city, top 50 shown, best 1000 kept.
+  random id in `localStorage`), players today, ending and city counts.
+- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): all-time, this week,
+  daily challenge and per starting city, top 50 shown. Nicknames pass a Thai + English filter
+  (`lib/moderation.ts`).
+- **Daily challenge** (`/api/daily`): one seed per day (Bangkok time) derived from `DAILY_SECRET`;
+  only a player's first daily run each day counts for the daily board.
+- **Profiles** (`/api/profile`): endings collection synced to the server; a recovery code moves it
+  to another device.
+- **Admin** (`/api/admin`, page `/admin`): 30-day player chart, how long lives last, hide/unhide
+  leaderboard names. Needs `ADMIN_TOKEN` (12+ chars).
 
 **Anti-cheat:** the play page records every action that changed the state (`GameState.actions`).
 When a life ends, the client sends only `seed` + `actions`; `/api/runs` replays them with the same
@@ -134,9 +141,17 @@ changes outcomes, bump `SAVE_VERSION` — old in-progress lives can no longer be
 1.25 · hard 1.5 · brutal 2). The log curve makes escaping beat farming days — check with
 `npm run simulate -- 300 safe x farm`.
 
-**Database:** [Upstash Redis](https://upstash.com) (free tier is plenty). Set either
-`KV_REST_API_URL` + `KV_REST_API_TOKEN` (added automatically by Vercel’s Upstash integration) or
-`UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`. For local dev put them in `.env.local`.
+**Database:** Postgres via [Neon](https://neon.tech) (`@neondatabase/serverless`, free tier is plenty).
+Tables are created automatically on first use (`lib/db.ts`). Environment variables:
+
+| Variable | |
+| --- | --- |
+| `DATABASE_URL` | Neon connection string (required for online features) |
+| `ADMIN_TOKEN` | password for `/admin` |
+| `DAILY_SECRET` | any random string — keeps future daily seeds secret |
+
+For local dev put them in `.env.local` (gitignored). `npm run test:online` runs an end-to-end check
+against the dev server and the database, and deletes its test data afterwards.
 
 Page views and visitors come from Vercel Web Analytics (`<Analytics />` in `app/layout.tsx`) —
 enable it under the project’s **Analytics** tab.
@@ -145,8 +160,8 @@ enable it under the project’s **Analytics** tab.
 
 1. Push this folder to a GitHub repository.
 2. In Vercel: **Add New → Project → Import** the repo. Framework is detected as Next.js.
-3. Project → **Storage → Create Database → Upstash (Redis)**, connect it to the project. This adds
-   the `KV_REST_API_*` env vars. Redeploy so they take effect.
+3. Project → **Settings → Environment Variables**: add `DATABASE_URL`, `ADMIN_TOKEN` and
+   `DAILY_SECRET`. Redeploy so they take effect.
 4. Deploy. The share card (`/api/og`) runs on the Edge runtime and fetches the Kanit font from
    Google Fonts at render time; if that fetch fails it falls back to the default font.
 

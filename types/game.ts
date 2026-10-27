@@ -463,6 +463,8 @@ export interface GameState {
   ended: { endingId: string; day: number; age: number } | null;
   /** Every action that changed the state since newGame(seed) — lets the server replay and verify a life. */
   actions?: GameAction[];
+  /** Set when this life is a daily challenge (YYYY-MM-DD, Bangkok time). */
+  daily?: string;
 }
 
 export type GameAction =

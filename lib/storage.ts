@@ -11,6 +11,7 @@ const ENDINGS_KEY = "spare-change:endings";
 const PLAYER_KEY = "spare-change:player";
 const RUN_KEY = "spare-change:last-run";
 const NICK_KEY = "spare-change:nickname";
+const DAILY_KEY = "spare-change:daily";
 
 function read<T>(key: string): T | null {
   try {
@@ -73,6 +74,10 @@ export function loadEndingsFound(): string[] {
   return Array.isArray(v) ? v : [];
 }
 
+export function saveEndingsFound(ids: string[]) {
+  write(ENDINGS_KEY, ids);
+}
+
 /** Anonymous random id, so the server can count unique players without a login. */
 export function loadPlayerId(): string {
   const existing = read<string>(PLAYER_KEY);
@@ -83,6 +88,22 @@ export function loadPlayerId(): string {
       : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`;
   write(PLAYER_KEY, id);
   return id;
+}
+
+/** Only used when restoring a profile from a recovery code on a new device. */
+export function savePlayerId(id: string) {
+  write(PLAYER_KEY, id);
+}
+
+/** Dates (YYYY-MM-DD) of daily challenges already started on this device. */
+export function loadDailyStarted(): string[] {
+  const v = read<string[]>(DAILY_KEY);
+  return Array.isArray(v) ? v : [];
+}
+
+export function markDailyStarted(date: string) {
+  // keep a short history — only "today" matters
+  write(DAILY_KEY, [date, ...loadDailyStarted().filter((d) => d !== date)].slice(0, 7));
 }
 
 /** Leaderboard submission for the last life: runId once verified, name once claimed. */

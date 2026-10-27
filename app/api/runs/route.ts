@@ -1,25 +1,31 @@
 // Submits a finished life. The server replays seed + actions, computes the score itself, records
 // stats once per unique run, and returns a runId the player can claim on the leaderboard with a name.
+// A daily-challenge life counts for the daily board only if it is the player's first daily run that day.
 
 import { createHash } from "node:crypto";
+import { isDailyDate } from "@/lib/daily";
+import { dailySeed, isOpenDaily } from "@/lib/daily-seed";
+import { badRequest, getDb, isPlayerId, json, offline, rateLimited, today, underLimit } from "@/lib/db";
 import { MAX_ACTIONS, parseAction, replayLife } from "@/lib/replay";
-import { getRedis, isPlayerId, json, K, underLimit } from "@/lib/redis";
 import { scoreLife } from "@/lib/score";
 import type { GameAction } from "@/types/game";
 
 export const maxDuration = 30;
 
-const RUN_TTL = 30 * 86400; // unclaimed runs expire; claimed ones are persisted
-
 export async function POST(req: Request) {
-  const redis = getRedis();
-  if (!redis) return json({ ok: false, error: "offline" }, 503);
-  const body = (await req.json().catch(() => null)) as { seed?: unknown; actions?: unknown; playerId?: unknown } | null;
+  const sql = await getDb();
+  if (!sql) return offline();
+  const body = (await req.json().catch(() => null)) as {
+    seed?: unknown;
+    actions?: unknown;
+    playerId?: unknown;
+    daily?: unknown;
+  } | null;
   const seed = body?.seed;
-  if (typeof seed !== "number" || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) return json({ ok: false, error: "bad_request" }, 400);
-  if (!isPlayerId(body?.playerId) || !Array.isArray(body?.actions) || body.actions.length > MAX_ACTIONS)
-    return json({ ok: false, error: "bad_request" }, 400);
-  if (!(await underLimit(redis, req, "runs", 60))) return json({ ok: false, error: "rate_limited" }, 429);
+  if (typeof seed !== "number" || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) return badRequest();
+  if (!isPlayerId(body?.playerId) || !Array.isArray(body?.actions) || body.actions.length > MAX_ACTIONS) return badRequest();
+  if (!(await underLimit(sql, req, "runs", 60))) return rateLimited();
+  const playerId = body.playerId;
 
   const actions: GameAction[] = [];
   for (const raw of body.actions) {
@@ -32,28 +38,38 @@ export async function POST(req: Request) {
   if (!life?.ended || !score) return json({ ok: false, error: "invalid_run" }, 422);
 
   const runId = createHash("sha256").update(`${seed}:${JSON.stringify(actions)}`).digest("hex").slice(0, 20);
-  const higher = await redis.zcount(K.lbAll, `(${score.total}`, "+inf");
-  const fresh = await redis.set(`${K.run(runId)}:lock`, 1, { nx: true, ex: RUN_TTL });
-  if (fresh) {
+  const existing = await sql`select player_id, daily::text as daily from runs where id = ${runId}`;
+  let daily: string | null = existing[0]?.daily ?? null;
+
+  if (!existing.length) {
+    const wantsDaily = isDailyDate(body.daily) && isOpenDaily(body.daily) && dailySeed(body.daily) === seed;
+    if (wantsDaily) {
+      const tried = await sql`select 1 from runs where player_id = ${playerId} and daily = ${body.daily}`;
+      if (!tried.length) daily = body.daily as string;
+    }
     const cityId = life.citiesLived[0] ?? life.cityId;
-    const p = redis.pipeline();
-    p.hset(K.run(runId), {
-      score: score.total,
-      endingId: life.ended.endingId,
-      cityId,
-      days: life.ended.day,
-      age: life.ended.age,
-      seed,
-      playerId: body.playerId,
-      at: Date.now(),
-    });
-    p.expire(K.run(runId), RUN_TTL);
-    p.incr(K.ended);
-    p.pfadd(K.players, body.playerId);
-    p.hincrby(K.endings, life.ended.endingId, 1);
-    p.hincrby(K.cityRuns, cityId, 1);
-    p.hincrby(K.cityDays, cityId, life.ended.day);
-    await p.exec();
+    await sql.transaction([
+      sql`insert into runs (id, player_id, seed, score, ending_id, city_id, days, age, daily)
+          values (${runId}, ${playerId}, ${seed}, ${score.total}, ${life.ended.endingId}, ${cityId},
+                  ${life.ended.day}, ${life.ended.age}, ${daily})
+          on conflict do nothing`,
+      sql`insert into players (id) values (${playerId}) on conflict (id) do update set last_seen = now()`,
+      sql`insert into player_days (player_id, day, ends) values (${playerId}, ${today()}, 1)
+          on conflict (player_id, day) do update set ends = player_days.ends + 1`,
+      sql`insert into player_endings (player_id, ending_id) values (${playerId}, ${life.ended.endingId})
+          on conflict do nothing`,
+    ]);
   }
-  return json({ ok: true, runId, score, rank: higher + 1 });
+
+  const [{ rank }] = await sql`
+    select count(*)::int + 1 as rank from runs
+    where name is not null and not hidden and score > ${score.total}`;
+  let dailyRank: number | null = null;
+  if (daily) {
+    const [r] = await sql`
+      select count(*)::int + 1 as rank from runs
+      where daily = ${daily} and name is not null and not hidden and score > ${score.total}`;
+    dailyRank = r.rank;
+  }
+  return json({ ok: true, runId, score, rank, daily, dailyRank });
 }

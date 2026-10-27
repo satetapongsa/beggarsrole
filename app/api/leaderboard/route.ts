@@ -1,13 +1,14 @@
-// GET  ?board=all|week|city&city=<id>  → top 50
-// POST { runId, playerId, name }        → put a verified run on the boards under a nickname
+// GET  ?board=all|week|daily|city  (&city=<id>, &date=YYYY-MM-DD for daily)  → top 50
+// POST { runId, playerId, name }  → put a verified run on the boards under a nickname
 
 import { DATA } from "@/lib/data";
-import { getRedis, isoWeek, isPlayerId, json, K, underLimit } from "@/lib/redis";
+import { dailyDate, isDailyDate } from "@/lib/daily";
+import { badRequest, getDb, isPlayerId, json, offline, rateLimited, underLimit } from "@/lib/db";
+import { isNameAllowed } from "@/lib/moderation";
 
 export const dynamic = "force-dynamic";
 
 const TOP = 50;
-const KEEP = 1000; // boards are trimmed to the best KEEP runs
 
 export interface BoardEntry {
   rank: number;
@@ -20,42 +21,40 @@ export interface BoardEntry {
   at: number;
 }
 
-function boardKey(url: URL): string | null {
-  const board = url.searchParams.get("board") ?? "all";
-  if (board === "all") return K.lbAll;
-  if (board === "week") return K.lbWeek(isoWeek());
-  if (board === "city") {
-    const c = url.searchParams.get("city") ?? "";
-    return DATA.city[c] ? K.lbCity(c) : null;
-  }
-  return null;
-}
-
 export async function GET(req: Request) {
-  const redis = getRedis();
-  if (!redis) return json({ ok: false, error: "offline" }, 503);
-  const key = boardKey(new URL(req.url));
-  if (!key) return json({ ok: false, error: "bad_request" }, 400);
+  const sql = await getDb();
+  if (!sql) return offline();
+  const url = new URL(req.url);
+  const board = url.searchParams.get("board") ?? "all";
+  const city = url.searchParams.get("city") ?? "";
+  const date = url.searchParams.get("date") ?? dailyDate();
 
-  const ids = await redis.zrange<string[]>(key, 0, TOP - 1, { rev: true });
-  if (ids.length === 0) return json({ ok: true, entries: [] });
-  const p = redis.pipeline();
-  ids.forEach((id) => p.hgetall(K.run(id)));
-  const rows = (await p.exec()) as (Record<string, unknown> | null)[];
-  const entries: BoardEntry[] = [];
-  rows.forEach((r) => {
-    if (!r) return;
-    entries.push({
-      rank: entries.length + 1,
-      name: String(r.name ?? "?"),
-      score: Number(r.score),
-      endingId: String(r.endingId),
-      cityId: String(r.cityId),
-      days: Number(r.days),
-      age: Number(r.age),
-      at: Number(r.at),
-    });
-  });
+  let rows: Record<string, unknown>[];
+  const cols = sql`name, score, ending_id, city_id, days, age, created_at`;
+  const visible = sql`name is not null and not hidden`;
+  if (board === "all") {
+    rows = await sql`select ${cols} from runs where ${visible} order by score desc, created_at limit ${TOP}`;
+  } else if (board === "week") {
+    rows = await sql`
+      select ${cols} from runs
+      where ${visible} and created_at >= date_trunc('week', now() at time zone 'Asia/Bangkok') at time zone 'Asia/Bangkok'
+      order by score desc, created_at limit ${TOP}`;
+  } else if (board === "daily" && isDailyDate(date)) {
+    rows = await sql`select ${cols} from runs where ${visible} and daily = ${date} order by score desc, created_at limit ${TOP}`;
+  } else if (board === "city" && DATA.city[city]) {
+    rows = await sql`select ${cols} from runs where ${visible} and city_id = ${city} order by score desc, created_at limit ${TOP}`;
+  } else return badRequest();
+
+  const entries: BoardEntry[] = rows.map((r, i) => ({
+    rank: i + 1,
+    name: String(r.name),
+    score: Number(r.score),
+    endingId: String(r.ending_id),
+    cityId: String(r.city_id),
+    days: Number(r.days),
+    age: Number(r.age),
+    at: new Date(String(r.created_at)).getTime(),
+  }));
   return json({ ok: true, entries });
 }
 
@@ -71,32 +70,32 @@ function cleanName(x: unknown): string | null {
 }
 
 export async function POST(req: Request) {
-  const redis = getRedis();
-  if (!redis) return json({ ok: false, error: "offline" }, 503);
+  const sql = await getDb();
+  if (!sql) return offline();
   const body = (await req.json().catch(() => null)) as { runId?: unknown; playerId?: unknown; name?: unknown } | null;
   const name = cleanName(body?.name);
   const runId = body?.runId;
-  if (!name || typeof runId !== "string" || !/^[a-f0-9]{20}$/.test(runId) || !isPlayerId(body?.playerId))
-    return json({ ok: false, error: "bad_request" }, 400);
-  if (!(await underLimit(redis, req, "claim", 30))) return json({ ok: false, error: "rate_limited" }, 429);
+  if (!name || typeof runId !== "string" || !/^[a-f0-9]{20}$/.test(runId) || !isPlayerId(body?.playerId)) return badRequest();
+  if (!isNameAllowed(name)) return json({ ok: false, error: "name_blocked" }, 422);
+  if (!(await underLimit(sql, req, "claim", 30))) return rateLimited();
 
-  const run = await redis.hgetall<Record<string, unknown>>(K.run(runId));
-  if (!run || String(run.playerId) !== body.playerId) return json({ ok: false, error: "not_found" }, 404);
-  if (run.name) return json({ ok: false, error: "already_claimed" }, 409);
-
-  const score = Number(run.score);
-  const cityId = String(run.cityId);
-  const week = K.lbWeek(isoWeek());
-  const p = redis.pipeline();
-  p.hset(K.run(runId), { name });
-  p.persist(K.run(runId));
-  p.persist(`${K.run(runId)}:lock`);
-  for (const key of [K.lbAll, week, K.lbCity(cityId)]) {
-    p.zadd(key, { score, member: runId });
-    p.zremrangebyrank(key, 0, -(KEEP + 1));
+  const updated = await sql`
+    update runs set name = ${name}, claimed_at = now()
+    where id = ${runId} and player_id = ${body.playerId} and name is null
+    returning score, daily::text as daily`;
+  if (!updated.length) {
+    const [run] = await sql`select name from runs where id = ${runId} and player_id = ${body.playerId}`;
+    return run ? json({ ok: false, error: "already_claimed" }, 409) : json({ ok: false, error: "not_found" }, 404);
   }
-  p.expire(week, 60 * 86400);
-  await p.exec();
-  const rank = (await redis.zrevrank(K.lbAll, runId)) ?? null;
-  return json({ ok: true, rank: rank === null ? null : rank + 1 });
+  const { score, daily } = updated[0];
+  const [{ rank }] = await sql`
+    select count(*)::int + 1 as rank from runs where name is not null and not hidden and score > ${score}`;
+  let dailyRank: number | null = null;
+  if (daily) {
+    const [r] = await sql`
+      select count(*)::int + 1 as rank from runs
+      where daily = ${daily} and name is not null and not hidden and score > ${score}`;
+    dailyRank = r.rank;
+  }
+  return json({ ok: true, rank, dailyRank });
 }

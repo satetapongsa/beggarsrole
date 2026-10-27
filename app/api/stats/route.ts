@@ -1,46 +1,29 @@
 // Public play statistics: players, lives started/finished, today's numbers, most common endings.
 
-import { getRedis, json, K, today } from "@/lib/redis";
+import { getDb, json, offline, today } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const redis = getRedis();
-  if (!redis) return json({ ok: false, error: "offline" }, 503);
+  const sql = await getDb();
+  if (!sql) return offline();
   const d = today();
-  const p = redis.pipeline();
-  p.pfcount(K.players);
-  p.get(K.started);
-  p.get(K.ended);
-  p.pfcount(K.dayPlayers(d));
-  p.get(K.dayStarted(d));
-  p.hgetall(K.endings);
-  p.hgetall(K.cityRuns);
-  p.hgetall(K.cityDays);
-  const [players, started, ended, playersToday, startedToday, endings, cityRuns, cityDays] = (await p.exec()) as [
-    number,
-    number | null,
-    number | null,
-    number,
-    number | null,
-    Record<string, number> | null,
-    Record<string, number> | null,
-    Record<string, number> | null,
-  ];
-  const cities = Object.entries(cityRuns ?? {}).map(([id, runs]) => ({
-    id,
-    runs: Number(runs),
-    avgDays: Math.round(Number(cityDays?.[id] ?? 0) / Math.max(1, Number(runs))),
-  }));
+  const [[totals], [todayRow], endings, cities] = await sql.transaction([
+    sql`select (select count(*)::int from players) as players,
+               (select coalesce(sum(starts), 0)::int from player_days) as started,
+               (select count(*)::int from runs) as ended`,
+    sql`select count(*)::int as players, coalesce(sum(starts), 0)::int as started from player_days where day = ${d}`,
+    sql`select ending_id as id, count(*)::int as n from runs group by ending_id order by n desc`,
+    sql`select city_id as id, count(*)::int as runs, round(avg(days))::int as "avgDays"
+        from runs group by city_id order by runs desc`,
+  ]);
   return json({
     ok: true,
-    players,
-    started: Number(started ?? 0),
-    ended: Number(ended ?? 0),
-    today: { players: playersToday, started: Number(startedToday ?? 0) },
-    endings: Object.entries(endings ?? {})
-      .map(([id, n]) => ({ id, n: Number(n) }))
-      .sort((a, b) => b.n - a.n),
-    cities: cities.sort((a, b) => b.runs - a.runs),
+    players: totals.players,
+    started: totals.started,
+    ended: totals.ended,
+    today: { players: todayRow.players, started: todayRow.started },
+    endings,
+    cities,
   });
 }

@@ -9230,5 +9230,762 @@
         "text_en": "The window rolls back up. That's okay — there's always another red light."
       }
     ]
+  },
+  {
+    "id": "bkk_sampeng_porter",
+    "icon": "📦",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "bangkok"
+      ],
+      "spots": [
+        "sampeng"
+      ]
+    },
+    "title_th": "รถเข็นติดซอย",
+    "title_en": "A Cart Stuck in the Lane",
+    "text_th": "ในซอยสำเพ็งที่แคบจนไหล่ชนกัน รถเข็นกองผ้าสูงเท่าคนติดอยู่กับท่อน้ำ เถ้าแก่ตะโกนหาคนช่วยเข็น",
+    "text_en": "In a Sampeng lane so narrow shoulders touch, a cart piled with bolts of cloth is wedged against a drainpipe. The shop owner shouts for someone to help push.",
+    "choices": [
+      {
+        "label_th": "ช่วยเข็นจนพ้นซอย",
+        "label_en": "Help push it through",
+        "effects": {
+          "cash": [
+            2,
+            3
+          ],
+          "energy": -14,
+          "rep": 3
+        },
+        "text_th": "เถ้าแก่ยัดแบงก์ใส่มือคุณ แล้วบอกว่าพรุ่งนี้มีของลงอีก",
+        "text_en": "The owner presses a note into your hand and says another load comes tomorrow."
+      },
+      {
+        "label_th": "หลบไปอีกทาง",
+        "label_en": "Squeeze past the other way",
+        "effects": {
+          "energy": -2
+        },
+        "text_th": "คุณเดินอ้อม ได้ยินเสียงด่าตามหลังมาเป็นภาษาจีนแต้จิ๋ว",
+        "text_en": "You go around. Cursing in Teochew follows you down the lane."
+      }
+    ]
+  },
+  {
+    "id": "mumbai_marine_drive_walkers",
+    "icon": "🌅",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "kindness"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "mumbai"
+      ],
+      "spots": [
+        "marine_drive"
+      ],
+      "phases": [
+        "morning"
+      ]
+    },
+    "title_th": "คนเดินเช้าที่มารีนไดรฟ์",
+    "title_en": "Morning Walkers on Marine Drive",
+    "text_th": "ตอนเช้า มารีนไดรฟ์เต็มไปด้วยคนเดินออกกำลัง ลุงคนหนึ่งในชุดวอร์มหยุดหอบข้างคุณ แล้วถามว่ากินอะไรมาหรือยัง",
+    "text_en": "In the morning Marine Drive fills with joggers and walkers. An uncle in a tracksuit stops to catch his breath beside you and asks whether you've eaten.",
+    "choices": [
+      {
+        "label_th": "บอกตามจริงว่ายัง",
+        "label_en": "Tell him the truth: no",
+        "effects": {
+          "hunger": 30,
+          "hope": 8
+        },
+        "text_th": "เขาพาคุณไปร้านชาข้างทาง สั่งวาดาเปาสองชิ้น แล้วเล่าเรื่องลูกชายที่ไม่เคยโทรหาเขา",
+        "text_en": "He takes you to a roadside stall, orders two vada pav, and talks about a son who never calls."
+      },
+      {
+        "label_th": "บอกว่ากินแล้ว",
+        "label_en": "Say you have",
+        "effects": {
+          "hope": 2
+        },
+        "text_th": "เขาพยักหน้าแล้วเดินต่อ คุณมองทะเลต่อไปอีกพักหนึ่ง",
+        "text_en": "He nods and walks on. You watch the sea a while longer."
+      }
+    ]
+  },
+  {
+    "id": "manila_quiapo_vendor",
+    "icon": "🕯️",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity",
+      "community"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "manila"
+      ],
+      "spots": [
+        "quiapo"
+      ]
+    },
+    "title_th": "แม่ค้าเทียนหน้าโบสถ์กีอาโป",
+    "title_en": "The Candle Seller at Quiapo",
+    "text_th": "หน้าโบสถ์กีอาโป แม่ค้าขายเทียนสีต่างๆ ต้องไปรับหลานที่โรงเรียน เธอถามว่าคุณช่วยดูแผงให้สักชั่วโมงได้ไหม",
+    "text_en": "Outside Quiapo Church, a woman selling coloured prayer candles has to fetch her grandson from school. She asks if you'll watch her stall for an hour.",
+    "choices": [
+      {
+        "label_th": "ได้ ไปเถอะ",
+        "label_en": "Sure, go",
+        "chance": 0.8,
+        "success": {
+          "text_th": "คุณขายเทียนสีเขียวให้คนที่ขอเรื่องเงิน สีแดงให้คนที่ขอเรื่องรัก เธอกลับมาแบ่งรายได้ให้คุณ",
+          "text_en": "You sell green candles to people praying for money and red to people praying for love. She comes back and splits the takings with you.",
+          "effects": {
+            "cash": 2,
+            "rep": 6,
+            "hope": 5
+          }
+        },
+        "fail": {
+          "text_th": "ฝนตกหนัก ไม่มีใครซื้อเลย เธอกลับมาแล้วบอกว่าไม่เป็นไร พรุ่งนี้ค่อยว่ากัน",
+          "text_en": "It pours and nobody buys. She comes back and says never mind, there's always tomorrow.",
+          "effects": {
+            "rep": 3
+          }
+        }
+      },
+      {
+        "label_th": "ขอโทษ ไม่ว่าง",
+        "label_en": "Sorry, can't",
+        "effects": {},
+        "text_th": "เธอไปถามคนอื่น",
+        "text_en": "She asks someone else."
+      }
+    ]
+  },
+  {
+    "id": "jakarta_monas_sunday",
+    "icon": "🚲",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "community"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "jakarta"
+      ],
+      "spots": [
+        "monas"
+      ],
+      "phases": [
+        "morning"
+      ]
+    },
+    "title_th": "วันอาทิตย์ที่โมนัส",
+    "title_en": "Sunday at Monas",
+    "text_th": "เช้าวันอาทิตย์ ถนนรอบโมนัสปิดให้คนเดิน ครอบครัวพาเด็กมาปั่นจักรยาน แผงลอยตั้งเต็มทาง",
+    "text_en": "On Sunday morning the roads around Monas close to cars. Families bring kids on bicycles and pop-up vendors line the way.",
+    "choices": [
+      {
+        "label_th": "ช่วยเฝ้าจักรยานเช่า",
+        "label_en": "Help mind the rental bikes",
+        "effects": {
+          "cash": 1,
+          "hunger": 25,
+          "energy": -8
+        },
+        "text_th": "เจ้าของแผงจ่ายคุณเป็นข้าวห่อใบตองกับเงินนิดหน่อย",
+        "text_en": "The owner pays you in a banana-leaf rice parcel and a little cash."
+      },
+      {
+        "label_th": "นั่งดูผู้คน",
+        "label_en": "Sit and watch people",
+        "effects": {
+          "hope": 7,
+          "energy": 4
+        },
+        "text_th": "เด็กผู้หญิงคนหนึ่งปั่นจักรยานล้มตรงหน้าคุณ ลุกขึ้นมาหัวเราะ คุณหัวเราะตาม",
+        "text_en": "A little girl falls off her bike in front of you, gets up laughing, and you laugh too."
+      }
+    ]
+  },
+  {
+    "id": "dhaka_sadarghat_launch",
+    "icon": "⛴️",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity",
+      "danger"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "dhaka"
+      ],
+      "spots": [
+        "sadarghat"
+      ]
+    },
+    "title_th": "เรือเข้าท่าซาดาร์กัต",
+    "title_en": "The Launch Comes In",
+    "text_th": "เรือลำใหญ่จากทางใต้เข้าเทียบท่าซาดาร์กัต คนหลายร้อยแบกกระสอบลงมาพร้อมกัน คนแบกของรับจ้างวิ่งกันวุ่น",
+    "text_en": "A big launch from the south docks at Sadarghat. Hundreds pour off with sacks on their heads and porters scramble for work.",
+    "choices": [
+      {
+        "label_th": "แย่งงานแบกของ",
+        "label_en": "Fight for a porter job",
+        "chance": 0.65,
+        "success": {
+          "text_th": "คุณแบกกระสอบข้าวสามเที่ยวขึ้นบันไดลื่นๆ หลังแทบหัก แต่ได้เงิน",
+          "text_en": "You haul three sacks of rice up the slick steps. Your back screams, but you get paid.",
+          "effects": {
+            "cash": [
+              2,
+              3
+            ],
+            "energy": -20,
+            "health": -3
+          }
+        },
+        "fail": {
+          "text_th": "คนแบกของประจำผลักคุณตกบันได ท่านี้มีเจ้าถิ่น",
+          "text_en": "A regular porter shoves you down the steps. This ghat has owners.",
+          "effects": {
+            "health": -8,
+            "hope": -4,
+            "cause": "violence"
+          }
+        }
+      },
+      {
+        "label_th": "รอเก็บขวดที่คนทิ้ง",
+        "label_en": "Wait to collect the bottles people leave",
+        "effects": {
+          "cash": 1,
+          "energy": -6
+        },
+        "text_th": "พอฝูงคนซา คุณเก็บขวดพลาสติกได้เต็มถุง",
+        "text_en": "When the crowd thins you fill a bag with plastic bottles."
+      }
+    ]
+  },
+  {
+    "id": "lagos_balogun_market",
+    "icon": "🧵",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "lagos"
+      ],
+      "spots": [
+        "balogun"
+      ]
+    },
+    "title_th": "ตลาดบาโลกุน",
+    "title_en": "Balogun Market",
+    "text_th": "ที่ตลาดบาโลกุน แม่ค้าผ้าอังการาตะโกนแข่งกับลำโพงเพลงแอโฟรบีตส์ เธอชี้มาที่คุณ “เสียงดังไหม มาช่วยเรียกลูกค้าหน่อย”",
+    "text_en": "In Balogun Market an Ankara cloth seller shouts over an Afrobeats speaker. She points at you. “Is your voice loud? Come and call customers for me.”",
+    "choices": [
+      {
+        "label_th": "ตะโกนเรียกลูกค้า",
+        "label_en": "Start shouting",
+        "effects": {
+          "cash": 2,
+          "hunger": 30,
+          "rep": 4,
+          "energy": -10
+        },
+        "text_th": "ถึงเย็นเสียงคุณแหบ แต่เธอขายได้ดีที่สุดในแถว และให้ค่าแรงพร้อมข้าวโจลอฟจานใหญ่",
+        "text_en": "By evening your voice is gone, but she outsold the whole row. She pays you and hands over a plate of jollof rice."
+      },
+      {
+        "label_th": "บอกว่าเสียงไม่ดี",
+        "label_en": "Say your voice is no good",
+        "effects": {
+          "hope": 1
+        },
+        "text_th": "เธอหัวเราะ “ทั้งลากอสไม่มีใครเสียงเบาหรอก” แล้วหันไปเรียกคนอื่น",
+        "text_en": "She laughs. “Nobody in Lagos has a quiet voice,” and calls someone else."
+      }
+    ]
+  },
+  {
+    "id": "cairo_khan_khalili_lamps",
+    "icon": "🏮",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity",
+      "moral"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "cairo"
+      ],
+      "spots": [
+        "khan_khalili"
+      ]
+    },
+    "title_th": "ร้านโคมไฟในข่านเอลคาลิลี",
+    "title_en": "The Lamp Shop in Khan el-Khalili",
+    "text_th": "เจ้าของร้านโคมทองเหลืองในข่านเอลคาลิลีเสนอว่า ถ้าคุณพานักท่องเที่ยวเข้าร้านได้ เขาจะแบ่งให้ “บอกเขาว่าร้านนี้ราคาพิเศษ”",
+    "text_en": "A brass-lamp seller in Khan el-Khalili offers you a cut for every tourist you bring in. “Tell them this shop has a special price.”",
+    "choices": [
+      {
+        "label_th": "พานักท่องเที่ยวเข้าร้าน",
+        "label_en": "Steer tourists in",
+        "effects": {
+          "cash": [
+            2,
+            4
+          ],
+          "hope": -3,
+          "rep": -2
+        },
+        "text_th": "คู่รักจากเยอรมนีจ่ายแพงกว่าราคาจริงสามเท่า คุณได้ส่วนแบ่ง และความรู้สึกแปลกๆ",
+        "text_en": "A German couple pays three times the real price. You get your cut, and an odd feeling."
+      },
+      {
+        "label_th": "บอกนักท่องเที่ยวราคาจริง",
+        "label_en": "Tell tourists the real price",
+        "effects": {
+          "cash": 1,
+          "hope": 5,
+          "rep": 3
+        },
+        "text_th": "เจ้าของร้านไล่คุณออกจากซอย แต่นักท่องเที่ยวคนหนึ่งให้ทิปก่อนไป",
+        "text_en": "The shop owner chases you out of the alley, but one tourist tips you on the way."
+      }
+    ]
+  },
+  {
+    "id": "sp_paulista_sunday",
+    "icon": "🥁",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "community"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "sao_paulo"
+      ],
+      "spots": [
+        "paulista"
+      ]
+    },
+    "title_th": "อเวนิดาเปาลิสตาวันอาทิตย์",
+    "title_en": "Avenida Paulista on Sunday",
+    "text_th": "วันอาทิตย์ อเวนิดาเปาลิสตาปิดถนน มีวงดนตรีทุกห้าสิบเมตร มือกลองวงซัมบาวงหนึ่งยื่นกลองแทมโบริมให้คุณ",
+    "text_en": "On Sundays Avenida Paulista closes to cars and there's a band every fifty metres. A samba drummer hands you a tamborim.",
+    "choices": [
+      {
+        "label_th": "เล่นตามจังหวะ",
+        "label_en": "Play along",
+        "effects": {
+          "cash": 1,
+          "hope": 12,
+          "rep": 3,
+          "energy": -6
+        },
+        "text_th": "คุณตีผิดตลอด แต่ไม่มีใครสน หมวกของวงเต็มไปด้วยเหรียญ และพวกเขาแบ่งให้คุณ",
+        "text_en": "You're off-beat the whole time, and nobody cares. The band's hat fills with coins and they split it with you."
+      },
+      {
+        "label_th": "ยิ้มแล้วส่งคืน",
+        "label_en": "Smile and hand it back",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "เขายักไหล่ เพลงยังดังต่อไปทั้งถนน",
+        "text_en": "He shrugs. The music carries on down the avenue."
+      }
+    ]
+  },
+  {
+    "id": "cdmx_basilica_pilgrims",
+    "icon": "🌹",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "kindness"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "mexico_city"
+      ],
+      "spots": [
+        "basilica"
+      ]
+    },
+    "title_th": "ผู้แสวงบุญที่บาซิลิกา",
+    "title_en": "Pilgrims at the Basilica",
+    "text_th": "กลุ่มผู้แสวงบุญที่เดินมาจากปวยบลาสามวันนั่งพักที่ลานบาซิลิกากัวดาลูเป พวกเขามีทามาเลสเหลือเต็มหม้อ",
+    "text_en": "A group of pilgrims who walked three days from Puebla rest in the plaza of the Basilica of Guadalupe. They have a whole pot of tamales left over.",
+    "choices": [
+      {
+        "label_th": "นั่งกินด้วยกัน",
+        "label_en": "Sit and eat with them",
+        "effects": {
+          "hunger": 35,
+          "hope": 10
+        },
+        "text_th": "คุณยายคนหนึ่งผูกลูกประคำเส้นเล็กไว้ที่ข้อมือคุณ “แม่พระดูแลทุกคน”",
+        "text_en": "A grandmother ties a small rosary around your wrist. “La Virgen looks after everyone.”"
+      },
+      {
+        "label_th": "ช่วยพวกเขาเก็บของ",
+        "label_en": "Help them pack up",
+        "effects": {
+          "hunger": 20,
+          "cash": 1,
+          "rep": 3,
+          "energy": -5
+        },
+        "text_th": "พวกเขาให้ทามาเลสห่อกลับไปด้วย และค่ารถเมล์ที่ไม่ได้ใช้",
+        "text_en": "They send you off with tamales wrapped for later and bus fare they didn't use."
+      }
+    ]
+  },
+  {
+    "id": "la_venice_boardwalk",
+    "icon": "🛹",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "absurd"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "los_angeles"
+      ],
+      "spots": [
+        "venice"
+      ]
+    },
+    "title_th": "ทางเดินริมหาดเวนิส",
+    "title_en": "The Venice Boardwalk",
+    "text_th": "บนทางเดินริมหาดเวนิส ทีมถ่ายโฆษณามองหาคน ‘ที่ดูจริง’ มาเดินผ่านกล้อง ผู้กำกับโบกเงินแล้วบอกว่า ‘แค่เป็นตัวเอง’",
+    "text_en": "On the Venice Boardwalk a commercial crew wants someone who ‘looks real’ to walk past the camera. The director waves cash and says, ‘Just be yourself.’",
+    "choices": [
+      {
+        "label_th": "เดินผ่านกล้อง",
+        "label_en": "Walk past the camera",
+        "effects": {
+          "cash": [
+            3,
+            5
+          ],
+          "hope": -2,
+          "energy": -8
+        },
+        "text_th": "ถ่ายสิบสองเทค ‘เป็นตัวเอง’ ยากกว่าที่คิด แต่เงินเป็นของจริง",
+        "text_en": "Twelve takes. Being yourself is harder than it sounds, but the money is real."
+      },
+      {
+        "label_th": "ปฏิเสธ",
+        "label_en": "Say no",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "ผู้กำกับหันไปหาคนต่อไปทันที คุณนั่งดูนักสเก็ตต่อ",
+        "text_en": "The director turns to the next person without missing a beat. You go back to watching the skaters."
+      }
+    ]
+  },
+  {
+    "id": "nyc_washington_sq_chess",
+    "icon": "♟️",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "new_york"
+      ],
+      "spots": [
+        "washington_sq"
+      ]
+    },
+    "title_th": "หมากรุกที่วอชิงตันสแควร์",
+    "title_en": "Chess in Washington Square",
+    "text_th": "นักหมากรุกเดิมพันที่วอชิงตันสแควร์พาร์คชี้กระดานว่าง “ห้าเหรียญหนึ่งเกม เล่นเป็นไหม”",
+    "text_en": "A chess hustler in Washington Square Park points at an empty board. “Five bucks a game. You play?”",
+    "choices": [
+      {
+        "label_th": "ลงเดิมพัน",
+        "label_en": "Put money down",
+        "chance": 0.35,
+        "success": {
+          "text_th": "เขาเปิดหมากแบบเดิมทุกตา พอเกมที่สองคุณก็อ่านออก เขาจ่ายแล้วบอกว่าพรุ่งนี้มาใหม่",
+          "text_en": "He plays the same opening every game. By the second you've seen through it. He pays up and tells you to come back tomorrow.",
+          "effects": {
+            "cash": 2,
+            "hope": 10,
+            "rep": 4
+          }
+        },
+        "fail": {
+          "text_th": "คุณแพ้ในยี่สิบตา เขาแทบไม่ได้มองกระดานเลย",
+          "text_en": "You lose in twenty moves. He barely looked at the board.",
+          "effects": {
+            "cashPct": -0.2,
+            "hope": -3
+          }
+        }
+      },
+      {
+        "label_th": "ยืนดูอย่างเดียว",
+        "label_en": "Just watch",
+        "effects": {
+          "hope": 4
+        },
+        "text_th": "คุณยืนดูทั้งบ่าย ได้เรียนรู้มากกว่าที่คิด",
+        "text_en": "You watch all afternoon and learn more than you expected."
+      }
+    ]
+  },
+  {
+    "id": "london_camden_flyers",
+    "icon": "🎟️",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity",
+      "authority"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "london"
+      ],
+      "spots": [
+        "camden"
+      ]
+    },
+    "title_th": "ใบปลิวที่แคมเดน",
+    "title_en": "Flyers in Camden",
+    "text_th": "คนจัดคอนเสิร์ตที่แคมเดนอยากได้คนแจกใบปลิว จ่ายเป็นเงินสดกับตั๋วเข้างานคืนนี้ แต่เขตเพิ่งเตือนเรื่องแจกใบปลิวโดยไม่มีใบอนุญาต",
+    "text_en": "A gig promoter in Camden wants someone to hand out flyers, paid in cash and a ticket for tonight. The council just warned about flyering without a licence.",
+    "choices": [
+      {
+        "label_th": "แจกใบปลิว",
+        "label_en": "Hand them out",
+        "chance": 0.7,
+        "success": {
+          "text_th": "ใบปลิวหมดภายในสองชั่วโมง คืนนั้นคุณยืนอยู่หลังฮอลล์ ฟังวงพังก์ดังจนหูอื้อ",
+          "text_en": "The flyers are gone in two hours. That night you stand at the back of the hall, ears ringing with punk.",
+          "effects": {
+            "cash": 2,
+            "hope": 12,
+            "energy": -10
+          }
+        },
+        "fail": {
+          "text_th": "เจ้าหน้าที่เขตจดชื่อคุณ แล้วยึดใบปลิวทั้งหมด",
+          "text_en": "A council officer takes your name and confiscates the lot.",
+          "effects": {
+            "heat": 12,
+            "hope": -4
+          }
+        }
+      },
+      {
+        "label_th": "ไม่เอาดีกว่า",
+        "label_en": "Better not",
+        "effects": {},
+        "text_th": "คนจัดงานยักไหล่ แล้วยื่นใบปลิวให้คุณใบหนึ่งอยู่ดี",
+        "text_en": "The promoter shrugs and hands you one flyer anyway."
+      }
+    ]
+  },
+  {
+    "id": "paris_sacre_coeur_sketch",
+    "icon": "🎨",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "kindness"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "paris"
+      ],
+      "spots": [
+        "sacre_coeur"
+      ],
+      "phases": [
+        "afternoon"
+      ]
+    },
+    "title_th": "บันไดซาเคร-เกอร์",
+    "title_en": "The Steps of Sacré-Cœur",
+    "text_th": "บนบันไดซาเคร-เกอร์ นักศึกษาศิลปะคนหนึ่งถามว่าขอวาดภาพคุณได้ไหม “หน้าคุณมีเรื่องเล่า”",
+    "text_en": "On the steps of Sacré-Cœur an art student asks if she can sketch you. “Your face has a story in it.”",
+    "choices": [
+      {
+        "label_th": "นั่งเป็นแบบ",
+        "label_en": "Sit for her",
+        "effects": {
+          "hope": 14,
+          "hunger": 25
+        },
+        "text_th": "หนึ่งชั่วโมงต่อมาเธอให้คุณดูภาพ คนในภาพดูเหนื่อยแต่ไม่ได้ดูพ่ายแพ้ เธอซื้อแซนด์วิชให้เป็นค่าตอบแทน",
+        "text_en": "An hour later she shows you the sketch. The person in it looks tired, but not beaten. She buys you a sandwich for your time."
+      },
+      {
+        "label_th": "ขอเป็นเงินแทน",
+        "label_en": "Ask to be paid instead",
+        "effects": {
+          "cash": 1,
+          "hope": 5
+        },
+        "text_th": "เธอเทเหรียญในกระเป๋าให้หมด แล้วรีบวาดก่อนแสงหมด",
+        "text_en": "She empties her coin purse into your hand and sketches fast before the light goes."
+      }
+    ]
+  },
+  {
+    "id": "tokyo_sanya_vans",
+    "icon": "🦺",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "opportunity",
+      "community"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "tokyo"
+      ],
+      "spots": [
+        "sanya"
+      ],
+      "phases": [
+        "morning"
+      ],
+      "minAge": 18,
+      "maxAge": 64
+    },
+    "title_th": "ตลาดแรงงานยามเช้าที่ซันยะ",
+    "title_en": "Dawn Hiring in Sanya",
+    "text_th": "ตีห้าที่ซันยะ รถตู้ของผู้รับเหมาจอดรับคนงานรายวัน ชายแก่ที่นอนข้างคุณเมื่อคืนกระซิบว่า ‘รถขาวคันนั้นจ่ายครบ คันสีเงินไม่ครบ’",
+    "text_en": "Five a.m. in Sanya. Contractors' vans pick up day labourers. The old man who slept next to you last night whispers: ‘The white van pays in full. The silver one doesn't.’",
+    "choices": [
+      {
+        "label_th": "ขึ้นรถขาว",
+        "label_en": "Get in the white van",
+        "effects": {
+          "cash": [
+            4,
+            5
+          ],
+          "energy": -25,
+          "hunger": -10
+        },
+        "text_th": "ทั้งวันคุณขนท่อเหล็กที่ไซต์ก่อสร้างในชิบะ ได้ค่าแรงครบทุกเยน",
+        "text_en": "All day you carry steel pipe at a site in Chiba. Paid to the last yen."
+      },
+      {
+        "label_th": "ขอบคุณแล้วกลับไปนอน",
+        "label_en": "Thank him and go back to sleep",
+        "effects": {
+          "energy": 10,
+          "hope": 3,
+          "rep": 2
+        },
+        "text_th": "ชายแก่ก็ไม่ได้ไปเหมือนกัน เขาบอกว่าหลังไม่ไหวแล้ว คุณสองคนนั่งดูรถแล่นออกไป",
+        "text_en": "The old man doesn't go either; his back can't take it anymore. The two of you watch the vans pull away."
+      }
+    ]
+  },
+  {
+    "id": "istanbul_kadikoy_ferry",
+    "icon": "⛴️",
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city",
+      "kindness"
+    ],
+    "cooldown": 30,
+    "conditions": {
+      "cities": [
+        "istanbul"
+      ],
+      "spots": [
+        "kadikoy"
+      ]
+    },
+    "title_th": "เรือข้ามฟากจากกาดือเกย",
+    "title_en": "The Kadıköy Ferry",
+    "text_th": "ที่ท่าเรือกาดือเกย ชายคนหนึ่งยื่นบัตรอิสตันบูลการ์ดที่ยังมีเงินเหลือให้คุณ “ผมกลับประเทศพรุ่งนี้ เอาไปใช้เถอะ”",
+    "text_en": "At the Kadıköy pier a man hands you his Istanbulkart with credit still on it. “I fly home tomorrow. Use it.”",
+    "choices": [
+      {
+        "label_th": "นั่งเรือข้ามไปฝั่งยุโรป",
+        "label_en": "Ride the ferry to the European side",
+        "effects": {
+          "hope": 14,
+          "energy": 5
+        },
+        "text_th": "คุณยืนท้ายเรือ โยนเศษขนมซิมิตให้นกนางนวล ช่องแคบบอสฟอรัสดูกว้างกว่าที่เคย",
+        "text_en": "You stand at the stern tossing simit crumbs to the gulls. The Bosphorus looks wider than ever."
+      },
+      {
+        "label_th": "ขายบัตรต่อ",
+        "label_en": "Sell the card on",
+        "effects": {
+          "cash": 2
+        },
+        "text_th": "นักศึกษาคนหนึ่งซื้อไปในราคาครึ่งหนึ่ง",
+        "text_en": "A student buys it off you for half its value."
+      }
+    ]
   }
 ]

@@ -19,9 +19,12 @@ entirely in the browser with no login; your life autosaves as you play.
 - **The city matters.** Each city has its own currency and prices, its own seasons (monsoon,
   heat waves, snow), real neighbourhoods to work in with different income, risk and police
   presence, local festivals, and a difficulty from *easy* to *brutal*.
-- **Things happen to you.** Over 180 events — a stranger buying you lunch, a police sweep, a
+- **Things happen to you.** Nearly 200 events — a stranger buying you lunch, a police sweep, a
   flood, a stray dog that follows you home, a talent scout at your busking spot. Most of them ask
   you to choose, and some choices stay with you for the rest of the life.
+  Every city also has scenes that only happen at one of its real places: a porter job when the
+  launch docks at Sadarghat, chess hustlers in Washington Square, dawn hiring vans in Sanya, the
+  candle sellers outside Quiapo Church. Moving between spots is how you find them.
 - **Every life ends.** There are 29 endings: 16 that take you off the street one way or another (a job and a flat, going
   home to family, becoming a monk, a record deal, a lottery ticket — or prison and deportation) and 13 ways
   to die (cold, heat, illness, hunger, storms, violence, accidents, old age). Some endings are

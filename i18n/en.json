@@ -480,5 +480,16 @@
   "rec.livesOf": "Lives of {name}",
   "version.new": "Latest update",
   "version.all": "All updates",
-  "version.hide": "Hide"
+  "version.hide": "Hide",
+  "hall.title": "Survivors' Hall of Honour",
+  "hall.subtitle": "Players who truly survived and got off the street, ranked by how many days their longest surviving life lasted",
+  "hall.medal.diamond": "Diamond",
+  "hall.medal.gold": "Gold",
+  "hall.medal.silver": "Silver",
+  "hall.medal.bronze": "Bronze",
+  "hall.medalMin": "{days}+ days",
+  "hall.medalAny": "survived",
+  "hall.days": "days",
+  "hall.times": "survived {n} lives",
+  "hall.empty": "Nobody has made it off the street yet — be the first!"
 }

@@ -6,13 +6,22 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Flag from "@/components/Flag";
-import type { LifeEntry, PlayerRow, Records } from "@/app/api/records/route";
+import type { LifeEntry, PlayerRow, Records, SurvivorRow } from "@/app/api/records/route";
 import { DATA } from "@/lib/data";
 import { formatMoney, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { loadNickname } from "@/lib/storage";
 
 type Sort = "score" | "days" | "money";
+
+/** Honour medals by how many days the surviving life lasted, highest first. */
+const MEDALS = [
+  { min: 365, icon: "💎", key: "diamond", cls: "border-cyan-400/60 bg-cyan-900/30 text-cyan-200" },
+  { min: 180, icon: "🥇", key: "gold", cls: "border-amber-400/60 bg-amber-900/30 text-amber-200" },
+  { min: 60, icon: "🥈", key: "silver", cls: "border-stone-300/50 bg-stone-700/30 text-stone-200" },
+  { min: 0, icon: "🥉", key: "bronze", cls: "border-orange-700/60 bg-orange-950/40 text-orange-200" },
+] as const;
+const medalFor = (days: number) => MEDALS.find((m) => days >= m.min)!;
 const SORTS: Sort[] = ["score", "days", "money"];
 
 interface Stats {
@@ -33,6 +42,7 @@ export default function LeaderboardPage() {
   const [mine, setMine] = useState("");
   const [open, setOpen] = useState<number | null>(null);
   const [players, setPlayers] = useState<PlayerRow[] | null>(null);
+  const [survivors, setSurvivors] = useState<SurvivorRow[] | null>(null);
   const [allPlayers, setAllPlayers] = useState(false);
   // a player picked from the players list: the lives list shows only their lives
   const [who, setWho] = useState<string | null>(null);
@@ -60,6 +70,7 @@ export default function LeaderboardPage() {
         setEntries(res.entries);
         setRecords(res.records);
         setPlayers(res.players);
+        setSurvivors(res.survivors);
       })
       .catch(() => alive && setOffline(true));
     return () => {
@@ -169,6 +180,52 @@ export default function LeaderboardPage() {
                   )}
                 </div>
               ))}
+            </section>
+          )}
+
+          {survivors && (
+            <section className="mt-6 overflow-hidden rounded-xl border-2 border-amber-500/50 bg-gradient-to-b from-amber-950/40 to-night-900 shadow-lg shadow-amber-900/20">
+              <div className="px-4 pt-4 text-center">
+                <h2 className="font-pixel text-2xl font-bold text-amber-300">🏛️ {t("hall.title")}</h2>
+                <p className="mt-1 text-xs text-stone-400">{t("hall.subtitle")}</p>
+                <div className="mt-3 flex flex-wrap justify-center gap-1.5 text-[11px]">
+                  {MEDALS.map((m) => (
+                    <span key={m.key} className={`rounded-full border px-2 py-0.5 ${m.cls}`}>
+                      {m.icon} {t(`hall.medal.${m.key}`)} · {m.min > 0 ? t("hall.medalMin", { days: m.min }) : t("hall.medalAny")}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {survivors.length === 0 ? (
+                <p className="p-6 text-center text-sm text-stone-400">{t("hall.empty")}</p>
+              ) : (
+                <ol className="mt-3">
+                  {survivors.map((sv) => {
+                    const m = medalFor(sv.days);
+                    return (
+                      <li key={sv.name} className={`flex items-center gap-3 border-t border-amber-900/40 px-4 py-3 ${isMine(sv.name) ? "bg-lamp-500/10" : ""}`}>
+                        <span className={`w-8 text-center text-lg font-bold tabular-nums ${sv.rank <= 3 ? "text-amber-300" : "text-stone-500"}`}>
+                          {sv.rank === 1 ? "👑" : sv.rank}
+                        </span>
+                        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-xl ${m.cls}`} title={t(`hall.medal.${m.key}`)}>
+                          {m.icon}
+                        </span>
+                        <button type="button" onClick={() => pickPlayer(sv.name)} className="min-w-0 flex-1 text-left">
+                          <div className="truncate font-semibold text-stone-100">{sv.name}</div>
+                          <div className="truncate text-[11px] text-stone-400">
+                            {endingName(sv.endingId)} · {cityName(sv.cityId)} · {t("rec.d.age", { age: sv.age })}
+                            {sv.survived > 1 && ` · ${t("hall.times", { n: formatNumber(sv.survived) })}`}
+                          </div>
+                        </button>
+                        <div className="shrink-0 text-right">
+                          <div className="text-2xl font-bold tabular-nums text-amber-300">{formatNumber(sv.days)}</div>
+                          <div className="text-[10px] uppercase tracking-wider text-stone-500">{t("hall.days")}</div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
             </section>
           )}
 

@@ -12,6 +12,12 @@ export interface Release {
 
 export const CHANGELOG: Release[] = [
   {
+    version: "1.22",
+    date: "2026-10-28",
+    th: "หอเกียรติยศผู้รอดชีวิตในหน้ากระดานคะแนน จัดอันดับผู้เล่นที่รอดพ้นจากถนนได้จริง ตามจำนวนวันที่รอด พร้อมเหรียญเกียรติยศ ทองแดง เงิน ทอง และเพชร",
+    en: "Survivors' Hall of Honour on the leaderboard: players who truly got off the street, ranked by days survived, with bronze, silver, gold and diamond medals.",
+  },
+  {
     version: "1.21",
     date: "2026-10-28",
     th: "ทางชีวิตใหม่ 9 แบบ (แบกของในตลาด ต่อคิว วาดชอล์ก ตกปลา ห้องสมุด เขียนบันทึก ช่วยโรงทาน เฝ้าร้าน นั่งสงบใจ) แต่ละทางมีเรื่องราวต่อเนื่องและตอนจบของตัวเอง ตอนจบใหม่ 8 แบบ ฉากใหม่ในเมืองอีกกว่า 30 เหตุการณ์ และแถบเวอร์ชันนี้",

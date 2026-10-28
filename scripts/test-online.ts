@@ -152,6 +152,10 @@ async function main() {
     const pC = recC.body.players?.find((x: { name: string }) => x.name === mixed);
     check("player row counts the life", pC && pC.ended >= 1 && pC.starts === 3, pC);
     check("filter by name ignores case", recC.body.entries.length >= 1 && recC.body.entries.every((e: { name: string }) => e.name === mixed), recC.body.entries);
+    const deaths = new Set(DATA.endings.filter((e) => e.death).map((e) => e.id));
+    const surv = recC.body.survivors as { name: string; days: number; endingId: string; rank: number }[];
+    check("survivors hall lists only lives that got off the street, longest first",
+      Array.isArray(surv) && surv.every((x) => !deaths.has(x.endingId)) && surv.every((x, i) => i === 0 || surv[i - 1].days >= x.days) && new Set(surv.map((x) => x.name.toLowerCase())).size === surv.length, surv);
     check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
 
     const stats = (await api("/api/stats")).body;

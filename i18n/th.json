@@ -480,5 +480,16 @@
   "rec.livesOf": "ชีวิตของ {name}",
   "version.new": "อัปเดตล่าสุด",
   "version.all": "ดูทั้งหมด",
-  "version.hide": "ซ่อน"
+  "version.hide": "ซ่อน",
+  "hall.title": "หอเกียรติยศผู้รอดชีวิต",
+  "hall.subtitle": "ผู้เล่นที่รอดชีวิตจริงและหลุดพ้นจากถนนได้ เรียงตามจำนวนวันที่ใช้ชีวิตรอดมาได้ในชีวิตที่นานที่สุด",
+  "hall.medal.diamond": "เหรียญเพชร",
+  "hall.medal.gold": "เหรียญทอง",
+  "hall.medal.silver": "เหรียญเงิน",
+  "hall.medal.bronze": "เหรียญทองแดง",
+  "hall.medalMin": "{days} วันขึ้นไป",
+  "hall.medalAny": "รอดชีวิต",
+  "hall.days": "วันที่รอด",
+  "hall.times": "รอดมาแล้ว {n} ชีวิต",
+  "hall.empty": "ยังไม่มีใครรอดพ้นจากถนนได้ เป็นคนแรกเลย!"
 }

@@ -1,6 +1,7 @@
 // GET ?sort=score|days|money (&name=)  → every finished life since launch (named or not), top 100, with
 // details, plus the all-time records (longest survival, most money at the end, best score), totals,
-// and every player name with how many lives it started and its bests. &name= limits the lives to one player.
+// every player name with how many lives it started and its bests, and the survivors' hall: players
+// who got off the street alive, ranked by how many days their longest surviving life lasted. &name= limits the lives to one player.
 // Unlike /api/leaderboard this does not fold a name into one row: each life is its own entry.
 
 import { DATA } from "@/lib/data";
@@ -39,6 +40,19 @@ export interface PlayerRow {
   longest: number | null;
   richestThb: number | null;
   lastSeen: number;
+}
+
+/** A player who survived: their longest life that ended off the street rather than in death. */
+export interface SurvivorRow {
+  rank: number;
+  name: string;
+  days: number;
+  age: number;
+  endingId: string;
+  cityId: string;
+  /** how many of their lives got off the street */
+  survived: number;
+  at: number;
 }
 
 export interface Records {
@@ -91,7 +105,7 @@ export async function GET(req: Request) {
   if (!order) return json({ ok: false, error: "bad_request" }, 400);
 
   const deaths = DATA.endings.filter((e) => e.death).map((e) => e.id);
-  const [rows, [totals], longest, richest, best, players] = await sql.transaction([
+  const [rows, [totals], longest, richest, best, players, survivors] = await sql.transaction([
     sql.query(`select ${COLS} from runs where not hidden and ($1::text is null or lower(name) = lower($1)) order by ${order} limit ${TOP}`, [name]),
     sql`select coalesce(sum(days), 0)::int as "totalDays", coalesce(round(avg(days)), 0)::int as "avgDays",
                count(*) filter (where ending_id <> all(${deaths}))::int as escaped
@@ -105,6 +119,12 @@ export async function GET(req: Request) {
         from names n left join runs r on lower(r.name) = lower(n.name) and not r.hidden
         group by n.name, n.starts, n.last_seen
         order by max(r.score) desc nulls last, n.starts desc, n.last_seen desc`,
+    sql`select name, days, age, ending_id, city_id, created_at, survived from (
+          select distinct on (lower(name)) name, days, age, ending_id, city_id, created_at,
+                 count(*) over (partition by lower(name))::int as survived
+          from runs where name is not null and not hidden and ending_id <> all(${deaths})
+          order by lower(name), days desc, created_at
+        ) best order by days desc, created_at limit ${TOP}`,
   ]);
 
   const records: Records = {
@@ -126,5 +146,15 @@ export async function GET(req: Request) {
     richestThb: num(p.richestThb),
     lastSeen: new Date(String(p.lastSeen)).getTime(),
   }));
-  return json({ ok: true, entries: rows.map(toEntry), records, players: playerRows });
+  const survivorRows: SurvivorRow[] = survivors.map((r, i) => ({
+    rank: i + 1,
+    name: String(r.name),
+    days: Number(r.days),
+    age: Number(r.age),
+    endingId: String(r.ending_id),
+    cityId: String(r.city_id),
+    survived: Number(r.survived),
+    at: new Date(String(r.created_at)).getTime(),
+  }));
+  return json({ ok: true, entries: rows.map(toEntry), records, players: playerRows, survivors: survivorRows });
 }

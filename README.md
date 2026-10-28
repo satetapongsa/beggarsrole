@@ -46,6 +46,11 @@ A settings page (from the title screen) holds the language, sound, how fast even
 out (slow to instant), motion (follow the device, reduce, or full; reduce turns off every
 animation) and the first-time tips, which can be switched off or shown again from the start.
 
+Players can report a bug or suggest an idea from the speech-bubble button on the play screen, or
+from the link at the bottom of the title and end screens. A report sent during a life carries its
+city, day and seed so the problem can be found again; a contact (such as a Facebook name) is
+optional. Only the admin page shows these messages.
+
 When a life ends you get a summary: your timeline, the numbers of your life, a share card, and for
 lives that made it out, a keepsake poster you can save as an image.
 
@@ -93,9 +98,9 @@ npm run dev        # http://localhost:3000
 ```
 app/            page.tsx (title) · play/ (the game) · end/ (life summary) · endings/ (album) · lives/
                 achievements/ · leaderboard/ · admin/
-                api/: og (share card) · track · runs · leaderboard · traces · stats · daily · profile · admin
+                api/: og (share card) · track · runs · leaderboard · traces · feedback · stats · daily · profile · admin
 components/     game UI: StatBar, ChoiceCard, EventModal, PixelScene, CharacterSprite, Timeline,
-                InventoryPanel, SpotPicker, SkipPanel, RunPanel, SurvivorPoster, Flag, ...
+                InventoryPanel, SpotPicker, SkipPanel, RunPanel, SurvivorPoster, FeedbackModal, Flag, ...
 data/           cities, origins, actions, events, endings, traits, items (JSON)
 lib/            engine.ts (pure game logic) · rng.ts (seeded) · conditions.ts · data.ts (load + validate)
                 score.ts · achievements.ts · replay.ts · storage.ts · online.ts · db.ts · i18n.tsx
@@ -210,8 +215,10 @@ panels say they are unavailable.
 - **Traces** (`/api/traces`, panel under the scene on the play page): graves and escapes written
   by `/api/runs`, plus player notes (2–80 characters, no links, same word filter) and one candle
   per player per grave. Traces never touch the engine, so replays are unaffected.
-- **Admin** (`/api/admin`, page `/admin`): a 30-day player chart, how long lives last, and
-  hiding or restoring leaderboard names and street notes. Needs `ADMIN_TOKEN` (12+ characters).
+- **Feedback** (`/api/feedback`): bug reports and ideas (5–1000 characters) with the page,
+  language, user agent and, during a life, its city, day and seed. Six per IP per hour.
+- **Admin** (`/api/admin`, page `/admin`): a 30-day player chart, how long lives last, player
+  feedback with a done/reopen toggle, and hiding or restoring leaderboard names and street notes. Needs `ADMIN_TOKEN` (12+ characters).
 
 **Anti-cheat.** The play page records every action that changed the state. When a life ends the
 client sends only the seed and that action list; `/api/runs` replays it with the same pure engine

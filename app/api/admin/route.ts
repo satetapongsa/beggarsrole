@@ -1,7 +1,8 @@
 // Admin dashboard data + leaderboard moderation. Requires `Authorization: Bearer <ADMIN_TOKEN>`.
-// GET                                   → daily series, how long lives last, recent names and notes
+// GET                                   → daily series, how long lives last, recent names, notes and feedback
 // POST { action: "hide"|"unhide", runId } → remove/restore a run on every board
 // POST { action: "hideNote"|"unhideNote", traceId } → remove/restore a player note
+// POST { action: "resolve"|"reopen", feedbackId }    → mark a feedback message done / not done
 
 import { timingSafeEqual } from "node:crypto";
 import { badRequest, getDb, json, offline, today } from "@/lib/db";
@@ -23,7 +24,7 @@ export async function GET(req: Request) {
   if (!authorized(req)) return unauthorized();
   const sql = await getDb();
   if (!sql) return offline();
-  const [series, lengths, recent, [totals], notes] = await sql.transaction([
+  const [series, lengths, recent, [totals], notes, feedback] = await sql.transaction([
     sql`
       select d::date::text as day,
              coalesce(count(pd.player_id), 0)::int as players,
@@ -53,15 +54,23 @@ export async function GET(req: Request) {
     sql`
       select id::int, body, city_id as "cityId", name_en as "nameEn", hidden, created_at as "createdAt"
       from traces where kind = 'note' order by created_at desc limit 100`,
+    sql`
+      select id::int, kind, body, contact, page, lang, city_id as "cityId", day, seed::text as seed,
+             user_agent as "userAgent", resolved, created_at as "createdAt"
+      from feedback order by resolved, created_at desc limit 200`,
   ]);
-  return json({ ok: true, totals, series, lengths, recent, notes });
+  return json({ ok: true, totals, series, lengths, recent, notes, feedback });
 }
 
 export async function POST(req: Request) {
   if (!authorized(req)) return unauthorized();
   const sql = await getDb();
   if (!sql) return offline();
-  const body = (await req.json().catch(() => null)) as { action?: unknown; runId?: unknown; traceId?: unknown } | null;
+  const body = (await req.json().catch(() => null)) as { action?: unknown; runId?: unknown; traceId?: unknown; feedbackId?: unknown } | null;
+  if ((body?.action === "resolve" || body?.action === "reopen") && Number.isInteger(body.feedbackId)) {
+    const rows = await sql`update feedback set resolved = ${body.action === "resolve"} where id = ${body.feedbackId as number} returning id`;
+    return rows.length ? json({ ok: true }) : json({ ok: false, error: "not_found" }, 404);
+  }
   if ((body?.action === "hideNote" || body?.action === "unhideNote") && Number.isInteger(body.traceId)) {
     const rows = await sql`update traces set hidden = ${body.action === "hideNote"} where id = ${body.traceId as number} returning id`;
     return rows.length ? json({ ok: true }) : json({ ok: false, error: "not_found" }, 404);

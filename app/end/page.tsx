@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CharacterSprite from "@/components/CharacterSprite";
 import CityBadge from "@/components/CityBadge";
+import FeedbackModal from "@/components/FeedbackModal";
 import RunPanel from "@/components/RunPanel";
 import SurvivorPoster from "@/components/SurvivorPoster";
 import Timeline from "@/components/Timeline";
@@ -27,6 +28,7 @@ export default function EndPage() {
   const [life, setLife] = useState<GameState | null | undefined>(undefined);
   const [found, setFound] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
+  const [feedback, setFeedback] = useState(false);
   const [run, setRun] = useState<LastRun | null>(null);
 
   const [fresh, setFresh] = useState<string[]>([]);
@@ -247,9 +249,13 @@ export default function EndPage() {
         <button type="button" onClick={() => router.push("/")} className="w-full py-2 text-sm text-stone-500 hover:text-stone-300">
           {t("end.home")}
         </button>
+        <button type="button" onClick={() => setFeedback(true)} className="w-full py-1 text-xs text-stone-500 hover:text-stone-300">
+          💬 {t("feedback.title")}
+        </button>
       </section>
 
       <p className="mx-auto mt-8 max-w-md text-center text-[11px] leading-relaxed text-stone-500">{t("end.note")}</p>
+      {feedback && <FeedbackModal onClose={() => setFeedback(false)} />}
     </main>
   );
 }

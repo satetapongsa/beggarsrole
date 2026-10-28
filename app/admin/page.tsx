@@ -37,12 +37,32 @@ interface Note {
   hidden: boolean;
   createdAt: string;
 }
+interface Feedback {
+  id: number;
+  kind: "bug" | "idea" | "other";
+  body: string;
+  contact: string | null;
+  page: string;
+  lang: string;
+  cityId: string | null;
+  day: number | null;
+  seed: string | null;
+  userAgent: string | null;
+  resolved: boolean;
+  createdAt: string;
+}
+const KIND_STYLE: Record<Feedback["kind"], string> = {
+  bug: "bg-red-900/60 text-red-200",
+  idea: "bg-sky-900/60 text-sky-200",
+  other: "bg-night-700 text-stone-300",
+};
 interface Dashboard {
   totals: { players: number; started: number; ended: number; claimed: number; daily: number };
   series: Day[];
   lengths: { bucket: string; n: number }[];
   recent: Recent[];
   notes: Note[];
+  feedback: Feedback[];
 }
 
 /** Single-series vertical bars with a hover tooltip; labels only the peak and the latest bar. */
@@ -165,6 +185,15 @@ export default function AdminPage() {
     await load(token);
   };
 
+  const toggleFeedback = async (f: Feedback) => {
+    await fetch("/api/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+      body: JSON.stringify({ action: f.resolved ? "reopen" : "resolve", feedbackId: f.id }),
+    });
+    await load(token);
+  };
+
   if (!data) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center px-5">
@@ -192,7 +221,8 @@ export default function AdminPage() {
     );
   }
 
-  const { totals, series, lengths, recent, notes } = data;
+  const { totals, series, lengths, recent, notes, feedback } = data;
+  const open = feedback.filter((f) => !f.resolved).length;
   const today = series[series.length - 1];
   const tiles: [string, number][] = [
     ["Players (all time)", totals.players],
@@ -248,6 +278,39 @@ export default function AdminPage() {
           data={lengths.map((l) => ({ label: l.bucket, value: l.n }))}
         />
       </div>
+
+      <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-4">
+        <h2 className="mb-3 text-sm font-semibold text-stone-200">
+          Player feedback <span className="font-normal text-stone-500">· {open} open</span>
+        </h2>
+        {feedback.length === 0 ? (
+          <p className="text-sm text-stone-500">No feedback yet.</p>
+        ) : (
+          <ul className="divide-y divide-night-800">
+            {feedback.map((f) => (
+              <li key={f.id} className={`flex items-start gap-3 py-2.5 text-sm ${f.resolved ? "opacity-50" : ""}`}>
+                <span className={`mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-[10px] uppercase ${KIND_STYLE[f.kind] ?? KIND_STYLE.other}`}>{f.kind}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="whitespace-pre-wrap break-words text-stone-100">{f.body}</p>
+                  <p className="mt-0.5 text-xs text-stone-500">
+                    {new Date(f.createdAt).toLocaleString()} · {f.page} · {f.lang}
+                    {f.cityId && ` · ${DATA.city[f.cityId]?.flag ?? ""} ${f.cityId} day ${f.day} seed #${f.seed}`}
+                    {f.contact && <span className="text-stone-300"> · contact: {f.contact}</span>}
+                  </p>
+                  {f.userAgent && <p className="truncate text-[10px] text-stone-600">{f.userAgent}</p>}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void toggleFeedback(f)}
+                  className={`shrink-0 rounded px-2 py-0.5 text-xs ${f.resolved ? "border border-night-600 text-stone-300" : "bg-emerald-900/60 text-emerald-200 hover:bg-emerald-800"}`}
+                >
+                  {f.resolved ? "Reopen" : "Done"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-4">
         <h2 className="mb-3 text-sm font-semibold text-stone-200">Latest leaderboard names</h2>

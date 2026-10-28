@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CharacterPixels } from "@/components/CharacterSprite";
+import FeedbackModal from "@/components/FeedbackModal";
 import Flag from "@/components/Flag";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
@@ -32,6 +33,7 @@ export default function TitlePage() {
   const [showSeed, setShowSeed] = useState(false);
   const [daily, setDaily] = useState<DailyInfo | null>(null);
   const [dailyDone, setDailyDone] = useState(false);
+  const [feedback, setFeedback] = useState(false);
 
   useEffect(() => {
     setSave(loadGame());
@@ -172,6 +174,11 @@ export default function TitlePage() {
         </div>
         <p className="mt-3 text-center text-[11px] text-stone-500">{t("title.disclaimer")}</p>
       </section>
+
+      <button type="button" onClick={() => setFeedback(true)} className="mt-4 text-xs text-stone-500 hover:text-stone-300">
+        💬 {t("feedback.title")}
+      </button>
+      {feedback && <FeedbackModal onClose={() => setFeedback(false)} />}
     </main>
   );
 }

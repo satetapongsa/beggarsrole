@@ -111,4 +111,18 @@ export function leaveNote(life: GameState, spot: string, text: string) {
   });
 }
 
+export type FeedbackKind = "bug" | "idea" | "other";
+
+/** Sends a bug report or idea; a life in progress attaches its city, day and seed so a bug can be replayed. */
+export function sendFeedback(input: { kind: FeedbackKind; text: string; contact: string; page: string; lang: string; life?: GameState | null }) {
+  const { life, ...rest } = input;
+  return call<{ id: number }>("/api/feedback", {
+    ...rest,
+    playerId: loadPlayerId(),
+    city: life?.cityId,
+    day: life?.day,
+    seed: life?.seed,
+  });
+}
+
 export const lightCandle = (traceId: number) => call<{ candles: number }>("/api/traces", { action: "candle", playerId: loadPlayerId(), traceId });

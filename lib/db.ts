@@ -69,6 +69,22 @@ const SCHEMA = [
     player_id text not null,
     primary key (trace_id, player_id)
   )`,
+  `create table if not exists feedback (
+    id bigserial primary key,
+    player_id text not null,
+    kind text not null,
+    body text not null,
+    contact text,
+    page text not null,
+    lang text not null,
+    city_id text,
+    day int,
+    seed bigint,
+    user_agent text,
+    resolved boolean not null default false,
+    created_at timestamptz not null default now()
+  )`,
+  `create index if not exists feedback_recent on feedback (created_at desc)`,
   `create table if not exists rate_limits (
     key text primary key,
     n int not null,

@@ -7,6 +7,7 @@ import CityBadge from "@/components/CityBadge";
 import CharacterSprite from "@/components/CharacterSprite";
 import DeltaChips from "@/components/DeltaChips";
 import GuideTip from "@/components/GuideTip";
+import FeedbackModal from "@/components/FeedbackModal";
 import HelpModal from "@/components/HelpModal";
 import EventModal from "@/components/EventModal";
 import InventoryPanel from "@/components/InventoryPanel";
@@ -52,6 +53,7 @@ export default function PlayPage() {
   const [showDetails, setShowDetails] = useState(false);
   const [sideTab, setSideTab] = useState<"log" | "timeline">("log");
   const [help, setHelp] = useState(false);
+  const [feedback, setFeedback] = useState(false);
   const prevLog = useRef<number>(0);
   const onKeyRef = useRef<(e: KeyboardEvent) => void>();
 
@@ -152,7 +154,7 @@ export default function PlayPage() {
   const fillT = (s: string) => fill(s, state, lang);
 
   onKeyRef.current = (e) => {
-    if (help || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (help || feedback || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
     const tag = (e.target as HTMLElement | null)?.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
     const n = keyDigit(e);
@@ -214,6 +216,9 @@ export default function PlayPage() {
             </button>
             <button type="button" onClick={() => setHelp(true)} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800" aria-label={t("help.open")} title={t("help.open")}>
               ?
+            </button>
+            <button type="button" onClick={() => setFeedback(true)} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800" aria-label={t("feedback.open")} title={t("feedback.open")}>
+              💬
             </button>
             <button type="button" onClick={() => setSound(!sound)} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800" aria-label={sound ? t("sound.on") : t("sound.off")}>
               {sound ? "🔊" : "🔇"}
@@ -395,6 +400,7 @@ export default function PlayPage() {
         />
       )}
       {help && <HelpModal onClose={() => setHelp(false)} />}
+      {feedback && <FeedbackModal life={state} onClose={() => setFeedback(false)} />}
       {state.summary && <SummaryModal state={state} onClose={() => dispatch({ type: "clearSummary" })} />}
       {!state.summary && state.revealed && (state.pendingEvent || state.eventResult) && (
         <EventModal state={state} onChoose={(i) => dispatch({ type: "choose", choiceIndex: i })} onDismiss={() => dispatch({ type: "dismiss" })} />

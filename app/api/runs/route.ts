@@ -8,6 +8,7 @@ import { isDailyDate } from "@/lib/daily";
 import { dailySeed, isOpenDaily } from "@/lib/daily-seed";
 import { badRequest, getDb, isPlayerId, json, offline, rateLimited, today, underLimit } from "@/lib/db";
 import { MAX_ACTIONS, parseAction, replayLife } from "@/lib/replay";
+import { toBaht } from "@/lib/format";
 import { scoreLife } from "@/lib/score";
 import type { GameAction } from "@/types/game";
 
@@ -53,10 +54,14 @@ export async function POST(req: Request) {
     const endCity = DATA.city[life.cityId];
     const endSpot = endCity.spots.find((sp) => sp.id === life.lastSpot) ?? endCity.spots[0];
     const traceKind = DATA.ending[life.ended.endingId]?.death ? "grave" : "free";
+    const money = life.cash + life.stash;
     await sql.transaction([
-      sql`insert into runs (id, player_id, seed, score, ending_id, city_id, days, age, daily)
+      sql`insert into runs (id, player_id, seed, score, ending_id, city_id, days, age, daily,
+                         money, money_thb, end_city_id, char_th, char_en, origin_id, cities)
           values (${runId}, ${playerId}, ${seed}, ${score.total}, ${life.ended.endingId}, ${cityId},
-                  ${life.ended.day}, ${life.ended.age}, ${daily})
+                  ${life.ended.day}, ${life.ended.age}, ${daily}, ${money}, ${toBaht(money, endCity)}, ${endCity.id},
+                  ${life.character.name_th}, ${life.character.name_en}, ${life.character.origin},
+                  ${new Set(life.citiesLived).size || 1})
           on conflict do nothing`,
       sql`insert into players (id) values (${playerId}) on conflict (id) do update set last_seen = now()`,
       sql`insert into player_days (player_id, day, ends) values (${playerId}, ${today()}, 1)

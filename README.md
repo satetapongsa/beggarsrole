@@ -59,6 +59,12 @@ lives that made it out, a keepsake poster you can save as an image.
 - **Score and leaderboard.** Each finished life is scored. Getting off the street pays far more than
   surviving forever, escaping sooner pays a speed bonus, kindness to other people adds points, and
   harder starting cities multiply the total. Scores are verified on the server (see below).
+  You enter your name on the title screen before the life is rolled, and the finished life goes
+  on the board under that name.
+- **One page of every life.** The leaderboard page lists every life any player has finished since
+  launch, named or not, sortable by score, days survived or money at the end (converted to baht).
+  It also shows totals and the all-time records, and each row opens to show the character, where
+  they were born and ended, their age, money, cities lived in and the ending.
 - **Daily challenge.** Everyone gets the same life each day; only your first attempt counts.
 - **Endings album.** Every ending you have reached, with a recovery code to move the collection to
   another device.
@@ -98,7 +104,7 @@ npm run dev        # http://localhost:3000
 ```
 app/            page.tsx (title) · play/ (the game) · end/ (life summary) · endings/ (album) · lives/
                 achievements/ · leaderboard/ · admin/
-                api/: og (share card) · track · runs · leaderboard · traces · feedback · stats · daily · profile · admin
+                api/: og (share card) · track · runs · records · leaderboard · traces · feedback · stats · daily · profile · admin
 components/     game UI: StatBar, ChoiceCard, EventModal, PixelScene, CharacterSprite, Timeline,
                 InventoryPanel, SpotPicker, SkipPanel, RunPanel, SurvivorPoster, FeedbackModal, Flag, ...
 data/           cities, origins, actions, events, endings, traits, items (JSON)
@@ -205,7 +211,11 @@ panels say they are unavailable.
 
 - **Play statistics** (`/api/track`, `/api/stats`): lives started and finished, unique players
   (an anonymous random id kept in the browser), players today, ending and city counts.
-- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): today (every run
+- **All lives** (`/api/records`, page `/leaderboard`): every finished life, top 100 by score,
+  days or money in baht (rough fixed rates in `lib/format.ts`), plus totals and record holders.
+  Money, end city, character and origin are stored per run from the server replay; runs from
+  before that have them empty.
+- **Leaderboard** (`/api/runs`, `/api/leaderboard`): today (every run
   finished since midnight Bangkok time), daily challenge, this week, all time and per starting
   city, top 50 each. A nickname counts as one person: each exact name appears once per board, with
   its best score, so a new record moves that name up instead of adding a second row. Nicknames go

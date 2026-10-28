@@ -120,6 +120,14 @@ async function main() {
       check("candle shows as lit", tr3.body.traces?.find((x: { id: number }) => x.id === Number(trace.id))?.lit === true, tr3.body);
     }
 
+    const [detail] = await sql`select money, money_thb, end_city_id, char_th, origin_id, cities from runs where id = ${sub.body.runId}`;
+    check("run stores money and character details", detail && detail.money !== null && detail.money_thb !== null && detail.end_city_id && detail.char_th && detail.origin_id && detail.cities >= 1, detail);
+    for (const sort of ["score", "days", "money"]) {
+      const rec = await api(`/api/records?sort=${sort}`);
+      check(`records sorted by ${sort}`, rec.body.ok && rec.body.entries.length > 0 && rec.body.records.longest, rec.body);
+    }
+    check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
+
     const stats = (await api("/api/stats")).body;
     check("stats", stats.ok && stats.players >= 2 && stats.ended >= 2, stats);
 

@@ -14,6 +14,16 @@ export function formatMoney(amount: number, city: City, opts: { sign?: boolean }
   return `${sign}${symbol}${body}`;
 }
 
+/** Rough baht per unit of each city currency, so money from different cities can be compared. */
+const THB_PER: Record<string, number> = {
+  THB: 1, INR: 0.39, PHP: 0.57, IDR: 0.002, BDT: 0.27, NGN: 0.021, EGP: 0.66, BRL: 5.9,
+  MXN: 1.75, USD: 32.5, GBP: 43, EUR: 37.5, JPY: 0.22, TRY: 0.8,
+};
+
+export function toBaht(amount: number, city: City): number {
+  return Math.round(amount * (THB_PER[city.currency.code] ?? 0));
+}
+
 export function formatNumber(n: number): string {
   return Math.round(n)
     .toString()

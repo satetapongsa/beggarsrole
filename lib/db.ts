@@ -36,6 +36,14 @@ const SCHEMA = [
     hidden boolean not null default false,
     created_at timestamptz not null default now()
   )`,
+  // details for the all-time board, added after launch (null on older runs)
+  `alter table runs add column if not exists money real`,
+  `alter table runs add column if not exists money_thb int`,
+  `alter table runs add column if not exists end_city_id text`,
+  `alter table runs add column if not exists char_th text`,
+  `alter table runs add column if not exists char_en text`,
+  `alter table runs add column if not exists origin_id text`,
+  `alter table runs add column if not exists cities int`,
   `create unique index if not exists runs_one_daily on runs (player_id, daily) where daily is not null`,
   `create index if not exists runs_board on runs (score desc) where name is not null and not hidden`,
   `create index if not exists runs_daily_board on runs (daily, score desc) where name is not null and not hidden`,

@@ -205,9 +205,11 @@ panels say they are unavailable.
 
 - **Play statistics** (`/api/track`, `/api/stats`): lives started and finished, unique players
   (an anonymous random id kept in the browser), players today, ending and city counts.
-- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): all-time, this week,
-  daily challenge and per starting city, top 50 each. Nicknames go through a Thai and English
-  word filter (`lib/moderation.ts`).
+- **Leaderboard** (`/api/runs`, `/api/leaderboard`, page `/leaderboard`): today (every run
+  finished since midnight Bangkok time), daily challenge, this week, all time and per starting
+  city, top 50 each. A nickname counts as one person: each exact name appears once per board, with
+  its best score, so a new record moves that name up instead of adding a second row. Nicknames go
+  through a Thai and English word filter (`lib/moderation.ts`).
 - **Daily challenge** (`/api/daily`): one seed per day on Bangkok time, derived from
   `DAILY_SECRET`; only a player's first daily run each day counts.
 - **Profiles** (`/api/profile`): the endings collection is synced to the server, and a recovery

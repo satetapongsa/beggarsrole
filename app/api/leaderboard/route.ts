@@ -1,5 +1,7 @@
-// GET  ?board=all|week|daily|city  (&city=<id>, &date=YYYY-MM-DD for daily)  → top 50
+// GET  ?board=today|daily|week|all|city  (&city=<id>, &date=YYYY-MM-DD for daily)  → top 50
 // POST { runId, playerId, name }  → put a verified run on the boards under a nickname
+// A nickname is one person: every board shows each exact name once, with its best run on that board.
+// "today" is every run finished since midnight Bangkok time; "daily" is only the daily challenge.
 
 import { DATA } from "@/lib/data";
 import { dailyDate, isDailyDate } from "@/lib/daily";
@@ -29,21 +31,22 @@ export async function GET(req: Request) {
   const city = url.searchParams.get("city") ?? "";
   const date = url.searchParams.get("date") ?? dailyDate();
 
-  let rows: Record<string, unknown>[];
-  const cols = sql`name, score, ending_id, city_id, days, age, created_at`;
-  const visible = sql`name is not null and not hidden`;
-  if (board === "all") {
-    rows = await sql`select ${cols} from runs where ${visible} order by score desc, created_at limit ${TOP}`;
-  } else if (board === "week") {
-    rows = await sql`
-      select ${cols} from runs
-      where ${visible} and created_at >= date_trunc('week', now() at time zone 'Asia/Bangkok') at time zone 'Asia/Bangkok'
-      order by score desc, created_at limit ${TOP}`;
-  } else if (board === "daily" && isDailyDate(date)) {
-    rows = await sql`select ${cols} from runs where ${visible} and daily = ${date} order by score desc, created_at limit ${TOP}`;
-  } else if (board === "city" && DATA.city[city]) {
-    rows = await sql`select ${cols} from runs where ${visible} and city_id = ${city} order by score desc, created_at limit ${TOP}`;
-  } else return badRequest();
+  let where;
+  if (board === "all") where = sql`true`;
+  else if (board === "today") where = sql`created_at >= date_trunc('day', now() at time zone 'Asia/Bangkok') at time zone 'Asia/Bangkok'`;
+  else if (board === "week") where = sql`created_at >= date_trunc('week', now() at time zone 'Asia/Bangkok') at time zone 'Asia/Bangkok'`;
+  else if (board === "daily" && isDailyDate(date)) where = sql`daily = ${date}`;
+  else if (board === "city" && DATA.city[city]) where = sql`city_id = ${city}`;
+  else return badRequest();
+
+  // best run per exact name (ties go to whoever got there first), then rank those
+  const rows = await sql`
+    select name, score, ending_id, city_id, days, age, created_at from (
+      select distinct on (name) name, score, ending_id, city_id, days, age, created_at
+      from runs where name is not null and not hidden and ${where}
+      order by name, score desc, created_at
+    ) best
+    order by score desc, created_at limit ${TOP}`;
 
   const entries: BoardEntry[] = rows.map((r, i) => ({
     rank: i + 1,
@@ -88,13 +91,15 @@ export async function POST(req: Request) {
     return run ? json({ ok: false, error: "already_claimed" }, 409) : json({ ok: false, error: "not_found" }, 404);
   }
   const { score, daily } = updated[0];
+  // ranks count other names only, matching the one-row-per-name boards
   const [{ rank }] = await sql`
-    select count(*)::int + 1 as rank from runs where name is not null and not hidden and score > ${score}`;
+    select count(distinct name)::int + 1 as rank from runs
+    where name is not null and name <> ${name} and not hidden and score > ${score}`;
   let dailyRank: number | null = null;
   if (daily) {
     const [r] = await sql`
-      select count(*)::int + 1 as rank from runs
-      where daily = ${daily} and name is not null and not hidden and score > ${score}`;
+      select count(distinct name)::int + 1 as rank from runs
+      where daily = ${daily} and name is not null and name <> ${name} and not hidden and score > ${score}`;
     dailyRank = r.rank;
   }
   return json({ ok: true, rank, dailyRank });

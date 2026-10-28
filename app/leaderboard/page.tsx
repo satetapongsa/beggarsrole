@@ -10,8 +10,8 @@ import { formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { loadLastRun } from "@/lib/storage";
 
-type Board = "daily" | "week" | "all" | "city";
-const BOARDS: Board[] = ["daily", "week", "all", "city"];
+type Board = "today" | "daily" | "week" | "all" | "city";
+const BOARDS: Board[] = ["today", "daily", "week", "all", "city"];
 
 interface Stats {
   players: number;

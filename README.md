@@ -45,6 +45,9 @@ lives that made it out, a keepsake poster you can save as an image.
   ending). Earning them unlocks extra poster themes. The achievements page also keeps career
   totals: lives played, escapes, total days, best score and cities seen.
 - **Seeds.** Any life can be replayed exactly from its seed, or started from a seed you type in.
+- **Install it like an app.** The site is a progressive web app: add it to your home screen on a
+  phone, or install it from the browser on a computer. After the first visit it loads and plays
+  offline; only the leaderboard and other online panels need a connection.
 
 ## Running it
 

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Kanit, Pixelify_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import ServiceWorker from "@/components/ServiceWorker";
 import { SettingsProvider } from "@/lib/i18n";
 import "./globals.css";
 
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="th" className={`${body.variable} ${pixel.variable}`}>
       <body className="font-body antialiased">
         <SettingsProvider>{children}</SettingsProvider>
+        <ServiceWorker />
         <Analytics />
       </body>
     </html>

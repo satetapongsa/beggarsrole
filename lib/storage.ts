@@ -215,15 +215,27 @@ export function saveNickname(n: string) {
   write(NICK_KEY, n);
 }
 
+export type TextSpeed = "slow" | "normal" | "fast" | "instant";
+export type Motion = "system" | "reduce" | "full";
+
 export interface Settings {
   lang: Lang;
   sound: boolean;
+  textSpeed: TextSpeed;
+  motion: Motion;
 }
 
+export const DEFAULT_SETTINGS: Settings = { lang: "th", sound: false, textSpeed: "normal", motion: "system" };
+
 export function loadSettings(): Settings | null {
-  const s = read<Settings>(SETTINGS_KEY);
+  const s = read<Partial<Settings>>(SETTINGS_KEY);
   if (!s || (s.lang !== "th" && s.lang !== "en")) return null;
-  return { lang: s.lang, sound: !!s.sound };
+  return {
+    lang: s.lang,
+    sound: !!s.sound,
+    textSpeed: (["slow", "normal", "fast", "instant"] as const).find((x) => x === s.textSpeed) ?? "normal",
+    motion: (["system", "reduce", "full"] as const).find((x) => x === s.motion) ?? "system",
+  };
 }
 
 export function saveSettings(s: Settings) {

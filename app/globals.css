@@ -79,9 +79,18 @@ body {
 .anim-bob { animation: bob 2.6s ease-in-out infinite; }
 .anim-wag { animation: wag 0.5s ease-in-out infinite; transform-box: fill-box; transform-origin: left center; }
 
+/* Looping animations follow the OS setting unless the player chose "full motion" in settings. */
 @media (prefers-reduced-motion: reduce) {
-  .anim-rain, .anim-snow, .anim-shimmer, .anim-flash, .anim-bob, .anim-wag,
-  .animate-pulseCrit, .animate-spinFlag, .animate-flicker {
+  html:not(.full-motion) :is(.anim-rain, .anim-snow, .anim-shimmer, .anim-flash, .anim-bob, .anim-wag,
+  .animate-pulseCrit, .animate-spinFlag, .animate-flicker) {
     animation: none !important;
   }
+}
+
+/* "Reduce motion" in settings: no animations or transitions anywhere. */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
 }

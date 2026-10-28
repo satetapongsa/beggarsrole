@@ -42,6 +42,10 @@ open tab (or picks a spot when asked where to go), **← →** or **Q W E R** sw
 an event **1–9** picks a choice while **Enter** skips the text and continues. Keys are read by
 position, so they work on a Thai keyboard layout too.
 
+A settings page (from the title screen) holds the language, sound, how fast event text types
+out (slow to instant), motion (follow the device, reduce, or full; reduce turns off every
+animation) and the first-time tips, which can be switched off or shown again from the start.
+
 When a life ends you get a summary: your timeline, the numbers of your life, a share card, and for
 lives that made it out, a keepsake poster you can save as an image.
 

@@ -5,7 +5,7 @@ import DeltaChips from "@/components/DeltaChips";
 import { DATA } from "@/lib/data";
 import { meets, checkConditions, cityOf } from "@/lib/conditions";
 import { fill } from "@/lib/format";
-import { useSettings } from "@/lib/i18n";
+import { TEXT_SPEED, useSettings } from "@/lib/i18n";
 import { typeTick } from "@/lib/sound";
 import { keyDigit, lockText } from "@/lib/ui";
 import type { GameState } from "@/types/game";
@@ -16,13 +16,13 @@ function graphemes(text: string): string[] {
   return Array.from(text);
 }
 
+/** Types text out one character at a time; speed is ms per character, 0 = show at once. */
 function useTypewriter(text: string, speed: number, sound: boolean) {
   const parts = useMemo(() => graphemes(text), [text]);
   const [n, setN] = useState(0);
   useEffect(() => {
     setN(0);
-    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    if (speed <= 0) {
       setN(parts.length);
       return;
     }
@@ -45,7 +45,7 @@ interface Props {
 }
 
 export default function EventModal({ state, onChoose, onDismiss }: Props) {
-  const { lang, t, has, sound } = useSettings();
+  const { lang, t, has, sound, textSpeed, reducedMotion } = useSettings();
   const ev = state.pendingEvent ? DATA.event[state.pendingEvent] : null;
   const result = state.eventResult;
   const city = cityOf(state);
@@ -60,7 +60,7 @@ export default function EventModal({ state, onChoose, onDismiss }: Props) {
       ? fill(lang === "th" ? ev.text_th : ev.text_en, state, lang)
       : "";
 
-  const tw = useTypewriter(body, lang === "th" ? 22 : 16, sound);
+  const tw = useTypewriter(body, reducedMotion ? 0 : (lang === "th" ? 22 : 16) * TEXT_SPEED[textSpeed], sound);
 
   // keyboard: Enter/Space finishes the text then continues, 1–9 picks a choice
   useEffect(() => {

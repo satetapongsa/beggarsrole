@@ -68,6 +68,9 @@ export default function TitlePage() {
         <button type="button" onClick={() => setSound(!sound)} className="rounded border border-night-600 px-2.5 py-1 text-xs hover:bg-night-800">
           {sound ? t("sound.on") : t("sound.off")}
         </button>
+        <button type="button" onClick={() => router.push("/settings")} className="rounded border border-night-600 px-2.5 py-1 text-xs hover:bg-night-800">
+          {t("settings.title")}
+        </button>
       </div>
 
       {/* street-lamp hero */}

@@ -10,7 +10,7 @@ import { useSettings } from "@/lib/i18n";
 import type { GameState } from "@/types/game";
 
 export default function RevealScreen({ state, onBegin }: { state: GameState; onBegin: () => void }) {
-  const { lang, t, sfx } = useSettings();
+  const { lang, t, sfx, reducedMotion, textSpeed } = useSettings();
   const [stage, setStage] = useState(0);
   const [flagIdx, setFlagIdx] = useState(0);
   const city = cityOf(state);
@@ -18,8 +18,7 @@ export default function RevealScreen({ state, onBegin }: { state: GameState; onB
   const c = state.character;
 
   useEffect(() => {
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    if (reducedMotion || textSpeed === "instant") {
       setStage(6);
       return;
     }
@@ -44,7 +43,7 @@ export default function RevealScreen({ state, onBegin }: { state: GameState; onB
       timers.forEach((x) => window.clearTimeout(x));
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reducedMotion, textSpeed === "instant"]);
 
   const name = lang === "th" ? c.name_th : c.name_en;
   const skip = () => setStage(6);

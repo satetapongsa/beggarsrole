@@ -2,8 +2,8 @@
 // Pages: network first, falling back to the cached copy. Build assets: cache first (their names
 // change with every build). The online API is never cached.
 
-const CACHE = "spare-change-v2";
-const PAGES = ["/", "/play", "/end", "/endings", "/achievements", "/lives"];
+const CACHE = "spare-change-v3";
+const PAGES = ["/", "/play", "/end", "/endings", "/achievements", "/lives", "/settings"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

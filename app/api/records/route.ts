@@ -2,6 +2,7 @@
 // details, plus the all-time records (longest survival, most money at the end, best score), totals,
 // every player name with how many lives it started and its bests, and the survivors' hall: players
 // who got off the street alive, ranked by how many days their longest surviving life lasted. &name= limits the lives to one player.
+// GET ?life=<runId>  → one life's full story: where it ended, why, its timeline and final stats.
 // Unlike /api/leaderboard this does not fold a name into one row: each life is its own entry.
 
 import { DATA } from "@/lib/data";
@@ -12,6 +13,7 @@ export const dynamic = "force-dynamic";
 const TOP = 100;
 
 export interface LifeEntry {
+  id: string;
   rank: number;
   name: string | null;
   score: number;
@@ -44,6 +46,7 @@ export interface PlayerRow {
 
 /** A player who survived: their longest life that ended off the street rather than in death. */
 export interface SurvivorRow {
+  id: string;
   rank: number;
   name: string;
   days: number;
@@ -52,6 +55,36 @@ export interface SurvivorRow {
   cityId: string;
   /** how many of their lives got off the street */
   survived: number;
+  at: number;
+}
+
+export interface LifeStory {
+  id: string;
+  name: string | null;
+  endingId: string;
+  cityId: string;
+  endCityId: string | null;
+  endSpotId: string | null;
+  /** cause of death; null for a life that got off the street */
+  cause: string | null;
+  days: number;
+  age: number;
+  money: number | null;
+  moneyThb: number | null;
+  score: number;
+  charTh: string | null;
+  charEn: string | null;
+  originId: string | null;
+  story: {
+    timeline: { day: number; age: number; icon: string; th: string; en: string; kind: string }[];
+    stats: Record<string, number>;
+    earned: number;
+    friends: number;
+    helped: number;
+    mealsGiven: number;
+    nightsShelter: number;
+    cities: number;
+  } | null;
   at: number;
 }
 
@@ -64,12 +97,13 @@ export interface Records {
   best: LifeEntry | null;
 }
 
-const COLS = `name, score, ending_id, city_id, end_city_id, days, age, money, money_thb, char_th, char_en,
+const COLS = `id, name, score, ending_id, city_id, end_city_id, days, age, money, money_thb, char_th, char_en,
   origin_id, cities, daily is not null as daily, created_at`;
 
 function toEntry(r: Record<string, unknown>, i: number): LifeEntry {
   const num = (x: unknown) => (x === null || x === undefined ? null : Number(x));
   return {
+    id: String(r.id),
     rank: i + 1,
     name: r.name ? String(r.name) : null,
     score: Number(r.score),
@@ -99,6 +133,21 @@ export async function GET(req: Request) {
   const sql = await getDb();
   if (!sql) return offline();
   const params = new URL(req.url).searchParams;
+  const lifeId = params.get("life");
+  if (lifeId !== null) {
+    if (!/^[a-f0-9]{20}$/.test(lifeId)) return json({ ok: false, error: "bad_request" }, 400);
+    const [r] = await sql`select ${sql.unsafe(COLS)}, end_spot_id, cause, story from runs where id = ${lifeId} and not hidden`;
+    if (!r) return json({ ok: false, error: "not_found" }, 404);
+    const e = toEntry(r, 0);
+    const life: LifeStory = {
+      id: e.id, name: e.name, endingId: e.endingId, cityId: e.cityId, endCityId: e.endCityId,
+      endSpotId: r.end_spot_id ? String(r.end_spot_id) : null, cause: r.cause ? String(r.cause) : null,
+      days: e.days, age: e.age, money: e.money, moneyThb: e.moneyThb, score: e.score,
+      charTh: e.charTh, charEn: e.charEn, originId: e.originId,
+      story: (r.story as LifeStory["story"]) ?? null, at: e.at,
+    };
+    return json({ ok: true, life });
+  }
   const sort = params.get("sort") ?? "score";
   const name = params.get("name") || null;
   const order = ORDER[sort];
@@ -119,8 +168,8 @@ export async function GET(req: Request) {
         from names n left join runs r on lower(r.name) = lower(n.name) and not r.hidden
         group by n.name, n.starts, n.last_seen
         order by max(r.score) desc nulls last, n.starts desc, n.last_seen desc`,
-    sql`select name, days, age, ending_id, city_id, created_at, survived from (
-          select distinct on (lower(name)) name, days, age, ending_id, city_id, created_at,
+    sql`select id, name, days, age, ending_id, city_id, created_at, survived from (
+          select distinct on (lower(name)) id, name, days, age, ending_id, city_id, created_at,
                  count(*) over (partition by lower(name))::int as survived
           from runs where name is not null and not hidden and ending_id <> all(${deaths})
           order by lower(name), days desc, created_at
@@ -147,6 +196,7 @@ export async function GET(req: Request) {
     lastSeen: new Date(String(p.lastSeen)).getTime(),
   }));
   const survivorRows: SurvivorRow[] = survivors.map((r, i) => ({
+    id: String(r.id),
     rank: i + 1,
     name: String(r.name),
     days: Number(r.days),

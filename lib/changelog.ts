@@ -12,6 +12,12 @@ export interface Release {
 
 export const CHANGELOG: Release[] = [
   {
+    version: "1.23",
+    date: "2026-10-28",
+    th: "ประวัติชีวิตบนกระดานคะแนน กดที่ผู้รอดชีวิตหรือชีวิตไหนก็ได้ เพื่อดูว่ารอดกี่วัน เหลือเงินเท่าไหร่ จบเกมที่สถานที่ไหน ฉากจบเป็นอย่างไร จบเพราะอะไร และไทม์ไลน์ทั้งชีวิต ผู้รอดชีวิตอันดับ 1 เปิดให้ดูเลย",
+    en: "Life stories on the leaderboard: tap any survivor or life to see days survived, money left, the exact place it ended, the ending scene, why it ended, and the whole timeline. The top survivor's story is open by default.",
+  },
+  {
     version: "1.22",
     date: "2026-10-28",
     th: "หอเกียรติยศผู้รอดชีวิตในหน้ากระดานคะแนน จัดอันดับผู้เล่นที่รอดพ้นจากถนนได้จริง ตามจำนวนวันที่รอด พร้อมเหรียญเกียรติยศ ทองแดง เงิน ทอง และเพชร",

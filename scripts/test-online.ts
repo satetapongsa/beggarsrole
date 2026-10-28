@@ -156,6 +156,11 @@ async function main() {
     const surv = recC.body.survivors as { name: string; days: number; endingId: string; rank: number }[];
     check("survivors hall lists only lives that got off the street, longest first",
       Array.isArray(surv) && surv.every((x) => !deaths.has(x.endingId)) && surv.every((x, i) => i === 0 || surv[i - 1].days >= x.days) && new Set(surv.map((x) => x.name.toLowerCase())).size === surv.length, surv);
+    const story = await api(`/api/records?life=${subC.body.runId}`);
+    const ls = story.body.life;
+    check("life story has end place, timeline and stats", story.body.ok && ls.endSpotId && ls.story?.timeline?.length > 1 && ls.story.timeline.at(-1).kind === "ending" && typeof ls.story.earned === "number", ls);
+    check("death has a cause, escape has none", deaths.has(ls.endingId) ? Boolean(ls.cause) : ls.cause === null, ls);
+    check("life story rejects a bad id", (await api("/api/records?life=nope")).status === 400);
     check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
 
     const stats = (await api("/api/stats")).body;

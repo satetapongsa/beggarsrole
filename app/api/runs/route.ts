@@ -8,6 +8,7 @@ import { isDailyDate } from "@/lib/daily";
 import { dailySeed, isOpenDaily } from "@/lib/daily-seed";
 import { badRequest, getDb, isPlayerId, json, offline, rateLimited, today, underLimit } from "@/lib/db";
 import { MAX_ACTIONS, parseAction, replayLife } from "@/lib/replay";
+import { lifeStats } from "@/lib/engine";
 import { toBaht } from "@/lib/format";
 import { scoreLife } from "@/lib/score";
 import type { GameAction } from "@/types/game";
@@ -55,13 +56,22 @@ export async function POST(req: Request) {
     const endSpot = endCity.spots.find((sp) => sp.id === life.lastSpot) ?? endCity.spots[0];
     const traceKind = DATA.ending[life.ended.endingId]?.death ? "grave" : "free";
     const money = life.cash + life.stash;
+    const ending = DATA.ending[life.ended.endingId];
+    // the timeline and final state, so the leaderboard can tell this life's story (newest 60 entries)
+    const story = {
+      timeline: life.timeline.slice(-60).map(({ day, age, icon, th, en, kind }) => ({ day, age, icon, th, en, kind })),
+      stats: life.stats,
+      ...lifeStats(life),
+    };
     await sql.transaction([
       sql`insert into runs (id, player_id, seed, score, ending_id, city_id, days, age, daily,
-                         money, money_thb, end_city_id, char_th, char_en, origin_id, cities)
+                         money, money_thb, end_city_id, char_th, char_en, origin_id, cities,
+                         end_spot_id, cause, story)
           values (${runId}, ${playerId}, ${seed}, ${score.total}, ${life.ended.endingId}, ${cityId},
                   ${life.ended.day}, ${life.ended.age}, ${daily}, ${money}, ${toBaht(money, endCity)}, ${endCity.id},
                   ${life.character.name_th}, ${life.character.name_en}, ${life.character.origin},
-                  ${new Set(life.citiesLived).size || 1})
+                  ${new Set(life.citiesLived).size || 1},
+                  ${endSpot.id}, ${ending?.death ? life.lastHarm : null}, ${JSON.stringify(story)}::jsonb)
           on conflict do nothing`,
       sql`insert into players (id) values (${playerId}) on conflict (id) do update set last_seen = now()`,
       sql`insert into player_days (player_id, day, ends) values (${playerId}, ${today()}, 1)

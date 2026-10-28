@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Flag from "@/components/Flag";
+import LifeStoryPanel from "@/components/LifeStoryPanel";
 import type { LifeEntry, PlayerRow, Records, SurvivorRow } from "@/app/api/records/route";
 import { DATA } from "@/lib/data";
 import { formatMoney, formatNumber } from "@/lib/format";
@@ -46,6 +47,9 @@ export default function LeaderboardPage() {
   const [allPlayers, setAllPlayers] = useState(false);
   // a player picked from the players list: the lives list shows only their lives
   const [who, setWho] = useState<string | null>(null);
+  // life stories opened from the record cards and from the survivors' hall (the champion's opens by itself)
+  const [cardStory, setCardStory] = useState<string | null>(null);
+  const [hallStory, setHallStory] = useState<string | null | undefined>(undefined);
 
   useEffect(() => {
     const s = new URLSearchParams(window.location.search).get("sort") as Sort | null;
@@ -71,6 +75,7 @@ export default function LeaderboardPage() {
         setRecords(res.records);
         setPlayers(res.players);
         setSurvivors(res.survivors);
+        setHallStory((cur) => (cur === undefined ? res.survivors?.[0]?.id ?? null : cur));
       })
       .catch(() => alive && setOffline(true));
     return () => {
@@ -163,7 +168,14 @@ export default function LeaderboardPage() {
                   ["🏆", t("rec.best"), records.best, (e: LifeEntry) => `${formatNumber(e.score)} ${t("rec.points")}`],
                 ] as const
               ).map(([icon, label, e, value]) => (
-                <div key={label} className="rounded-xl border border-lamp-500/30 bg-night-900 p-4">
+                <button
+                  type="button"
+                  key={label}
+                  disabled={!e}
+                  onClick={() => e && setCardStory(cardStory === e.id ? null : e.id)}
+                  aria-expanded={Boolean(e && cardStory === e.id)}
+                  className={`rounded-xl border bg-night-900 p-4 text-left hover:bg-night-800 ${e && cardStory === e.id ? "border-lamp-400" : "border-lamp-500/30"}`}
+                >
                   <div className="text-[11px] font-semibold uppercase tracking-wider text-lamp-300">
                     {icon} {label}
                   </div>
@@ -178,8 +190,14 @@ export default function LeaderboardPage() {
                   ) : (
                     <div className="mt-1 text-sm text-stone-500">—</div>
                   )}
-                </div>
+                  {e && <div className="mt-2 text-[11px] text-lamp-300/80">{cardStory === e.id ? t("story.hide") : t("story.show")}</div>}
+                </button>
               ))}
+            </section>
+          )}
+          {cardStory && (
+            <section className="mt-3 rounded-xl border border-lamp-500/40 bg-night-900 pt-4">
+              <LifeStoryPanel id={cardStory} />
             </section>
           )}
 
@@ -203,24 +221,39 @@ export default function LeaderboardPage() {
                   {survivors.map((sv) => {
                     const m = medalFor(sv.days);
                     return (
-                      <li key={sv.name} className={`flex items-center gap-3 border-t border-amber-900/40 px-4 py-3 ${isMine(sv.name) ? "bg-lamp-500/10" : ""}`}>
+                      <li key={sv.name} className={`border-t border-amber-900/40 ${isMine(sv.name) ? "bg-lamp-500/10" : ""}`}>
+                        <button
+                          type="button"
+                          onClick={() => setHallStory(hallStory === sv.id ? null : sv.id)}
+                          aria-expanded={hallStory === sv.id}
+                          className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-amber-950/30"
+                        >
                         <span className={`w-8 text-center text-lg font-bold tabular-nums ${sv.rank <= 3 ? "text-amber-300" : "text-stone-500"}`}>
                           {sv.rank === 1 ? "👑" : sv.rank}
                         </span>
                         <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-xl ${m.cls}`} title={t(`hall.medal.${m.key}`)}>
                           {m.icon}
                         </span>
-                        <button type="button" onClick={() => pickPlayer(sv.name)} className="min-w-0 flex-1 text-left">
+                        <div className="min-w-0 flex-1">
                           <div className="truncate font-semibold text-stone-100">{sv.name}</div>
                           <div className="truncate text-[11px] text-stone-400">
                             {endingName(sv.endingId)} · {cityName(sv.cityId)} · {t("rec.d.age", { age: sv.age })}
                             {sv.survived > 1 && ` · ${t("hall.times", { n: formatNumber(sv.survived) })}`}
                           </div>
-                        </button>
+                        </div>
                         <div className="shrink-0 text-right">
                           <div className="text-2xl font-bold tabular-nums text-amber-300">{formatNumber(sv.days)}</div>
                           <div className="text-[10px] uppercase tracking-wider text-stone-500">{t("hall.days")}</div>
                         </div>
+                        </button>
+                        {hallStory === sv.id && (
+                          <>
+                            <LifeStoryPanel id={sv.id} />
+                            <button type="button" onClick={() => pickPlayer(sv.name)} className="mb-3 ml-4 text-xs text-sky-300 hover:text-sky-200">
+                              {t("story.allLives", { name: sv.name })} →
+                            </button>
+                          </>
+                        )}
                       </li>
                     );
                   })}
@@ -333,6 +366,7 @@ export default function LeaderboardPage() {
                           ))}
                         </dl>
                       )}
+                      {isOpen && <LifeStoryPanel id={e.id} />}
                     </li>
                   );
                 })}

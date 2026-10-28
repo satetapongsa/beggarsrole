@@ -71,6 +71,7 @@ lives that made it out, a keepsake poster you can save as an image.
   It also shows totals and the all-time records, and each row opens to show the character, where
   they were born and ended, their age, money, cities lived in and the ending.
 - **Survivors' Hall of Honour.** Players who truly got off the street alive, ranked by how many days their longest surviving life lasted, with a medal for it: bronze for surviving, silver from 60 days, gold from 180, diamond from 365.
+- **Life stories.** Tap any survivor, record or life on the leaderboard to read how it went: days survived, money left, the exact place it ended, the ending scene, why it ended (the cause of death, or the last turning point before getting out) and the dated timeline. The top survivor's story is open by default.
 - **Players.** A name is one player, ignoring upper and lower case (WAVY and wavy are the same person, shown with the spelling used first). The server records the name every time a life starts, so the
   players list shows everyone who has played, how many times they were reborn, how many lives they
   finished and their bests. Tap a name to see only that player's lives. The player count is the

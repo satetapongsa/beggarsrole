@@ -44,6 +44,10 @@ const SCHEMA = [
   `alter table runs add column if not exists char_en text`,
   `alter table runs add column if not exists origin_id text`,
   `alter table runs add column if not exists cities int`,
+  // the life story shown on the leaderboard: where it ended, what killed it, its timeline and final stats
+  `alter table runs add column if not exists end_spot_id text`,
+  `alter table runs add column if not exists cause text`,
+  `alter table runs add column if not exists story jsonb`,
   // one row per player name (the name typed before each life): how many lives it started
   `create table if not exists names (
     name text primary key,

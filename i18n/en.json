@@ -467,5 +467,15 @@
   "rec.d.score": "Score",
   "rec.d.when": "Played",
   "rec.d.daily": "daily challenge",
-  "rec.note": "Tap a row for details · money converted to baht (approx.) · older lives have no money data"
+  "rec.note": "Tap a row for details · money converted to baht (approx.) · older lives have no money data",
+  "rec.players": "All players: {n}",
+  "rec.playersHint": "Same name, same player · tap a name to see all their lives",
+  "rec.p.reborn": "reborn {n}×",
+  "rec.p.ended": "{n} finished",
+  "rec.p.escaped": "escaped {n}×",
+  "rec.p.longest": "longest {days} days",
+  "rec.p.richest": "most ฿{thb}",
+  "rec.showAll": "Show all {n}",
+  "rec.showLess": "Show less",
+  "rec.livesOf": "Lives of {name}"
 }

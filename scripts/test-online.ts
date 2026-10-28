@@ -126,6 +126,17 @@ async function main() {
       const rec = await api(`/api/records?sort=${sort}`);
       check(`records sorted by ${sort}`, rec.body.ok && rec.body.entries.length > 0 && rec.body.records.longest, rec.body);
     }
+    const nick = `ทดสอบ ${RUN_TAG}`;
+    await api("/api/track", { playerId: P1, name: nick });
+    await api("/api/track", { playerId: P1, name: nick });
+    check("rude name not recorded at start", (await api("/api/track", { playerId: P1, name: "fuck" })).body.ok);
+    const [nrow] = await sql`select starts from names where name = ${nick}`;
+    check("name recorded at each start", nrow && Number(nrow.starts) >= 2, nrow);
+    check("rude name skipped", !(await sql`select 1 from names where name = 'fuck'`).length);
+    const recs = await api(`/api/records?sort=score&name=${encodeURIComponent(nick)}`);
+    const prow = recs.body.players?.find((x: { name: string }) => x.name === nick);
+    check("players list shows the name with its rebirths and best", prow && prow.starts >= 2 && prow.ended >= 1 && prow.best > 0, prow);
+    check("lives filtered to one player", recs.body.entries.length > 0 && recs.body.entries.every((e: { name: string }) => e.name === nick), recs.body.entries);
     check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
 
     const stats = (await api("/api/stats")).body;
@@ -152,6 +163,7 @@ async function main() {
   } finally {
     await sql.transaction([
       sql`delete from runs where player_id like 'e2etest-%'`,
+      sql`delete from names where name like ${"%" + RUN_TAG}`,
       sql`delete from trace_candles where trace_id in (select id from traces where player_id like 'e2etest-%')`,
       sql`delete from trace_candles where player_id like 'e2etest-%'`,
       sql`delete from traces where player_id like 'e2etest-%'`,

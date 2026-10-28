@@ -6,7 +6,7 @@
 import { DATA } from "@/lib/data";
 import { dailyDate, isDailyDate } from "@/lib/daily";
 import { badRequest, getDb, isPlayerId, json, offline, rateLimited, underLimit } from "@/lib/db";
-import { isNameAllowed } from "@/lib/moderation";
+import { cleanName, isNameAllowed } from "@/lib/moderation";
 
 export const dynamic = "force-dynamic";
 
@@ -59,17 +59,6 @@ export async function GET(req: Request) {
     at: new Date(String(r.created_at)).getTime(),
   }));
   return json({ ok: true, entries });
-}
-
-/** Trim, drop control/invisible characters, cap length. */
-function cleanName(x: unknown): string | null {
-  if (typeof x !== "string") return null;
-  const name = x
-    .replace(/[\p{C}]/gu, "")
-    .replace(/\s+/g, " ")
-    .trim();
-  const chars = Array.from(name);
-  return chars.length >= 1 && chars.length <= 20 ? name : null;
 }
 
 export async function POST(req: Request) {

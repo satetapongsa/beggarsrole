@@ -12,7 +12,7 @@ import { dailyNumber } from "@/lib/daily";
 import { formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { startLife } from "@/lib/online";
-import { loadPastLives, type PastLife } from "@/lib/storage";
+import { loadNickname, loadPastLives, type PastLife } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 
 type Filter = "all" | "escaped" | "died";
@@ -39,6 +39,8 @@ export default function LivesPage() {
   }, [lives, filter, sort]);
 
   const replay = (seed: number) => {
+    // every life starts under a name: without one, go pick it on the title screen first
+    if (!loadNickname()) return router.push("/");
     sfx("good");
     startLife(seed);
     router.push("/play");

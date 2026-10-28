@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Flag from "@/components/Flag";
-import type { LifeEntry, Records } from "@/app/api/records/route";
+import type { LifeEntry, PlayerRow, Records } from "@/app/api/records/route";
 import { DATA } from "@/lib/data";
 import { formatMoney, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
@@ -32,6 +32,10 @@ export default function LeaderboardPage() {
   const [offline, setOffline] = useState(false);
   const [mine, setMine] = useState("");
   const [open, setOpen] = useState<number | null>(null);
+  const [players, setPlayers] = useState<PlayerRow[] | null>(null);
+  const [allPlayers, setAllPlayers] = useState(false);
+  // a player picked from the players list: the lives list shows only their lives
+  const [who, setWho] = useState<string | null>(null);
 
   useEffect(() => {
     const s = new URLSearchParams(window.location.search).get("sort") as Sort | null;
@@ -47,19 +51,26 @@ export default function LeaderboardPage() {
     let alive = true;
     setEntries(null);
     setOpen(null);
-    fetch(`/api/records?sort=${sort}`)
+    const q = new URLSearchParams({ sort, ...(who ? { name: who } : {}) });
+    fetch(`/api/records?${q}`)
       .then((r) => r.json())
       .then((res) => {
         if (!alive) return;
         if (!res.ok) return setOffline(true);
         setEntries(res.entries);
         setRecords(res.records);
+        setPlayers(res.players);
       })
       .catch(() => alive && setOffline(true));
     return () => {
       alive = false;
     };
-  }, [sort]);
+  }, [sort, who]);
+
+  const pickPlayer = (name: string) => {
+    setWho(who === name ? null : name);
+    document.getElementById("lives")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const cityName = (id: string) => {
     const c = DATA.city[id];
@@ -160,7 +171,45 @@ export default function LeaderboardPage() {
             </section>
           )}
 
-          <div className="mt-6 flex flex-wrap items-center gap-2">
+          {players && players.length > 0 && (
+            <section className="mt-6 overflow-hidden rounded-xl border border-night-700 bg-night-900">
+              <h2 className="px-4 pt-4 text-sm font-semibold uppercase tracking-wider text-lamp-300">
+                👥 {t("rec.players", { n: formatNumber(players.length) })}
+              </h2>
+              <p className="px-4 pb-2 text-[11px] text-stone-500">{t("rec.playersHint")}</p>
+              <ol>
+                {(allPlayers ? players : players.slice(0, 20)).map((p, i) => (
+                  <li key={p.name} className={`border-t border-night-800 ${p.name === mine ? "bg-lamp-500/10" : ""} ${p.name === who ? "bg-sky-900/30" : ""}`}>
+                    <button type="button" onClick={() => pickPlayer(p.name)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-night-800/60">
+                      <span className="w-7 text-right font-semibold tabular-nums text-stone-500">{i + 1}</span>
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate font-medium text-stone-100">{p.name}</div>
+                        <div className="truncate text-[11px] text-stone-500">
+                          {t("rec.p.reborn", { n: formatNumber(p.starts) })} · {t("rec.p.ended", { n: formatNumber(p.ended) })}
+                          {p.escaped > 0 && ` · ${t("rec.p.escaped", { n: formatNumber(p.escaped) })}`}
+                          {p.longest !== null && ` · ${t("rec.p.longest", { days: formatNumber(p.longest) })}`}
+                          {p.richestThb !== null && ` · ${t("rec.p.richest", { thb: formatNumber(p.richestThb) })}`}
+                        </div>
+                      </div>
+                      <span className="font-semibold tabular-nums text-lamp-300">{p.best === null ? "—" : formatNumber(p.best)}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+              {players.length > 20 && (
+                <button type="button" onClick={() => setAllPlayers((v) => !v)} className="w-full border-t border-night-800 py-2 text-xs text-stone-400 hover:bg-night-800">
+                  {allPlayers ? t("rec.showLess") : t("rec.showAll", { n: formatNumber(players.length) })}
+                </button>
+              )}
+            </section>
+          )}
+
+          <div id="lives" className="mt-6 flex scroll-mt-4 flex-wrap items-center gap-2">
+            {who && (
+              <button type="button" onClick={() => setWho(null)} className="rounded-full bg-sky-800 px-4 py-1.5 text-sm text-sky-100 hover:bg-sky-700">
+                {t("rec.livesOf", { name: who })} ✕
+              </button>
+            )}
             {SORTS.map((s) => (
               <button
                 key={s}

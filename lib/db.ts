@@ -44,6 +44,17 @@ const SCHEMA = [
   `alter table runs add column if not exists char_en text`,
   `alter table runs add column if not exists origin_id text`,
   `alter table runs add column if not exists cities int`,
+  // one row per player name (the name typed before each life): how many lives it started
+  `create table if not exists names (
+    name text primary key,
+    starts int not null default 0,
+    first_seen timestamptz not null default now(),
+    last_seen timestamptz not null default now()
+  )`,
+  // names that reached the board before names were recorded at the start of a life
+  `insert into names (name, starts, first_seen, last_seen)
+    select name, count(*), min(created_at), max(created_at) from runs where name is not null group by name
+    on conflict (name) do nothing`,
   `create unique index if not exists runs_one_daily on runs (player_id, daily) where daily is not null`,
   `create index if not exists runs_board on runs (score desc) where name is not null and not hidden`,
   `create index if not exists runs_daily_board on runs (daily, score desc) where name is not null and not hidden`,

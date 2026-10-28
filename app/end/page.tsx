@@ -18,7 +18,7 @@ import { useSettings } from "@/lib/i18n";
 import { startLife } from "@/lib/online";
 import { makeSeed } from "@/lib/rng";
 import { ACHIEVEMENT, lifeKey, TIER_STYLE } from "@/lib/achievements";
-import { loadAchievements, loadEndingsFound, loadLastLife, type LastRun } from "@/lib/storage";
+import { loadAchievements, loadEndingsFound, loadLastLife, loadNickname, type LastRun } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 import type { GameState } from "@/types/game";
 
@@ -100,6 +100,8 @@ export default function EndPage() {
 🏆 ${t("end.shareScore", { score: formatNumber(run.score) })}${run.daily ? ` · 📅 ${t("daily.badge", { n: dailyNumber(run.daily) })}` : ""}` : "");
 
   const start = (seed: number) => {
+    // every life starts under a name: without one, go pick it on the title screen first
+    if (!loadNickname()) return router.push("/");
     sfx("good");
     startLife(seed);
     router.push("/play");

@@ -2,7 +2,7 @@
 // the game carries on exactly as it does offline.
 
 import { newGame } from "@/lib/engine";
-import { loadEndingsFound, loadPlayerId, saveEndingsFound, saveGame, savePlayerId } from "@/lib/storage";
+import { loadEndingsFound, loadNickname, loadPlayerId, saveEndingsFound, saveGame, savePlayerId } from "@/lib/storage";
 import type { GameState } from "@/types/game";
 import type { ScoreBreakdown } from "@/lib/score";
 
@@ -25,7 +25,7 @@ async function call<T>(url: string, body?: unknown): Promise<Result<T>> {
 export function startLife(seed: number, daily?: string) {
   const s = newGame(seed);
   saveGame(daily ? { ...s, daily } : s);
-  void call("/api/track", { playerId: loadPlayerId() });
+  void call("/api/track", { playerId: loadPlayerId(), name: loadNickname() });
 }
 
 export interface DailyInfo {

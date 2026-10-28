@@ -16,6 +16,17 @@ const RESERVED = ["admin", "moderator", "official", "sparechange", "แอดม
 
 const LEET: Record<string, string> = { "0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "7": "t", "@": "a", $: "s", "!": "i" };
 
+/** Trim, drop control/invisible characters, cap length. */
+export function cleanName(x: unknown): string | null {
+  if (typeof x !== "string") return null;
+  const name = x
+    .replace(/[\p{C}]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const chars = Array.from(name);
+  return chars.length >= 1 && chars.length <= 20 ? name : null;
+}
+
 export function normalizeName(name: string): string {
   return name
     .toLowerCase()

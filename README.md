@@ -65,6 +65,10 @@ lives that made it out, a keepsake poster you can save as an image.
   launch, named or not, sortable by score, days survived or money at the end (converted to baht).
   It also shows totals and the all-time records, and each row opens to show the character, where
   they were born and ended, their age, money, cities lived in and the ending.
+- **Players.** A name is one player. The server records the name every time a life starts, so the
+  players list shows everyone who has played, how many times they were reborn, how many lives they
+  finished and their bests. Tap a name to see only that player's lives. The player count is the
+  number of names.
 - **Daily challenge.** Everyone gets the same life each day; only your first attempt counts.
 - **Endings album.** Every ending you have reached, with a recovery code to move the collection to
   another device.
@@ -214,7 +218,8 @@ panels say they are unavailable.
 - **All lives** (`/api/records`, page `/leaderboard`): every finished life, top 100 by score,
   days or money in baht (rough fixed rates in `lib/format.ts`), plus totals and record holders.
   Money, end city, character and origin are stored per run from the server replay; runs from
-  before that have them empty.
+  before that have them empty. `names` holds one row per player name with its start count
+  (`/api/track` adds one per life); `/api/stats` counts players as names.
 - **Leaderboard** (`/api/runs`, `/api/leaderboard`): today (every run
   finished since midnight Bangkok time), daily challenge, this week, all time and per starting
   city, top 50 each. A nickname counts as one person: each exact name appears once per board, with

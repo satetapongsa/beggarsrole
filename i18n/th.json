@@ -477,5 +477,8 @@
   "rec.p.richest": "เงินมากสุด ฿{thb}",
   "rec.showAll": "ดูทั้งหมด {n} คน",
   "rec.showLess": "ย่อ",
-  "rec.livesOf": "ชีวิตของ {name}"
+  "rec.livesOf": "ชีวิตของ {name}",
+  "version.new": "อัปเดตล่าสุด",
+  "version.all": "ดูทั้งหมด",
+  "version.hide": "ซ่อน"
 }

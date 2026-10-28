@@ -1913,56 +1913,6 @@
     ]
   },
   {
-    "id": "lost_child",
-    "icon": "🧒",
-    "weight": 2,
-    "trigger": "any",
-    "tags": [
-      "community",
-      "kindness"
-    ],
-    "cooldown": 40,
-    "title_th": "เด็กหลง",
-    "title_en": "A Lost Child",
-    "text_th": "เด็กชายราวห้าขวบยืนร้องไห้กลางทางเดิน คนเดินผ่านไปหลายสิบคน ไม่มีใครหยุด",
-    "text_en": "A boy of about five stands crying in the middle of the walkway. Dozens of people pass. Nobody stops.",
-    "choices": [
-      {
-        "label_th": "นั่งลงคุยกับเขา ช่วยหาแม่",
-        "label_en": "Kneel down and help find his mom",
-        "chance": 0.8,
-        "success": {
-          "text_th": "สิบนาทีต่อมาแม่วิ่งมากอดลูก แล้วกอดคุณด้วย โดยไม่สนใจว่าเสื้อคุณเปื้อนแค่ไหน",
-          "text_en": "Ten minutes later his mother runs up and hugs him — then hugs you too, not caring how dirty your shirt is.",
-          "effects": {
-            "rep": 8,
-            "hope": 12,
-            "energy": -6
-          }
-        },
-        "fail": {
-          "text_th": "รปภ. มาเห็นคุณจูงเด็กแล้วเข้าใจผิด สุดท้ายแม่มาถึงและอธิบายทุกอย่าง แต่ รปภ. ก็จำหน้าคุณไว้",
-          "text_en": "A guard sees you holding the boy's hand and assumes the worst. His mother arrives and explains — but the guard remembers your face.",
-          "effects": {
-            "rep": 5,
-            "hope": 6,
-            "heat": 6
-          }
-        }
-      },
-      {
-        "label_th": "ไปบอก รปภ.",
-        "label_en": "Go tell a guard",
-        "effects": {
-          "hope": 3,
-          "rep": 2
-        },
-        "text_th": "รปภ. รับเรื่องไป คุณมองจนเห็นแม่มาถึง",
-        "text_en": "The guard takes over. You watch until his mother arrives."
-      }
-    ]
-  },
-  {
     "id": "night_theft",
     "icon": "🌃",
     "weight": 6,
@@ -9985,6 +9935,1673 @@
         },
         "text_th": "นักศึกษาคนหนึ่งซื้อไปในราคาครึ่งหนึ่ง",
         "text_en": "A student buys it off you for half its value."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "absurd"
+    ],
+    "id": "chalk_rain",
+    "icon": "🌧️",
+    "cooldown": 12,
+    "conditions": {
+      "afterActions": [
+        "chalk_art"
+      ],
+      "counters": {
+        "art": 2
+      }
+    },
+    "title_th": "ฝนมาก่อนภาพเสร็จ",
+    "title_en": "Rain Before the Picture Dries",
+    "text_th": "เมฆดำมาเร็วกว่าที่คิด ภาพที่คุณวาดมาทั้งบ่ายเริ่มมีหยดน้ำแรกตกลงมา สีชอล์กเริ่มไหลเป็นทาง",
+    "text_en": "The clouds come faster than you thought. The first drops land on the picture you spent all afternoon on, and the colors start to run.",
+    "choices": [
+      {
+        "label_th": "นั่งดูมันละลายไปจนหมด",
+        "label_en": "Sit and watch it melt away",
+        "effects": {
+          "hope": 3,
+          "counters": {
+            "art": 1
+          }
+        },
+        "text_th": "สีไหลลงท่อเป็นสายรุ้ง คนเดินผ่านหยุดดูภาพที่กำลังหายไป สวยกว่าตอนวาดเสร็จเสียอีก",
+        "text_en": "The colors run into the drain like a rainbow. Passers-by stop to watch it disappear — somehow more beautiful than when it was finished."
+      },
+      {
+        "label_th": "ขอยืมมือถือคนแถวนั้นถ่ายไว้ก่อน",
+        "label_en": "Borrow someone's phone to photograph it",
+        "chance": 0.6,
+        "success": {
+          "text_th": "เด็กนักเรียนถ่ายให้ แล้วโพสต์ลงโซเชียลพร้อมแท็กชื่อสถานที่ คืนนั้นมีคนแชร์หลายร้อย",
+          "text_en": "A student takes the photo and posts it with the location tag. By night it has hundreds of shares.",
+          "effects": {
+            "counters": {
+              "artFame": 1
+            },
+            "hope": 6,
+            "rep": 3
+          }
+        },
+        "fail": {
+          "text_th": "รูปเบลอเพราะฝน แต่เจ้าของมือถือส่งรูปมาให้ดูก่อนไปอยู่ดี",
+          "text_en": "The photo is blurry from the rain, but the phone's owner shows it to you before leaving anyway.",
+          "effects": {
+            "hope": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness",
+      "community"
+    ],
+    "id": "chalk_kids",
+    "icon": "🧒",
+    "cooldown": 15,
+    "conditions": {
+      "afterActions": [
+        "chalk_art"
+      ],
+      "counters": {
+        "art": 4
+      }
+    },
+    "title_th": "ศิลปินตัวน้อย",
+    "title_en": "Tiny Artists",
+    "text_th": "เด็กสามคนยืนดูคุณวาดมานานแล้ว คนเล็กสุดชี้ชอล์กสีฟ้าแล้วมองหน้าคุณเหมือนขออนุญาต",
+    "text_en": "Three kids have been watching you draw for a while. The smallest points at the blue chalk and looks at you as if asking permission.",
+    "choices": [
+      {
+        "label_th": "ยื่นชอล์กให้ แล้วสอนวาดเมฆ",
+        "label_en": "Hand it over and teach them clouds",
+        "effects": {
+          "hope": 8,
+          "rep": 4,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "ทางเท้าเต็มไปด้วยเมฆเบี้ยวๆ สามสิบก้อน แม่ของเด็กๆ ซื้อน้ำมาให้คุณหนึ่งขวด",
+        "text_en": "The sidewalk fills with thirty lopsided clouds. The kids' mother buys you a bottle of water."
+      },
+      {
+        "label_th": "ขอโทษ ชอล์กเหลือน้อยแล้ว",
+        "label_en": "Sorry — the chalk is running low",
+        "effects": {
+          "hope": -2
+        },
+        "text_th": "เด็กพยักหน้าเข้าใจ แต่ระหว่างเดินกลับยังหันมามองชอล์กสีฟ้าอีกสองครั้ง",
+        "text_en": "The kid nods like they understand, but on the way home looks back at the blue chalk twice."
+      }
+    ]
+  },
+  {
+    "weight": 6,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "chalk_photographer",
+    "icon": "📸",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "chalk_art"
+      ],
+      "counters": {
+        "art": 10
+      }
+    },
+    "title_th": "ช่างภาพสายสตรีท",
+    "title_en": "The Street Photographer",
+    "text_th": "ชายถือกล้องฟิล์มเดินวนรอบภาพของคุณสามรอบ “ผมถ่ายภาพคนในเมืองลงเพจ คนตามสองแสน ขอถ่ายภาพนี้กับคนวาดได้ไหม”",
+    "text_en": "A man with a film camera circles your picture three times. “I post photos of city people. Two hundred thousand followers. Can I shoot this — and the artist?”",
+    "choices": [
+      {
+        "label_th": "ถ่ายได้ ทั้งภาพทั้งคน",
+        "label_en": "Sure — the picture and me",
+        "effects": {
+          "counters": {
+            "artFame": 1
+          },
+          "hope": 8,
+          "rep": 5
+        },
+        "text_th": "คืนนั้นเพจโพสต์ภาพคุณนั่งยองๆ มือเปื้อนชอล์ก คอมเมนต์แรกเขียนว่า “ผมเดินผ่านทุกวัน ไม่เคยสังเกตเลย”",
+        "text_en": "That night the page posts you crouching with chalk-stained hands. The first comment: “I walk past here every day and never noticed.”"
+      },
+      {
+        "label_th": "ถ่ายแค่ภาพพอ",
+        "label_en": "Just the picture",
+        "effects": {
+          "counters": {
+            "artFame": 1
+          },
+          "hope": 5
+        },
+        "text_th": "โพสต์นั้นมีแต่ภาพบนพื้นกับเงาของคุณที่ติดมุมเฟรม คนถามกันทั้งคืนว่าใครวาด",
+        "text_en": "The post shows only the drawing, with your shadow caught in the corner. All night people ask who drew it."
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "gallery_offer",
+    "icon": "🖼️",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "afterActions": [
+        "chalk_art"
+      ],
+      "counters": {
+        "art": 22,
+        "artFame": 1
+      },
+      "min": {
+        "rep": 40
+      }
+    },
+    "title_th": "เจ้าของแกลเลอรี",
+    "title_en": "The Gallery Owner",
+    "text_th": "ผู้หญิงผมสั้นคุกเข่าดูภาพคุณใกล้จนจมูกแทบแตะพื้น “ฉันตามดูภาพคุณในโซเชียลมาสามเดือน ฉันมีผนังว่างหนึ่งห้อง ผ้าใบกับสีฉันออกเอง คุณสนใจไหม”",
+    "text_en": "A woman with short hair kneels so close to your picture her nose nearly touches the ground. “I've followed your work online for three months. I have an empty room of walls. I'll pay for canvas and paint. Interested?”",
+    "choices": [
+      {
+        "label_th": "รับ ลองวาดบนผ้าใบดู",
+        "label_en": "Yes — try painting on canvas",
+        "effects": {
+          "flags": [
+            "art_show"
+          ],
+          "hope": 30
+        },
+        "text_th": "มือสั่นตอนจับพู่กันครั้งแรก แต่พอเริ่มก็รู้ว่าภาพไม่สนว่าอยู่บนพื้นหรือบนผ้า",
+        "text_en": "Your hand shakes the first time you hold a brush. Once you start, you realize the picture doesn't care if it's on concrete or cloth."
+      },
+      {
+        "label_th": "ขอวาดบนถนนต่อ ที่นี่คนทุกแบบได้ดู",
+        "label_en": "Stay on the street, where everyone can see",
+        "effects": {
+          "cash": 8,
+          "hope": 10,
+          "rep": 10
+        },
+        "text_th": "เธอหัวเราะ ซื้อสมุดสเก็ตช์ของคุณไปหนึ่งเล่มในราคาที่คุณไม่กล้าบอกใคร “ถ้าเปลี่ยนใจ ผนังยังว่างอยู่”",
+        "text_en": "She laughs and buys one of your sketches for a price you'd be embarrassed to say out loud. “If you change your mind, the walls are still empty.”"
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "absurd"
+    ],
+    "id": "journal_soaked",
+    "icon": "💧",
+    "cooldown": 20,
+    "conditions": {
+      "afterActions": [
+        "journal",
+        "sleep"
+      ],
+      "counters": {
+        "journal": 4
+      },
+      "weather": [
+        "rain",
+        "storm"
+      ],
+      "sheltered": false
+    },
+    "title_th": "สมุดเปียก",
+    "title_en": "A Soaked Notebook",
+    "text_th": "ตื่นมากลางดึก น้ำฝนซึมเข้าถุงพลาสติก สมุดบันทึกเปียกจนหน้ากระดาษติดกัน ตัวหนังสือบางหน้าเลือนจนอ่านไม่ออก",
+    "text_en": "You wake in the night. Rain has seeped into the plastic bag; your notebook is soaked, pages stuck together, some lines bled into nothing.",
+    "choices": [
+      {
+        "label_th": "ค่อยๆ ลอกทีละหน้าแล้วตากแดด",
+        "label_en": "Peel the pages apart and dry them in the sun",
+        "effects": {
+          "energy": -6,
+          "hope": 4
+        },
+        "text_th": "สมุดกลับมาเป็นคลื่นๆ หนาขึ้นเท่าตัว เหมือนมันผ่านอะไรมาเยอะ ก็จริง",
+        "text_en": "It dries wavy and twice as thick, like it's been through a lot. It has."
+      },
+      {
+        "label_th": "เขียนหน้าที่หายใหม่จากความจำ",
+        "label_en": "Rewrite the lost pages from memory",
+        "effects": {
+          "hope": 6,
+          "counters": {
+            "journal": 2
+          }
+        },
+        "text_th": "บางเรื่องจำได้ชัดกว่าเดิม บางเรื่องคุณเลือกเขียนให้ใจดีกว่าที่มันเกิดจริง",
+        "text_en": "Some things you remember more clearly than before. Some you choose to write kinder than they really were."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness",
+      "opportunity"
+    ],
+    "id": "journal_reader",
+    "icon": "👓",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "journal"
+      ],
+      "counters": {
+        "journal": 12
+      }
+    },
+    "title_th": "คนที่อ่านข้ามไหล่",
+    "title_en": "Reading Over Your Shoulder",
+    "text_th": "นักศึกษาคนหนึ่งนั่งรอรถเมล์ข้างคุณ แอบอ่านสมุดคุณมาพักใหญ่แล้ว จนสุดท้ายเขาพูดขึ้นมา “ขอโทษครับ แต่คุณเขียนดีมาก ขออ่านต่อได้ไหม”",
+    "text_en": "A university student waiting for the bus beside you has been reading your notebook for a while. Finally he says, “Sorry — but you write really well. Can I keep reading?”",
+    "choices": [
+      {
+        "label_th": "ยื่นสมุดให้อ่าน",
+        "label_en": "Hand him the notebook",
+        "effects": {
+          "flags": [
+            "journal_shared"
+          ],
+          "hope": 10,
+          "rep": 3
+        },
+        "text_th": "เขาพลาดรถเมล์สองคัน ตอนคืนสมุดตาแดงๆ แล้วขอเบอร์ติดต่อของศูนย์ที่คุณไปประจำ",
+        "text_en": "He misses two buses. When he gives it back his eyes are red, and he asks for the number of the center you use."
+      },
+      {
+        "label_th": "ปิดสมุด นี่ของส่วนตัว",
+        "label_en": "Close it — this is private",
+        "effects": {
+          "hope": 1
+        },
+        "text_th": "เขาขอโทษอีกรอบแล้วนั่งเงียบ ก่อนขึ้นรถเขาบอกว่า “เขียนต่อนะครับ”",
+        "text_en": "He apologizes again and sits quietly. Boarding the bus he says, “Keep writing.”"
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "day",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "journalist_interview",
+    "icon": "📰",
+    "once": true,
+    "conditions": {
+      "flags": [
+        "journal_shared"
+      ],
+      "counters": {
+        "journal": 18
+      }
+    },
+    "title_th": "นักข่าวมาหา",
+    "title_en": "A Reporter Comes Looking",
+    "text_th": "นักศึกษาคนนั้นส่งต่อเรื่องของคุณให้รุ่นพี่ที่เป็นนักข่าว เธอมาหาคุณที่ศูนย์ “อยากเขียนบทความเรื่องคนข้างถนนจากสายตาคนข้างถนน ขอใช้บันทึกของคุณบางตอนได้ไหม”",
+    "text_en": "The student passed your story to a reporter he knows. She finds you at the center. “I want to write about street life through the eyes of someone living it. Could I quote parts of your notebook?”",
+    "choices": [
+      {
+        "label_th": "ได้ ใช้ชื่อจริงของฉันด้วย",
+        "label_en": "Yes, and use my real name",
+        "effects": {
+          "counters": {
+            "press": 1
+          },
+          "hope": 12,
+          "rep": 8,
+          "heat": 4
+        },
+        "text_th": "บทความลงหน้าสาม มีคนเอามาแปะไว้ที่บอร์ดของศูนย์ ตำรวจแถวนั้นก็อ่าน",
+        "text_en": "It runs on page three. Someone pins it to the center's notice board. The local police read it too."
+      },
+      {
+        "label_th": "ได้ แต่ไม่ต้องใส่ชื่อ",
+        "label_en": "Yes, but leave my name out",
+        "effects": {
+          "counters": {
+            "press": 1
+          },
+          "hope": 8
+        },
+        "text_th": "บทความใช้ชื่อคุณว่า “คนเขียนบันทึก” คุณอ่านแล้วรู้สึกเหมือนมีอีกคนที่เป็นคุณอยู่ในเมือง",
+        "text_en": "The article calls you “the notebook writer.” Reading it, you feel like there's another you somewhere in the city."
+      },
+      {
+        "label_th": "ยังไม่พร้อม",
+        "label_en": "Not ready yet",
+        "effects": {
+          "hope": -2
+        },
+        "text_th": "เธอทิ้งนามบัตรไว้ “เมื่อไหร่ก็ได้”",
+        "text_en": "She leaves a card. “Whenever you're ready.”"
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "day",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "publisher_offer",
+    "icon": "📖",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "counters": {
+        "journal": 28,
+        "press": 1
+      }
+    },
+    "title_th": "สำนักพิมพ์เล็กๆ",
+    "title_en": "A Small Publisher",
+    "text_th": "สำนักพิมพ์อิสระเห็นบทความแล้วติดต่อผ่านศูนย์ พวกเขาอยากพิมพ์บันทึกทั้งเล่ม ให้ค่าลิขสิทธิ์ล่วงหน้าพอเช่าห้องได้ครึ่งปี",
+    "text_en": "An independent publisher saw the article and reached you through the center. They want to print the whole notebook, with an advance big enough to rent a room for half a year.",
+    "choices": [
+      {
+        "label_th": "เซ็นสัญญา",
+        "label_en": "Sign",
+        "effects": {
+          "flags": [
+            "memoir_published"
+          ],
+          "hope": 30
+        },
+        "text_th": "บรรณาธิการขอแก้แค่คำผิด เรื่องที่เหลือเธอบอกว่าห้ามแตะ",
+        "text_en": "The editor only fixes typos. The rest, she says, nobody touches."
+      },
+      {
+        "label_th": "ขอให้รายได้ไปที่โรงทานแทน",
+        "label_en": "Ask for the money to go to the soup kitchen",
+        "effects": {
+          "cash": 4,
+          "hope": 20,
+          "rep": 15,
+          "counters": {
+            "helped": 2
+          }
+        },
+        "text_th": "สำนักพิมพ์พิมพ์จำนวนน้อย รายได้ทุกบาทไปที่โรงทาน คุณได้หนังสือเล่มแรกมาเก็บไว้หนึ่งเล่ม",
+        "text_en": "They print a small run and every baht goes to the kitchen. You keep the very first copy."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "community"
+    ],
+    "id": "kitchen_rush",
+    "icon": "🍚",
+    "cooldown": 8,
+    "conditions": {
+      "afterActions": [
+        "volunteer"
+      ]
+    },
+    "title_th": "ข้าวหมดหม้อ",
+    "title_en": "The Rice Runs Out",
+    "text_th": "แถววันนี้ยาวผิดปกติ ข้าวหม้อสุดท้ายเหลือก้นหม้อ ยังมีคนรออีกยี่สิบคน ป้าหัวหน้าครัวหันมามองคุณ",
+    "text_en": "The line is unusually long. The last pot is down to the bottom, and twenty people are still waiting. The auntie in charge looks at you.",
+    "choices": [
+      {
+        "label_th": "วิ่งไปขอข้าวจากร้านแถวนั้น",
+        "label_en": "Run to the nearby shops and ask for rice",
+        "chance": 0.55,
+        "success": {
+          "text_th": "ร้านข้าวแกงให้มาสองหม้อใหญ่ “บอกป้าว่าเดือนหน้าให้อีก” คนสุดท้ายในแถวได้กินพร้อมกับคุณ",
+          "text_en": "The curry shop gives two big pots. “Tell auntie there's more next month.” The last person in line eats alongside you.",
+          "effects": {
+            "rep": 6,
+            "hope": 8,
+            "counters": {
+              "volunteer": 1,
+              "helped": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "ร้านปิดหมด คุณกลับมามือเปล่า ป้าแบ่งข้าวที่เหลือเป็นจานเล็กลง ทุกคนได้ แต่ไม่มีใครอิ่ม",
+          "text_en": "Every shop is closed. You come back empty-handed. Auntie splits what's left into smaller plates — everyone eats, no one's full.",
+          "effects": {
+            "hope": -2,
+            "energy": -8
+          }
+        }
+      },
+      {
+        "label_th": "ยกจานของตัวเองให้คนท้ายแถว",
+        "label_en": "Give your own plate to the last in line",
+        "effects": {
+          "hunger": -15,
+          "hope": 6,
+          "rep": 4,
+          "counters": {
+            "helped": 1,
+            "mealsGiven": 1
+          }
+        },
+        "text_th": "ชายคนนั้นกินช้ามาก เหมือนกลัวว่ามันจะหมดเร็ว",
+        "text_en": "The man eats very slowly, as if afraid it might end too soon."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "community",
+      "kindness"
+    ],
+    "id": "kitchen_old_friend",
+    "icon": "🫂",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "volunteer"
+      ],
+      "counters": {
+        "volunteer": 6
+      }
+    },
+    "title_th": "หน้าที่คุ้นเคยในแถว",
+    "title_en": "A Familiar Face in Line",
+    "text_th": "คนที่ยื่นจานมาคือคนที่เคยนอนใต้สะพานเดียวกับคุณเมื่อเดือนแรก เขาผอมลงมาก จำคุณได้แล้วก้มหน้า",
+    "text_en": "The person holding out a plate slept under the same bridge as you in your first month. He's much thinner now. He recognizes you, and looks down.",
+    "choices": [
+      {
+        "label_th": "ตักให้เต็มจาน แล้วชวนมาช่วยพรุ่งนี้",
+        "label_en": "Fill his plate and invite him to help tomorrow",
+        "effects": {
+          "hope": 8,
+          "rep": 5,
+          "counters": {
+            "friends": 1,
+            "helped": 1
+          }
+        },
+        "text_th": "เช้าวันต่อมาเขามาจริงๆ ล้างจานเร็วกว่าคุณอีก",
+        "text_en": "The next morning he actually shows up, and washes dishes faster than you."
+      },
+      {
+        "label_th": "ตักให้ตามปกติ ไม่ทำให้เขาอาย",
+        "label_en": "Serve him like anyone else, so he isn't embarrassed",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "เขาพยักหน้าเบาๆ ตอนรับจาน แค่นั้นก็พอแล้ว",
+        "text_en": "He nods slightly as he takes the plate. That's enough."
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "kitchen_offer",
+    "icon": "🍛",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "afterActions": [
+        "volunteer"
+      ],
+      "counters": {
+        "volunteer": 18
+      },
+      "min": {
+        "rep": 45
+      }
+    },
+    "title_th": "ป้าจะเกษียณ",
+    "title_en": "Auntie Is Retiring",
+    "text_th": "ป้าหัวหน้าครัวเรียกคุณไปหลังร้าน “เข่าป้าไม่ไหวแล้ว มูลนิธิถามว่าใครควรมาแทน ป้าบอกชื่อเธอไป มีเงินเดือนนะ มีห้องหลังมูลนิธิด้วย”",
+    "text_en": "The auntie who runs the kitchen calls you out back. “My knees are done. The foundation asked who should take over. I gave them your name. There's a salary, and a room behind the building.”",
+    "choices": [
+      {
+        "label_th": "รับ",
+        "label_en": "Accept",
+        "effects": {
+          "flags": [
+            "kitchen_staff"
+          ],
+          "hope": 30
+        },
+        "text_th": "ป้าส่งทัพพีประจำตัวให้ ด้ามมันสึกเป็นรูปมือป้า",
+        "text_en": "She hands you her ladle. The handle is worn to the shape of her hand."
+      },
+      {
+        "label_th": "ยังอยากช่วยแบบอาสาไปก่อน",
+        "label_en": "Keep volunteering for now",
+        "effects": {
+          "hope": 6,
+          "rep": 6
+        },
+        "text_th": "ป้าส่ายหัวแต่ยิ้ม “งั้นมาพรุ่งนี้แต่เช้า”",
+        "text_en": "She shakes her head, smiling. “Then come early tomorrow.”"
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "danger"
+    ],
+    "id": "watch_noise",
+    "icon": "🔦",
+    "cooldown": 10,
+    "conditions": {
+      "afterActions": [
+        "night_watch"
+      ]
+    },
+    "title_th": "เสียงหลังร้าน",
+    "title_en": "A Noise Behind the Shop",
+    "text_th": "ตีสองมีเสียงเหล็กกระทบกันหลังร้าน แล้วเงียบไป ไฟฉายของคุณถ่านใกล้หมด",
+    "text_en": "At 2 a.m. there's a clang of metal behind the shop, then silence. Your flashlight batteries are nearly dead.",
+    "choices": [
+      {
+        "label_th": "เดินไปดูเอง",
+        "label_en": "Go and look",
+        "chance": 0.7,
+        "success": {
+          "text_th": "หมาจรคาบถุงกระดูกจากถังขยะ คุณหัวเราะออกมาดังจนตัวเองตกใจ เจ้าของร้านได้ยินเรื่องนี้แล้วขึ้นค่าเฝ้าให้",
+          "text_en": "A stray dog dragging a bag of bones out of the bin. You laugh so loud you startle yourself. The owner hears the story and raises your pay.",
+          "effects": {
+            "hope": 4,
+            "cash": 1,
+            "counters": {
+              "guard": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "มีคนกำลังงัดประตู เขาผลักคุณล้มแล้ววิ่งหนี ประตูไม่พัง แต่ข้อมือคุณเคล็ด",
+          "text_en": "Someone is prying at the door. He shoves you down and runs. The door holds; your wrist doesn't.",
+          "effects": {
+            "health": -12,
+            "flags": [
+              "injured"
+            ],
+            "rep": 4,
+            "counters": {
+              "guard": 1
+            },
+            "cause": "injury"
+          }
+        }
+      },
+      {
+        "label_th": "ตะโกนเสียงดังแล้วส่องไฟ",
+        "label_en": "Shout and shine the light",
+        "effects": {
+          "hope": 1,
+          "counters": {
+            "guard": 1
+          }
+        },
+        "text_th": "มีเสียงฝีเท้าวิ่งหนีไป คุณไม่รู้ว่าเป็นใคร และไม่อยากรู้",
+        "text_en": "Footsteps running away. You don't know who it was, and you don't want to."
+      },
+      {
+        "label_th": "โทรเรียกตำรวจ",
+        "label_en": "Call the police",
+        "effects": {
+          "heat": 5,
+          "hope": -1
+        },
+        "text_th": "ตำรวจมาตอนตีสาม ไม่เจอใคร แต่ถามบัตรประชาชนคุณนานมาก",
+        "text_en": "Police arrive at three. They find nobody, but spend a long time asking for your ID."
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "guard_offer",
+    "icon": "🔦",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "afterActions": [
+        "night_watch"
+      ],
+      "counters": {
+        "guard": 12
+      }
+    },
+    "title_th": "เจ้าของร้านทั้งซอย",
+    "title_en": "Every Shop on the Street",
+    "text_th": "เช้านี้ไม่ได้มีแค่เจ้าของร้านเดียว แต่มากันห้าคน “ตั้งแต่คุณมาเฝ้า ซอยนี้ไม่มีของหายเลย เรารวมเงินกันจ้างคุณเป็นยามประจำ มีชุด มีห้องเช่า สนใจไหม”",
+    "text_en": "This morning it isn't one shop owner but five. “Since you started watching, nothing's gone missing on this street. We'll pool money to hire you full-time. Uniform, a rented room. Interested?”",
+    "choices": [
+      {
+        "label_th": "รับงาน",
+        "label_en": "Take the job",
+        "effects": {
+          "flags": [
+            "guard_hired"
+          ],
+          "hope": 25
+        },
+        "text_th": "ชุดยามใหญ่ไปนิด แต่ป้ายชื่อบนอกเป็นชื่อคุณ",
+        "text_en": "The uniform's a little big, but the name tag on the chest is yours."
+      },
+      {
+        "label_th": "ขอรับจ้างเป็นคืนๆ แบบเดิม",
+        "label_en": "Keep it night by night",
+        "effects": {
+          "cash": 4,
+          "rep": 6
+        },
+        "text_th": "พวกเขาเข้าใจ แต่ทิ้งกุญแจห้องน้ำหลังร้านไว้ให้คุณหนึ่งดอก",
+        "text_en": "They understand, and leave you a key to the bathroom behind the shop."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness"
+    ],
+    "id": "librarian_card",
+    "icon": "🪪",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "library"
+      ],
+      "counters": {
+        "reading": 5
+      }
+    },
+    "title_th": "บรรณารักษ์",
+    "title_en": "The Librarian",
+    "text_th": "บรรณารักษ์สังเกตคุณมาหลายวัน วันนี้เธอเดินมาพร้อมแบบฟอร์ม “ทำบัตรสมาชิกไหมคะ ยืมกลับไปอ่านได้ ที่อยู่ใช้ที่อยู่ของมูลนิธิได้นะ”",
+    "text_en": "The librarian has noticed you for days. Today she walks over with a form. “Want a library card? You can borrow books. You can use the foundation's address.”",
+    "choices": [
+      {
+        "label_th": "ทำบัตร",
+        "label_en": "Get the card",
+        "effects": {
+          "flags": [
+            "library_card"
+          ],
+          "hope": 10,
+          "items": {
+            "book": 1
+          }
+        },
+        "text_th": "บัตรสมาชิกเป็นบัตรแรกในรอบหลายปีที่มีชื่อคุณอยู่บนนั้น คุณยืมหนังสือกลับไปหนึ่งเล่ม",
+        "text_en": "It's the first card in years with your name on it. You borrow one book to take with you."
+      },
+      {
+        "label_th": "ขอบคุณ แต่กลัวทำหนังสือหาย",
+        "label_en": "Thanks, but I'd lose the books",
+        "effects": {
+          "hope": 2
+        },
+        "text_th": "เธอพยักหน้า “งั้นมาอ่านที่นี่ทุกวันก็ได้ เก้าอี้ตัวนั้นว่างตลอด”",
+        "text_en": "She nods. “Then read here every day. That chair's always free.”"
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "authority"
+    ],
+    "id": "library_guard",
+    "icon": "🚪",
+    "cooldown": 15,
+    "conditions": {
+      "afterActions": [
+        "library"
+      ],
+      "max": {
+        "hygiene": 45
+      }
+    },
+    "title_th": "ยามหน้าห้องสมุด",
+    "title_en": "The Library Guard",
+    "text_th": "ยามเดินมาหยุดข้างโต๊ะ “มีคนแจ้งว่ามีกลิ่น ขอเชิญออกไปก่อนนะครับ”",
+    "text_en": "A guard stops at your table. “Someone complained about a smell. I'll have to ask you to leave.”",
+    "choices": [
+      {
+        "label_th": "เก็บของออกไปเงียบๆ",
+        "label_en": "Pack up and leave quietly",
+        "effects": {
+          "hope": -5
+        },
+        "text_th": "คุณคืนหนังสือที่ชั้นเดิม ไม่ลืมคั่นหน้าที่อ่านค้างไว้",
+        "text_en": "You return the book to its shelf, careful to mark the page you were on."
+      },
+      {
+        "label_th": "ขอใช้ห้องน้ำล้างตัวก่อน แล้วกลับมาอ่านต่อ",
+        "label_en": "Ask to wash up first, then come back",
+        "chance": 0.5,
+        "success": {
+          "text_th": "ยามลังเลแล้วชี้ห้องน้ำพนักงาน “สิบนาทีนะ” คุณกลับมาอ่านต่อได้จนปิด",
+          "text_en": "He hesitates, then points to the staff bathroom. “Ten minutes.” You read until closing.",
+          "effects": {
+            "hygiene": 15,
+            "hope": 4,
+            "counters": {
+              "reading": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "“กฎคือกฎครับ” คุณออกมานั่งอ่านข้อความบนป้ายหน้าห้องสมุดแทน",
+          "text_en": "“Rules are rules.” You sit outside reading the notice board instead.",
+          "effects": {
+            "hope": -3,
+            "heat": 2
+          }
+        }
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "day",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "exam_offer",
+    "icon": "🎓",
+    "major": true,
+    "cooldown": 30,
+    "conditions": {
+      "flags": [
+        "library_card"
+      ],
+      "notFlags": [
+        "passed_exam"
+      ],
+      "counters": {
+        "reading": 20
+      }
+    },
+    "title_th": "สอบเทียบวุฒิ",
+    "title_en": "The Equivalency Exam",
+    "text_th": "บรรณารักษ์ยื่นใบสมัครสอบเทียบวุฒิการศึกษาให้ “สอบเดือนหน้า ค่าสมัครมูลนิธิจ่ายให้ ฉันว่าคุณอ่านมาพอแล้ว”",
+    "text_en": "The librarian hands you an application for the equivalency exam. “It's next month. The foundation covers the fee. I think you've read enough.”",
+    "choices": [
+      {
+        "label_th": "ลงสอบ",
+        "label_en": "Sit the exam",
+        "chance": 0.6,
+        "success": {
+          "text_th": "ผลสอบประกาศที่บอร์ดของศูนย์ คุณหาชื่อตัวเองอยู่นานเพราะไม่กล้าเชื่อ",
+          "text_en": "Results go up on the center's board. You stare at your name a long time because you don't dare believe it.",
+          "effects": {
+            "flags": [
+              "passed_exam"
+            ],
+            "hope": 30
+          }
+        },
+        "fail": {
+          "text_th": "ขาดไปสี่คะแนน บรรณารักษ์วงข้อที่ผิดให้ “รอบหน้า”",
+          "text_en": "Four points short. The librarian circles the questions you missed. “Next round.”",
+          "effects": {
+            "hope": -6,
+            "counters": {
+              "reading": 2
+            }
+          }
+        }
+      },
+      {
+        "label_th": "ขอเวลาอ่านเพิ่มอีกหน่อย",
+        "label_en": "Ask for more time to study",
+        "effects": {
+          "hope": 2
+        },
+        "text_th": "เธอเก็บใบสมัครไว้ในลิ้นชัก “รอบหน้าฉันจะยื่นให้อีก”",
+        "text_en": "She puts the form in a drawer. “I'll bring it again next round.”"
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness",
+      "community"
+    ],
+    "id": "old_fisherman",
+    "icon": "🎣",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "fish"
+      ],
+      "counters": {
+        "fishing": 4
+      }
+    },
+    "title_th": "ลุงชาวประมง",
+    "title_en": "The Old Fisherman",
+    "text_th": "ลุงผิวคล้ำที่ตกปลาจุดเดียวกับคุณทุกวันเดินมาดูเบ็ดคุณแล้วส่ายหัว “ผูกแบบนี้ปลาหลุดหมด มา ลุงสอน”",
+    "text_en": "The weathered old man who fishes the same spot every day looks at your line and shakes his head. “Tie it like that and they all get away. Come here, I'll show you.”",
+    "choices": [
+      {
+        "label_th": "นั่งเรียนผูกเงื่อนทั้งบ่าย",
+        "label_en": "Spend the afternoon learning knots",
+        "effects": {
+          "counters": {
+            "fishSkill": 1,
+            "friends": 1
+          },
+          "hope": 8,
+          "energy": -6
+        },
+        "text_th": "นิ้วคุณพันกันมั่วไปหมด ลุงหัวเราะทุกครั้ง แต่ตอนเย็นคุณผูกได้เองครบห้าแบบ",
+        "text_en": "Your fingers tangle every time and he laughs every time, but by evening you can tie all five knots yourself."
+      },
+      {
+        "label_th": "ขอบคุณ แต่ชอบตกเงียบๆ คนเดียว",
+        "label_en": "Thanks, but I like fishing alone",
+        "effects": {
+          "hope": 1
+        },
+        "text_th": "ลุงยักไหล่แล้วกลับไปนั่งที่เดิม พรุ่งนี้ลุงก็ยังทักคุณอยู่ดี",
+        "text_en": "He shrugs and goes back to his spot. Tomorrow he still says hello."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "big_catch",
+    "icon": "🐟",
+    "cooldown": 10,
+    "conditions": {
+      "afterActions": [
+        "fish"
+      ],
+      "counters": {
+        "fishing": 3
+      }
+    },
+    "title_th": "ตัวใหญ่",
+    "title_en": "The Big One",
+    "text_th": "เบ็ดกระตุกแรงจนเอ็นแทบขาด ปลาตัวเท่าแขนดิ้นอยู่ในมือคุณ คนแถวนั้นมามุงดู",
+    "text_en": "The line jerks so hard it nearly snaps. A fish as long as your arm thrashes in your hands. A small crowd gathers.",
+    "choices": [
+      {
+        "label_th": "ขายให้ร้านอาหารริมน้ำ",
+        "label_en": "Sell it to the riverside restaurant",
+        "effects": {
+          "cash": [
+            3,
+            5
+          ],
+          "hope": 5
+        },
+        "text_th": "เชฟชั่งน้ำหนักแล้วจ่ายเงินสด “ตัวต่อไปเอามาที่นี่นะ”",
+        "text_en": "The chef weighs it and pays cash. “Bring the next one here.”"
+      },
+      {
+        "label_th": "ย่างแบ่งกันกินทั้งท่าน้ำ",
+        "label_en": "Grill it and share with the whole pier",
+        "effects": {
+          "hunger": 25,
+          "hope": 9,
+          "rep": 6,
+          "counters": {
+            "mealsGiven": 2
+          }
+        },
+        "text_th": "ปลาตัวเดียวเลี้ยงคนได้แปดคน ทุกคนได้ชิ้นเล็ก แต่ทุกคนยิ้ม",
+        "text_en": "One fish feeds eight people. Small pieces, big smiles."
+      }
+    ]
+  },
+  {
+    "weight": 7,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "boat_offer",
+    "icon": "⛵",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "afterActions": [
+        "fish"
+      ],
+      "counters": {
+        "fishing": 15,
+        "fishSkill": 1
+      }
+    },
+    "title_th": "เรือขาดคน",
+    "title_en": "A Boat Short One Hand",
+    "text_th": "ลุงชาวประมงพาเจ้าของเรือมาหา “ลูกเรือเขาเพิ่งลาออก ลุงบอกว่าผูกเงื่อนเก่งที่สุดในท่านี้คือคนนี้” งานหนัก ออกเรือตีสี่ แต่มีที่นอนและส่วนแบ่ง",
+    "text_en": "The old fisherman brings a boat owner over. “His deckhand just quit. I told him the best knots on this pier are yours.” Hard work, out at four a.m., but a bunk and a share of the catch.",
+    "choices": [
+      {
+        "label_th": "ขึ้นเรือ",
+        "label_en": "Climb aboard",
+        "effects": {
+          "flags": [
+            "boat_crew"
+          ],
+          "hope": 25
+        },
+        "text_th": "คืนแรกบนเรือคุณเมาคลื่นทั้งคืน ลุงบอกว่าทุกคนเป็นแบบนี้ แล้วยื่นขิงให้หนึ่งแง่ง",
+        "text_en": "Your first night aboard you're seasick until dawn. The old man says everyone is, and hands you a piece of ginger."
+      },
+      {
+        "label_th": "ยังไม่กล้าออกทะเล",
+        "label_en": "Not ready for the open sea",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "เจ้าของเรือบอกว่าเรือออกทุกวัน เปลี่ยนใจเมื่อไหร่ก็มาที่ท่า",
+        "text_en": "The owner says the boat goes out every day. Change your mind, come to the pier."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "health"
+    ],
+    "id": "porter_strain",
+    "icon": "🧺",
+    "cooldown": 10,
+    "conditions": {
+      "afterActions": [
+        "carry_bags"
+      ]
+    },
+    "title_th": "กระสอบสุดท้าย",
+    "title_en": "The Last Sack",
+    "text_th": "กระสอบสุดท้ายของเช้านี้หนักผิดปกติ หลังคุณเริ่มส่งเสียงเตือน แม่ค้ายังรอคุณอยู่",
+    "text_en": "The last sack of the morning is unusually heavy. Your back is starting to complain. The vendor is waiting.",
+    "choices": [
+      {
+        "label_th": "ฝืนแบกให้จบ",
+        "label_en": "Push through",
+        "chance": 0.7,
+        "success": {
+          "text_th": "ยกขึ้นรถได้พอดี แม่ค้าให้ทิปเพิ่มเพราะเห็นว่าหนัก",
+          "text_en": "You get it onto the truck. The vendor tips extra because she saw how heavy it was.",
+          "effects": {
+            "cash": 1,
+            "counters": {
+              "porter": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "มีเสียงดังกึกในหลัง คุณนั่งลงกับพื้นทั้งที่ยังกอดกระสอบ",
+          "text_en": "Something in your back goes click. You sit down on the ground, still hugging the sack.",
+          "effects": {
+            "health": -10,
+            "flags": [
+              "injured"
+            ],
+            "cause": "injury"
+          }
+        }
+      },
+      {
+        "label_th": "เรียกคนแบกอีกคนมาช่วยแบ่งเงิน",
+        "label_en": "Call another porter and split the pay",
+        "effects": {
+          "rep": 3,
+          "counters": {
+            "porter": 1,
+            "friends": 1
+          }
+        },
+        "text_th": "สองคนยกง่ายกว่าเยอะ เงินได้ครึ่งเดียว แต่หลังยังอยู่ครบ",
+        "text_en": "Two people make it easy. Half the money, but your back is still whole."
+      }
+    ]
+  },
+  {
+    "weight": 6,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "porter_lead",
+    "icon": "🧺",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "afterActions": [
+        "carry_bags"
+      ],
+      "counters": {
+        "porter": 20
+      },
+      "min": {
+        "rep": 35
+      }
+    },
+    "title_th": "เถ้าแก่ตลาด",
+    "title_en": "The Market Boss",
+    "text_th": "เถ้าแก่ที่คุมตลาดทั้งแถวเรียกคุณไปกินกาแฟ “คนแบกที่นี่ทะเลาะกันทุกวัน แต่ฟังคุณคนเดียว มาคุมสายแบกให้ผม มีเงินเดือน มีห้องเหนือโกดัง”",
+    "text_en": "The man who runs the whole market row buys you coffee. “The porters here fight every day, but they all listen to you. Run them for me. Salary, and a room above the warehouse.”",
+    "choices": [
+      {
+        "label_th": "รับ แต่ขอให้จ้างคนข้างถนนก่อน",
+        "label_en": "Accept — if street people get hired first",
+        "effects": {
+          "flags": [
+            "porter_crew_lead"
+          ],
+          "hope": 25,
+          "rep": 5
+        },
+        "text_th": "เถ้าแก่หัวเราะ “ก็เพราะแบบนี้ไง” แล้วจับมือคุณ",
+        "text_en": "He laughs. “That's exactly why.” And shakes your hand."
+      },
+      {
+        "label_th": "ขอแบกอย่างเดียวพอ",
+        "label_en": "I'd rather just carry",
+        "effects": {
+          "cash": 3,
+          "hope": 4
+        },
+        "text_th": "เขาจ่ายค่ากาแฟแล้วบอกว่าข้อเสนอไม่หมดอายุ",
+        "text_en": "He pays for the coffee and says the offer doesn't expire."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "opportunity"
+    ],
+    "id": "queue_overtime",
+    "icon": "🎟️",
+    "cooldown": 8,
+    "conditions": {
+      "afterActions": [
+        "queue_job"
+      ]
+    },
+    "title_th": "คิวคอนเสิร์ต",
+    "title_en": "The Concert Queue",
+    "text_th": "ลูกค้าโทรมาบอกว่าติดประชุม ขอให้คุณต่อคิวบัตรคอนเสิร์ตต่ออีกสามชั่วโมง ให้เงินสองเท่า แดดกำลังแรง",
+    "text_en": "Your client calls: stuck in a meeting, could you hold the concert-ticket line three more hours? Double pay. The sun is blazing.",
+    "choices": [
+      {
+        "label_th": "อยู่ต่อ",
+        "label_en": "Stay",
+        "effects": {
+          "cash": [
+            2,
+            3
+          ],
+          "thirst": -15,
+          "energy": -10,
+          "hope": 2
+        },
+        "text_th": "บัตรคอนเสิร์ตใบละเท่าค่ากินคุณครึ่งเดือน ลูกค้าวิ่งมาทันพอดี ยิ้มกว้างจนคุณยิ้มตาม",
+        "text_en": "Each ticket costs half a month of your meals. The client arrives just in time, grinning so wide you grin back."
+      },
+      {
+        "label_th": "ขอโทษ ไม่ไหวแล้ว",
+        "label_en": "Sorry, I can't",
+        "effects": {
+          "hope": -1
+        },
+        "text_th": "ลูกค้าบ่นนิดหน่อย แต่ยังจ่ายเงินที่ตกลงไว้",
+        "text_en": "The client grumbles but pays what you agreed."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness"
+    ],
+    "id": "worship_meal",
+    "icon": "🕯️",
+    "cooldown": 10,
+    "conditions": {
+      "afterActions": [
+        "pray"
+      ]
+    },
+    "title_th": "คนดูแลสถานที่",
+    "title_en": "The Caretaker",
+    "text_th": "คนดูแลศาสนสถานเห็นคุณมานั่งหลายครั้ง วันนี้เขาเดินมานั่งข้างๆ ถือห่ออาหารมาด้วยสองห่อ “กินด้วยกันไหม วันนี้มีคนมาทำบุญเยอะ”",
+    "text_en": "The caretaker has seen you here many times. Today he sits beside you with two food parcels. “Eat with me? Lots of people made offerings today.”",
+    "choices": [
+      {
+        "label_th": "กินด้วยกัน แล้วเล่าเรื่องตัวเอง",
+        "label_en": "Eat together and tell him your story",
+        "effects": {
+          "hunger": 25,
+          "hope": 10,
+          "counters": {
+            "friends": 1
+          }
+        },
+        "text_th": "เขาฟังโดยไม่ขัดเลยสักครั้ง ก่อนแยกกันเขาบอกว่าประตูหลังเปิดถึงสี่ทุ่ม ถ้าฝนตกมาหลบได้",
+        "text_en": "He listens without interrupting once. When you part he says the back door stays open until ten — come in if it rains."
+      },
+      {
+        "label_th": "รับห่อข้าวไปให้คนข้างนอก",
+        "label_en": "Take it to someone outside",
+        "effects": {
+          "hope": 6,
+          "rep": 4,
+          "counters": {
+            "mealsGiven": 1
+          }
+        },
+        "text_th": "หญิงที่นั่งพิงกำแพงข้างนอกรับห่อข้าวด้วยสองมือ เหมือนรับของสำคัญ",
+        "text_en": "The woman sitting against the outside wall takes it with both hands, like something precious."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "day",
+    "tags": [
+      "absurd",
+      "community"
+    ],
+    "id": "city_blackout",
+    "icon": "🌑",
+    "cooldown": 60,
+    "title_th": "ไฟดับทั้งเมือง",
+    "title_en": "The Whole City Goes Dark",
+    "text_th": "สามทุ่ม ไฟดับพร้อมกันทั้งเมือง ตึกสูงกลายเป็นเงาดำ คนเดินลงมาจากคอนโด ยืนงงกันบนถนน เป็นครั้งแรกที่ทุกคนมืดเท่ากับคุณ",
+    "text_en": "At nine p.m. the power cuts out across the city. Towers become black shapes. People come down from their condos and stand confused in the street. For once, everyone is in the same dark as you.",
+    "choices": [
+      {
+        "label_th": "เอาเทียนที่มีมาจุดแบ่งคนแถวนั้น",
+        "label_en": "Light your candles and share them",
+        "effects": {
+          "hope": 8,
+          "rep": 6,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "คนแปลกหน้ามานั่งล้อมเทียนของคุณ มีคนเอาขนมมาแบ่ง มีคนเล่นกีตาร์ ไฟกลับมาตอนตีหนึ่ง ทุกคนดูเสียดาย",
+        "text_en": "Strangers gather around your candles. Someone shares snacks, someone plays guitar. When the power returns at one a.m., everyone looks a little disappointed."
+      },
+      {
+        "label_th": "นอนเร็ว ความมืดก็คือความมืด",
+        "label_en": "Sleep early — dark is dark",
+        "effects": {
+          "energy": 10,
+          "hope": 2
+        },
+        "text_th": "เมืองเงียบที่สุดตั้งแต่คุณมาอยู่ คุณหลับสนิทที่สุดในรอบหลายเดือน",
+        "text_en": "The quietest the city has ever been. You sleep better than you have in months."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "community"
+    ],
+    "id": "street_wedding",
+    "icon": "💐",
+    "cooldown": 60,
+    "conditions": {
+      "phases": [
+        "afternoon",
+        "night"
+      ]
+    },
+    "title_th": "งานแต่งริมถนน",
+    "title_en": "A Wedding in the Street",
+    "text_th": "เต็นท์งานแต่งกางปิดครึ่งซอย เสียงเพลงดังลั่น อาหารเหลือเต็มโต๊ะ ญาติเจ้าบ่าวคนหนึ่งเห็นคุณยืนดูอยู่แล้วกวักมือเรียก",
+    "text_en": "A wedding tent blocks half the street. Loud music, tables still covered in food. One of the groom's relatives sees you watching and waves you over.",
+    "choices": [
+      {
+        "label_th": "เข้าไปกิน แล้วช่วยเก็บโต๊ะ",
+        "label_en": "Go eat, then help clear the tables",
+        "effects": {
+          "hunger": 35,
+          "thirst": 20,
+          "hope": 8,
+          "energy": -6,
+          "rep": 3
+        },
+        "text_th": "เจ้าสาวมาขอบคุณที่ช่วยเก็บ แล้วยัดซองใส่มือคุณ “ให้โชคดีเหมือนกัน”",
+        "text_en": "The bride thanks you for helping clean up and presses an envelope into your hand. “Good luck to you too.”"
+      },
+      {
+        "label_th": "ยิ้มให้แล้วเดินผ่านไป",
+        "label_en": "Smile and walk on",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "เพลงรักดังตามหลังคุณไปจนสุดซอย",
+        "text_en": "A love song follows you all the way to the end of the street."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "community",
+      "absurd"
+    ],
+    "id": "football_night",
+    "icon": "⚽",
+    "cooldown": 45,
+    "conditions": {
+      "phases": [
+        "night"
+      ]
+    },
+    "title_th": "ฟุตบอลนัดใหญ่",
+    "title_en": "The Big Match",
+    "text_th": "ร้านโชห่วยหันทีวีออกมาหน้าร้าน คนทั้งซอยมานั่งดูบอลนัดชิง วินมอเตอร์ไซค์ แม่ค้า คนข้างถนน นั่งเก้าอี้พลาสติกแถวเดียวกัน",
+    "text_en": "The corner shop turns its TV toward the street. The whole block comes out for the final: moto-taxi drivers, vendors, street people, all on the same row of plastic chairs.",
+    "choices": [
+      {
+        "label_th": "เชียร์สุดเสียง",
+        "label_en": "Cheer at the top of your lungs",
+        "chance": 0.5,
+        "success": {
+          "text_th": "ทีมที่คุณเชียร์ชนะในนาทีสุดท้าย คนแปลกหน้ากอดคุณ เจ้าของร้านแจกน้ำอัดลมฟรีทั้งซอย",
+          "text_en": "Your team wins in the last minute. Strangers hug you. The shop owner hands out free soda to the whole block.",
+          "effects": {
+            "hope": 12,
+            "thirst": 15,
+            "rep": 3
+          }
+        },
+        "fail": {
+          "text_th": "แพ้จุดโทษ ทั้งซอยเงียบกริบ แต่ทุกคนเศร้าด้วยกัน ซึ่งก็ไม่แย่",
+          "text_en": "Lost on penalties. The street goes silent, but everyone is sad together, which isn't so bad.",
+          "effects": {
+            "hope": 4
+          }
+        }
+      },
+      {
+        "label_th": "นั่งดูเงียบๆ ท้ายแถว",
+        "label_en": "Watch quietly from the back",
+        "effects": {
+          "hope": 5
+        },
+        "text_th": "ไม่มีใครถามว่าคุณเป็นใคร ทุกคนสนใจแค่ลูกบอล",
+        "text_en": "Nobody asks who you are. Everyone only cares about the ball."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "opportunity",
+      "absurd"
+    ],
+    "id": "film_extras",
+    "icon": "🎬",
+    "cooldown": 60,
+    "conditions": {
+      "phases": [
+        "morning",
+        "afternoon"
+      ]
+    },
+    "title_th": "กองถ่ายหนัง",
+    "title_en": "The Film Crew",
+    "text_th": "กองถ่ายหนังปิดถนน ผู้ช่วยผู้กำกับเดินหาตัวประกอบ “ต้องการคนเดินผ่านฉากสิบคน ได้ค่าตัวกับข้าวกล่อง” เขามองคุณแล้วลังเลนิดหนึ่ง",
+    "text_en": "A film crew has closed the street. An assistant director hunts for extras. “Need ten people to walk through the shot. Pay and a boxed lunch.” He looks at you and hesitates a moment.",
+    "choices": [
+      {
+        "label_th": "อาสาเป็นตัวประกอบ",
+        "label_en": "Volunteer as an extra",
+        "chance": 0.65,
+        "success": {
+          "text_th": "คุณเดินผ่านกล้องสิบเจ็ดเทค ผู้กำกับชอบท่าเดินคุณ ให้ยืนหลังพระเอกในฉากสุดท้าย",
+          "text_en": "Seventeen takes of walking past the camera. The director likes your walk and puts you behind the lead in the final shot.",
+          "effects": {
+            "cash": [
+              2,
+              4
+            ],
+            "hunger": 25,
+            "hope": 10
+          }
+        },
+        "fail": {
+          "text_th": "ผู้ช่วยขอโทษว่าคนเต็มแล้ว แต่ยื่นข้าวกล่องที่เหลือให้หนึ่งกล่อง",
+          "text_en": "The assistant apologizes — they're full — but hands you a spare boxed lunch.",
+          "effects": {
+            "hunger": 25,
+            "hope": 1
+          }
+        }
+      },
+      {
+        "label_th": "ยืนดูเขาถ่ายอยู่ข้างๆ",
+        "label_en": "Just watch from the side",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "ฝนเทียมจากรถดับเพลิงตกลงมาเฉพาะบนฉาก คุณยืนแห้งอยู่ห่างออกไปสองเมตร",
+        "text_en": "Fake rain from a fire truck falls only on the set. You stand two meters away, perfectly dry."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "moral"
+    ],
+    "id": "lost_child",
+    "icon": "🧒",
+    "cooldown": 60,
+    "conditions": {
+      "phases": [
+        "morning",
+        "afternoon"
+      ]
+    },
+    "title_th": "เด็กหลงทาง",
+    "title_en": "A Lost Child",
+    "text_th": "เด็กผู้หญิงอายุราวห้าขวบยืนร้องไห้กลางตลาด คนเดินผ่านมองแล้วเดินต่อ เธอหันมาจับชายเสื้อคุณ",
+    "text_en": "A girl of about five stands crying in the middle of the market. People glance and keep walking. She turns and grabs the hem of your shirt.",
+    "choices": [
+      {
+        "label_th": "พาเดินหาพ่อแม่ทั่วตลาด",
+        "label_en": "Walk the market with her to find her parents",
+        "chance": 0.75,
+        "success": {
+          "text_th": "แม่ของเธอวิ่งมากอดลูกแล้วร้องไห้หนักกว่าลูก จากนั้นหันมากอดคุณด้วย ทั้งตลาดเห็น",
+          "text_en": "Her mother runs up and sobs harder than her daughter, then hugs you too — in front of the whole market.",
+          "effects": {
+            "hope": 12,
+            "rep": 10,
+            "cash": 2,
+            "counters": {
+              "helped": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "ยามตลาดเห็นคุณจูงเด็กแล้วเข้ามาขวาง พาเด็กไปป้อมเอง คุณได้ยินทีหลังว่าเจอพ่อแม่แล้ว",
+          "text_en": "A market guard sees you holding her hand and steps in, taking her to the booth himself. You hear later her parents found her.",
+          "effects": {
+            "hope": 2,
+            "heat": 4
+          }
+        }
+      },
+      {
+        "label_th": "พาไปส่งที่ป้อมยามตลาด",
+        "label_en": "Take her to the market guard booth",
+        "effects": {
+          "hope": 5,
+          "rep": 3
+        },
+        "text_th": "ยามประกาศเสียงตามสาย ห้านาทีต่อมาพ่อของเธอวิ่งมาถึง เขาพยักหน้าขอบคุณคุณ",
+        "text_en": "The guard makes an announcement. Five minutes later her father comes running, and nods his thanks to you."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "day",
+    "tags": [
+      "kindness",
+      "absurd"
+    ],
+    "id": "kitten",
+    "icon": "🐈",
+    "once": true,
+    "title_th": "แมวที่เลือกคุณ",
+    "title_en": "A Kitten Chooses You",
+    "text_th": "ลูกแมวสีส้มตัวเท่ากำปั้นเดินมานอนบนเท้าคุณ ไล่ก็ไม่ไป ไปไหนก็ตาม",
+    "text_en": "An orange kitten no bigger than your fist curls up on your foot. Shoo it and it stays. Walk and it follows.",
+    "choices": [
+      {
+        "label_th": "แบ่งข้าวให้กิน",
+        "label_en": "Share your food with it",
+        "effects": {
+          "hunger": -6,
+          "hope": 10
+        },
+        "text_th": "มันกินเสร็จแล้วเลียมือคุณ คืนนั้นมันนอนในเสื้อคุณ อุ่นกว่าผ้าห่ม",
+        "text_en": "It finishes and licks your hand. That night it sleeps inside your shirt, warmer than any blanket."
+      },
+      {
+        "label_th": "พาไปฝากร้านข้าวแกงที่ชอบแมว",
+        "label_en": "Take it to the cat-loving curry shop",
+        "effects": {
+          "hope": 6,
+          "rep": 2
+        },
+        "text_th": "เจ้าของร้านตั้งชื่อมันตามชื่อคุณ บอกว่ามาเยี่ยมได้ทุกวัน",
+        "text_en": "The owner names it after you and says you can visit any day."
+      }
+    ]
+  },
+  {
+    "weight": 3,
+    "trigger": "day",
+    "tags": [
+      "kindness",
+      "health"
+    ],
+    "id": "water_truck",
+    "icon": "🚰",
+    "cooldown": 20,
+    "conditions": {
+      "inSeason": [
+        "hot"
+      ]
+    },
+    "title_th": "รถน้ำกลางคลื่นความร้อน",
+    "title_en": "Water Truck in the Heatwave",
+    "text_th": "อากาศร้อนจนถนนลวก รถน้ำของเทศบาลมาจอดหัวมุม แจกน้ำเย็นฟรี แถวยาวเต็มฟุตบาท",
+    "text_en": "It's so hot the asphalt shimmers. A city water truck parks on the corner handing out cold water. The line fills the sidewalk.",
+    "choices": [
+      {
+        "label_th": "ต่อแถวรับน้ำ",
+        "label_en": "Queue for water",
+        "effects": {
+          "thirst": 35,
+          "health": 4,
+          "hope": 3
+        },
+        "text_th": "น้ำเย็นจนปวดฟัน คุณดื่มรวดเดียวหมดขวด",
+        "text_en": "So cold it hurts your teeth. You drain the bottle in one go."
+      },
+      {
+        "label_th": "ช่วยเจ้าหน้าที่ยกลังน้ำแจก",
+        "label_en": "Help the crew hand out water",
+        "effects": {
+          "thirst": 30,
+          "energy": -8,
+          "rep": 5,
+          "hope": 6,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "เจ้าหน้าที่ให้คุณเก็บน้ำไว้สี่ขวดสำหรับคืนนี้ และขอบใจที่ช่วย",
+        "text_en": "The crew lets you keep four bottles for tonight, and thanks you for the help."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "action",
+    "tags": [
+      "danger"
+    ],
+    "id": "bridge_fire",
+    "icon": "🔥",
+    "cooldown": 90,
+    "conditions": {
+      "afterActions": [
+        "sleep"
+      ],
+      "sheltered": false,
+      "minDay": 10
+    },
+    "title_th": "ไฟใต้สะพาน",
+    "title_en": "Fire Under the Bridge",
+    "text_th": "กลิ่นควันปลุกคุณตอนตีสอง เพิงลังกระดาษฝั่งตรงข้ามลุกเป็นไฟ ลมพัดมาทางนี้ เพื่อนบ้านใต้สะพานวิ่งออกมาตะโกนว่าของทั้งหมดของเขาอยู่ข้างใน",
+    "text_en": "Smoke wakes you at 2 a.m. The cardboard shelters across the way are burning, and the wind is blowing this way. Your neighbor under the bridge runs out shouting that everything he owns is still inside.",
+    "choices": [
+      {
+        "label_th": "คว้าของตัวเองแล้ววิ่งออกไป",
+        "label_en": "Grab your things and run",
+        "effects": {
+          "hope": -6,
+          "energy": -10,
+          "health": -3
+        },
+        "text_th": "คุณยืนดูไฟจากอีกฝั่งถนนจนรถดับเพลิงมา ลังกระดาษที่เคยเป็นบ้านกลายเป็นขี้เถ้า แต่ทุกคนรอด",
+        "text_en": "You watch from across the street until the fire trucks arrive. The cardboard that was home is ash, but everyone made it out."
+      },
+      {
+        "label_th": "วิ่งกลับเข้าไปช่วยเขาขนของ",
+        "label_en": "Run back in to help save his things",
+        "chance": 0.75,
+        "success": {
+          "text_th": "คุณลากถุงใหญ่สองใบออกมาได้ก่อนหลังคาลังพังลง ในถุงมีรูปลูกสาวเขา เขากอดคุณแน่นจนหายใจไม่ออก",
+          "text_en": "You drag out two big bags just before the roof collapses. One holds photos of his daughter. He hugs you so hard you can't breathe.",
+          "effects": {
+            "health": -8,
+            "hope": 12,
+            "rep": 10,
+            "counters": {
+              "helped": 1,
+              "friends": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "ควันหนาจนมองไม่เห็นทางออก",
+          "text_en": "The smoke is too thick to see the way out.",
+          "effects": {
+            "health": -200,
+            "cause": "injury",
+            "flags": [
+              "burned"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "day",
+    "tags": [
+      "kindness"
+    ],
+    "id": "letter_center",
+    "icon": "✉️",
+    "once": true,
+    "conditions": {
+      "hasFamily": true,
+      "minDay": 20
+    },
+    "title_th": "จดหมายที่ศูนย์",
+    "title_en": "A Letter at the Center",
+    "text_th": "เจ้าหน้าที่ศูนย์เรียกชื่อคุณ “มีจดหมายมาถึง ส่งมาที่ศูนย์นี้ตั้งแต่สัปดาห์ก่อน” ลายมือบนซองเป็นลายมือที่คุณจำได้ทันที",
+    "text_en": "A worker at the center calls your name. “A letter came for you last week.” You recognize the handwriting on the envelope instantly.",
+    "choices": [
+      {
+        "label_th": "เปิดอ่านเดี๋ยวนี้",
+        "label_en": "Open it now",
+        "chance": 0.6,
+        "success": {
+          "text_th": "“ไม่ต้องกลับมาก็ได้ถ้ายังไม่พร้อม แต่บอกหน่อยว่ายังปลอดภัย” คุณอ่านซ้ำจนกระดาษนิ่ม",
+          "text_en": "“You don't have to come back until you're ready. Just tell us you're safe.” You read it until the paper goes soft.",
+          "effects": {
+            "hope": 18,
+            "items": {
+              "letter": 1
+            },
+            "counters": {
+              "familyCalls": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "ในซองมีแค่ใบแจ้งหนี้ที่บ้านส่งต่อมา กับโน้ตสั้นๆ ว่า “ของเธอ” คุณพับมันเก็บไว้ใต้สุดของกระเป๋า",
+          "text_en": "Inside is only a debt notice forwarded from home and a short note: “Yours.” You fold it away at the very bottom of your bag.",
+          "effects": {
+            "hope": -8
+          }
+        }
+      },
+      {
+        "label_th": "เก็บไว้เปิดวันที่ใจพร้อม",
+        "label_en": "Keep it for a day you feel ready",
+        "effects": {
+          "hope": 4,
+          "items": {
+            "letter": 1
+          }
+        },
+        "text_th": "ซองจดหมายอยู่ในกระเป๋าเสื้อ อุ่นอยู่ตรงนั้นตลอดวัน",
+        "text_en": "It sits in your shirt pocket, warm there all day."
       }
     ]
   }

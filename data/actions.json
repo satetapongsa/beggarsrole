@@ -849,5 +849,356 @@
     "flavor_en": [
       "You paint the stall's sign by hand. The letters are a bit crooked. It's the most beautiful thing in the world."
     ]
+  },
+  {
+    "id": "carry_bags",
+    "kind": "activity",
+    "category": "earn",
+    "icon": "🧺",
+    "name_th": "รับจ้างแบกของในตลาด",
+    "name_en": "Carry loads at the market",
+    "desc_th": "ตลาดเช้าต้องการแรงงาน แบกกระสอบผัก ลังปลา ได้เงินสด หลังพังนิดหน่อย",
+    "desc_en": "The morning market needs backs. Sacks of vegetables, crates of fish. Cash in hand, a sore back.",
+    "phases": [
+      "morning"
+    ],
+    "energy": 24,
+    "pay": [
+      1.8,
+      3
+    ],
+    "requires": {
+      "min": {
+        "health": 35
+      }
+    },
+    "effects": {
+      "hygiene": -6,
+      "counters": {
+        "porter": 1
+      }
+    },
+    "eventChance": 0.22,
+    "flavor_th": [
+      "แม่ค้าเรียกคุณด้วยการผิวปาก ลังแล้วลังเล่า จนแดดขึ้น ได้ค่าแรง {amount}",
+      "กระสอบข้าวสารหนักกว่าที่คิด แต่เจ๊ร้านขายของชำจ่ายตรงเวลา {amount}",
+      "คุณกับคนแบกอีกสามคนแข่งกันว่าใครขนเร็วกว่า ไม่มีใครชนะ แต่ทุกคนได้ {amount}"
+    ],
+    "flavor_en": [
+      "A vendor whistles for you. Crate after crate until the sun is up. {amount} for the morning.",
+      "The rice sacks are heavier than they look, but the grocer pays on time: {amount}.",
+      "You and three other porters race to see who's fastest. Nobody wins, but everyone gets {amount}."
+    ]
+  },
+  {
+    "id": "queue_job",
+    "kind": "activity",
+    "category": "earn",
+    "icon": "🎟️",
+    "name_th": "รับจ้างต่อคิว",
+    "name_en": "Stand in line for hire",
+    "desc_th": "คนรวยไม่มีเวลารอ คุณมีเวลาเหลือเฟือ ต่อคิวซื้อบัตร ต่อคิวร้านดัง ต่อคิวยื่นเอกสาร",
+    "desc_en": "Busy people hate waiting. You have nothing but time. Queue for tickets, famous restaurants, paperwork.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 8,
+    "pay": [
+      0.8,
+      1.6
+    ],
+    "requires": {
+      "min": {
+        "hygiene": 25
+      }
+    },
+    "effects": {
+      "hope": -1,
+      "counters": {
+        "queued": 1
+      }
+    },
+    "eventChance": 0.2,
+    "flavor_th": [
+      "สี่ชั่วโมงหน้าร้านขนมปังที่เพิ่งดังในโซเชียล ลูกค้ารับของแล้วยื่นเงินให้ {amount}",
+      "คุณยืนแทนผู้หญิงคนหนึ่งในคิวยื่นวีซ่า เธอกลับมาทันพอดี ได้ {amount}",
+      "คิวยาวจนเลี้ยวหัวมุมสองรอบ คุณได้รู้จักคนข้างหน้าทั้งชีวิต และได้เงิน {amount}"
+    ],
+    "flavor_en": [
+      "Four hours outside a bakery that went viral. The client takes the box and hands you {amount}.",
+      "You hold a woman's place in the visa line. She's back just in time. {amount}.",
+      "The line wraps the corner twice. You learn the whole life story of the man in front, and earn {amount}."
+    ]
+  },
+  {
+    "id": "chalk_art",
+    "kind": "activity",
+    "category": "earn",
+    "icon": "🖍️",
+    "name_th": "วาดชอล์กบนทางเท้า",
+    "name_en": "Chalk art on the pavement",
+    "desc_th": "ซื้อชอล์กถูกๆ หนึ่งกล่อง แล้วเปลี่ยนพื้นปูนให้เป็นภาพ คนที่หยุดดูบางคนหยอดเหรียญ",
+    "desc_en": "A cheap box of chalk turns concrete into pictures. Some who stop to look leave coins.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 14,
+    "cost": 0.3,
+    "pay": [
+      0.4,
+      2.6
+    ],
+    "effects": {
+      "hope": 4,
+      "rep": [
+        1,
+        3
+      ],
+      "counters": {
+        "art": 1
+      }
+    },
+    "eventChance": 0.3,
+    "flavor_th": [
+      "คุณวาดทะเลบนทางเท้า เด็กๆ เดินอ้อมไม่ให้เหยียบคลื่น ได้เหรียญรวม {amount}",
+      "ภาพหน้าแม่ที่คุณจำได้ไม่ชัด วาดเสร็จแล้วกลับเหมือนกว่าที่คิด คนหยอดเหรียญให้ {amount}",
+      "เมฆ ต้นไม้ แมวตัวอ้วน คนถ่ายรูปเยอะกว่าหยอดเงิน แต่ก็ได้ {amount}"
+    ],
+    "flavor_en": [
+      "You draw the sea on the sidewalk. Kids walk around it so they don't step on the waves. {amount} in coins.",
+      "A face of your mother you barely remember. Finished, it looks more like her than you expected. {amount}.",
+      "Clouds, a tree, a fat cat. More photos than coins, but still {amount}."
+    ]
+  },
+  {
+    "id": "fish",
+    "kind": "activity",
+    "category": "survive",
+    "icon": "🎣",
+    "name_th": "ตกปลาริมน้ำ",
+    "name_en": "Fish by the water",
+    "desc_th": "เบ็ดทำเองจากเอ็นกับตะขอ บางวันได้มื้อ บางวันได้แค่ความเงียบ",
+    "desc_en": "A homemade line and hook. Some days you get a meal, some days only quiet.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 10,
+    "effects": {
+      "hunger": [
+        4,
+        24
+      ],
+      "hope": 3,
+      "counters": {
+        "fishing": 1
+      }
+    },
+    "eventChance": 0.2,
+    "flavor_th": [
+      "ปลาตัวเล็กสองตัว ย่างบนไฟถ่านที่ยืมเขามา อร่อยกว่าข้าวกล่องไหนๆ",
+      "ทั้งเช้าไม่มีอะไรกินเบ็ดเลย แต่น้ำนิ่งจนคุณลืมไปชั่วโมงหนึ่งว่าอยู่ที่ไหน",
+      "ลุงข้างๆ แบ่งเหยื่อให้ คุณแบ่งปลาให้ลุง ยุติธรรมดี"
+    ],
+    "flavor_en": [
+      "Two little fish, grilled on borrowed coals. Better than any boxed lunch.",
+      "Nothing bites all morning, but the water is so still you forget where you are for an hour.",
+      "The old man next to you shares his bait; you share your catch. Fair enough."
+    ]
+  },
+  {
+    "id": "library",
+    "kind": "activity",
+    "category": "future",
+    "icon": "📚",
+    "name_th": "อ่านหนังสือที่ห้องสมุดประชาชน",
+    "name_en": "Read at the public library",
+    "desc_th": "ห้องแอร์ฟรี เก้าอี้ฟรี โลกทั้งใบฟรี ขอแค่ดูสะอาดพอให้ยามไม่ไล่",
+    "desc_en": "Free air-conditioning, free chairs, the whole world for free — as long as you look clean enough for the guard.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 6,
+    "requires": {
+      "min": {
+        "hygiene": 30
+      }
+    },
+    "effects": {
+      "hope": 5,
+      "heat": -2,
+      "counters": {
+        "reading": 1
+      }
+    },
+    "eventChance": 0.2,
+    "flavor_th": [
+      "คุณอ่านเรื่องคนที่เดินข้ามทวีป จบเล่มแล้วเท้าที่ปวดอยู่ดูไม่ใช่เรื่องใหญ่",
+      "หนังสือคณิตศาสตร์ ม.ต้น ยากกว่าที่จำได้ แต่คุณทำโจทย์ได้สามข้อ",
+      "คุณหลับไปบนแผนที่โลก ตื่นมามีรอยเส้นศูนย์สูตรบนแก้ม"
+    ],
+    "flavor_en": [
+      "You read about someone who walked across a continent. After that, your sore feet don't seem like much.",
+      "A middle-school math book is harder than you remember, but you solve three problems.",
+      "You fall asleep on a world map and wake with the equator printed on your cheek."
+    ]
+  },
+  {
+    "id": "journal",
+    "kind": "activity",
+    "category": "future",
+    "icon": "📓",
+    "name_th": "เขียนบันทึก",
+    "name_en": "Write in your notebook",
+    "desc_th": "สมุดเก่าๆ กับปากกาที่เก็บได้ เขียนว่าวันนี้เกิดอะไรขึ้น เขียนให้ตัวเองจำได้ว่ายังเป็นคน",
+    "desc_en": "A battered notebook and a found pen. Write down what happened today, so you remember you're still a person.",
+    "phases": [
+      "afternoon",
+      "night"
+    ],
+    "energy": 4,
+    "effects": {
+      "hope": 4,
+      "counters": {
+        "journal": 1
+      }
+    },
+    "eventChance": 0.15,
+    "flavor_th": [
+      "วันนี้คุณเขียนถึงคนขายส้มตำที่ให้ข้าวเหนียวฟรี เขียนชื่อเขาไว้ด้วย กลัวลืม",
+      "คุณเขียนรายการของที่อยากได้ ข้อแรกคือรองเท้าที่ไม่รั่ว ข้อสุดท้ายคือบ้าน",
+      "หน้านี้คุณเขียนแค่ประโยคเดียว “ยังอยู่” แล้วปิดสมุด"
+    ],
+    "flavor_en": [
+      "Today you write about the vendor who gave you free sticky rice. You write down his name so you won't forget.",
+      "You list things you want. First: shoes that don't leak. Last: a home.",
+      "Tonight you write one line — “Still here.” — and close the notebook."
+    ]
+  },
+  {
+    "id": "volunteer",
+    "kind": "activity",
+    "category": "people",
+    "icon": "🥄",
+    "name_th": "ช่วยงานโรงทาน",
+    "name_en": "Help at the soup kitchen",
+    "desc_th": "ล้างจาน ตักข้าว ยกหม้อ ได้กินก่อนแจกเสร็จ และได้เห็นว่าตัวเองยังให้ใครได้",
+    "desc_en": "Wash dishes, serve rice, haul pots. You eat after the line is done, and remember you can still give.",
+    "phases": [
+      "morning",
+      "afternoon"
+    ],
+    "energy": 16,
+    "requires": {
+      "min": {
+        "health": 30
+      }
+    },
+    "effects": {
+      "hunger": 20,
+      "thirst": 10,
+      "hope": 5,
+      "rep": [
+        2,
+        4
+      ],
+      "hygiene": -3,
+      "counters": {
+        "volunteer": 1,
+        "helped": 1
+      }
+    },
+    "eventChance": 0.25,
+    "flavor_th": [
+      "คุณตักข้าวสามร้อยจาน แขนล้า แต่ป้าที่คุมครัวตักแกงเพิ่มให้คุณเป็นพิเศษ",
+      "คนในแถววันนี้เรียกคุณว่า “น้อง” ทั้งที่เมื่อเดือนก่อนคุณยืนอยู่ในแถวเดียวกัน",
+      "หม้อใบใหญ่ที่สุดต้องใช้สองคนยก คุณกับเด็กหนุ่มที่ไม่พูดสักคำ ยกจนเสร็จ"
+    ],
+    "flavor_en": [
+      "You serve three hundred plates. Your arms ache, but the auntie running the kitchen gives you extra curry.",
+      "People in line call you “kid” today, though a month ago you stood in that same line.",
+      "The biggest pot takes two people. You and a silent young man carry it until the end."
+    ]
+  },
+  {
+    "id": "night_watch",
+    "kind": "activity",
+    "category": "earn",
+    "icon": "🔦",
+    "name_th": "เฝ้าร้านตอนกลางคืน",
+    "name_en": "Watch a shop overnight",
+    "desc_th": "เจ้าของร้านที่รู้จักคุณจ้างให้นั่งเฝ้าหน้าร้านทั้งคืน ไม่ได้นอน แต่ได้เงินและไม่มีใครไล่",
+    "desc_en": "A shop owner who knows you pays you to sit out front all night. No sleep, but money, and no one moves you along.",
+    "phases": [
+      "night"
+    ],
+    "energy": 26,
+    "pay": [
+      2.2,
+      3.2
+    ],
+    "requires": {
+      "min": {
+        "rep": 35
+      }
+    },
+    "effects": {
+      "hope": -1,
+      "heat": -3,
+      "counters": {
+        "guard": 1
+      }
+    },
+    "eventChance": 0.2,
+    "flavor_th": [
+      "คืนเงียบ มีแค่แมวกับรถขยะ เช้ามาเจ้าของร้านยื่นกาแฟกับเงิน {amount}",
+      "ตีสามมีวัยรุ่นเดินผ่าน เห็นคุณนั่งอยู่ก็เดินเลยไป เช้ามาได้ {amount}",
+      "คุณนับดาวได้สิบเอ็ดดวงในเมืองที่ไม่ค่อยเห็นดาว ได้ค่าเฝ้า {amount}"
+    ],
+    "flavor_en": [
+      "A quiet night: cats and the garbage truck. At dawn the owner hands you coffee and {amount}.",
+      "At 3 a.m. some teenagers wander by, see you sitting there, and keep walking. {amount} in the morning.",
+      "You count eleven stars in a city that rarely shows any. {amount} for the night."
+    ]
+  },
+  {
+    "id": "pray",
+    "kind": "activity",
+    "category": "survive",
+    "icon": "🕯️",
+    "name_th": "นั่งสงบใจที่ศาสนสถาน",
+    "name_en": "Sit quietly at a place of worship",
+    "desc_th": "วัด มัสยิด โบสถ์ ไม่มีใครถามว่าคุณมาจากไหน แค่นั่งเงียบๆ ก็เบาลง",
+    "desc_en": "Temple, mosque or church — nobody asks where you came from. Just sitting quietly makes things lighter.",
+    "phases": [
+      "morning",
+      "afternoon",
+      "night"
+    ],
+    "energy": 3,
+    "effects": {
+      "hope": [
+        5,
+        9
+      ],
+      "heat": -2,
+      "counters": {
+        "prayers": 1
+      }
+    },
+    "eventChance": 0.18,
+    "flavor_th": [
+      "เสียงสวดดังแผ่วๆ คุณไม่รู้ความหมายทุกคำ แต่รู้ว่ามันใจดี",
+      "คุณนั่งจนแดดย้ายจากเท้าไปถึงเข่า ไม่มีใครรีบให้คุณไปไหน",
+      "หญิงชราข้างๆ ยื่นดอกไม้ให้หนึ่งดอก คุณวางมันคู่กับของเธอ"
+    ],
+    "flavor_en": [
+      "Soft chanting. You don't know every word, but you know it's kind.",
+      "You sit until the sunlight moves from your feet to your knees. Nobody hurries you anywhere.",
+      "The old woman beside you hands you a flower. You lay it down next to hers."
+    ]
   }
 ]

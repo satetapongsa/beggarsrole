@@ -264,7 +264,9 @@ export type ActionKind =
   | "apply_id"
   | "move_city"
   | "rent_room"
-  | "open_stall";
+  | "open_stall"
+  /** Plain data-driven action: effects, optional pay, counters and events do all the work. */
+  | "activity";
 
 export type ActionCategory = "earn" | "survive" | "people" | "future";
 
@@ -285,6 +287,8 @@ export interface ActionDef {
   requires?: Conditions;
   /** Meal-unit cost paid up front (locked if you cannot afford it). */
   cost?: number;
+  /** "activity" only: earnings in meal units, scaled by weather and how presentable you are. */
+  pay?: [number, number];
   pickSpot?: boolean;
   effects?: Effects;
   /** Base chance of an action-triggered event afterwards. */

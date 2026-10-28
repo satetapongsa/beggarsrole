@@ -764,6 +764,9 @@ function performAction(s: GameState, rng: Rng, actionId: string, spotId?: string
       tone = "good";
       break;
     }
+    case "activity":
+      if (def.pay) amount = rng.float(def.pay[0], def.pay[1]) * m * weatherFactor(s.weather) * (0.75 + 0.25 * hygieneFactor(s));
+      break;
     default:
       break;
   }

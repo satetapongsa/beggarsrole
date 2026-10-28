@@ -477,5 +477,8 @@
   "rec.p.richest": "most ฿{thb}",
   "rec.showAll": "Show all {n}",
   "rec.showLess": "Show less",
-  "rec.livesOf": "Lives of {name}"
+  "rec.livesOf": "Lives of {name}",
+  "version.new": "Latest update",
+  "version.all": "All updates",
+  "version.hide": "Hide"
 }

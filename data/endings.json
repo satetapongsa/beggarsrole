@@ -527,5 +527,146 @@
       ]
     },
     "hidden": true
+  },
+  {
+    "id": "chalk_gallery",
+    "title_th": "ภาพบนทางเท้าขึ้นผนัง",
+    "title_en": "From Pavement to Gallery Wall",
+    "rarity": "epic",
+    "icon": "🖼️",
+    "priority": 89,
+    "conditions": {
+      "flags": [
+        "art_show"
+      ]
+    },
+    "epitaph_th": "นิทรรศการแรกของคุณชื่อ “ฝนลบไม่ได้” ทุกภาพวาดใหม่บนผ้าใบจากภาพชอล์กที่ฝนเคยลบไป คืนเปิดงาน แขกที่ใส่สูทยืนเคียงข้างคนที่เคยนอนข้างคุณใต้สะพาน และไม่มีใครรู้ว่าใครเป็นใคร",
+    "epitaph_en": "Your first exhibition is called “What the Rain Couldn't Wash Away”: every canvas a chalk picture the rain once erased. On opening night, people in suits stand beside people who used to sleep next to you under the bridge, and nobody can tell who is who.",
+    "line_th": "ฝนลบภาพได้ แต่ลบคนวาดไม่ได้",
+    "line_en": "Rain can wash away the picture, not the one who drew it."
+  },
+  {
+    "id": "memoir",
+    "title_th": "บันทึกข้างถนน",
+    "title_en": "Notes From the Pavement",
+    "rarity": "legendary",
+    "icon": "📖",
+    "priority": 91,
+    "conditions": {
+      "flags": [
+        "memoir_published"
+      ]
+    },
+    "epitaph_th": "สมุดเก่าๆ ที่เปียกฝนมาหลายรอบกลายเป็นหนังสือปกแข็ง ร้านหนังสือวางไว้หน้าร้าน ห้องสมุดประชาชนที่คุณเคยไปนั่งสั่งมาห้าเล่ม หน้าแรกเขียนว่า “ให้ทุกคนที่หยุดมองหน้าฉัน”",
+    "epitaph_en": "A notebook that survived more rain than you can count becomes a hardback. Bookshops put it in the window. The public library where you used to sit orders five copies. The first page reads: “For everyone who stopped and looked me in the eye.”",
+    "line_th": "ฉันเขียนเพื่อจำว่ายังเป็นคน แล้วคนอื่นก็อ่านแล้วจำได้เหมือนกัน",
+    "line_en": "I wrote to remember I was a person. Then other people read it and remembered too."
+  },
+  {
+    "id": "kitchen_heart",
+    "title_th": "หัวใจของโรงทาน",
+    "title_en": "The Heart of the Kitchen",
+    "rarity": "rare",
+    "icon": "🍛",
+    "priority": 79,
+    "conditions": {
+      "flags": [
+        "kitchen_staff"
+      ]
+    },
+    "epitaph_th": "คุณได้ตำแหน่งผู้ช่วยหัวหน้าครัว มีเงินเดือน มีห้องเล็กๆ หลังมูลนิธิ ทุกเช้าคุณยืนตรงจุดที่เคยต่อแถว แต่อยู่อีกฝั่งของโต๊ะ และจำชื่อคนในแถวได้ทุกคน",
+    "epitaph_en": "You become assistant head cook: a salary, a small room behind the foundation. Every morning you stand where you used to queue — on the other side of the table now — and you know everyone in line by name.",
+    "line_th": "ฉันรู้ว่าแถวนี้หิวแค่ไหน เพราะเคยยืนอยู่ตรงนั้น",
+    "line_en": "I know how hungry this line is. I used to stand in it."
+  },
+  {
+    "id": "night_guard",
+    "title_th": "ยามกะดึกที่ทุกคนไว้ใจ",
+    "title_en": "The Night Guard Everyone Trusts",
+    "rarity": "uncommon",
+    "icon": "🔦",
+    "priority": 77,
+    "conditions": {
+      "flags": [
+        "guard_hired"
+      ]
+    },
+    "epitaph_th": "เจ้าของร้านทั้งซอยรวมเงินกันจ้างคุณเป็นยามประจำ ได้ชุด ได้ไฟฉาย ได้ห้องเช่าเล็กๆ คนข้างถนนรู้ว่าหน้าร้านไหนที่คุณเฝ้า คืนฝนตกนอนหลบได้ ไม่มีใครไล่",
+    "epitaph_en": "The shop owners on the whole street pool their money to hire you full-time: a uniform, a flashlight, a small rented room. Street people know which doorways you watch — on rainy nights they can shelter there, and nobody moves them along.",
+    "line_th": "ฉันเฝ้าร้านให้เขา และเฝ้าคนนอนหน้าร้านให้ตัวเอง",
+    "line_en": "I watch the shops for them, and the people sleeping in front of them for me."
+  },
+  {
+    "id": "second_chance_exam",
+    "title_th": "สอบผ่านตอนอายุเท่านี้",
+    "title_en": "Passed the Exam at Last",
+    "rarity": "epic",
+    "icon": "🎓",
+    "priority": 88,
+    "conditions": {
+      "flags": [
+        "passed_exam"
+      ]
+    },
+    "epitaph_th": "ใบประกาศเทียบวุฒิการศึกษามาถึงทางไปรษณีย์ของมูลนิธิ คุณใช้มันสมัครงานธุรการได้ในเดือนเดียว บรรณารักษ์ที่ห้องสมุดเอาสำเนาใส่กรอบแขวนไว้หลังเคาน์เตอร์ ไม่บอกใครว่าเป็นของใคร",
+    "epitaph_en": "The equivalency certificate arrives at the foundation's mailbox. Within a month it gets you an office job. The librarian frames a copy behind the counter and never tells anyone whose it is.",
+    "line_th": "ห้องสมุดไม่เคยถามว่าฉันนอนที่ไหน ถามแค่ว่าอยากอ่านอะไร",
+    "line_en": "The library never asked where I slept. Only what I wanted to read."
+  },
+  {
+    "id": "boat_crew",
+    "title_th": "ลูกเรือ",
+    "title_en": "One of the Crew",
+    "rarity": "rare",
+    "icon": "⛵",
+    "priority": 76,
+    "conditions": {
+      "flags": [
+        "boat_crew"
+      ]
+    },
+    "epitaph_th": "เรือประมงลำเล็กออกจากท่าตอนตีสี่ทุกวัน คุณคือคนที่ผูกเชือกเก่งที่สุดบนเรือ ได้ส่วนแบ่งปลา ได้ที่นอนในห้องเก็บอวน ได้ท้องฟ้ากว้างกว่าที่เมืองเคยให้",
+    "epitaph_en": "A small fishing boat leaves the pier at four every morning. You tie the best knots on board. You get a share of the catch, a bunk in the net locker, and a sky wider than the city ever gave you.",
+    "line_th": "ทะเลไม่สนว่าเมื่อก่อนฉันเป็นใคร สนแค่ว่าผูกเชือกแน่นไหม",
+    "line_en": "The sea doesn't care who I was. Only whether my knots hold."
+  },
+  {
+    "id": "porter_boss",
+    "title_th": "หัวหน้าคนแบก",
+    "title_en": "Boss of the Porters",
+    "rarity": "uncommon",
+    "icon": "🧺",
+    "priority": 74,
+    "conditions": {
+      "flags": [
+        "porter_crew_lead"
+      ]
+    },
+    "epitaph_th": "ตลาดเช้าไว้ใจคุณจนยกให้ดูแลคนแบกทั้งสาย คุณแบ่งงานให้คนข้างถนนก่อนเสมอ จ่ายตรงเวลา และห้ามใครแบกเกินกำลัง ทุกคนเรียกคุณว่าพี่ใหญ่",
+    "epitaph_en": "The morning market trusts you enough to put you in charge of every porter on the row. You always give work to street people first, pay on time, and never let anyone carry more than they can. Everyone calls you boss.",
+    "line_th": "หลังฉันพังมาเยอะแล้ว หลังคนอื่นไม่ต้องพังเหมือนกัน",
+    "line_en": "My back took enough damage. Nobody else's has to."
+  },
+  {
+    "id": "burned",
+    "title_th": "ไฟใต้สะพาน",
+    "title_en": "Fire Under the Bridge",
+    "rarity": "uncommon",
+    "icon": "🔥",
+    "priority": 71,
+    "hidden": true,
+    "death": [
+      "injury",
+      "heat"
+    ],
+    "conditions": {
+      "flags": [
+        "burned"
+      ]
+    },
+    "epitaph_th": "ข่าวเช้าบอกว่าไฟไหม้เพิงลังกระดาษใต้สะพาน ไม่ระบุชื่อ เพื่อนที่คุณวิ่งกลับไปช่วยขนของรอดมาได้ เขากลับมาที่เดิมทุกปี วางขวดน้ำไว้หนึ่งขวด เพราะคืนนั้นร้อนมาก",
+    "epitaph_en": "The morning news mentions a fire in the cardboard shelters under the bridge. No names. The friend whose things you ran back for made it out. He comes back to the spot every year and leaves a bottle of water, because that night was so hot.",
+    "line_th": "ฉันวิ่งกลับไปเพราะของพวกนั้นคือทั้งชีวิตของเขา",
+    "line_en": "I ran back because those things were his whole life."
   }
 ]

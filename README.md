@@ -14,20 +14,25 @@ entirely in the browser with no login; your life autosaves as you play.
   action: beg at a busy spot, busk, collect recycling, take day labour, buy food or water, wash,
   rest, visit a clinic or an NGO, talk to people, look after a dog, call your family, save money,
   apply for an ID card, move to another city, rent a room or open a food stall.
+- **Ways of living.** Some actions are a whole path of their own: carrying loads at the morning
+  market, standing in queues for hire, chalk art on the pavement, fishing, reading at the public
+  library, keeping a notebook, volunteering at the soup kitchen, watching a shop overnight, or
+  sitting quietly at a place of worship. Keep at one and its own story unfolds (a librarian, an old
+  fisherman, a reporter, a gallery owner) until it offers you a way off the street.
 - **Eight needs are always moving**: health, hunger, thirst, hygiene, hope, energy, street
   reputation and police attention ("heat"). Let one of the first few hit zero and the life can end.
 - **The city matters.** Each city has its own currency and prices, its own seasons (monsoon,
   heat waves, snow), real neighbourhoods to work in with different income, risk and police
   presence, local festivals, and a difficulty from *easy* to *brutal*.
-- **Things happen to you.** Nearly 200 events — a stranger buying you lunch, a police sweep, a
+- **Things happen to you.** Over 220 events — a stranger buying you lunch, a police sweep, a
   flood, a stray dog that follows you home, a talent scout at your busking spot. Most of them ask
   you to choose, and some choices stay with you for the rest of the life.
   Every city also has scenes that only happen at one of its real places: a porter job when the
   launch docks at Sadarghat, chess hustlers in Washington Square, dawn hiring vans in Sanya, the
   candle sellers outside Quiapo Church. Moving between spots is how you find them.
-- **Every life ends.** There are 29 endings: 16 that take you off the street one way or another (a job and a flat, going
-  home to family, becoming a monk, a record deal, a lottery ticket — or prison and deportation) and 13 ways
-  to die (cold, heat, illness, hunger, storms, violence, accidents, old age). Some endings are
+- **Every life ends.** There are 37 endings: 23 that take you off the street one way or another (a job and a flat, going
+  home to family, becoming a monk, a record deal, a published memoir, a gallery show, a fishing boat — or prison and
+  deportation) and 14 ways to die (cold, heat, illness, hunger, storms, violence, accidents, old age). Some endings are
   hidden until you find them.
 - **Skip ahead** a week or a month with an auto-pilot (safe, balanced or risky) when you just want
   to see how the life goes; it stops for anything important.
@@ -100,6 +105,7 @@ npm run dev        # http://localhost:3000
 | `npm run build` / `npm start` | Production build / serve |
 | `npm run validate` | Checks every JSON data file and its cross-references (items, actions, traits, flags, translation parity) |
 | `npm run simulate -- 300 balanced` | Plays N lives with the auto-pilot (`safe` / `balanced` / `risky`) and prints how they ended — use after changing data |
+| `npx tsx scripts/check-paths.ts 40` | Plays lives that commit to one way of living and counts how often each reaches its own ending — the auto-pilot never takes those paths |
 | `npm run verify-replay -- 100` | Plays N lives through `step()` like the UI does, then checks the server replay reproduces each one — run after changing the engine |
 | `npm run check-achievements -- 150` | Plays N lives into one career and reports how often each achievement is earned |
 
@@ -116,7 +122,7 @@ lib/            engine.ts (pure game logic) · rng.ts (seeded) · conditions.ts 
                 score.ts · achievements.ts · replay.ts · storage.ts · online.ts · db.ts · i18n.tsx
 i18n/           th.json · en.json (interface text)
 types/game.ts   shared types
-scripts/        validate-data · simulate · verify-replay · check-achievements · test-online
+scripts/        validate-data · simulate · check-paths · verify-replay · check-achievements · test-online
 ```
 
 **The engine is pure.** `lib/engine.ts` exposes `step(state, action) => newState` with no React and
@@ -185,6 +191,15 @@ Append to `data/events.json`:
 - Flags you set can unlock later events and endings through `conditions.flags`.
 
 Then run `npm run validate` and `npm run simulate` to see it fire.
+
+An action with `"kind": "activity"` needs no engine code: its `effects` (stats, counters, flags),
+an optional `pay` range in meal units, and the events that read its counters do all the work.
+
+### Versions
+
+The version in the top-right corner and the update bar on the title screen come from
+`lib/changelog.ts`. Every shipped update adds an entry at the top and bumps the last number
+(v1.0 was the first playable build).
 
 ### An ending
 

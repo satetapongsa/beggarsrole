@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { CharacterPixels } from "@/components/CharacterSprite";
 import FeedbackModal from "@/components/FeedbackModal";
 import Flag from "@/components/Flag";
+import VersionBar from "@/components/VersionBar";
 import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
 import { fetchDaily, startLife, type DailyInfo } from "@/lib/online";
@@ -82,8 +83,10 @@ export default function TitlePage() {
   const lastEnding = last?.ended ? DATA.ending[last.ended.endingId] : null;
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center px-5 py-10 text-center">
-      <div className="absolute right-4 top-4 flex gap-2">
+    <>
+    <VersionBar />
+    <main className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center px-5 pb-10 pt-14 text-center">
+      <div className="absolute right-4 top-11 flex gap-2">
         <button type="button" onClick={() => setLang(lang === "th" ? "en" : "th")} className="rounded border border-night-600 px-2.5 py-1 text-xs hover:bg-night-800">
           {t("lang.toggle")}
         </button>
@@ -224,5 +227,6 @@ export default function TitlePage() {
       </button>
       {feedback && <FeedbackModal onClose={() => setFeedback(false)} />}
     </main>
+    </>
   );
 }

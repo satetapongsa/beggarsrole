@@ -44,6 +44,8 @@ lives that made it out, a keepsake poster you can save as an image.
   escape a brutal city) or your whole career (finish 50 lives, live in every city, find every
   ending). Earning them unlocks extra poster themes. The achievements page also keeps career
   totals: lives played, escapes, total days, best score and cities seen.
+- **Past lives.** A history of the last 100 lives on the device — who you were, where you lived,
+  how it ended, days and score — sortable by date, score or length, each one replayable.
 - **Seeds.** Any life can be replayed exactly from its seed, or started from a seed you type in.
 - **Install it like an app.** The site is a progressive web app: add it to your home screen on a
   phone, or install it from the browser on a computer. After the first visit it loads and plays
@@ -67,7 +69,7 @@ npm run dev        # http://localhost:3000
 ## How the code is organised
 
 ```
-app/            page.tsx (title) · play/ (the game) · end/ (life summary) · endings/ (album)
+app/            page.tsx (title) · play/ (the game) · end/ (life summary) · endings/ (album) · lives/
                 achievements/ · leaderboard/ · admin/
                 api/: og (share card) · track · runs · leaderboard · stats · daily · profile · admin
 components/     game UI: StatBar, ChoiceCard, EventModal, PixelScene, CharacterSprite, Timeline,

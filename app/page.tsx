@@ -126,15 +126,20 @@ export default function TitlePage() {
             {t("title.viewLast")}: {lastEnding.icon} {lang === "th" ? lastEnding.title_th : lastEnding.title_en}
           </button>
         )}
-        <button type="button" onClick={() => router.push("/leaderboard")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
-          🏆 {t("title.leaderboard")}
-        </button>
-        <button type="button" onClick={() => router.push("/endings")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
-          📖 {t("title.endings")}
-        </button>
-        <button type="button" onClick={() => router.push("/achievements")} className="rounded-lg border border-night-700 px-6 py-2 text-sm text-stone-300 hover:bg-night-800">
-          🏅 {t("title.achievements")}
-        </button>
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" onClick={() => router.push("/leaderboard")} className="rounded-lg border border-night-700 px-3 py-2 text-sm text-stone-300 hover:bg-night-800">
+            🏆 {t("title.leaderboard")}
+          </button>
+          <button type="button" onClick={() => router.push("/endings")} className="rounded-lg border border-night-700 px-3 py-2 text-sm text-stone-300 hover:bg-night-800">
+            📖 {t("title.endings")}
+          </button>
+          <button type="button" onClick={() => router.push("/achievements")} className="rounded-lg border border-night-700 px-3 py-2 text-sm text-stone-300 hover:bg-night-800">
+            🏅 {t("title.achievements")}
+          </button>
+          <button type="button" onClick={() => router.push("/lives")} className="rounded-lg border border-night-700 px-3 py-2 text-sm text-stone-300 hover:bg-night-800">
+            🕯️ {t("title.lives")}
+          </button>
+        </div>
         <button type="button" onClick={() => setShowSeed((v) => !v)} className="text-xs text-stone-500 hover:text-stone-300">
           {t("title.seed")}
         </button>

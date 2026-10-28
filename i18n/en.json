@@ -327,5 +327,18 @@
   "ach.tier.bronze": "Bronze",
   "ach.tier.silver": "Silver",
   "ach.tier.gold": "Gold",
-  "ach.earnedOn": "Earned {date}"
+  "ach.earnedOn": "Earned {date}",
+  "title.lives": "Past lives",
+  "lives.title": "Past Lives",
+  "lives.sub": "Every life you have lived on this device. Replay any of them from the same start.",
+  "lives.filter.all": "All",
+  "lives.filter.escaped": "Got out",
+  "lives.filter.died": "Died",
+  "lives.sort.recent": "Recent",
+  "lives.sort.score": "Score",
+  "lives.sort.days": "Longest",
+  "lives.empty": "No finished lives yet.",
+  "lives.days": "{n} days",
+  "lives.score": "{n} pts",
+  "lives.replay": "Replay"
 }

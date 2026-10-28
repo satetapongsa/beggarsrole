@@ -327,5 +327,18 @@
   "ach.tier.bronze": "ทองแดง",
   "ach.tier.silver": "เงิน",
   "ach.tier.gold": "ทอง",
-  "ach.earnedOn": "ได้เมื่อ {date}"
+  "ach.earnedOn": "ได้เมื่อ {date}",
+  "title.lives": "ชีวิตที่ผ่านมา",
+  "lives.title": "ชีวิตที่ผ่านมา",
+  "lives.sub": "ทุกชีวิตที่คุณเคยใช้บนเครื่องนี้ เล่นซ้ำจากจุดเริ่มเดิมได้ทุกชีวิต",
+  "lives.filter.all": "ทั้งหมด",
+  "lives.filter.escaped": "หลุดพ้น",
+  "lives.filter.died": "เสียชีวิต",
+  "lives.sort.recent": "ล่าสุด",
+  "lives.sort.score": "คะแนน",
+  "lives.sort.days": "ยาวที่สุด",
+  "lives.empty": "ยังไม่มีชีวิตที่เล่นจบ",
+  "lives.days": "{n} วัน",
+  "lives.score": "{n} แต้ม",
+  "lives.replay": "เล่นซ้ำ"
 }

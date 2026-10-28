@@ -3,7 +3,8 @@
 
 import { addLife, EMPTY_CAREER, lifeKey, newlyEarned, type Career } from "@/lib/achievements";
 import { SAVE_VERSION } from "@/lib/engine";
-import type { GameState, Lang } from "@/types/game";
+import { scoreLife } from "@/lib/score";
+import type { Appearance, GameState, Lang } from "@/types/game";
 
 const SAVE_KEY = "spare-change:save";
 const LAST_KEY = "spare-change:last-life";
@@ -15,6 +16,7 @@ const NICK_KEY = "spare-change:nickname";
 const DAILY_KEY = "spare-change:daily";
 const CAREER_KEY = "spare-change:career";
 const ACH_KEY = "spare-change:achievements";
+const LIVES_KEY = "spare-change:lives";
 
 function read<T>(key: string): T | null {
   try {
@@ -78,6 +80,52 @@ export function loadCareer(): Career {
   return c && typeof c.lives === "number" ? { ...EMPTY_CAREER, ...c } : { ...EMPTY_CAREER };
 }
 
+/** A finished life, kept small for the history page. */
+export interface PastLife {
+  key: string;
+  at: number;
+  seed: number;
+  name_th: string;
+  name_en: string;
+  appearance: Appearance;
+  ageStart: number;
+  ageEnd: number;
+  /** Starting city first. */
+  cities: string[];
+  days: number;
+  endingId: string;
+  score: number;
+  daily?: string;
+  dog: boolean;
+}
+
+const MAX_PAST_LIVES = 100;
+
+function pastLife(s: GameState): PastLife {
+  return {
+    key: lifeKey(s),
+    at: Date.now(),
+    seed: s.seed,
+    name_th: s.character.name_th,
+    name_en: s.character.name_en,
+    appearance: s.character.appearance,
+    ageStart: s.character.ageStart,
+    ageEnd: s.ended?.age ?? s.age,
+    cities: s.citiesLived,
+    days: s.ended?.day ?? s.day,
+    endingId: s.ended?.endingId ?? "",
+    score: scoreLife(s)?.total ?? 0,
+    daily: s.daily,
+    dog: !!s.companion,
+  };
+}
+
+/** Finished lives on this device, newest first. */
+export function loadPastLives(): PastLife[] {
+  const v = read<PastLife[]>(LIVES_KEY);
+  return Array.isArray(v) ? v : [];
+}
+
 /** Earned achievements: id -> when, and which life earned it (lifeKey). */
 export type Earned = Record<string, { at: number; life: string }>;
 
@@ -91,6 +139,7 @@ function recordCareer(s: GameState, endings: Set<string>) {
   const career = addLife(before, s);
   if (career === before) return;
   write(CAREER_KEY, career);
+  write(LIVES_KEY, [pastLife(s), ...loadPastLives()].slice(0, MAX_PAST_LIVES));
   const earned = loadAchievements();
   const key = lifeKey(s);
   for (const id of newlyEarned({ life: s, career, endings }, new Set(Object.keys(earned)))) {

@@ -50,6 +50,11 @@ lives that made it out, a keepsake poster you can save as an image.
   totals: lives played, escapes, total days, best score and cities seen.
 - **Past lives.** A history of the last 100 lives on the device — who you were, where you lived,
   how it ended, days and score — sortable by date, score or length, each one replayable.
+- **Traces of other players.** Every spot in every city remembers who was there. When a life ends,
+  it leaves a grave (or, for an escape, a note that someone got out) at the spot where it ended.
+  While playing you can read what other players left at the spot you are standing on, light a
+  candle on a grave, and leave a short note of your own for whoever comes next. Notes are signed
+  with your character's name, not yours.
 - **Seeds.** Any life can be replayed exactly from its seed, or started from a seed you type in.
 - **Install it like an app.** The site is a progressive web app: add it to your home screen on a
   phone, or install it from the browser on a computer. After the first visit it loads and plays
@@ -75,7 +80,7 @@ npm run dev        # http://localhost:3000
 ```
 app/            page.tsx (title) · play/ (the game) · end/ (life summary) · endings/ (album) · lives/
                 achievements/ · leaderboard/ · admin/
-                api/: og (share card) · track · runs · leaderboard · stats · daily · profile · admin
+                api/: og (share card) · track · runs · leaderboard · traces · stats · daily · profile · admin
 components/     game UI: StatBar, ChoiceCard, EventModal, PixelScene, CharacterSprite, Timeline,
                 InventoryPanel, SpotPicker, SkipPanel, RunPanel, SurvivorPoster, Flag, ...
 data/           cities, origins, actions, events, endings, traits, items (JSON)
@@ -189,8 +194,11 @@ panels say they are unavailable.
   `DAILY_SECRET`; only a player's first daily run each day counts.
 - **Profiles** (`/api/profile`): the endings collection is synced to the server, and a recovery
   code moves it to another device.
+- **Traces** (`/api/traces`, panel under the scene on the play page): graves and escapes written
+  by `/api/runs`, plus player notes (2–80 characters, no links, same word filter) and one candle
+  per player per grave. Traces never touch the engine, so replays are unaffected.
 - **Admin** (`/api/admin`, page `/admin`): a 30-day player chart, how long lives last, and
-  hiding or restoring leaderboard names. Needs `ADMIN_TOKEN` (12+ characters).
+  hiding or restoring leaderboard names and street notes. Needs `ADMIN_TOKEN` (12+ characters).
 
 **Anti-cheat.** The play page records every action that changed the state. When a life ends the
 client sends only the seed and that action list; `/api/runs` replays it with the same pure engine

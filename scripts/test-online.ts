@@ -97,6 +97,29 @@ async function main() {
     const db = await api(`/api/leaderboard?board=daily&date=${daily.date}`);
     check("daily board lists the run", db.body.entries?.some((e: { name: string }) => e.name === `daily ${RUN_TAG}`), db.body);
 
+    // a finished life leaves a grave (or a way-out mark) where it ended
+    const [trace] = await sql`select id, kind, city_id, spot_id from traces where run_id = ${sub.body.runId}`;
+    check("ended life leaves a trace", trace && (trace.kind === "grave" || trace.kind === "free"), trace);
+    const at = `/api/traces?city=${trace.city_id}&spot=${trace.spot_id}&playerId=${P2}`;
+    const tr = await api(at);
+    check("trace listed at its spot", tr.body.traces?.some((x: { id: number }) => x.id === Number(trace.id)), tr.body);
+    const note = { action: "note", playerId: P2, city: trace.city_id, spot: trace.spot_id, nameTh: "ทดสอบ", nameEn: "Test", age: 30, day: 5 };
+    const n1 = await api("/api/traces", { ...note, text: `ระวังตำรวจตอนเย็น ${RUN_TAG}` });
+    check("leave a note", n1.body.ok && n1.body.id > 0, n1.body);
+    check("link in note refused", (await api("/api/traces", { ...note, text: "go to www.spam.com" })).status === 422);
+    check("rude note refused", (await api("/api/traces", { ...note, text: "f u c k you" })).status === 422);
+    check("note at a made-up spot refused", (await api("/api/traces", { ...note, spot: "nowhere", text: "hello there" })).status === 400);
+    const tr2 = await api(at);
+    check("note listed first", tr2.body.traces?.[0]?.body === `ระวังตำรวจตอนเย็น ${RUN_TAG}`, tr2.body);
+    check("candle on a note refused", (await api("/api/traces", { action: "candle", playerId: P2, traceId: n1.body.id })).status === 404);
+    if (trace.kind === "grave") {
+      const c1 = await api("/api/traces", { action: "candle", playerId: P2, traceId: Number(trace.id) });
+      check("light a candle", c1.body.ok && c1.body.candles === 1, c1.body);
+      check("one candle per player", (await api("/api/traces", { action: "candle", playerId: P2, traceId: Number(trace.id) })).status === 409);
+      const tr3 = await api(at);
+      check("candle shows as lit", tr3.body.traces?.find((x: { id: number }) => x.id === Number(trace.id))?.lit === true, tr3.body);
+    }
+
     const stats = (await api("/api/stats")).body;
     check("stats", stats.ok && stats.players >= 2 && stats.ended >= 2, stats);
 
@@ -121,6 +144,9 @@ async function main() {
   } finally {
     await sql.transaction([
       sql`delete from runs where player_id like 'e2etest-%'`,
+      sql`delete from trace_candles where trace_id in (select id from traces where player_id like 'e2etest-%')`,
+      sql`delete from trace_candles where player_id like 'e2etest-%'`,
+      sql`delete from traces where player_id like 'e2etest-%'`,
       sql`delete from player_endings where player_id like 'e2etest-%'`,
       sql`delete from player_days where player_id like 'e2etest-%'`,
       sql`delete from players where id like 'e2etest-%'`,

@@ -1,6 +1,7 @@
 // Admin dashboard data + leaderboard moderation. Requires `Authorization: Bearer <ADMIN_TOKEN>`.
-// GET                                   → daily series, how long lives last, recent names
+// GET                                   → daily series, how long lives last, recent names and notes
 // POST { action: "hide"|"unhide", runId } → remove/restore a run on every board
+// POST { action: "hideNote"|"unhideNote", traceId } → remove/restore a player note
 
 import { timingSafeEqual } from "node:crypto";
 import { badRequest, getDb, json, offline, today } from "@/lib/db";
@@ -22,7 +23,7 @@ export async function GET(req: Request) {
   if (!authorized(req)) return unauthorized();
   const sql = await getDb();
   if (!sql) return offline();
-  const [series, lengths, recent, [totals]] = await sql.transaction([
+  const [series, lengths, recent, [totals], notes] = await sql.transaction([
     sql`
       select d::date::text as day,
              coalesce(count(pd.player_id), 0)::int as players,
@@ -49,15 +50,22 @@ export async function GET(req: Request) {
              (select count(*)::int from runs) as ended,
              (select count(*)::int from runs where name is not null) as claimed,
              (select count(*)::int from runs where daily is not null) as daily`,
+    sql`
+      select id::int, body, city_id as "cityId", name_en as "nameEn", hidden, created_at as "createdAt"
+      from traces where kind = 'note' order by created_at desc limit 100`,
   ]);
-  return json({ ok: true, totals, series, lengths, recent });
+  return json({ ok: true, totals, series, lengths, recent, notes });
 }
 
 export async function POST(req: Request) {
   if (!authorized(req)) return unauthorized();
   const sql = await getDb();
   if (!sql) return offline();
-  const body = (await req.json().catch(() => null)) as { action?: unknown; runId?: unknown } | null;
+  const body = (await req.json().catch(() => null)) as { action?: unknown; runId?: unknown; traceId?: unknown } | null;
+  if ((body?.action === "hideNote" || body?.action === "unhideNote") && Number.isInteger(body.traceId)) {
+    const rows = await sql`update traces set hidden = ${body.action === "hideNote"} where id = ${body.traceId as number} returning id`;
+    return rows.length ? json({ ok: true }) : json({ ok: false, error: "not_found" }, 404);
+  }
   if ((body?.action !== "hide" && body?.action !== "unhide") || typeof body.runId !== "string") return badRequest();
   const rows = await sql`update runs set hidden = ${body.action === "hide"} where id = ${body.runId} returning id`;
   return rows.length ? json({ ok: true }) : json({ ok: false, error: "not_found" }, 404);

@@ -14,6 +14,7 @@ import RevealScreen from "@/components/RevealScreen";
 import SpotPicker from "@/components/SpotPicker";
 import StatBar from "@/components/StatBar";
 import Timeline from "@/components/Timeline";
+import TracesPanel from "@/components/TracesPanel";
 import { SkipButtons, SummaryModal } from "@/components/SkipPanel";
 import { DATA } from "@/lib/data";
 import { activeFestivals, ageGroupOf, cityOf } from "@/lib/conditions";
@@ -295,6 +296,8 @@ export default function PlayPage() {
               )}
             </div>
           )}
+
+          <TracesPanel state={state} spotId={spot.id} />
 
           {!busy && <GuideTip state={state} onCat={setCat} />}
 

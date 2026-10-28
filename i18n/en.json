@@ -354,5 +354,22 @@
   "tip.hygiene_low": "You're very dirty. People give less and you get sick more easily. Wash under Survive.",
   "tip.first_night": "It's night. Sleeping restores energy. A shelter bed is safer than sleeping rough, especially in rain or cold.",
   "tip.skip": "You can now skip ahead a week at a time with the buttons below the cards. Pick a style of living; it stops for anything important.",
-  "tip.way_out": "The main way off the street: save money, get an ID card, find steady work, then rent a room — all under Future. There are other, hidden ways out too."
+  "tip.way_out": "The main way off the street: save money, get an ID card, find steady work, then rent a room — all under Future. There are other, hidden ways out too.",
+  "traces.title": "Traces here",
+  "traces.none": "Nobody has left anything here yet. You could be the first.",
+  "traces.grave": "{name}, {age} — {ending} on day {day}",
+  "traces.free": "{name} used to sleep here, and got out — {ending}",
+  "traces.note": "— {name}, day {day}",
+  "traces.candle": "Light a candle",
+  "traces.candles": "{n} candles",
+  "traces.write": "Leave a note for whoever comes next…",
+  "traces.leave": "Leave it",
+  "traces.left": "Your note is here now. Anyone who reaches this spot can read it.",
+  "traces.err.bad_note": "Notes must be 2–80 characters, with no links.",
+  "traces.err.note_blocked": "That note can't be posted.",
+  "traces.err.rate_limited": "Too many notes — wait a while and try again.",
+  "traces.err.other": "Couldn't send it. Try again.",
+  "traces.more": "and {n} more",
+  "end.trace.grave": "{name}'s grave is at {spot} now. Other players who pass by will see it and can light a candle.",
+  "end.trace.free": "{spot} will remember that {name} lived here and got out. Other players who pass by will see it."
 }

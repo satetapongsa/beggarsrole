@@ -46,6 +46,29 @@ const SCHEMA = [
     found_at timestamptz not null default now(),
     primary key (player_id, ending_id)
   )`,
+  `create table if not exists traces (
+    id bigserial primary key,
+    player_id text not null,
+    kind text not null,
+    city_id text not null,
+    spot_id text not null,
+    run_id text unique,
+    name_th text not null,
+    name_en text not null,
+    age int not null,
+    day int not null,
+    ending_id text,
+    body text,
+    candles int not null default 0,
+    hidden boolean not null default false,
+    created_at timestamptz not null default now()
+  )`,
+  `create index if not exists traces_spot on traces (city_id, spot_id, created_at desc) where not hidden`,
+  `create table if not exists trace_candles (
+    trace_id bigint not null,
+    player_id text not null,
+    primary key (trace_id, player_id)
+  )`,
   `create table if not exists rate_limits (
     key text primary key,
     n int not null,
@@ -57,7 +80,8 @@ let client: Sql | null | undefined;
 let ready: Promise<unknown> | null = null;
 
 export async function getDb(): Promise<Sql | null> {
-  if (client === undefined) client = process.env.DATABASE_URL ? neon(process.env.DATABASE_URL) : null;
+  // no-store: Next.js otherwise keeps Neon's HTTP responses in its fetch cache and serves stale rows
+  if (client === undefined) client = process.env.DATABASE_URL ? neon(process.env.DATABASE_URL, { fetchOptions: { cache: "no-store" } }) : null;
   if (!client) return null;
   const sql = client;
   ready ??= sql.transaction(SCHEMA.map((q) => sql.query(q))).catch((e) => {

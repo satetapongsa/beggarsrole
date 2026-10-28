@@ -76,3 +76,39 @@ export async function restoreProfile(code: string): Promise<Result<{ endings: st
   savePlayerId(res.playerId);
   return { ok: true, endings: await syncEndings() };
 }
+
+export interface Trace {
+  id: number;
+  kind: "note" | "grave" | "free";
+  nameTh: string;
+  nameEn: string;
+  age: number;
+  day: number;
+  endingId: string | null;
+  body: string | null;
+  candles: number;
+  lit: boolean;
+  at: number;
+}
+
+export function fetchTraces(city: string, spot: string) {
+  const p = new URLSearchParams({ city, spot, playerId: loadPlayerId() });
+  return call<{ traces: Trace[]; total: number }>(`/api/traces?${p.toString()}`);
+}
+
+/** Leaves a note at the spot the character is standing, signed with the character's name. */
+export function leaveNote(life: GameState, spot: string, text: string) {
+  return call<{ id: number }>("/api/traces", {
+    action: "note",
+    playerId: loadPlayerId(),
+    city: life.cityId,
+    spot,
+    nameTh: life.character.name_th,
+    nameEn: life.character.name_en,
+    age: life.age,
+    day: life.day,
+    text,
+  });
+}
+
+export const lightCandle = (traceId: number) => call<{ candles: number }>("/api/traces", { action: "candle", playerId: loadPlayerId(), traceId });

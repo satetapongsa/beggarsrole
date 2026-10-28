@@ -29,11 +29,20 @@ interface Recent {
   hidden: boolean;
   claimedAt: string;
 }
+interface Note {
+  id: number;
+  body: string;
+  cityId: string;
+  nameEn: string;
+  hidden: boolean;
+  createdAt: string;
+}
 interface Dashboard {
   totals: { players: number; started: number; ended: number; claimed: number; daily: number };
   series: Day[];
   lengths: { bucket: string; n: number }[];
   recent: Recent[];
+  notes: Note[];
 }
 
 /** Single-series vertical bars with a hover tooltip; labels only the peak and the latest bar. */
@@ -147,6 +156,15 @@ export default function AdminPage() {
     await load(token);
   };
 
+  const toggleNote = async (n: Note) => {
+    await fetch("/api/admin", {
+      method: "POST",
+      headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+      body: JSON.stringify({ action: n.hidden ? "unhideNote" : "hideNote", traceId: n.id }),
+    });
+    await load(token);
+  };
+
   if (!data) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center px-5">
@@ -174,7 +192,7 @@ export default function AdminPage() {
     );
   }
 
-  const { totals, series, lengths, recent } = data;
+  const { totals, series, lengths, recent, notes } = data;
   const today = series[series.length - 1];
   const tiles: [string, number][] = [
     ["Players (all time)", totals.players],
@@ -253,6 +271,34 @@ export default function AdminPage() {
                   className={`rounded px-2 py-0.5 text-xs ${r.hidden ? "border border-night-600 text-stone-300" : "bg-red-900/60 text-red-200 hover:bg-red-800"}`}
                 >
                   {r.hidden ? "Restore" : "Hide"}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-4">
+        <h2 className="mb-3 text-sm font-semibold text-stone-200">Latest street notes</h2>
+        {notes.length === 0 ? (
+          <p className="text-sm text-stone-500">No notes yet.</p>
+        ) : (
+          <ul className="divide-y divide-night-800">
+            {notes.map((n) => (
+              <li key={n.id} className={`flex items-center gap-3 py-2 text-sm ${n.hidden ? "opacity-50" : ""}`}>
+                <span className="w-6 text-center">{DATA.city[n.cityId]?.flag}</span>
+                <span className="min-w-0 flex-1">
+                  <span className={n.hidden ? "line-through" : "text-stone-100"}>{n.body}</span>
+                  <span className="ml-2 text-xs text-stone-500">
+                    {n.nameEn} · {new Date(n.createdAt).toLocaleString()}
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => void toggleNote(n)}
+                  className={`rounded px-2 py-0.5 text-xs ${n.hidden ? "border border-night-600 text-stone-300" : "bg-red-900/60 text-red-200 hover:bg-red-800"}`}
+                >
+                  {n.hidden ? "Restore" : "Hide"}
                 </button>
               </li>
             ))}

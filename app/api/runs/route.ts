@@ -3,6 +3,7 @@
 // A daily-challenge life counts for the daily board only if it is the player's first daily run that day.
 
 import { createHash } from "node:crypto";
+import { DATA } from "@/lib/data";
 import { isDailyDate } from "@/lib/daily";
 import { dailySeed, isOpenDaily } from "@/lib/daily-seed";
 import { badRequest, getDb, isPlayerId, json, offline, rateLimited, today, underLimit } from "@/lib/db";
@@ -48,6 +49,10 @@ export async function POST(req: Request) {
       if (!tried.length) daily = body.daily as string;
     }
     const cityId = life.citiesLived[0] ?? life.cityId;
+    // where the life ended becomes a trace other players find at that spot: a grave or a way out
+    const endCity = DATA.city[life.cityId];
+    const endSpot = endCity.spots.find((sp) => sp.id === life.lastSpot) ?? endCity.spots[0];
+    const traceKind = DATA.ending[life.ended.endingId]?.death ? "grave" : "free";
     await sql.transaction([
       sql`insert into runs (id, player_id, seed, score, ending_id, city_id, days, age, daily)
           values (${runId}, ${playerId}, ${seed}, ${score.total}, ${life.ended.endingId}, ${cityId},
@@ -58,6 +63,10 @@ export async function POST(req: Request) {
           on conflict (player_id, day) do update set ends = player_days.ends + 1`,
       sql`insert into player_endings (player_id, ending_id) values (${playerId}, ${life.ended.endingId})
           on conflict do nothing`,
+      sql`insert into traces (player_id, kind, city_id, spot_id, run_id, name_th, name_en, age, day, ending_id)
+          values (${playerId}, ${traceKind}, ${endCity.id}, ${endSpot.id}, ${runId}, ${life.character.name_th},
+                  ${life.character.name_en}, ${life.ended.age}, ${life.ended.day}, ${life.ended.endingId})
+          on conflict (run_id) do nothing`,
     ]);
   }
 

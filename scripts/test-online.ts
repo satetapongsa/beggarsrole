@@ -137,6 +137,21 @@ async function main() {
     const prow = recs.body.players?.find((x: { name: string }) => x.name === nick);
     check("players list shows the name with its rebirths and best", prow && prow.starts >= 2 && prow.ended >= 1 && prow.best > 0, prow);
     check("lives filtered to one player", recs.body.entries.length > 0 && recs.body.entries.every((e: { name: string }) => e.name === nick), recs.body.entries);
+    // a name is one player whatever its case: MiXeD and mixed share one row and one spelling
+    const mixed = `CaseTest ${RUN_TAG}`;
+    await api("/api/track", { playerId: P2, name: mixed });
+    await api("/api/track", { playerId: P2, name: mixed.toLowerCase() });
+    await api("/api/track", { playerId: P2, name: mixed.toUpperCase() });
+    const caseRows = await sql`select name, starts from names where lower(name) = lower(${mixed})`;
+    check("names match ignoring case", caseRows.length === 1 && caseRows[0].name === mixed && Number(caseRows[0].starts) === 3, caseRows);
+    const lifeC = play(4242, 7);
+    const subC = await api("/api/runs", { seed: lifeC.seed, actions: lifeC.actions, playerId: P2 });
+    const claimC = await api("/api/leaderboard", { runId: subC.body.runId, playerId: P2, name: mixed.toLowerCase() });
+    check("claim keeps the first spelling", claimC.body.ok && claimC.body.name === mixed, claimC.body);
+    const recC = await api(`/api/records?sort=score&name=${encodeURIComponent(mixed.toUpperCase())}`);
+    const pC = recC.body.players?.find((x: { name: string }) => x.name === mixed);
+    check("player row counts the life", pC && pC.ended >= 1 && pC.starts === 3, pC);
+    check("filter by name ignores case", recC.body.entries.length >= 1 && recC.body.entries.every((e: { name: string }) => e.name === mixed), recC.body.entries);
     check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
 
     const stats = (await api("/api/stats")).body;

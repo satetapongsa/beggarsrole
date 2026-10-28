@@ -54,7 +54,7 @@ export function submitRun(life: GameState) {
 }
 
 export function claimRun(runId: string, name: string) {
-  return call<{ rank: number; dailyRank: number | null }>("/api/leaderboard", { runId, name, playerId: loadPlayerId() });
+  return call<{ rank: number; dailyRank: number | null; name: string }>("/api/leaderboard", { runId, name, playerId: loadPlayerId() });
 }
 
 /** Merges local and server endings both ways; returns the merged list. */

@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   await sql.transaction([
     ...(named
       ? [sql`insert into names (name, starts) values (${named}, 1)
-             on conflict (name) do update set starts = names.starts + 1, last_seen = now()`]
+             on conflict ((lower(name))) do update set starts = names.starts + 1, last_seen = now()`]
       : []),
     sql`insert into players (id) values (${id}) on conflict (id) do update set last_seen = now()`,
     sql`insert into player_days (player_id, day, starts) values (${id}, ${today()}, 1)

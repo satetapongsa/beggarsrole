@@ -89,7 +89,7 @@ export default function RunPanel({ life, onResult }: { life: GameState; onResult
     if (!base) return;
     update({
       ...base,
-      name: nick,
+      name: res.ok ? res.name : nick,
       rank: res.ok ? res.rank : base.rank,
       dailyRank: res.ok ? res.dailyRank ?? undefined : base.dailyRank,
     });

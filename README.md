@@ -65,7 +65,7 @@ lives that made it out, a keepsake poster you can save as an image.
   launch, named or not, sortable by score, days survived or money at the end (converted to baht).
   It also shows totals and the all-time records, and each row opens to show the character, where
   they were born and ended, their age, money, cities lived in and the ending.
-- **Players.** A name is one player. The server records the name every time a life starts, so the
+- **Players.** A name is one player, ignoring upper and lower case (WAVY and wavy are the same person, shown with the spelling used first). The server records the name every time a life starts, so the
   players list shows everyone who has played, how many times they were reborn, how many lives they
   finished and their bests. Tap a name to see only that player's lives. The player count is the
   number of names.

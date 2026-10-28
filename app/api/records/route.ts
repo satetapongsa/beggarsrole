@@ -92,7 +92,7 @@ export async function GET(req: Request) {
 
   const deaths = DATA.endings.filter((e) => e.death).map((e) => e.id);
   const [rows, [totals], longest, richest, best, players] = await sql.transaction([
-    sql.query(`select ${COLS} from runs where not hidden and ($1::text is null or name = $1) order by ${order} limit ${TOP}`, [name]),
+    sql.query(`select ${COLS} from runs where not hidden and ($1::text is null or lower(name) = lower($1)) order by ${order} limit ${TOP}`, [name]),
     sql`select coalesce(sum(days), 0)::int as "totalDays", coalesce(round(avg(days)), 0)::int as "avgDays",
                count(*) filter (where ending_id <> all(${deaths}))::int as escaped
         from runs where not hidden`,
@@ -102,7 +102,7 @@ export async function GET(req: Request) {
     sql`select n.name, n.starts, n.last_seen as "lastSeen", count(r.id)::int as ended,
                count(r.id) filter (where r.ending_id <> all(${deaths}))::int as escaped,
                max(r.score) as best, max(r.days) as longest, max(r.money_thb) as "richestThb"
-        from names n left join runs r on r.name = n.name and not r.hidden
+        from names n left join runs r on lower(r.name) = lower(n.name) and not r.hidden
         group by n.name, n.starts, n.last_seen
         order by max(r.score) desc nulls last, n.starts desc, n.last_seen desc`,
   ]);

@@ -81,6 +81,7 @@ export default function LeaderboardPage() {
     return e ? `${e.icon} ${lang === "th" ? e.title_th : e.title_en}` : id;
   };
   const playerName = (e: LifeEntry) => e.name ?? t("rec.anon");
+  const isMine = (n: string | null) => Boolean(mine && n && n.toLowerCase() === mine.toLowerCase());
   const money = (e: LifeEntry) => {
     const city = DATA.city[e.endCityId ?? ""];
     if (e.money === null || !city) return "—";
@@ -179,7 +180,7 @@ export default function LeaderboardPage() {
               <p className="px-4 pb-2 text-[11px] text-stone-500">{t("rec.playersHint")}</p>
               <ol>
                 {(allPlayers ? players : players.slice(0, 20)).map((p, i) => (
-                  <li key={p.name} className={`border-t border-night-800 ${p.name === mine ? "bg-lamp-500/10" : ""} ${p.name === who ? "bg-sky-900/30" : ""}`}>
+                  <li key={p.name} className={`border-t border-night-800 ${isMine(p.name) ? "bg-lamp-500/10" : ""} ${p.name === who ? "bg-sky-900/30" : ""}`}>
                     <button type="button" onClick={() => pickPlayer(p.name)} className="flex w-full items-center gap-3 px-4 py-2.5 text-left hover:bg-night-800/60">
                       <span className="w-7 text-right font-semibold tabular-nums text-stone-500">{i + 1}</span>
                       <div className="min-w-0 flex-1">
@@ -234,7 +235,7 @@ export default function LeaderboardPage() {
                   const origin = e.originId ? DATA.origin[e.originId] : null;
                   const charName = lang === "th" ? e.charTh : e.charEn;
                   return (
-                    <li key={`${e.rank}-${e.at}`} className={`border-b border-night-800 last:border-0 ${mine && e.name === mine ? "bg-lamp-500/10" : ""}`}>
+                    <li key={`${e.rank}-${e.at}`} className={`border-b border-night-800 last:border-0 ${isMine(e.name) ? "bg-lamp-500/10" : ""}`}>
                       <button
                         type="button"
                         onClick={() => setOpen(isOpen ? null : e.rank)}

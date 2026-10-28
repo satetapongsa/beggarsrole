@@ -72,24 +72,27 @@ export async function POST(req: Request) {
   if (!(await underLimit(sql, req, "claim", 30))) return rateLimited();
 
   const updated = await sql`
-    update runs set name = ${name}, claimed_at = now()
+    update runs set claimed_at = now(),
+      name = coalesce((select n.name from names n where lower(n.name) = lower(${name})), ${name})
     where id = ${runId} and player_id = ${body.playerId} and name is null
-    returning score, daily::text as daily`;
+    returning name, score, daily::text as daily`;
   if (!updated.length) {
     const [run] = await sql`select name from runs where id = ${runId} and player_id = ${body.playerId}`;
     return run ? json({ ok: false, error: "already_claimed" }, 409) : json({ ok: false, error: "not_found" }, 404);
   }
+  // the player's existing spelling wins: "wavy" claims as "WAVY" if WAVY played first
   const { score, daily } = updated[0];
+  const canonical = String(updated[0].name);
   // ranks count other names only, matching the one-row-per-name boards
   const [{ rank }] = await sql`
     select count(distinct name)::int + 1 as rank from runs
-    where name is not null and name <> ${name} and not hidden and score > ${score}`;
+    where name is not null and name <> ${canonical} and not hidden and score > ${score}`;
   let dailyRank: number | null = null;
   if (daily) {
     const [r] = await sql`
       select count(distinct name)::int + 1 as rank from runs
-      where daily = ${daily} and name is not null and name <> ${name} and not hidden and score > ${score}`;
+      where daily = ${daily} and name is not null and name <> ${canonical} and not hidden and score > ${score}`;
     dailyRank = r.rank;
   }
-  return json({ ok: true, rank, dailyRank });
+  return json({ ok: true, rank, dailyRank, name: canonical });
 }

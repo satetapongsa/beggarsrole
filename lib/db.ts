@@ -53,8 +53,23 @@ const SCHEMA = [
   )`,
   // names that reached the board before names were recorded at the start of a life
   `insert into names (name, starts, first_seen, last_seen)
-    select name, count(*), min(created_at), max(created_at) from runs where name is not null group by name
-    on conflict (name) do nothing`,
+    select (array_agg(name order by created_at))[1], count(*), min(created_at), max(created_at)
+    from runs where name is not null group by lower(name)
+    on conflict do nothing`,
+  // names are one player regardless of upper/lower case: fold rows that differ only in case into the
+  // first-seen spelling, then keep it that way with a unique index on lower(name)
+  `with dup as (
+      select lower(name) as k, sum(starts)::int as starts, min(first_seen) as f, max(last_seen) as l,
+             (array_agg(name order by first_seen, name))[1] as keep
+      from names group by lower(name) having count(*) > 1
+    ), merged as (
+      update names n set starts = dup.starts, first_seen = dup.f, last_seen = dup.l
+      from dup where n.name = dup.keep returning n.name
+    )
+    delete from names d using dup where lower(d.name) = dup.k and d.name <> dup.keep`,
+  `create unique index if not exists names_lower on names (lower(name))`,
+  // runs carry the player's one spelling, so boards group and match them as one name
+  `update runs r set name = n.name from names n where lower(r.name) = lower(n.name) and r.name <> n.name`,
   `create unique index if not exists runs_one_daily on runs (player_id, daily) where daily is not null`,
   `create index if not exists runs_board on runs (score desc) where name is not null and not hidden`,
   `create index if not exists runs_daily_board on runs (daily, score desc) where name is not null and not hidden`,

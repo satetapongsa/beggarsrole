@@ -16,7 +16,8 @@ import { fill, formatMoney, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { startLife } from "@/lib/online";
 import { makeSeed } from "@/lib/rng";
-import { loadEndingsFound, loadLastLife, type LastRun } from "@/lib/storage";
+import { ACHIEVEMENT, lifeKey, TIER_STYLE } from "@/lib/achievements";
+import { loadAchievements, loadEndingsFound, loadLastLife, type LastRun } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 import type { GameState } from "@/types/game";
 
@@ -28,9 +29,16 @@ export default function EndPage() {
   const [copied, setCopied] = useState(false);
   const [run, setRun] = useState<LastRun | null>(null);
 
+  const [fresh, setFresh] = useState<string[]>([]);
+
   useEffect(() => {
-    setLife(loadLastLife());
+    const l = loadLastLife();
+    setLife(l);
     setFound(loadEndingsFound());
+    if (l) {
+      const key = lifeKey(l);
+      setFresh(Object.entries(loadAchievements()).filter(([, v]) => v.life === key).map(([id]) => id));
+    }
   }, []);
 
   const ending = life?.ended ? DATA.ending[life.ended.endingId] : null;
@@ -171,6 +179,26 @@ export default function EndPage() {
           📖 {t("end.endingsFound", { n: found.length, total: DATA.endings.length })}
         </Link>
       </section>
+
+      {fresh.length > 0 && (
+        <section className="mt-6 animate-fadeIn rounded-xl border border-yellow-700/60 bg-night-900 p-5">
+          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-yellow-300">🏅 {t("ach.new")}</h2>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {fresh.map((id) => ACHIEVEMENT[id]).filter(Boolean).map((a) => (
+              <li key={a.id} className={`flex items-center gap-3 rounded-lg border bg-night-800 p-2.5 ${TIER_STYLE[a.tier]}`}>
+                <span className="text-2xl" aria-hidden>{a.icon}</span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-medium text-stone-100">{lang === "th" ? a.name_th : a.name_en}</span>
+                  <span className="block text-xs text-stone-400">{lang === "th" ? a.desc_th : a.desc_en}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <Link href="/achievements" className="mt-3 inline-block text-xs text-stone-500 hover:text-stone-300 hover:underline">
+            {t("title.achievements")} →
+          </Link>
+        </section>
+      )}
 
       <RunPanel life={life} onResult={setRun} />
 

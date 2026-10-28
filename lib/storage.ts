@@ -1,6 +1,7 @@
 // localStorage helpers. Every call is wrapped in try/catch: private mode, quota errors
 // or disabled storage must never crash the game.
 
+import { addLife, EMPTY_CAREER, lifeKey, newlyEarned, type Career } from "@/lib/achievements";
 import { SAVE_VERSION } from "@/lib/engine";
 import type { GameState, Lang } from "@/types/game";
 
@@ -12,6 +13,8 @@ const PLAYER_KEY = "spare-change:player";
 const RUN_KEY = "spare-change:last-run";
 const NICK_KEY = "spare-change:nickname";
 const DAILY_KEY = "spare-change:daily";
+const CAREER_KEY = "spare-change:career";
+const ACH_KEY = "spare-change:achievements";
 
 function read<T>(key: string): T | null {
   try {
@@ -66,7 +69,34 @@ export function saveLastLife(s: GameState) {
     const found = new Set(loadEndingsFound());
     found.add(s.ended.endingId);
     write(ENDINGS_KEY, Array.from(found));
+    recordCareer(s, found);
   }
+}
+
+export function loadCareer(): Career {
+  const c = read<Career>(CAREER_KEY);
+  return c && typeof c.lives === "number" ? { ...EMPTY_CAREER, ...c } : { ...EMPTY_CAREER };
+}
+
+/** Earned achievements: id -> when, and which life earned it (lifeKey). */
+export type Earned = Record<string, { at: number; life: string }>;
+
+export function loadAchievements(): Earned {
+  const v = read<Earned>(ACH_KEY);
+  return v && typeof v === "object" ? v : {};
+}
+
+function recordCareer(s: GameState, endings: Set<string>) {
+  const before = loadCareer();
+  const career = addLife(before, s);
+  if (career === before) return;
+  write(CAREER_KEY, career);
+  const earned = loadAchievements();
+  const key = lifeKey(s);
+  for (const id of newlyEarned({ life: s, career, endings }, new Set(Object.keys(earned)))) {
+    earned[id] = { at: Date.now(), life: key };
+  }
+  write(ACH_KEY, earned);
 }
 
 export function loadEndingsFound(): string[] {

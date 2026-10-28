@@ -11,6 +11,7 @@
     "validate": "tsx scripts/validate-data.ts",
     "simulate": "tsx scripts/simulate.ts",
     "verify-replay": "tsx scripts/verify-replay.ts",
+    "check-achievements": "tsx scripts/check-achievements.ts",
     "test:online": "tsx --env-file=.env.local scripts/test-online.ts"
   },
   "dependencies": {

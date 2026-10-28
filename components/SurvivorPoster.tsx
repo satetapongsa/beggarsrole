@@ -12,14 +12,15 @@ import { dailyNumber } from "@/lib/daily";
 import { lifeStats } from "@/lib/engine";
 import { fill, formatNumber } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
-import type { LastRun } from "@/lib/storage";
+import { POSTER_UNLOCKS } from "@/lib/achievements";
+import { loadAchievements, type LastRun } from "@/lib/storage";
 import { RARITY_STYLE } from "@/lib/ui";
 import type { Ending, GameState } from "@/types/game";
 
 const W = 540;
 const H = 675;
 
-type Theme = "dawn" | "night" | "gold";
+type Theme = "dawn" | "night" | "gold" | "neon" | "paper";
 const THEMES: Record<Theme, { bg: string; ink: string; soft: string; accent: string; card: string; swatch: string }> = {
   dawn: {
     bg: "linear-gradient(172deg, #ffc58a 0%, #f38a6b 30%, #8e4f7a 62%, #2a1b3d 100%)",
@@ -45,6 +46,23 @@ const THEMES: Record<Theme, { bg: string; ink: string; soft: string; accent: str
     card: "rgba(255,255,255,0.28)",
     swatch: "linear-gradient(135deg,#fff3c4,#b45309)",
   },
+  // unlocked by achievements (POSTER_UNLOCKS)
+  neon: {
+    bg: "radial-gradient(circle at 20% 10%, rgba(236,72,153,0.45) 0%, rgba(236,72,153,0) 45%), radial-gradient(circle at 85% 30%, rgba(34,211,238,0.35) 0%, rgba(34,211,238,0) 45%), linear-gradient(170deg, #1a0b2e 0%, #05030c 100%)",
+    ink: "#f5f3ff",
+    soft: "rgba(245,243,255,0.72)",
+    accent: "#67e8f9",
+    card: "rgba(236,72,153,0.14)",
+    swatch: "linear-gradient(135deg,#ec4899,#22d3ee)",
+  },
+  paper: {
+    bg: "repeating-linear-gradient(0deg, rgba(120,90,50,0.06) 0px, rgba(120,90,50,0.06) 1px, transparent 1px, transparent 28px), linear-gradient(170deg, #f7efe0 0%, #e9dcc2 100%)",
+    ink: "#2b2118",
+    soft: "rgba(43,33,24,0.68)",
+    accent: "#8a3b12",
+    card: "rgba(120,90,50,0.12)",
+    swatch: "linear-gradient(135deg,#f7efe0,#c9b38a)",
+  },
 };
 
 export default function SurvivorPoster({ life, ending, run }: { life: GameState; ending: Ending; run: LastRun | null }) {
@@ -55,6 +73,10 @@ export default function SurvivorPoster({ life, ending, run }: { life: GameState;
   const [error, setError] = useState(false);
   const wrap = useRef<HTMLDivElement>(null);
   const poster = useRef<HTMLDivElement>(null);
+  const [earned, setEarned] = useState(0);
+
+  useEffect(() => setEarned(Object.keys(loadAchievements()).length), []);
+  const needFor = (k: Theme) => POSTER_UNLOCKS.find((u) => u.theme === k)?.need ?? 0;
 
   useEffect(() => {
     const el = wrap.current;
@@ -112,19 +134,26 @@ export default function SurvivorPoster({ life, ending, run }: { life: GameState;
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-lamp-300">🖼️ {t("poster.title")}</h2>
         <div className="flex gap-2" role="radiogroup" aria-label={t("poster.theme")}>
-          {(Object.keys(THEMES) as Theme[]).map((k) => (
-            <button
-              key={k}
-              type="button"
-              role="radio"
-              aria-checked={theme === k}
-              aria-label={t(`poster.theme.${k}`)}
-              title={t(`poster.theme.${k}`)}
-              onClick={() => setTheme(k)}
-              className={`h-7 w-7 rounded-full border-2 ${theme === k ? "border-lamp-300" : "border-night-600"}`}
-              style={{ background: THEMES[k].swatch }}
-            />
-          ))}
+          {(Object.keys(THEMES) as Theme[]).map((k) => {
+            const locked = earned < needFor(k);
+            const label = locked ? t("poster.locked", { theme: t(`poster.theme.${k}`), n: needFor(k) }) : t(`poster.theme.${k}`);
+            return (
+              <button
+                key={k}
+                type="button"
+                role="radio"
+                aria-checked={theme === k}
+                aria-label={label}
+                title={label}
+                disabled={locked}
+                onClick={() => setTheme(k)}
+                className={`relative h-7 w-7 rounded-full border-2 disabled:cursor-not-allowed ${theme === k ? "border-lamp-300" : "border-night-600"}`}
+                style={{ background: THEMES[k].swatch, opacity: locked ? 0.35 : 1 }}
+              >
+                {locked && <span className="absolute inset-0 flex items-center justify-center text-[11px]" aria-hidden>🔒</span>}
+              </button>
+            );
+          })}
         </div>
       </div>
 

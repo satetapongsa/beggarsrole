@@ -7,6 +7,7 @@ import CityBadge from "@/components/CityBadge";
 import CharacterSprite from "@/components/CharacterSprite";
 import DeltaChips from "@/components/DeltaChips";
 import GuideTip from "@/components/GuideTip";
+import HelpModal from "@/components/HelpModal";
 import EventModal from "@/components/EventModal";
 import InventoryPanel from "@/components/InventoryPanel";
 import PixelScene from "@/components/PixelScene";
@@ -19,11 +20,11 @@ import { SkipButtons, SummaryModal } from "@/components/SkipPanel";
 import { DATA } from "@/lib/data";
 import { activeFestivals, ageGroupOf, cityOf } from "@/lib/conditions";
 import { dailyNumber } from "@/lib/daily";
-import { actionViews, step } from "@/lib/engine";
+import { actionViews, spotViews, step } from "@/lib/engine";
 import { fill, formatMoney } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { clearGame, loadGame, saveGame, saveLastLife } from "@/lib/storage";
-import { hasDeltas, lockText, WEATHER_ICON } from "@/lib/ui";
+import { hasDeltas, isHelpKey, keyDigit, lockText, WEATHER_ICON } from "@/lib/ui";
 import type { ActionCategory, GameAction, GameState } from "@/types/game";
 import { STAT_KEYS } from "@/types/game";
 
@@ -39,6 +40,7 @@ function reducer(s: GameState | null, a: Act): GameState | null {
 
 const CATS: ActionCategory[] = ["earn", "survive", "people", "future"];
 const CAT_ICON: Record<ActionCategory, string> = { earn: "🪙", survive: "🍲", people: "🤝", future: "🔑" };
+const CAT_KEY: Record<string, ActionCategory> = { KeyQ: "earn", KeyW: "survive", KeyE: "people", KeyR: "future" };
 
 export default function PlayPage() {
   const router = useRouter();
@@ -49,7 +51,16 @@ export default function PlayPage() {
   const [toasts, setToasts] = useState<{ id: number; text: string }[]>([]);
   const [showDetails, setShowDetails] = useState(false);
   const [sideTab, setSideTab] = useState<"log" | "timeline">("log");
+  const [help, setHelp] = useState(false);
   const prevLog = useRef<number>(0);
+  const onKeyRef = useRef<(e: KeyboardEvent) => void>();
+
+  // keyboard shortcuts; the handler is rebuilt every render so it always sees the current state
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => onKeyRef.current?.(e);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   // load save
   useEffect(() => {
@@ -140,6 +151,35 @@ export default function PlayPage() {
 
   const fillT = (s: string) => fill(s, state, lang);
 
+  onKeyRef.current = (e) => {
+    if (help || e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+    const tag = (e.target as HTMLElement | null)?.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    const n = keyDigit(e);
+    if (picking) {
+      if (e.key === "Escape") setPicking(null);
+      const sv = n ? spotViews(state)[n - 1] : undefined;
+      if (sv && !sv.lock) {
+        dispatch({ type: "act", actionId: picking, spotId: sv.spot.id });
+        setPicking(null);
+      }
+      return;
+    }
+    if (busy || !state.revealed) return;
+    if (isHelpKey(e)) {
+      e.preventDefault();
+      setHelp(true);
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      const i = CATS.indexOf(cat) + (e.key === "ArrowLeft" ? -1 : 1);
+      setCat(CATS[(i + CATS.length) % CATS.length]);
+    } else if (CAT_KEY[e.code]) {
+      setCat(CAT_KEY[e.code]);
+    } else if (n) {
+      const v = catViews[n - 1];
+      if (v && !v.lock) act(v.def.id, v.def.pickSpot);
+    }
+  };
+
   return (
     <main className="mx-auto max-w-6xl px-3 pb-24 pt-2 sm:px-4">
       {state.revealed ? null : <RevealScreen state={state} onBegin={() => dispatch({ type: "revealDone" })} />}
@@ -171,6 +211,9 @@ export default function PlayPage() {
             )}
             <button type="button" onClick={() => setLang(lang === "th" ? "en" : "th")} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800">
               {t("lang.toggle")}
+            </button>
+            <button type="button" onClick={() => setHelp(true)} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800" aria-label={t("help.open")} title={t("help.open")}>
+              ?
             </button>
             <button type="button" onClick={() => setSound(!sound)} className="rounded border border-night-600 px-2 py-0.5 text-xs hover:bg-night-800" aria-label={sound ? t("sound.on") : t("sound.off")}>
               {sound ? "🔊" : "🔇"}
@@ -320,7 +363,7 @@ export default function PlayPage() {
           </div>
 
           <div className={`grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4 ${busy ? "pointer-events-none opacity-60" : ""}`}>
-            {catViews.map(({ def, lock, energy }) => (
+            {catViews.map(({ def, lock, energy }, i) => (
               <ChoiceCard
                 key={def.id}
                 icon={def.icon}
@@ -329,6 +372,7 @@ export default function PlayPage() {
                 energyLabel={energy > 0 ? t("card.energy", { n: energy }) : t("card.free")}
                 costLabel={def.cost ? formatMoney((def.kind === "clinic" && state.items.medicine ? 0 : def.cost) * city.meal, city) : undefined}
                 lockReason={lock ? lockText(lock, t, has, lang) : null}
+                hotkey={i < 9 ? i + 1 : undefined}
                 onClick={() => act(def.id, def.pickSpot)}
               />
             ))}
@@ -350,6 +394,7 @@ export default function PlayPage() {
           }}
         />
       )}
+      {help && <HelpModal onClose={() => setHelp(false)} />}
       {state.summary && <SummaryModal state={state} onClose={() => dispatch({ type: "clearSummary" })} />}
       {!state.summary && state.revealed && (state.pendingEvent || state.eventResult) && (
         <EventModal state={state} onChoose={(i) => dispatch({ type: "choose", choiceIndex: i })} onDismiss={() => dispatch({ type: "dismiss" })} />

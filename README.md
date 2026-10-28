@@ -31,7 +31,13 @@ entirely in the browser with no login; your life autosaves as you play.
 
 New players get short first-time tips the first time something comes up: the first night,
 hunger or thirst running low, the police starting to notice you, the way off the street. Each tip
-shows once and can point you to the right tab; all of them can be turned off.
+shows once and can point you to the right tab; all of them can be turned off. The **?** button on
+the play screen opens a short how-to-play page that explains the day, every stat and the way out.
+
+On a computer the game can be played from the keyboard: **1–9** takes the numbered action in the
+open tab (or picks a spot when asked where to go), **← →** or **Q W E R** switch tabs, and during
+an event **1–9** picks a choice while **Enter** skips the text and continues. Keys are read by
+position, so they work on a Thai keyboard layout too.
 
 When a life ends you get a summary: your timeline, the numbers of your life, a share card, and for
 lives that made it out, a keepsake poster you can save as an image.

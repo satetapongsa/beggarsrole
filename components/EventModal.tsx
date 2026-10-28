@@ -7,7 +7,7 @@ import { meets, checkConditions, cityOf } from "@/lib/conditions";
 import { fill } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
 import { typeTick } from "@/lib/sound";
-import { lockText } from "@/lib/ui";
+import { keyDigit, lockText } from "@/lib/ui";
 import type { GameState } from "@/types/game";
 
 function graphemes(text: string): string[] {
@@ -62,6 +62,27 @@ export default function EventModal({ state, onChoose, onDismiss }: Props) {
 
   const tw = useTypewriter(body, lang === "th" ? 22 : 16, sound);
 
+  // keyboard: Enter/Space finishes the text then continues, 1–9 picks a choice
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key === "Enter" || e.key === " ") {
+        if ((e.target as HTMLElement | null)?.tagName === "BUTTON") return; // the focused button handles it
+        e.preventDefault();
+        if (!tw.done) tw.finish();
+        else if (result) onDismiss();
+        return;
+      }
+      const n = keyDigit(e);
+      if (!result && ev && tw.done && n && n <= ev.choices.length && meets(ev.choices[n - 1].requires, state)) {
+        e.preventDefault();
+        onChoose(n - 1);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
   if (!ev && !result) return null;
 
   return (
@@ -111,6 +132,7 @@ export default function EventModal({ state, onChoose, onDismiss }: Props) {
                   }`}
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
+                  <kbd className="mr-2 hidden font-mono text-[11px] text-stone-500 sm:inline">{i + 1}</kbd>
                   <span>{label}</span>
                   {c.chance !== undefined && <span className="ml-2 text-[11px] text-amber-300/80">🎲</span>}
                   {reason && <span className="mt-0.5 block text-[11px] text-red-300">🔒 {lockText(reason, t, has, lang)}</span>}

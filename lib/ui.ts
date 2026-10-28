@@ -69,3 +69,14 @@ export function hasDeltas(d?: Deltas): boolean {
     Object.keys(d.stats).length > 0 || Math.abs(d.cash) > 0.0001 || Math.abs(d.stash) > 0.0001 || Object.keys(d.items).length > 0
   );
 }
+
+/** 1–9 from the number row or numpad, by physical key so non-Latin layouts (e.g. Thai) work; 0 if none. */
+export function keyDigit(e: KeyboardEvent): number {
+  const m = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);
+  return m ? Number(m[1]) : 0;
+}
+
+/** The "?" key on any layout. */
+export function isHelpKey(e: KeyboardEvent): boolean {
+  return e.key === "?" || (e.code === "Slash" && e.shiftKey);
+}

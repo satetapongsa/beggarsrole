@@ -5,10 +5,11 @@ interface Props {
   energyLabel: string;
   costLabel?: string;
   lockReason?: string | null;
+  hotkey?: number;
   onClick: () => void;
 }
 
-export default function ChoiceCard({ icon, title, desc, energyLabel, costLabel, lockReason, onClick }: Props) {
+export default function ChoiceCard({ icon, title, desc, energyLabel, costLabel, lockReason, hotkey, onClick }: Props) {
   const locked = !!lockReason;
   return (
     <button
@@ -33,6 +34,7 @@ export default function ChoiceCard({ icon, title, desc, energyLabel, costLabel, 
       <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-2 text-[10px] sm:text-[11px]">
         <span className="rounded bg-night-950/70 px-1.5 py-0.5 text-amber-300">⚡ {energyLabel}</span>
         {costLabel && <span className="rounded bg-night-950/70 px-1.5 py-0.5 text-emerald-300">💰 {costLabel}</span>}
+        {hotkey !== undefined && !locked && <kbd className="ml-auto hidden font-mono text-stone-500 sm:inline">{hotkey}</kbd>}
       </div>
       {locked && (
         <div className="mt-1.5 flex items-center gap-1 text-[10px] text-red-300 sm:text-[11px]">

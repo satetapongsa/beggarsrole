@@ -63,6 +63,9 @@ export default function RunPanel({ life, onResult }: { life: GameState; onResult
       });
       setScore(res.score);
       setStatus(keep ? "claimed" : "ready");
+      // the player named themselves before birth: put the life on the board without asking again
+      const nick = loadNickname().trim();
+      if (!keep && nick) void claim(res.runId, nick);
     });
     return () => {
       alive = false;
@@ -70,22 +73,25 @@ export default function RunPanel({ life, onResult }: { life: GameState; onResult
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [life]);
 
-  const claim = async () => {
-    if (!run?.runId || !name.trim()) return;
+  const claim = async (runId = run?.runId, nick = name.trim()) => {
+    if (!runId || !nick) return;
     setStatus("claiming");
     setError("");
-    const res = await claimRun(run.runId, name);
+    const res = await claimRun(runId, nick);
     if (!res.ok && res.error !== "already_claimed") {
       setStatus("ready");
       setError(t(ERRORS[res.error] ?? "lb.error.generic"));
       return;
     }
-    saveNickname(name.trim());
+    saveNickname(nick);
+    // read the saved run: an auto-claim fires before React has the fresh run in state
+    const base = loadLastRun() ?? run;
+    if (!base) return;
     update({
-      ...run,
-      name: name.trim(),
-      rank: res.ok ? res.rank : run.rank,
-      dailyRank: res.ok ? res.dailyRank ?? undefined : run.dailyRank,
+      ...base,
+      name: nick,
+      rank: res.ok ? res.rank : base.rank,
+      dailyRank: res.ok ? res.dailyRank ?? undefined : base.dailyRank,
     });
     setStatus("claimed");
   };

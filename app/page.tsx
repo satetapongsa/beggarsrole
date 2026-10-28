@@ -9,8 +9,9 @@ import { DATA } from "@/lib/data";
 import { cityOf } from "@/lib/conditions";
 import { fetchDaily, startLife, type DailyInfo } from "@/lib/online";
 import { useSettings } from "@/lib/i18n";
+import { isNameAllowed } from "@/lib/moderation";
 import { makeSeed } from "@/lib/rng";
-import { loadDailyStarted, loadGame, loadLastLife, markDailyStarted } from "@/lib/storage";
+import { loadDailyStarted, loadGame, loadLastLife, loadNickname, markDailyStarted, saveNickname } from "@/lib/storage";
 import type { GameState } from "@/types/game";
 
 const DEMO = { skin: "#c98e62", hair: "#1b1410", shirt: "#b4443a", pants: "#3a3f4b", hairStyle: 2 };
@@ -34,10 +35,13 @@ export default function TitlePage() {
   const [daily, setDaily] = useState<DailyInfo | null>(null);
   const [dailyDone, setDailyDone] = useState(false);
   const [feedback, setFeedback] = useState(false);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
 
   useEffect(() => {
     setSave(loadGame());
     setLast(loadLastLife());
+    setName(loadNickname());
     fetchDaily().then((d) => {
       if (!d.ok) return;
       setDaily(d);
@@ -45,8 +49,23 @@ export default function TitlePage() {
     });
   }, []);
 
+  // the nickname is chosen before birth, so the end screen can put the life on the board right away
+  const takeName = () => {
+    const n = name.trim();
+    if (!n) {
+      setNameError(t("title.nameNeeded"));
+      return false;
+    }
+    if (!isNameAllowed(n)) {
+      setNameError(t("lb.error.blocked"));
+      return false;
+    }
+    saveNickname(n);
+    return true;
+  };
+
   const startDaily = () => {
-    if (!daily || dailyDone) return;
+    if (!daily || dailyDone || !takeName()) return;
     sfx("good");
     markDailyStarted(daily.date);
     startLife(daily.seed, daily.date);
@@ -54,6 +73,7 @@ export default function TitlePage() {
   };
 
   const start = () => {
+    if (!takeName()) return;
     sfx("good");
     startLife(parseSeed(seed));
     router.push("/play");
@@ -100,7 +120,31 @@ export default function TitlePage() {
       <p className="mt-4 max-w-sm text-sm italic text-stone-400">“{t("game.tagline")}”</p>
 
       <div className="mt-8 flex w-full max-w-xs flex-col gap-3">
-        <button type="button" onClick={start} className="rounded-lg bg-lamp-500 px-6 py-3 text-lg font-semibold text-black shadow-lg shadow-amber-900/40 hover:bg-lamp-400">
+        <form
+          className="text-left"
+          onSubmit={(e) => {
+            e.preventDefault();
+            start();
+          }}
+        >
+          <label htmlFor="player-name" className="mb-1 block text-xs font-semibold uppercase tracking-wider text-lamp-300">
+            {t("title.name")}
+          </label>
+          <input
+            id="player-name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setNameError("");
+            }}
+            maxLength={20}
+            autoComplete="nickname"
+            placeholder={t("title.namePlaceholder")}
+            className="w-full rounded-lg border border-night-600 bg-night-900 px-3 py-2.5 text-center outline-none focus:border-lamp-500"
+          />
+          <p className={`mt-1 text-center text-[11px] ${nameError ? "text-red-400" : "text-stone-500"}`}>{nameError || t("title.nameHint")}</p>
+        </form>
+        <button type="button" onClick={start} disabled={!name.trim()} className="rounded-lg bg-lamp-500 px-6 py-3 text-lg font-semibold text-black shadow-lg shadow-amber-900/40 hover:bg-lamp-400 disabled:opacity-50">
           🎲 {t("title.start")}
         </button>
         {daily &&
@@ -109,7 +153,7 @@ export default function TitlePage() {
               📅 {t("daily.done", { n: daily.number })}
             </button>
           ) : (
-            <button type="button" onClick={startDaily} className="rounded-lg border border-sky-600 bg-sky-900/50 px-6 py-3 font-semibold text-sky-100 hover:bg-sky-800/60">
+            <button type="button" onClick={startDaily} disabled={!name.trim()} className="rounded-lg border border-sky-600 bg-sky-900/50 px-6 py-3 font-semibold text-sky-100 hover:bg-sky-800/60 disabled:opacity-50">
               📅 {t("daily.play", { n: daily.number })}
               <span className="block text-xs font-normal text-sky-300/80">{t("daily.hint")}</span>
             </button>

@@ -29,6 +29,10 @@ entirely in the browser with no login; your life autosaves as you play.
 - **Skip ahead** a week or a month with an auto-pilot (safe, balanced or risky) when you just want
   to see how the life goes; it stops for anything important.
 
+New players get short first-time tips the first time something comes up: the first night,
+hunger or thirst running low, the police starting to notice you, the way off the street. Each tip
+shows once and can point you to the right tab; all of them can be turned off.
+
 When a life ends you get a summary: your timeline, the numbers of your life, a share card, and for
 lives that made it out, a keepsake poster you can save as an image.
 

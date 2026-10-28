@@ -17,6 +17,7 @@ const DAILY_KEY = "spare-change:daily";
 const CAREER_KEY = "spare-change:career";
 const ACH_KEY = "spare-change:achievements";
 const LIVES_KEY = "spare-change:lives";
+const TIPS_KEY = "spare-change:tips";
 
 function read<T>(key: string): T | null {
   try {
@@ -227,4 +228,19 @@ export function loadSettings(): Settings | null {
 
 export function saveSettings(s: Settings) {
   write(SETTINGS_KEY, s);
+}
+
+/** First-time tips: ids already shown, and whether the player turned tips off. */
+export interface TipState {
+  seen: string[];
+  off: boolean;
+}
+
+export function loadTips(): TipState {
+  const v = read<TipState>(TIPS_KEY);
+  return v && Array.isArray(v.seen) ? { seen: v.seen, off: !!v.off } : { seen: [], off: false };
+}
+
+export function saveTips(v: TipState) {
+  write(TIPS_KEY, v);
 }

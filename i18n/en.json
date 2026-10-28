@@ -340,5 +340,19 @@
   "lives.empty": "No finished lives yet.",
   "lives.days": "{n} days",
   "lives.score": "{n} pts",
-  "lives.replay": "Replay"
+  "lives.replay": "Replay",
+  "tip.ok": "Got it",
+  "tip.off": "Turn off all tips",
+  "tip.show": "Go to {tab}",
+  "tip.welcome": "Each part of the day — morning, afternoon, night — you get one action. Earn some money under Earn, then spend it on food and water under Survive. If health reaches 0, this life is over.",
+  "tip.health_low": "Your health is slipping. Visit a clinic or an NGO, rest, and don't let hunger or thirst run out — health at 0 ends the life.",
+  "tip.thirst_low": "You're getting dehydrated. Buy water under Survive — thirst hurts your health faster than hunger.",
+  "tip.hunger_low": "You're getting hungry. Buy a meal, or get free food from a charity kitchen.",
+  "tip.energy_low": "You're nearly out of energy. Most work costs energy; rest in the shade or sleep to get it back.",
+  "tip.heat_high": "The police are noticing you. Move to a spot with fewer police, or lie low for a while until it calms down.",
+  "tip.hope_low": "Your hope is running low. Talk to people on the street, call your family, or play with your dog — it is hard to climb out without hope.",
+  "tip.hygiene_low": "You're very dirty. People give less and you get sick more easily. Wash under Survive.",
+  "tip.first_night": "It's night. Sleeping restores energy. A shelter bed is safer than sleeping rough, especially in rain or cold.",
+  "tip.skip": "You can now skip ahead a week at a time with the buttons below the cards. Pick a style of living; it stops for anything important.",
+  "tip.way_out": "The main way off the street: save money, get an ID card, find steady work, then rent a room — all under Future. There are other, hidden ways out too."
 }

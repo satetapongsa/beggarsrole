@@ -6,6 +6,7 @@ import ChoiceCard from "@/components/ChoiceCard";
 import CityBadge from "@/components/CityBadge";
 import CharacterSprite from "@/components/CharacterSprite";
 import DeltaChips from "@/components/DeltaChips";
+import GuideTip from "@/components/GuideTip";
 import EventModal from "@/components/EventModal";
 import InventoryPanel from "@/components/InventoryPanel";
 import PixelScene from "@/components/PixelScene";
@@ -294,6 +295,8 @@ export default function PlayPage() {
               )}
             </div>
           )}
+
+          {!busy && <GuideTip state={state} onCat={setCat} />}
 
           {/* category tabs */}
           <div className="grid grid-cols-4 gap-1 rounded-lg bg-night-900 p-1">

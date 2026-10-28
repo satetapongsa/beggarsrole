@@ -159,7 +159,7 @@ export default function TitlePage() {
             </button>
           ))}
         {save && !save.ended && (
-          <button type="button" onClick={() => router.push("/play")} className="rounded-lg border border-night-600 bg-night-800 px-6 py-3 hover:bg-night-700">
+          <button type="button" onClick={() => takeName() && router.push("/play")} disabled={!name.trim()} className="rounded-lg border border-night-600 bg-night-800 px-6 py-3 hover:bg-night-700 disabled:opacity-50">
             ▶ {t("title.continue")}
             <span className="block text-xs text-stone-400">
               {t("title.continueInfo", {

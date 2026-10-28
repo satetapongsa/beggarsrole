@@ -24,7 +24,7 @@ import { dailyNumber } from "@/lib/daily";
 import { actionViews, spotViews, step } from "@/lib/engine";
 import { fill, formatMoney } from "@/lib/format";
 import { useSettings } from "@/lib/i18n";
-import { clearGame, loadGame, saveGame, saveLastLife } from "@/lib/storage";
+import { clearGame, loadGame, loadNickname, saveGame, saveLastLife } from "@/lib/storage";
 import { hasDeltas, isHelpKey, keyDigit, lockText, WEATHER_ICON } from "@/lib/ui";
 import type { ActionCategory, GameAction, GameState } from "@/types/game";
 import { STAT_KEYS } from "@/types/game";
@@ -67,7 +67,8 @@ export default function PlayPage() {
   // load save
   useEffect(() => {
     const s = loadGame();
-    if (!s) router.replace("/");
+    // no life, or no player name yet (every life is played under a name): back to the title screen
+    if (!s || !loadNickname()) router.replace("/");
     else dispatch({ type: "load", state: s });
   }, [router]);
 

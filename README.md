@@ -24,13 +24,14 @@ entirely in the browser with no login; your life autosaves as you play.
 - **The city matters.** Each city has its own currency and prices, its own seasons (monsoon,
   heat waves, snow), real neighbourhoods to work in with different income, risk and police
   presence, local festivals, and a difficulty from *easy* to *brutal*.
-- **Things happen to you.** Over 220 events — a stranger buying you lunch, a police sweep, a
+- **Things happen to you.** Over 260 events — a stranger buying you lunch, a police sweep, a
   flood, a stray dog that follows you home, a talent scout at your busking spot. Most of them ask
   you to choose, and some choices stay with you for the rest of the life.
-  Every city also has scenes that only happen at one of its real places: a porter job when the
+  Every city has six real places to work, and scenes that only happen at one of them: a porter job when the
   launch docks at Sadarghat, chess hustlers in Washington Square, dawn hiring vans in Sanya, the
   candle sellers outside Quiapo Church. Moving between spots is how you find them.
-- **Every life ends.** There are 37 endings: 23 that take you off the street one way or another (a job and a flat, going
+- **People you meet again.** A street kid who starts following you, an old flower seller who needs help up the hill, a former policeman who knows when the sweeps come. Each turns up again and again, and each story can end with a way off the street.
+- **Every life ends.** There are 39 endings: 25 that take you off the street one way or another (a job and a flat, going
   home to family, becoming a monk, a record deal, a published memoir, a gallery show, a fishing boat — or prison and
   deportation) and 14 ways to die (cold, heat, illness, hunger, storms, violence, accidents, old age). Some endings are
   hidden until you find them.
@@ -72,6 +73,8 @@ lives that made it out, a keepsake poster you can save as an image.
   they were born and ended, their age, money, cities lived in and the ending.
 - **Survivors' Hall of Honour.** Players who truly got off the street alive, ranked by how many days their longest surviving life lasted, with a medal for it: bronze for surviving, silver from 60 days, gold from 180, diamond from 365.
 - **Life stories.** Tap any survivor, record or life on the leaderboard to read how it went: days survived, money left, the exact place it ended, the ending scene, why it ended (the cause of death, or the last turning point before getting out) and the dated timeline. The top survivor's story is open by default.
+- **Daily stats.** The leaderboard's Daily tab ranks who survived the longest in a life finished that day (Bangkok time), one row per name, starting fresh at midnight; the last 7 days can be browsed. The all-time boards are unchanged.
+- **Leaderboard tabs.** Overview, Hall of Honour, Daily, Players and All lives sit in a tab bar at the top, so nobody has to scroll past every board; `?tab=daily` links straight to one.
 - **Players.** A name is one player, ignoring upper and lower case (WAVY and wavy are the same person, shown with the spelling used first). The server records the name every time a life starts, so the
   players list shows everyone who has played, how many times they were reborn, how many lives they
   finished and their bests. Tap a name to see only that player's lives. The player count is the

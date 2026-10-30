@@ -78,7 +78,11 @@ async function main() {
 
     for (const q of ["board=all", "board=week", `board=city&city=${life.citiesLived[0]}`]) {
       const lb = await api(`/api/leaderboard?${q}`);
-      check(`board ${q} lists the run`, lb.body.entries?.some((e: { name: string }) => e.name === `ทดสอบ ${RUN_TAG}`), lb.body);
+      // with real players on the live database the test run may rank below the top 50; then it must sit below the cut
+      const rows = (lb.body.entries ?? []) as { name: string; score: number }[];
+      const listed = rows.some((e) => e.name === `ทดสอบ ${RUN_TAG}`);
+      const belowCut = rows.length === 50 && rows[49].score >= sub.body.score.total;
+      check(`board ${q} lists the run (or it ranks below the top 50)`, listed || belowCut, { listed, cut: rows.at(-1)?.score, ours: sub.body.score.total });
     }
 
     const daily = (await api("/api/daily")).body;
@@ -161,6 +165,13 @@ async function main() {
     check("life story has end place, timeline and stats", story.body.ok && ls.endSpotId && ls.story?.timeline?.length > 1 && ls.story.timeline.at(-1).kind === "ending" && typeof ls.story.earned === "number", ls);
     check("death has a cause, escape has none", deaths.has(ls.endingId) ? Boolean(ls.cause) : ls.cause === null, ls);
     check("life story rejects a bad id", (await api("/api/records?life=nope")).status === 400);
+    const today = new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
+    const dayBoard = await api(`/api/records?day=${today}`);
+    const dayRows = dayBoard.body.entries as { name: string; days: number }[];
+    check("daily board lists today's lives, one per name, longest first",
+      dayBoard.body.ok && dayRows.some((x) => x.name === mixed) && dayRows.every((x, i) => i === 0 || dayRows[i - 1].days >= x.days) && new Set(dayRows.map((x) => x.name.toLowerCase())).size === dayRows.length, dayBoard.body);
+    check("daily board for a day nobody played is empty", (await api("/api/records?day=2020-01-01")).body.entries?.length === 0);
+    check("daily board rejects a bad date", (await api("/api/records?day=yesterday")).status === 400);
     check("records reject a bad sort", (await api("/api/records?sort=nope")).status === 400);
 
     const stats = (await api("/api/stats")).body;

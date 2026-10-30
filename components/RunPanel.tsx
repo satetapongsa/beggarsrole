@@ -108,7 +108,7 @@ export default function RunPanel({ life, onResult }: { life: GameState; onResult
     <section className="mt-6 rounded-xl border border-lamp-500/40 bg-night-900 p-5">
       <div className="flex items-baseline justify-between">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-lamp-300">🏆 {t("lb.score")}</h2>
-        <Link href={run?.daily ? `/leaderboard?board=daily` : "/leaderboard"} className="text-xs text-stone-400 hover:text-stone-200">
+        <Link href={run?.daily ? `/leaderboard?tab=daily` : "/leaderboard"} className="text-xs text-stone-400 hover:text-stone-200">
           {t("lb.view")} →
         </Link>
       </div>

@@ -484,51 +484,6 @@
     ]
   },
   {
-    "id": "free_haircut",
-    "icon": "💈",
-    "weight": 2,
-    "trigger": "day",
-    "tags": [
-      "kindness"
-    ],
-    "cooldown": 40,
-    "title_th": "ตัดผมฟรี",
-    "title_en": "A Free Haircut",
-    "text_th": "นักเรียนโรงเรียนสอนตัดผมตั้งเก้าอี้พับริมทาง ป้ายเขียนว่า “ฝึกมือ ตัดฟรี ไม่รับประกันความหล่อ”",
-    "text_en": "Barber-school students set up folding chairs on the sidewalk. The sign: “Practice cuts. Free. Good looks not guaranteed.”",
-    "choices": [
-      {
-        "label_th": "นั่งลง ปล่อยให้โชคชะตาตัดสิน",
-        "label_en": "Sit down and let fate decide",
-        "chance": 0.7,
-        "success": {
-          "text_th": "ออกมาดีเกินคาด คุณส่องกระจกร้านข้างๆ สามรอบ",
-          "text_en": "It turns out great. You check your reflection in a shop window three times.",
-          "effects": {
-            "hygiene": 20,
-            "hope": 12,
-            "rep": 3
-          }
-        },
-        "fail": {
-          "text_th": "ด้านซ้ายสั้นกว่าด้านขวาชัดเจน แต่นักเรียนขอโทษน่ารักมาก และหัวคุณก็เบาขึ้นเยอะ",
-          "text_en": "The left side is clearly shorter than the right. The student's apology is adorable, and your head feels much lighter.",
-          "effects": {
-            "hygiene": 15,
-            "hope": 6
-          }
-        }
-      },
-      {
-        "label_th": "ขอบคุณ ไว้คราวหน้า",
-        "label_en": "Maybe next time",
-        "effects": {},
-        "text_th": "ผมยาวก็อุ่นดี",
-        "text_en": "Long hair is warmer anyway."
-      }
-    ]
-  },
-  {
     "id": "student_interview",
     "icon": "🎓",
     "weight": 2,
@@ -11602,6 +11557,1773 @@
         },
         "text_th": "ซองจดหมายอยู่ในกระเป๋าเสื้อ อุ่นอยู่ตรงนั้นตลอดวัน",
         "text_en": "It sits in your shirt pocket, warm there all day."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "bkk_yaowarat_night",
+    "icon": "🏮",
+    "conditions": {
+      "cities": [
+        "bangkok"
+      ],
+      "spots": [
+        "yaowarat"
+      ],
+      "phases": [
+        "night"
+      ]
+    },
+    "title_th": "ไฟแดงของเยาวราช",
+    "title_en": "Yaowarat's Red Lights",
+    "text_th": "ป้ายไฟนีออนสีแดงเหลืองสว่างทั้งถนน ควันจากกระทะผัดลอยขึ้นฟ้า ร้านกระเพาะปลาเจ้าดังเหลือหม้อสุดท้าย คนขายมองคุณที่ยืนดมกลิ่นอยู่นาน",
+    "text_en": "Red and gold neon floods the whole road. Wok smoke rises into the sky. The famous fish-maw stall is down to its last pot, and the cook has noticed you standing there breathing it in.",
+    "choices": [
+      {
+        "label_th": "ช่วยล้างชามแลกข้าวหนึ่งถ้วย",
+        "label_en": "Wash bowls for a bowl of your own",
+        "effects": {
+          "hunger": 30,
+          "thirst": 10,
+          "energy": -10,
+          "hope": 6,
+          "rep": 2
+        },
+        "text_th": "คุณล้างชามจนตีหนึ่ง เถ้าแก่ตักให้พูนจนน้ำแกงล้นขอบ “มาอีกพรุ่งนี้ ชามเยอะเหมือนเดิม”",
+        "text_en": "You wash bowls until 1 a.m. The owner ladles yours so full it spills over the rim. “Come back tomorrow. Same pile of bowls.”"
+      },
+      {
+        "label_th": "ยืนดมกลิ่นแล้วเดินต่อ",
+        "label_en": "Enjoy the smell and move on",
+        "effects": {
+          "hope": 2,
+          "hunger": -2
+        },
+        "text_th": "กลิ่นพริกไทยกับน้ำมันงาตามคุณไปจนสุดถนน ท้องร้องดังกว่าเสียงรถ",
+        "text_en": "Pepper and sesame oil follow you to the end of the road. Your stomach is louder than the traffic."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "mumbai_gateway_photo",
+    "icon": "📷",
+    "conditions": {
+      "cities": [
+        "mumbai"
+      ],
+      "spots": [
+        "gateway"
+      ]
+    },
+    "title_th": "ช่างภาพหน้าประตู",
+    "title_en": "The Gateway Photographers",
+    "text_th": "ช่างภาพข้างทางหลายสิบคนรุมเรียกนักท่องเที่ยวหน้าประตูสู่อินเดีย คนหนึ่งในนั้นข้อเท้าแพลง วางกล้องกับเครื่องพิมพ์พกพาไว้ แล้วมองคุณ “ช่วยเรียกลูกค้าให้หน่อย แบ่งกันครึ่งๆ”",
+    "text_en": "Dozens of street photographers hustle tourists at the Gateway. One has sprained his ankle; he sets down his camera and portable printer and looks at you. “Bring me customers. We split it half and half.”",
+    "choices": [
+      {
+        "label_th": "ตะโกนเรียกลูกค้าทั้งบ่าย",
+        "label_en": "Call in customers all afternoon",
+        "chance": 0.7,
+        "success": {
+          "text_th": "ครอบครัวจากรัฐคุชราตถ่ายไปสิบสองรูป ช่างภาพแบ่งเงินให้ตรงตามที่สัญญา และสอนวิธีจัดท่าให้ด้วย",
+          "text_en": "A family from Gujarat orders twelve prints. He splits it exactly as promised, and shows you how to pose people.",
+          "effects": {
+            "cash": [
+              2,
+              4
+            ],
+            "rep": 3,
+            "hope": 5
+          }
+        },
+        "fail": {
+          "text_th": "ตำรวจท่องเที่ยวไล่ช่างภาพที่ไม่มีบัตรออกไปหมด รวมถึงคุณ",
+          "text_en": "Tourist police clear out every photographer without a badge — you included.",
+          "effects": {
+            "heat": 6,
+            "hope": -2
+          }
+        }
+      },
+      {
+        "label_th": "ช่วยพันข้อเท้าให้เขาแทน",
+        "label_en": "Strap up his ankle instead",
+        "effects": {
+          "rep": 4,
+          "hope": 4,
+          "counters": {
+            "helped": 1,
+            "friends": 1
+          }
+        },
+        "text_th": "คุณใช้ผ้าเช็ดหน้าพันข้อเท้าให้แน่น เขาถ่ายรูปคุณยืนหน้าประตูหนึ่งรูป พิมพ์ออกมาให้ฟรี",
+        "text_en": "You bind his ankle tight with a handkerchief. He takes one photo of you in front of the Gateway and prints it for free."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "manila_binondo_lugaw",
+    "icon": "🥣",
+    "conditions": {
+      "cities": [
+        "manila"
+      ],
+      "spots": [
+        "binondo"
+      ],
+      "phases": [
+        "morning"
+      ]
+    },
+    "title_th": "โจ๊กเช้าที่บินอนโด",
+    "title_en": "Morning Lugaw in Binondo",
+    "text_th": "ร้านโจ๊กเก่าแก่ข้างโบสถ์บินอนโดเปิดตั้งแต่ตีห้า อาม่าเจ้าของร้านตักโจ๊กใส่ถ้วยพลาสติกวางไว้ที่ขอบโต๊ะ ไม่พูดอะไร แค่พยักหน้าไปทางคุณ",
+    "text_en": "The old lugaw shop beside Binondo Church opens at five. The grandmother who runs it sets a plastic cup of porridge on the edge of the counter, says nothing, and nods toward you.",
+    "choices": [
+      {
+        "label_th": "รับไว้ แล้วกวาดหน้าร้านให้",
+        "label_en": "Take it and sweep the shopfront",
+        "effects": {
+          "hunger": 25,
+          "thirst": 10,
+          "hope": 6,
+          "rep": 2,
+          "energy": -5
+        },
+        "text_th": "อาม่ามองไม้กวาดในมือคุณแล้วยิ้มครั้งแรก พรุ่งนี้ถ้วยโจ๊กก็วางอยู่ที่เดิม",
+        "text_en": "She looks at the broom in your hand and smiles for the first time. Tomorrow the cup is waiting in the same spot."
+      },
+      {
+        "label_th": "รับไว้ ขอบคุณเป็นภาษาตากาล็อก",
+        "label_en": "Take it and thank her in Tagalog",
+        "effects": {
+          "hunger": 25,
+          "thirst": 10,
+          "hope": 4
+        },
+        "text_th": "“Salamat po” ออกเสียงผิดนิดหน่อย อาม่าแก้ให้ทีละพยางค์จนถูก",
+        "text_en": "Your “Salamat po” is a little off. She corrects it syllable by syllable until you get it right."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "jakarta_glodok_rain",
+    "icon": "☔",
+    "conditions": {
+      "cities": [
+        "jakarta"
+      ],
+      "spots": [
+        "glodok"
+      ],
+      "weather": [
+        "rain",
+        "storm"
+      ]
+    },
+    "title_th": "ร่มเช่าที่โกลด็อก",
+    "title_en": "Umbrellas for Hire at Glodok",
+    "text_th": "ฝนเทลงมาเหมือนเปิดก๊อก เด็กๆ ในตลาดโกลด็อกวิ่งถือร่มคันใหญ่ไปกางให้คนเดินข้ามถนน แลกเหรียญ ชายที่คุมร่มยื่นร่มคันหนึ่งให้คุณ",
+    "text_en": "Rain pours like a tap turned on. Kids at Glodok run umbrellas over people crossing the road, for coins. The man who owns the umbrellas holds one out to you.",
+    "choices": [
+      {
+        "label_th": "วิ่งกางร่มให้คนข้ามถนน",
+        "label_en": "Run umbrellas across the road",
+        "effects": {
+          "cash": [
+            1,
+            3
+          ],
+          "hygiene": -10,
+          "energy": -12,
+          "hope": 3
+        },
+        "text_th": "คุณเปียกโชกทั้งตัวแต่ลูกค้าแห้งสนิท เหรียญหนักกระเป๋ากว่าที่ขอทานทั้งวัน",
+        "text_en": "You're soaked to the bone; your customers stay perfectly dry. Your pocket is heavier than after a full day of begging."
+      },
+      {
+        "label_th": "ขอแค่หลบฝนใต้กันสาดร้าน",
+        "label_en": "Just shelter under an awning",
+        "effects": {
+          "hope": 1
+        },
+        "text_th": "คุณนั่งดูเด็กๆ วิ่งไปมาในฝน ชายคนนั้นบอกว่าเปลี่ยนใจเมื่อไหร่ร่มยังเหลือ",
+        "text_en": "You watch the kids splash back and forth. The man says there's still an umbrella if you change your mind."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "dhaka_shahbagh_books",
+    "icon": "📚",
+    "conditions": {
+      "cities": [
+        "dhaka"
+      ],
+      "spots": [
+        "shahbagh"
+      ]
+    },
+    "title_th": "แผงหนังสือชาห์บาก",
+    "title_en": "The Shahbagh Book Stalls",
+    "text_th": "แผงหนังสือมือสองเรียงยาวข้างมหาวิทยาลัย นักศึกษาเถียงกันเรื่องบทกวี เจ้าของแผงคนหนึ่งต้องย้ายหนังสือหนีฝนเป็นร้อยเล่ม",
+    "text_en": "Secondhand book stalls stretch along the university wall. Students argue about poetry. One stall owner has a hundred books to move before the rain.",
+    "choices": [
+      {
+        "label_th": "ช่วยขนหนังสือ",
+        "label_en": "Help carry the books",
+        "effects": {
+          "cash": 1,
+          "energy": -10,
+          "hope": 5,
+          "items": {
+            "book": 1
+          }
+        },
+        "text_th": "เขาให้คุณเลือกหนังสือหนึ่งเล่มเป็นค่าแรง คุณเลือกเล่มที่ปกขาดที่สุด เพราะดูเหมือนคนอ่านเยอะที่สุด",
+        "text_en": "He lets you pick one book as payment. You choose the most battered cover, because it looks the most read."
+      },
+      {
+        "label_th": "นั่งฟังนักศึกษาเถียงกัน",
+        "label_en": "Sit and listen to the students",
+        "effects": {
+          "hope": 4
+        },
+        "text_th": "คุณไม่รู้จักกวีที่พวกเขาพูดถึง แต่พอฟังจบก็อยากรู้จัก",
+        "text_en": "You don't know the poet they're arguing about. By the end, you want to."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "lagos_bar_beach_sunday",
+    "icon": "🏖️",
+    "conditions": {
+      "cities": [
+        "lagos"
+      ],
+      "spots": [
+        "bar_beach"
+      ]
+    },
+    "title_th": "วันอาทิตย์ที่หาด",
+    "title_en": "Sunday on the Beach",
+    "text_th": "คณะนักร้องโบสถ์มาทำพิธีริมทะเล ชุดขาวทั้งแถว กลองดังกลบเสียงคลื่น ผู้นำคณะเห็นคุณนั่งอยู่บนทรายแล้วโบกมือเรียกให้ร่วมวง",
+    "text_en": "A church choir holds a service by the sea, a whole row in white, drums louder than the waves. The leader sees you sitting on the sand and waves you over to join.",
+    "choices": [
+      {
+        "label_th": "เข้าไปร้องเพลงด้วย",
+        "label_en": "Join the singing",
+        "effects": {
+          "hope": 12,
+          "rep": 3,
+          "hunger": 15
+        },
+        "text_th": "คุณไม่รู้เนื้อเพลง แต่ปรบมือตามจังหวะได้ หลังพิธีมีข้าวโจลอฟแจกทุกคน",
+        "text_en": "You don't know the words, but you can clap the rhythm. Afterward there's jollof rice for everyone."
+      },
+      {
+        "label_th": "ฟังอยู่ห่างๆ",
+        "label_en": "Listen from a distance",
+        "effects": {
+          "hope": 5
+        },
+        "text_th": "เสียงเพลงลอยมากับลม คุณหลับตาฟังจนจบ",
+        "text_en": "The music drifts over on the wind. You close your eyes until the end."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "cairo_dead_family",
+    "icon": "🕌",
+    "conditions": {
+      "cities": [
+        "cairo"
+      ],
+      "spots": [
+        "city_of_dead"
+      ]
+    },
+    "title_th": "บ้านในสุสาน",
+    "title_en": "A Home Among the Tombs",
+    "text_th": "ที่นี่คนเป็นอาศัยอยู่ร่วมกับคนตายมาหลายชั่วอายุ ครอบครัวหนึ่งตากผ้าบนรั้วหลุมศพ แม่บ้านชวนคุณดื่มชาข้างหลุมของปู่ทวดเธอ",
+    "text_en": "Here the living have shared space with the dead for generations. A family hangs laundry on a tomb's railing. The mother invites you for tea beside her great-grandfather's grave.",
+    "choices": [
+      {
+        "label_th": "นั่งดื่มชาฟังเรื่องครอบครัว",
+        "label_en": "Have tea and hear their story",
+        "effects": {
+          "hope": 10,
+          "thirst": 15,
+          "counters": {
+            "friends": 1
+          }
+        },
+        "text_th": "เธอเล่าว่าปู่ทวดเป็นช่างแกะหิน ลายบนหลุมทุกหลุมในซอยนี้เป็นฝีมือเขา “ที่นี่ไม่น่ากลัวหรอก คนตายเป็นเพื่อนบ้านที่เงียบที่สุด”",
+        "text_en": "Her great-grandfather was a stonecarver; every tomb in this lane bears his work. “It isn't scary here. The dead are the quietest neighbors.”"
+      },
+      {
+        "label_th": "ขอบคุณแล้วขอนอนพักมุมหนึ่ง",
+        "label_en": "Thank her and ask to rest in a corner",
+        "effects": {
+          "energy": 15,
+          "hope": 4
+        },
+        "text_th": "เธอปูเสื่อให้ในห้องเล็กข้างหลุม เป็นครั้งแรกในรอบหลายวันที่ไม่มีเสียงรถ",
+        "text_en": "She lays a mat for you in a little room beside the tomb. For the first time in days, there's no traffic noise."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "sp_liberdade_fair",
+    "icon": "🏮",
+    "conditions": {
+      "cities": [
+        "sao_paulo"
+      ],
+      "spots": [
+        "liberdade"
+      ]
+    },
+    "title_th": "ตลาดนัดลิเบอร์ดาจี",
+    "title_en": "The Liberdade Street Fair",
+    "text_th": "ตลาดนัดสุดสัปดาห์ใต้โคมแดงแบบญี่ปุ่น คุณยายเชื้อสายญี่ปุ่นขายเกี๊ยวซ่าทอด เธอเพิ่งทำถาดตกพื้น เกี๊ยวกระจายเต็มทางเดิน",
+    "text_en": "The weekend fair under Japanese red lanterns. A Japanese-Brazilian grandmother selling fried gyoza has just dropped a tray; dumplings scatter across the walkway.",
+    "choices": [
+      {
+        "label_th": "ช่วยเก็บและทำความสะอาด",
+        "label_en": "Help pick up and clean",
+        "effects": {
+          "hunger": 20,
+          "hope": 6,
+          "rep": 3
+        },
+        "text_th": "เกี๊ยวที่ตกขายไม่ได้ เธอเลยยัดใส่ถุงให้คุณทั้งหมด “โอบรีกาดา อาริกาโตะ” พูดสองภาษาในประโยคเดียว",
+        "text_en": "The dropped ones can't be sold, so she bags them all up for you. “Obrigada — arigatō,” two languages in one breath."
+      },
+      {
+        "label_th": "เดินผ่านไป",
+        "label_en": "Walk past",
+        "effects": {
+          "hope": -1
+        },
+        "text_th": "คุณได้ยินเธอบ่นเป็นภาษาญี่ปุ่นปนโปรตุเกสอยู่ข้างหลัง",
+        "text_en": "Behind you, she grumbles in Japanese mixed with Portuguese."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "mx_coyoacan_mariachi_kid",
+    "icon": "🎻",
+    "conditions": {
+      "cities": [
+        "mexico_city"
+      ],
+      "spots": [
+        "coyoacan"
+      ]
+    },
+    "title_th": "เด็กไวโอลินที่โกโยอากัน",
+    "title_en": "The Violin Kid of Coyoacán",
+    "text_th": "เด็กชายราวสิบขวบเล่นไวโอลินเพลงพื้นเมืองหน้าโบสถ์ เพี้ยนบ้าง แต่คนหยุดฟัง พ่อของเขานั่งขายลูกโป่งอยู่ข้างๆ เด็กหันมาถามว่าคุณร้องเพลงได้ไหม",
+    "text_en": "A boy of about ten plays folk songs on the violin outside the church — a little out of tune, but people stop to listen. His father sells balloons nearby. The boy asks if you can sing.",
+    "choices": [
+      {
+        "label_th": "ร้องคู่กับเขา",
+        "label_en": "Sing with him",
+        "chance": 0.6,
+        "success": {
+          "text_th": "เพลง Cielito Lindo ท่อนฮุคทั้งลานร้องตาม หมวกของเด็กเต็มไปด้วยเหรียญ เขาแบ่งให้คุณครึ่งหนึ่งอย่างเคร่งครัด",
+          "text_en": "The whole plaza joins the Cielito Lindo chorus. The boy's hat fills with coins and he splits them with you, strictly half.",
+          "effects": {
+            "cash": [
+              1,
+              3
+            ],
+            "hope": 10,
+            "rep": 4
+          }
+        },
+        "fail": {
+          "text_th": "คุณลืมเนื้อตั้งแต่ท่อนสอง เด็กหัวเราะจนเล่นต่อไม่ได้ คนฟังหัวเราะตาม",
+          "text_en": "You forget the words by the second verse. The boy laughs too hard to keep playing; so does the crowd.",
+          "effects": {
+            "hope": 6
+          }
+        }
+      },
+      {
+        "label_th": "นั่งฟังแล้วปรบมือดังๆ",
+        "label_en": "Listen and clap loudly",
+        "effects": {
+          "hope": 5
+        },
+        "text_th": "เด็กโค้งให้คุณคนเดียว เหมือนคุณเป็นคนดูที่สำคัญที่สุด",
+        "text_en": "He bows just to you, as if you're the most important person in the audience."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "la_macarthur_paleta",
+    "icon": "🍦",
+    "conditions": {
+      "cities": [
+        "los_angeles"
+      ],
+      "spots": [
+        "macarthur_park"
+      ]
+    },
+    "title_th": "รถไอติมแท่งในสวน",
+    "title_en": "The Paleta Cart",
+    "text_th": "แดดแรงจนพื้นคอนกรีตร้อน คนขายไอติมแท่งเข็นรถกระดิ่งผ่านมา เขาเปิดฝาตู้ ไอเย็นลอยออกมา “อันนี้ละลายแล้ว ขายไม่ได้ เอาไหม”",
+    "text_en": "The sun makes the concrete burn. A paleta seller pushes his bell cart by, opens the lid, and cold mist rolls out. “These ones melted a little. Can't sell them. Want one?”",
+    "choices": [
+      {
+        "label_th": "รับไอติมมะม่วงพริก",
+        "label_en": "Take the chili-mango one",
+        "effects": {
+          "thirst": 20,
+          "hope": 6
+        },
+        "text_th": "เปรี้ยว หวาน เผ็ด เย็น ทั้งหมดในคำเดียว เป็นคำที่ดีที่สุดของสัปดาห์",
+        "text_en": "Sour, sweet, spicy, cold — all in one bite. Best bite of the week."
+      },
+      {
+        "label_th": "ขอไปให้เด็กที่นอนใต้ต้นไม้",
+        "label_en": "Ask for one for the kid under the tree",
+        "effects": {
+          "thirst": 10,
+          "hope": 8,
+          "rep": 3,
+          "counters": {
+            "mealsGiven": 1
+          }
+        },
+        "text_th": "คนขายให้มาสองแท่ง ไม่ถามอะไรเลย",
+        "text_en": "He hands you two, no questions asked."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "nyc_penn_commuters",
+    "icon": "🚆",
+    "conditions": {
+      "cities": [
+        "new_york"
+      ],
+      "spots": [
+        "penn_station"
+      ]
+    },
+    "title_th": "ชั่วโมงเร่งด่วนที่เพนน์",
+    "title_en": "Rush Hour at Penn",
+    "text_th": "จอประกาศขบวนรถไฟเปลี่ยนชานชาลาพร้อมกันสามขบวน คนนับพันวิ่งพร้อมกัน ชายใส่สูททำกระเป๋าเอกสารหล่น กระดาษปลิวเต็มพื้น",
+    "text_en": "The departure board switches three tracks at once. Thousands of people run. A man in a suit drops his briefcase; papers fly across the floor.",
+    "choices": [
+      {
+        "label_th": "ช่วยเก็บกระดาษ",
+        "label_en": "Help gather the papers",
+        "effects": {
+          "rep": 3,
+          "hope": 5,
+          "cash": [
+            0,
+            2
+          ]
+        },
+        "text_th": "เขาวิ่งทันรถไฟพอดี ตะโกนขอบคุณจากประตูที่กำลังปิด มีแบงก์หนึ่งใบหล่นอยู่บนกองกระดาษที่คุณยื่นให้ เขาตั้งใจให้หรือเปล่าคุณไม่รู้",
+        "text_en": "He makes his train just in time, shouting thanks through the closing doors. A bill was tucked in the stack you handed him — on purpose or not, you'll never know."
+      },
+      {
+        "label_th": "หลบมุมให้คนวิ่งผ่าน",
+        "label_en": "Step out of the stampede",
+        "effects": {
+          "energy": 3
+        },
+        "text_th": "คุณยืนพิงเสาดูคลื่นคนไหลผ่าน ห้านาทีต่อมาโถงก็ว่างเหมือนไม่มีอะไรเกิดขึ้น",
+        "text_en": "You lean on a pillar and watch the tide of people pass. Five minutes later the hall is empty, as if nothing happened."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "london_covent_juggler",
+    "icon": "🤹",
+    "conditions": {
+      "cities": [
+        "london"
+      ],
+      "spots": [
+        "covent_garden"
+      ]
+    },
+    "title_th": "นักแสดงข้างถนนต้องการผู้ช่วย",
+    "title_en": "A Street Performer Needs a Volunteer",
+    "text_th": "นักโยนไฟบนลานโคเวนต์การ์เดนเรียกหาอาสาสมัครจากฝูงชน ไม่มีใครยกมือ เขาชี้มาที่คุณ “คุณนั่นแหละ มายืนตรงนี้ ห้ามขยับนะ”",
+    "text_en": "A fire juggler at Covent Garden asks the crowd for a volunteer. Nobody raises a hand. He points at you. “You. Stand right here. Don't move.”",
+    "choices": [
+      {
+        "label_th": "ยืนนิ่งเป็นเป้า",
+        "label_en": "Stand very, very still",
+        "chance": 0.8,
+        "success": {
+          "text_th": "คบเพลิงหมุนผ่านหัวคุณสามรอบ ฝูงชนปรบมือลั่น เขาแบ่งเงินในหมวกให้คุณ “ผู้ช่วยที่ดีที่สุดของสัปดาห์”",
+          "text_en": "Flaming torches spin over your head three times. The crowd roars. He shares the hat with you. “Best assistant this week.”",
+          "effects": {
+            "cash": [
+              2,
+              4
+            ],
+            "hope": 10,
+            "rep": 4
+          }
+        },
+        "fail": {
+          "text_th": "คุณสะดุ้งตอนไฟผ่าน ผมไหม้ไปปอยหนึ่ง ฝูงชนหัวเราะ เขาขอโทษแล้วยัดเงินให้มากกว่าเดิม",
+          "text_en": "You flinch as a torch passes and singe a lock of hair. The crowd laughs. He apologizes and gives you extra.",
+          "effects": {
+            "cash": [
+              2,
+              3
+            ],
+            "hope": 2,
+            "health": -2
+          }
+        }
+      },
+      {
+        "label_th": "ส่ายหัวแล้วถอยออก",
+        "label_en": "Shake your head and back away",
+        "effects": {
+          "hope": -1
+        },
+        "text_th": "เขาเลือกนักท่องเที่ยวคนอื่น และใช้คุณเป็นมุกตลกไปทั้งโชว์",
+        "text_en": "He picks a tourist instead, and makes you the running joke of the whole show."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "paris_canal_picnic",
+    "icon": "🥖",
+    "conditions": {
+      "cities": [
+        "paris"
+      ],
+      "spots": [
+        "canal_st_martin"
+      ],
+      "phases": [
+        "afternoon",
+        "night"
+      ]
+    },
+    "title_th": "ปิกนิกริมคลอง",
+    "title_en": "Picnic on the Canal",
+    "text_th": "คนหนุ่มสาวนั่งห้อยขาริมคลองแซ็งมาร์แต็งเต็มแนว ขนมปัง ชีส ไวน์ กลุ่มหนึ่งกำลังจะกลับ เหลือของกินกองใหญ่ คนหนึ่งเดินมาถามว่ารังเกียจไหมถ้าจะให้",
+    "text_en": "Young people line the Canal Saint-Martin, legs dangling over the water — bread, cheese, wine. One group is leaving with a pile of food left over. One of them comes to ask if you'd mind taking it.",
+    "choices": [
+      {
+        "label_th": "รับไว้ แล้วนั่งคุยด้วย",
+        "label_en": "Take it and stay to talk",
+        "effects": {
+          "hunger": 30,
+          "hope": 8,
+          "counters": {
+            "friends": 1
+          }
+        },
+        "text_th": "พวกเขาเป็นนักศึกษาสถาปัตย์ เถียงกันว่าสะพานเหล็กเส้นไหนสวยที่สุด คุณชี้สะพานที่คุณเคยนอนใต้มัน ทุกคนเงียบไปแล้วยอมรับว่าเห็นด้วย",
+        "text_en": "They're architecture students arguing over the prettiest iron footbridge. You point to the one you've slept under. Everyone goes quiet, then agrees."
+      },
+      {
+        "label_th": "ขอบคุณ รับไว้กินทีหลัง",
+        "label_en": "Thank them, save it for later",
+        "effects": {
+          "hunger": 25,
+          "hope": 4
+        },
+        "text_th": "ชีสในกระดาษไขส่งกลิ่นแรงจนนกพิราบตามคุณมาสามตัว",
+        "text_en": "The cheese in its wax paper smells strong enough that three pigeons follow you home."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "tokyo_shibuya_hachiko",
+    "icon": "🐕",
+    "conditions": {
+      "cities": [
+        "tokyo"
+      ],
+      "spots": [
+        "shibuya"
+      ]
+    },
+    "title_th": "รูปปั้นฮาจิโกะ",
+    "title_en": "Waiting at Hachikō",
+    "text_th": "หน้ารูปปั้นหมาที่รอเจ้าของสิบปี คนนัดพบกันเป็นร้อย หญิงชราคนหนึ่งยืนรอใครสักคนตั้งแต่เช้า ตอนนี้เย็นแล้ว เธอยังถือป้ายกระดาษเขียนชื่ออยู่",
+    "text_en": "At the statue of the dog who waited ten years for his owner, hundreds meet friends. One elderly woman has waited since morning; it's evening now, and she still holds a paper sign with a name on it.",
+    "choices": [
+      {
+        "label_th": "ช่วยถามคนแถวนั้นว่าเห็นคนชื่อนี้ไหม",
+        "label_en": "Ask around for the name on her sign",
+        "chance": 0.4,
+        "success": {
+          "text_th": "ชายหนุ่มคนหนึ่งวิ่งมาจากทางออกฝั่งตรงข้าม เขารอผิดฝั่งมาทั้งวัน หลานกับยายกอดกันกลางฝูงชน เธอโค้งให้คุณจนหน้าเกือบถึงพื้น",
+          "text_en": "A young man runs over from the opposite exit — he'd waited on the wrong side all day. Grandson and grandmother embrace in the crowd. She bows to you nearly to the ground.",
+          "effects": {
+            "hope": 14,
+            "rep": 5,
+            "counters": {
+              "helped": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "ไม่มีใครรู้จัก คุณนั่งรอเป็นเพื่อนเธอจนสถานีปิด ก่อนกลับเธอยื่นโอนิกิริให้หนึ่งก้อน",
+          "text_en": "Nobody knows him. You wait with her until the station closes. Before she leaves, she hands you a rice ball.",
+          "effects": {
+            "hope": 4,
+            "hunger": 15
+          }
+        }
+      },
+      {
+        "label_th": "นั่งรอเป็นเพื่อนเงียบๆ",
+        "label_en": "Sit and wait beside her",
+        "effects": {
+          "hope": 6,
+          "energy": -4
+        },
+        "text_th": "เธอไม่พูดภาษาที่คุณเข้าใจ แต่ยื่นผ้าห่มผืนเล็กมาคลุมขาคุณด้วย",
+        "text_en": "She doesn't speak a language you know, but she spreads a little blanket over your knees too."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "any",
+    "tags": [
+      "city"
+    ],
+    "cooldown": 30,
+    "id": "ist_eminonu_fish_bread",
+    "icon": "🐟",
+    "conditions": {
+      "cities": [
+        "istanbul"
+      ],
+      "spots": [
+        "eminonu"
+      ]
+    },
+    "title_th": "ขนมปังปลาที่ท่าเรือ",
+    "title_en": "Fish Bread at the Pier",
+    "text_th": "เรือลำเล็กโคลงเคลงข้างท่า คนย่างปลาแมกเคอเรลบนเรือแล้วยัดใส่ขนมปังส่งขึ้นมา นกนางนวลวนอยู่เต็มฟ้า ลูกเรือคนหนึ่งตะโกนถามว่าใครช่วยขนลังน้ำแข็งได้บ้าง",
+    "text_en": "Small boats rock beside the pier, grilling mackerel on board and handing it up in bread. Gulls fill the sky. A deckhand shouts for someone to haul ice crates.",
+    "choices": [
+      {
+        "label_th": "อาสาขนลังน้ำแข็ง",
+        "label_en": "Volunteer to haul ice",
+        "effects": {
+          "hunger": 30,
+          "cash": 1,
+          "energy": -14,
+          "hope": 5
+        },
+        "text_th": "มือชาจากน้ำแข็ง แต่ขนมปังปลาที่ได้ร้อนจนต้องเป่า กินบนบันไดท่าเรือมองสะพานกาลาตา",
+        "text_en": "Your hands go numb from the ice, but the fish bread is so hot you have to blow on it. You eat on the pier steps watching the Galata Bridge."
+      },
+      {
+        "label_th": "ยืนดูนกนางนวลแย่งขนมปัง",
+        "label_en": "Watch the gulls fight over crumbs",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "นกตัวหนึ่งขโมยขนมปังทั้งชิ้นจากมือนักท่องเที่ยว คุณหัวเราะออกมาเสียงดัง",
+        "text_en": "One gull snatches a whole sandwich from a tourist's hand. You laugh out loud."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "day",
+    "tags": [
+      "community",
+      "kindness"
+    ],
+    "cooldown": 8,
+    "id": "kid_meet",
+    "icon": "🧒",
+    "once": true,
+    "conditions": {
+      "minDay": 4,
+      "minAge": 16
+    },
+    "title_th": "เด็กที่ตามคุณ",
+    "title_en": "The Kid Who Follows You",
+    "text_th": "เด็กผอมๆ อายุราวสิบขวบ ผมยุ่ง รองเท้าคนละข้าง เดินตามคุณมาสามช่วงตึกแล้ว พอคุณหันไป เขาก็ทำเป็นดูอย่างอื่น",
+    "text_en": "A skinny kid of about ten — messy hair, mismatched shoes — has been following you for three blocks. Every time you turn, he pretends to look at something else.",
+    "choices": [
+      {
+        "label_th": "แบ่งข้าวที่มีให้ครึ่งหนึ่ง",
+        "label_en": "Share half of what you have",
+        "effects": {
+          "hunger": -10,
+          "hope": 8,
+          "counters": {
+            "kidBond": 1,
+            "mealsGiven": 1
+          }
+        },
+        "text_th": "เขากินเร็วจนสำลัก แล้วบอกชื่อเล่นที่ไม่น่าจะใช่ชื่อจริง คืนนั้นเขานอนห่างจากคุณสองเมตร ใกล้พอให้รู้สึกปลอดภัย",
+        "text_en": "He eats so fast he chokes, then gives a nickname that probably isn't his real name. That night he sleeps two meters away — close enough to feel safe."
+      },
+      {
+        "label_th": "ไล่ให้ไปหาที่อื่น",
+        "label_en": "Tell him to go somewhere else",
+        "effects": {
+          "hope": -4
+        },
+        "text_th": "เขาไปจริงๆ คืนนั้นคุณนอนไม่หลับ คิดว่าเขานอนที่ไหน",
+        "text_en": "He actually goes. That night you can't sleep, wondering where he is."
+      }
+    ]
+  },
+  {
+    "weight": 5,
+    "trigger": "day",
+    "tags": [
+      "danger",
+      "community"
+    ],
+    "cooldown": 8,
+    "id": "kid_bullies",
+    "icon": "🧒",
+    "conditions": {
+      "counters": {
+        "kidBond": 1
+      },
+      "maxCounters": {
+        "kidBond": 1
+      }
+    },
+    "title_th": "เด็กโตกว่ารุมเขา",
+    "title_en": "Older Boys Corner Him",
+    "text_th": "เด็กวัยรุ่นสามคนต้อนเด็กคนนั้นเข้ามุม กำลังค้นกระเป๋าเงินที่เขาเก็บมาทั้งวัน เขามองมาที่คุณ",
+    "text_en": "Three teenagers have the kid backed into a corner, going through the coins he collected all day. He looks over at you.",
+    "choices": [
+      {
+        "label_th": "เดินเข้าไปยืนข้างเขา",
+        "label_en": "Walk over and stand beside him",
+        "chance": 0.7,
+        "success": {
+          "text_th": "ผู้ใหญ่หนึ่งคนพอให้พวกนั้นถอย เด็กไม่พูดขอบคุณ แต่เดินชิดคุณทั้งวัน",
+          "text_en": "One adult is enough to make them back off. The kid doesn't say thanks, but walks right beside you all day.",
+          "effects": {
+            "rep": 5,
+            "hope": 6,
+            "counters": {
+              "kidBond": 1
+            }
+          }
+        },
+        "fail": {
+          "text_th": "หมัดหนึ่งเข้าที่ปาก พวกนั้นเอาเงินไปหมด แต่เด็กปลอดภัย คืนนั้นเขาเอาน้ำแข็งมาประคบให้คุณ",
+          "text_en": "A fist catches your mouth and they take the money — but the kid is safe. That night he brings ice for your lip.",
+          "effects": {
+            "health": -8,
+            "cause": "injury",
+            "counters": {
+              "kidBond": 1
+            }
+          }
+        }
+      },
+      {
+        "label_th": "ตะโกนเรียกยามตลาด",
+        "label_en": "Shout for the market guard",
+        "effects": {
+          "heat": 4,
+          "hope": 2,
+          "counters": {
+            "kidBond": 1
+          }
+        },
+        "text_th": "พวกนั้นวิ่งหนี ยามมาถามบัตรคุณแทน เด็กแอบหัวเราะ",
+        "text_en": "They scatter. The guard asks for your ID instead. The kid giggles behind his hand."
+      }
+    ]
+  },
+  {
+    "weight": 5,
+    "trigger": "day",
+    "tags": [
+      "health",
+      "kindness"
+    ],
+    "cooldown": 8,
+    "id": "kid_fever",
+    "icon": "🤒",
+    "conditions": {
+      "counters": {
+        "kidBond": 2
+      },
+      "maxCounters": {
+        "kidBond": 2
+      }
+    },
+    "title_th": "เขาตัวร้อน",
+    "title_en": "He's Burning Up",
+    "text_th": "เช้านี้เด็กไม่ลุก ตัวร้อนจี๋ ปากแห้ง พูดไม่รู้เรื่อง คลินิกฟรีอยู่อีกฝั่งเมือง",
+    "text_en": "This morning the kid won't get up. He's burning hot, lips cracked, mumbling. The free clinic is across town.",
+    "choices": [
+      {
+        "label_th": "แบกเขาไปคลินิก",
+        "label_en": "Carry him to the clinic",
+        "effects": {
+          "energy": -25,
+          "hope": 10,
+          "rep": 4,
+          "counters": {
+            "kidBond": 1,
+            "helped": 1
+          }
+        },
+        "text_th": "คุณแบกเขาเดินสองชั่วโมง หมอบอกว่ามาทันพอดี พยาบาลถามว่าคุณเป็นอะไรกับเด็ก คุณตอบไม่ถูก",
+        "text_en": "You carry him for two hours. The doctor says you got there just in time. A nurse asks how you're related; you don't know what to say."
+      },
+      {
+        "label_th": "เอาเงินทั้งหมดซื้อยาให้",
+        "label_en": "Spend everything on medicine",
+        "effects": {
+          "cashPct": -1,
+          "hope": 8,
+          "counters": {
+            "kidBond": 1,
+            "helped": 1
+          }
+        },
+        "text_th": "สองวันต่อมาไข้ลด เขาลุกขึ้นมาบ่นว่าหิว คุณไม่เคยดีใจที่ได้ยินใครบ่นขนาดนี้",
+        "text_en": "Two days later the fever breaks and he wakes up complaining he's hungry. You've never been so happy to hear someone complain."
+      }
+    ]
+  },
+  {
+    "weight": 6,
+    "trigger": "day",
+    "tags": [
+      "opportunity"
+    ],
+    "cooldown": 8,
+    "id": "kid_school",
+    "icon": "🎒",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "counters": {
+        "kidBond": 3
+      },
+      "min": {
+        "rep": 35
+      }
+    },
+    "title_th": "โรงเรียนรับเขา",
+    "title_en": "A School Will Take Him",
+    "text_th": "เจ้าหน้าที่มูลนิธิเด็กได้ยินเรื่องคุณสองคนจากคลินิก “เรามีที่ในหอพักกับโรงเรียนให้เขา แต่เขาบอกว่าจะไปก็ต่อเมื่อคุณบอกให้ไป”",
+    "text_en": "A children's foundation heard about the two of you from the clinic. “We have a bed in our dorm and a place at school for him. But he says he'll only go if you tell him to.”",
+    "choices": [
+      {
+        "label_th": "บอกให้เขาไป",
+        "label_en": "Tell him to go",
+        "effects": {
+          "flags": [
+            "kid_in_school"
+          ],
+          "hope": 20,
+          "rep": 8
+        },
+        "text_th": "เขาร้องไห้ เถียง แล้วก็ไป ก่อนขึ้นรถเขายื่นรองเท้าข้างที่ไม่เข้าคู่ให้คุณเก็บไว้ “เดี๋ยวกลับมาเอา”",
+        "text_en": "He cries, argues, and goes. Before getting in the van he hands you his odd shoe to keep. “I'll come back for it.”"
+      },
+      {
+        "label_th": "ให้เขาอยู่ด้วยกันต่อ",
+        "label_en": "Keep him with you",
+        "effects": {
+          "hope": 4,
+          "counters": {
+            "kidBond": -1
+          }
+        },
+        "text_th": "คืนนั้นเขานอนหลับสบาย แต่คุณนอนไม่หลับ",
+        "text_en": "He sleeps soundly that night. You don't."
+      }
+    ]
+  },
+  {
+    "weight": 8,
+    "trigger": "day",
+    "tags": [
+      "opportunity",
+      "kindness"
+    ],
+    "cooldown": 8,
+    "id": "kid_returns",
+    "icon": "🎓",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "flags": [
+        "kid_in_school"
+      ],
+      "minDay": 60
+    },
+    "title_th": "เขากลับมาเอารองเท้า",
+    "title_en": "He Comes Back for the Shoe",
+    "text_th": "เด็กหนุ่มในชุดนักเรียนรีดเรียบยืนอยู่ตรงหน้า ตัวสูงขึ้นจนจำแทบไม่ได้ เขาไม่ได้มาคนเดียว ผู้อำนวยการมูลนิธิมาด้วย “เขาเล่าเรื่องคุณให้ทุกคนฟัง เรามีงานดูแลหอพักเด็กชาย มีห้องให้อยู่ คุณสนใจไหม”",
+    "text_en": "A boy in a pressed school uniform stands in front of you, taller than you'd recognize. He didn't come alone; the foundation's director is with him. “He tells everyone about you. We need someone to look after the boys' dorm. There's a room. Interested?”",
+    "choices": [
+      {
+        "label_th": "รับงาน",
+        "label_en": "Take the job",
+        "effects": {
+          "flags": [
+            "big_sibling"
+          ],
+          "hope": 30
+        },
+        "text_th": "เขาขอรองเท้าคืน แล้วยื่นรองเท้าคู่ใหม่ให้คุณแทน “ไซซ์นี้ใช่ไหม ผมจำได้”",
+        "text_en": "He asks for the shoe back, then hands you a new pair. “This is your size, right? I remembered.”"
+      },
+      {
+        "label_th": "ขอบคุณ แต่ยังไม่พร้อม",
+        "label_en": "Thank them, but not yet",
+        "effects": {
+          "hope": 15,
+          "rep": 10
+        },
+        "text_th": "เขาเข้าใจ และสัญญาว่าจะมาเยี่ยมทุกปิดเทอม",
+        "text_en": "He understands, and promises to visit every school break."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "action",
+    "tags": [
+      "kindness",
+      "community"
+    ],
+    "cooldown": 30,
+    "id": "flower_meet",
+    "icon": "💐",
+    "once": true,
+    "conditions": {
+      "afterActions": [
+        "beg",
+        "sell",
+        "busk"
+      ]
+    },
+    "title_th": "ยายขายดอกไม้",
+    "title_en": "The Old Flower Seller",
+    "text_th": "หญิงชราหลังค่อมเข็นรถดอกไม้ผ่านทุกวันตอนสาย วันนี้ล้อรถติดร่องท่อ ดอกมะลิกับดาวเรืองเกือบหกลงพื้น",
+    "text_en": "A stooped old woman pushes her flower cart past every late morning. Today a wheel catches in a drain grate; jasmine and marigolds nearly spill onto the street.",
+    "choices": [
+      {
+        "label_th": "ช่วยยกรถขึ้น",
+        "label_en": "Lift the cart free",
+        "effects": {
+          "hope": 6,
+          "rep": 2,
+          "counters": {
+            "flowerBond": 1
+          }
+        },
+        "text_th": "ยายเหน็บดอกมะลิพวงเล็กไว้ที่กระเป๋าเสื้อคุณ “พรุ่งนี้ผ่านมาอีก ช่วยเข็นขึ้นเนินด้วยนะ”",
+        "text_en": "She tucks a little jasmine garland into your shirt pocket. “I'll pass by tomorrow. Help me up the hill?”"
+      },
+      {
+        "label_th": "มองแล้วทำงานต่อ",
+        "label_en": "Watch and keep working",
+        "effects": {
+          "hope": -2
+        },
+        "text_th": "ยายใช้เวลาสิบนาทีกว่าจะเข็นออก คุณรู้สึกแปลกๆ ทั้งวัน",
+        "text_en": "It takes her ten minutes to free it. Something sits wrong with you all day."
+      }
+    ]
+  },
+  {
+    "weight": 5,
+    "trigger": "day",
+    "tags": [
+      "community",
+      "kindness"
+    ],
+    "cooldown": 6,
+    "id": "flower_hill",
+    "icon": "💐",
+    "conditions": {
+      "counters": {
+        "flowerBond": 1
+      }
+    },
+    "title_th": "เนินของยาย",
+    "title_en": "Grandma's Hill",
+    "text_th": "ยายรอคุณอยู่ที่ตีนเนินเหมือนทุกวัน ระหว่างเข็นยายเล่าเรื่องสามีที่ตายไป ลูกที่ไปทำงานต่างประเทศ และลูกค้าประจำทุกคนที่รู้จักชื่อ",
+    "text_en": "She's waiting at the foot of the hill as always. As you push, she tells you about her late husband, her son working abroad, and every regular customer by name.",
+    "choices": [
+      {
+        "label_th": "เข็นไปฟังไป",
+        "label_en": "Push and listen",
+        "effects": {
+          "hope": 5,
+          "energy": -6,
+          "cash": 1,
+          "counters": {
+            "flowerBond": 1
+          }
+        },
+        "text_th": "ถึงหัวเนินยายยัดเงินใส่มือคุณ ไม่ยอมให้ปฏิเสธ “ค่าจ้างคนฟัง”",
+        "text_en": "At the top she presses money into your hand and won't hear no. “Pay for the listener.”"
+      },
+      {
+        "label_th": "วันนี้ขอไม่ไป",
+        "label_en": "Not today",
+        "effects": {
+          "hope": -1
+        },
+        "text_th": "ยายเข็นเองช้าๆ หยุดพักสามรอบ",
+        "text_en": "She pushes it herself, slowly, stopping three times."
+      }
+    ]
+  },
+  {
+    "weight": 6,
+    "trigger": "day",
+    "tags": [
+      "kindness",
+      "health"
+    ],
+    "cooldown": 8,
+    "id": "flower_hospital",
+    "icon": "🏥",
+    "once": true,
+    "conditions": {
+      "counters": {
+        "flowerBond": 4
+      }
+    },
+    "title_th": "รถดอกไม้ไม่มา",
+    "title_en": "The Cart Doesn't Come",
+    "text_th": "สามวันแล้วที่ยายไม่ผ่านมา แม่ค้าข้างๆ บอกว่ายายล้มในห้องเช่า ตอนนี้อยู่โรงพยาบาลรัฐ ไม่มีใครไปเยี่ยมเพราะลูกอยู่ไกล",
+    "text_en": "Three days without her. The vendor next door says she fell in her room and is in the public hospital. Nobody visits — her son is too far away.",
+    "choices": [
+      {
+        "label_th": "ไปเยี่ยมยาย",
+        "label_en": "Go visit her",
+        "effects": {
+          "hope": 10,
+          "energy": -10,
+          "counters": {
+            "flowerBond": 2
+          }
+        },
+        "text_th": "ยายนอนตัวเล็กนิดเดียวบนเตียง พอเห็นคุณก็ร้องไห้ คุณนั่งร้อยมาลัยกับยายบนเตียงจนพยาบาลไล่",
+        "text_en": "She looks tiny in the bed. When she sees you, she cries. You sit stringing garlands with her until the nurse chases you out."
+      },
+      {
+        "label_th": "ฝากแม่ค้าข้างๆ เอาส้มไปให้",
+        "label_en": "Send oranges with the neighbor",
+        "effects": {
+          "cash": -1,
+          "hope": 4,
+          "counters": {
+            "flowerBond": 1
+          }
+        },
+        "text_th": "แม่ค้ากลับมาบอกว่ายายถามถึงคุณ",
+        "text_en": "The neighbor comes back saying she asked about you."
+      }
+    ]
+  },
+  {
+    "weight": 8,
+    "trigger": "day",
+    "tags": [
+      "opportunity",
+      "kindness"
+    ],
+    "cooldown": 8,
+    "id": "flower_cart_gift",
+    "icon": "🌼",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "counters": {
+        "flowerBond": 6
+      },
+      "min": {
+        "rep": 30
+      }
+    },
+    "title_th": "รถเข็นของยาย",
+    "title_en": "Grandma's Cart",
+    "text_th": "ยายออกจากโรงพยาบาลแต่เดินไม่ไหวแล้ว ลูกชายจะรับไปอยู่ด้วยต่างจังหวัด ยายจับมือคุณ “รถคันนี้ ลูกค้าประจำทุกคน สวนดอกไม้ที่รับของ ยายยกให้หมด ถ้าเอา”",
+    "text_en": "She's out of the hospital but can't walk far anymore; her son is taking her to live with him in the countryside. She holds your hand. “This cart. Every regular. The farm I buy from. All yours, if you want them.”",
+    "choices": [
+      {
+        "label_th": "รับรถเข็นของยาย",
+        "label_en": "Take over her cart",
+        "effects": {
+          "flags": [
+            "flower_cart"
+          ],
+          "hope": 30
+        },
+        "text_th": "ยายสอนร้อยมาลัยแบบของยายเป็นครั้งสุดท้าย ลูกค้าคนแรกของคุณคือแม่ค้าข้างๆ ที่ซื้อแบบไม่ต่อสักบาท",
+        "text_en": "She teaches you her garland knot one last time. Your first customer is the neighbor vendor, who doesn't haggle a single baht."
+      },
+      {
+        "label_th": "ให้ยายขายรถเอาเงินไปรักษาตัว",
+        "label_en": "Tell her to sell it for her treatment",
+        "effects": {
+          "hope": 12,
+          "rep": 8
+        },
+        "text_th": "ยายตีแขนคุณเบาๆ “โง่จริง” แล้วยิ้มทั้งน้ำตา",
+        "text_en": "She swats your arm. “Silly.” Then smiles through tears."
+      }
+    ]
+  },
+  {
+    "weight": 4,
+    "trigger": "day",
+    "tags": [
+      "authority",
+      "community"
+    ],
+    "cooldown": 8,
+    "id": "excop_meet",
+    "icon": "👮",
+    "once": true,
+    "conditions": {
+      "minDay": 6,
+      "min": {
+        "heat": 20
+      }
+    },
+    "title_th": "ชายที่รู้ตารางกวาดล้าง",
+    "title_en": "The Man Who Knows the Sweeps",
+    "text_th": "ชายวัยห้าสิบในเสื้อแจ็กเก็ตเก่าหย่อนก้นลงนั่งข้างคุณ “คืนพรุ่งนี้เทศกิจกวาดถนนเส้นนี้ ตีสองถึงตีสี่ ย้ายไปนอนหลังตลาดซะ” แล้วเดินจากไปโดยไม่บอกชื่อ",
+    "text_en": "A man in his fifties in a worn jacket sits down beside you. “City inspectors sweep this street tomorrow night, two to four a.m. Sleep behind the market instead.” He leaves without giving a name.",
+    "choices": [
+      {
+        "label_th": "เชื่อเขา ย้ายที่นอน",
+        "label_en": "Trust him and move",
+        "effects": {
+          "heat": -8,
+          "hope": 3,
+          "counters": {
+            "copBond": 1
+          }
+        },
+        "text_th": "คืนต่อมาคุณมองจากหลังตลาด รถกระบะเทศกิจมาตรงเวลาเป๊ะ ยึดทุกอย่างบนทางเท้า",
+        "text_en": "The next night, from behind the market, you watch the inspectors' truck arrive right on time and confiscate everything on the sidewalk."
+      },
+      {
+        "label_th": "ไม่เชื่อ นอนที่เดิม",
+        "label_en": "Ignore him and stay",
+        "chance": 0.4,
+        "success": {
+          "text_th": "คืนนั้นไม่มีอะไรเกิดขึ้น หรือคุณอาจแค่โชคดี",
+          "text_en": "Nothing happens that night. Or maybe you just got lucky.",
+          "effects": {
+            "hope": 1
+          }
+        },
+        "fail": {
+          "text_th": "ตีสองตรงเป๊ะ ผ้าห่มกับกล่องกระดาษของคุณถูกโยนขึ้นรถไปหมด",
+          "text_en": "Two a.m. on the dot. Your blanket and cardboard get thrown in the truck.",
+          "effects": {
+            "heat": 6,
+            "hope": -6,
+            "items": {
+              "blanket": -1,
+              "cardboard": -1
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "weight": 5,
+    "trigger": "day",
+    "tags": [
+      "community"
+    ],
+    "cooldown": 8,
+    "id": "excop_story",
+    "icon": "👮",
+    "once": true,
+    "conditions": {
+      "counters": {
+        "copBond": 1
+      }
+    },
+    "title_th": "เขาเคยเป็นตำรวจ",
+    "title_en": "He Used to Be a Cop",
+    "text_th": "ชายแจ็กเก็ตเก่านั่งดื่มกาแฟร้านข้างทาง คราวนี้เขาเรียกคุณไปนั่งด้วย “ผมเคยเป็นตำรวจที่นี่ยี่สิบปี จนวันที่ไม่ยอมเซ็นใบจับคนที่ไม่ได้ทำผิด” เขาหัวเราะแห้งๆ “แล้วผมก็มาอยู่ฝั่งเดียวกับคุณ”",
+    "text_en": "The man in the jacket is drinking coffee at a street stall, and this time he waves you over. “I was a cop here twenty years. Until I refused to sign an arrest for someone who did nothing.” A dry laugh. “Then I ended up on your side of things.”",
+    "choices": [
+      {
+        "label_th": "เล่าเรื่องของตัวเองให้เขาฟังบ้าง",
+        "label_en": "Tell him your story too",
+        "effects": {
+          "hope": 8,
+          "counters": {
+            "copBond": 1,
+            "friends": 1
+          }
+        },
+        "text_th": "เขาฟังแบบตำรวจ ถามเวลา สถานที่ ชื่อคน จดลงสมุดเล่มเล็ก “เผื่อวันหนึ่งได้ใช้”",
+        "text_en": "He listens like a cop — times, places, names — and writes it in a little notebook. “In case it's useful one day.”"
+      },
+      {
+        "label_th": "ฟังเงียบๆ",
+        "label_en": "Just listen",
+        "effects": {
+          "hope": 4,
+          "counters": {
+            "copBond": 1
+          }
+        },
+        "text_th": "เขาจ่ายค่ากาแฟให้คุณด้วย บอกว่าคนฟังเก่งหายาก",
+        "text_en": "He pays for your coffee too. Good listeners are rare, he says."
+      }
+    ]
+  },
+  {
+    "weight": 6,
+    "trigger": "day",
+    "tags": [
+      "opportunity",
+      "authority"
+    ],
+    "cooldown": 8,
+    "id": "excop_papers",
+    "icon": "🪪",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "counters": {
+        "copBond": 2
+      },
+      "notFlags": [
+        "has_id"
+      ]
+    },
+    "title_th": "เพื่อนเก่าที่สำนักงานเขต",
+    "title_en": "An Old Friend at the District Office",
+    "text_th": "“คุณยังไม่มีบัตรใช่ไหม” อดีตตำรวจถาม “เพื่อนรุ่นเดียวกันผมทำงานที่สำนักงานเขต เขาเป็นหนี้ผมอยู่ ไปกับผมพรุ่งนี้เช้า เอกสารที่ขาด ผมเป็นพยานให้”",
+    "text_en": "“You still don't have an ID, do you?” the ex-cop asks. “A classmate of mine works at the district office. He owes me. Come with me tomorrow morning — whatever papers you're missing, I'll vouch for you.”",
+    "choices": [
+      {
+        "label_th": "ไปด้วยกัน",
+        "label_en": "Go with him",
+        "effects": {
+          "counters": {
+            "idProgress": 2,
+            "copBond": 1
+          },
+          "hope": 15,
+          "heat": -10
+        },
+        "text_th": "เพื่อนเขาดูเอกสารแล้วถอนหายใจ แต่ประทับตราให้สองช่อง “อีกขั้นเดียว มาให้ครบนะ”",
+        "text_en": "His friend looks over your papers, sighs, and stamps two boxes. “One more step. Finish it.”"
+      },
+      {
+        "label_th": "ขอทำเองตามขั้นตอน",
+        "label_en": "Do it the normal way",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "เขาพยักหน้าเคารพ “ก็ดี แต่ถ้าติดตรงไหนบอกผม”",
+        "text_en": "He nods with respect. “Fair. But if you get stuck, tell me.”"
+      }
+    ]
+  },
+  {
+    "weight": 3,
+    "trigger": "any",
+    "tags": [
+      "kindness"
+    ],
+    "cooldown": 20,
+    "id": "night_market_close",
+    "icon": "🌙",
+    "conditions": {
+      "phases": [
+        "night"
+      ]
+    },
+    "title_th": "ตลาดกลางคืนปิดร้าน",
+    "title_en": "The Night Market Closes",
+    "text_th": "ไฟตลาดดับทีละดวง แม่ค้าเก็บแผง ของที่ขายไม่หมดจะถูกทิ้งถ้าไม่มีใครเอา ป้าคนหนึ่งชูถุงข้าวเหนียวหมูปิ้งขึ้นมาแล้วมองหาใครสักคน",
+    "text_en": "The market lights go out one by one as vendors pack up. Whatever didn't sell gets thrown away unless someone takes it. One auntie holds up a bag of grilled pork and sticky rice, looking for someone.",
+    "choices": [
+      {
+        "label_th": "ยกมือ แล้วช่วยเก็บแผง",
+        "label_en": "Raise your hand, then help pack up",
+        "effects": {
+          "hunger": 30,
+          "energy": -8,
+          "hope": 5,
+          "rep": 2
+        },
+        "text_th": "สามแผงเรียกคุณไปช่วย ได้ของกินกลับมาจนต้องแบ่งให้คนนอนข้างๆ",
+        "text_en": "Three stalls call you over to help. You come back with so much food you share it with your neighbors."
+      },
+      {
+        "label_th": "ชี้ไปที่แม่ลูกที่นั่งอยู่หัวมุม",
+        "label_en": "Point to the mother and child on the corner",
+        "effects": {
+          "hope": 8,
+          "rep": 4,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "ป้าเดินไปให้แม่ลูกคู่นั้น แล้วเดินกลับมาให้คุณอีกถุง “คนชี้ทางก็ต้องกิน”",
+        "text_en": "She takes it to them, then walks back with another bag for you. “The one who points the way eats too.”"
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "action",
+    "tags": [
+      "moral",
+      "absurd"
+    ],
+    "cooldown": 40,
+    "id": "prank_teens",
+    "icon": "📱",
+    "conditions": {
+      "afterActions": [
+        "beg",
+        "busk"
+      ]
+    },
+    "title_th": "คลิปแกล้งคน",
+    "title_en": "The Prank Video",
+    "text_th": "วัยรุ่นสองคนถือมือถือถ่ายคุณ คนหนึ่งยื่นแบงก์ให้ “ถ้ากินพริกเม็ดนี้ทั้งเม็ด เอาไปเลย” อีกคนหัวเราะรอ",
+    "text_en": "Two teenagers film you on their phones. One holds out a banknote. “Eat this whole chili and it's yours.” The other laughs, waiting.",
+    "choices": [
+      {
+        "label_th": "กินเลย เงินคือเงิน",
+        "label_en": "Eat it — money is money",
+        "effects": {
+          "cash": 3,
+          "health": -3,
+          "hope": -6,
+          "thirst": -15
+        },
+        "text_th": "ปากไหม้จนน้ำตาไหล พวกนั้นหัวเราะจนมือถือสั่น คุณได้เงินมา แต่รู้สึกเหมือนเสียอะไรไปมากกว่า",
+        "text_en": "Your mouth burns until you cry. They laugh so hard the phones shake. You get the money, and feel like you lost something bigger."
+      },
+      {
+        "label_th": "บอกให้ถ่ายคลิปคุยกันแทน",
+        "label_en": "Offer them a real interview instead",
+        "chance": 0.4,
+        "success": {
+          "text_th": "คนถือกล้องเงียบไป แล้วถามว่าคุณมาอยู่ตรงนี้ได้ยังไง คลิปนั้นไม่ฮา แต่มีคนดูเยอะกว่าคลิปไหนของพวกเขา",
+          "text_en": "The one filming goes quiet, then asks how you ended up here. That video isn't funny, but it gets more views than anything they've made.",
+          "effects": {
+            "hope": 10,
+            "rep": 4,
+            "cash": 2
+          }
+        },
+        "fail": {
+          "text_th": "พวกนั้นทำหน้าเบื่อแล้วเดินไปหาคนอื่น",
+          "text_en": "They look bored and go find someone else.",
+          "effects": {
+            "hope": 2
+          }
+        }
+      },
+      {
+        "label_th": "ไม่เอา ไปเถอะ",
+        "label_en": "No. Move on.",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "พวกเขาบ่นว่าไม่สนุก คุณยังมีศักดิ์ศรีครบ",
+        "text_en": "They complain it's no fun. Your dignity stays whole."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "moral",
+      "community"
+    ],
+    "cooldown": 30,
+    "id": "old_classmate",
+    "icon": "🫣",
+    "once": true,
+    "conditions": {
+      "minDay": 15,
+      "minAge": 18
+    },
+    "title_th": "เพื่อนร่วมห้องเก่า",
+    "title_en": "An Old Classmate",
+    "text_th": "ผู้หญิงในชุดทำงานเดินผ่าน แล้วหยุด หันกลับมา เรียกชื่อจริงของคุณที่ไม่ได้ยินมานาน “...ใช่เธอจริงๆ ด้วย” เธอเคยนั่งโต๊ะข้างคุณตอนมัธยม",
+    "text_en": "A woman in office clothes walks past, stops, and turns. She says your real name — one you haven't heard in a long time. “…It really is you.” She sat next to you in high school.",
+    "choices": [
+      {
+        "label_th": "ยอมรับ แล้วคุยกัน",
+        "label_en": "Admit it and talk",
+        "effects": {
+          "hope": 10,
+          "counters": {
+            "friends": 1
+          },
+          "cash": [
+            0,
+            3
+          ]
+        },
+        "text_th": "เธอซื้อกาแฟให้ เล่าว่าใครแต่งงาน ใครย้ายไปไหน ไม่ถามสักคำว่าทำไมคุณมาอยู่ตรงนี้ ก่อนแยกกันเธอเขียนเบอร์ไว้บนแก้วกาแฟ",
+        "text_en": "She buys you coffee and tells you who married whom, who moved where — never once asking why you're here. Before leaving, she writes her number on the cup."
+      },
+      {
+        "label_th": "บอกว่าจำคนผิด",
+        "label_en": "Say she has the wrong person",
+        "effects": {
+          "hope": -8
+        },
+        "text_th": "เธอขอโทษแล้วเดินไป หันกลับมามองอีกสองครั้ง คุณมองตามจนเธอลับตา",
+        "text_en": "She apologizes and walks on, looking back twice. You watch until she's gone."
+      }
+    ]
+  },
+  {
+    "weight": 3,
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "opportunity"
+    ],
+    "cooldown": 25,
+    "id": "lost_tourist_map",
+    "icon": "🗺️",
+    "conditions": {
+      "phases": [
+        "morning",
+        "afternoon"
+      ]
+    },
+    "title_th": "นักท่องเที่ยวหลงทาง",
+    "title_en": "A Lost Tourist",
+    "text_th": "นักท่องเที่ยวคู่หนึ่งหมุนแผนที่ไปมาสามรอบ มือถือแบตหมด ถามคนแถวนั้นแต่ไม่มีใครหยุด สุดท้ายเขาหันมาหาคุณ",
+    "text_en": "A tourist couple turns their map around three times. Phone dead. Nobody stops when they ask. Finally they turn to you.",
+    "choices": [
+      {
+        "label_th": "พาเดินไปส่งถึงที่",
+        "label_en": "Walk them all the way there",
+        "effects": {
+          "cash": [
+            1,
+            3
+          ],
+          "hope": 6,
+          "energy": -8,
+          "rep": 2
+        },
+        "text_th": "ระหว่างทางคุณเล่าเรื่องย่านนี้ที่ไกด์บุ๊กไม่มี ถึงที่หมายพวกเขาให้ทิปมากกว่าค่าไกด์จริง",
+        "text_en": "On the way you tell them things about the neighborhood no guidebook has. At the end they tip more than a real guide would get."
+      },
+      {
+        "label_th": "ชี้ทางให้",
+        "label_en": "Point the way",
+        "effects": {
+          "hope": 3
+        },
+        "text_th": "พวกเขาขอบคุณสามภาษา แล้วเดินผิดทางอยู่ดี",
+        "text_en": "They thank you in three languages, then walk the wrong way anyway."
+      }
+    ]
+  },
+  {
+    "weight": 3,
+    "trigger": "day",
+    "tags": [
+      "kindness",
+      "health"
+    ],
+    "cooldown": 40,
+    "id": "free_haircut",
+    "icon": "💇",
+    "title_th": "ตัดผมฟรีริมทาง",
+    "title_en": "Free Haircuts on the Sidewalk",
+    "text_th": "ช่างตัดผมอาสากางเก้าอี้พับสามตัวริมทาง ป้ายเขียนว่า “ตัดฟรี ไม่ถามอะไร” คิวยาวพอสมควร",
+    "text_en": "Volunteer barbers have set up three folding chairs on the sidewalk. The sign reads: “Free cuts. No questions.” The line is fairly long.",
+    "choices": [
+      {
+        "label_th": "ต่อคิวตัดผม",
+        "label_en": "Get in line",
+        "effects": {
+          "hygiene": 20,
+          "hope": 10,
+          "rep": 2
+        },
+        "text_th": "ช่างหมุนเก้าอี้ให้ดูกระจก คนในกระจกดูเหมือนคนที่คุณจำได้ คุณยิ้มให้เขา",
+        "text_en": "The barber turns the chair to the mirror. The face in it looks like someone you remember. You smile at him."
+      },
+      {
+        "label_th": "ช่วยกวาดผมให้แทน",
+        "label_en": "Sweep up hair for them instead",
+        "effects": {
+          "hope": 6,
+          "rep": 4,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "ตอนเลิก ช่างคนสุดท้ายตัดให้คุณด้วย “คิวพิเศษสำหรับทีมงาน”",
+        "text_en": "At the end, the last barber cuts yours too. “Staff gets the VIP line.”"
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "action",
+    "tags": [
+      "moral",
+      "danger"
+    ],
+    "cooldown": 40,
+    "id": "pickpocket_seen",
+    "icon": "👛",
+    "conditions": {
+      "afterActions": [
+        "beg",
+        "busk",
+        "sell"
+      ]
+    },
+    "title_th": "มือในกระเป๋าคนอื่น",
+    "title_en": "A Hand in Someone's Bag",
+    "text_th": "คุณเห็นชายเสื้อฮู้ดค่อยๆ ล้วงกระเป๋าเป้ของนักท่องเที่ยวที่ยืนดูแผนที่ เขาเห็นว่าคุณเห็น แล้วยกนิ้วจุ๊ปาก",
+    "text_en": "You see a man in a hoodie easing his hand into a tourist's backpack while she studies a map. He sees you see him, and puts a finger to his lips.",
+    "choices": [
+      {
+        "label_th": "ตะโกนเตือนเธอ",
+        "label_en": "Shout a warning",
+        "chance": 0.75,
+        "success": {
+          "text_th": "ชายคนนั้นวิ่งหนี นักท่องเที่ยวกอดกระเป๋าแน่น แล้วหยิบเงินในกระเป๋าที่เกือบหายมาให้คุณส่วนหนึ่ง",
+          "text_en": "He bolts. She clutches her bag, then gives you part of the money she nearly lost.",
+          "effects": {
+            "cash": [
+              2,
+              4
+            ],
+            "rep": 5,
+            "hope": 8
+          }
+        },
+        "fail": {
+          "text_th": "เขาวิ่งหนี แต่คืนนั้นเขากับเพื่อนมาหาคุณ",
+          "text_en": "He runs — but that night he comes back with a friend.",
+          "effects": {
+            "health": -10,
+            "cashPct": -0.5,
+            "cause": "injury",
+            "hope": -4
+          }
+        }
+      },
+      {
+        "label_th": "ทำเป็นไม่เห็น",
+        "label_en": "Pretend you didn't see",
+        "effects": {
+          "hope": -6
+        },
+        "text_th": "เขาพยักหน้าให้คุณก่อนหายเข้าฝูงคน นักท่องเที่ยวยังดูแผนที่อยู่ ไม่รู้อะไรเลย",
+        "text_en": "He nods at you and melts into the crowd. The tourist is still reading her map, unaware."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "health",
+      "moral"
+    ],
+    "cooldown": 60,
+    "id": "collapse_stranger",
+    "icon": "🚑",
+    "title_th": "คนล้มกลางถนน",
+    "title_en": "Someone Collapses",
+    "text_th": "ชายวัยกลางคนในชุดทำงานล้มฟุบลงกลางฟุตบาท คนมุงยกมือถือขึ้นถ่าย แต่ไม่มีใครเข้าไปใกล้",
+    "text_en": "A middle-aged man in office clothes collapses on the sidewalk. A crowd forms, phones raised, but nobody goes near him.",
+    "choices": [
+      {
+        "label_th": "เข้าไปพลิกตัว เรียกรถพยาบาล",
+        "label_en": "Roll him over and call for an ambulance",
+        "effects": {
+          "hope": 12,
+          "rep": 6,
+          "counters": {
+            "helped": 1
+          }
+        },
+        "text_th": "คุณจำท่าจากโปสเตอร์ในศูนย์ได้ จับเขานอนตะแคง ตะโกนให้คนโทรเรียกรถ รถพยาบาลมาในแปดนาที พยาบาลบอกว่าท่านอนนั้นช่วยได้มาก",
+        "text_en": "You remember the position from a poster at the center: on his side, airway clear. You shout for someone to call. The ambulance arrives in eight minutes; the medic says that position helped a lot."
+      },
+      {
+        "label_th": "รอให้คนอื่นจัดการ",
+        "label_en": "Let someone else handle it",
+        "effects": {
+          "hope": -5
+        },
+        "text_th": "ห้านาทีต่อมาร้านขายยามีคนวิ่งออกมาช่วย คุณไม่รู้ว่าเขารอดหรือเปล่า",
+        "text_en": "Five minutes later someone runs out of a pharmacy to help. You never find out if he made it."
+      }
+    ]
+  },
+  {
+    "weight": 2,
+    "trigger": "any",
+    "tags": [
+      "moral",
+      "kindness"
+    ],
+    "cooldown": 30,
+    "id": "phone_ringing",
+    "icon": "📱",
+    "once": true,
+    "title_th": "มือถือที่ดังอยู่บนม้านั่ง",
+    "title_en": "A Phone Ringing on a Bench",
+    "text_th": "มือถือรุ่นใหม่วางทิ้งไว้บนม้านั่ง ดังไม่หยุด หน้าจอขึ้นว่า “แม่” โทรมาเป็นครั้งที่เก้า",
+    "text_en": "A new phone has been left on a bench, ringing nonstop. The screen says “Mom” — the ninth call.",
+    "choices": [
+      {
+        "label_th": "รับสาย",
+        "label_en": "Answer it",
+        "effects": {
+          "hope": 10,
+          "rep": 4,
+          "cash": [
+            1,
+            3
+          ]
+        },
+        "text_th": "แม่ของเจ้าของเครื่องร้องไห้ด้วยความโล่ง ลูกชายเธอวิ่งกลับมาในสิบนาที ให้เงินคุณแล้วกอดแน่น “แม่ผมจะเลิกโทรตามแล้ว เพราะคุณ”",
+        "text_en": "The owner's mother cries with relief. Her son runs back within ten minutes, pays you and hugs you hard. “Mom will finally stop calling — thanks to you.”"
+      },
+      {
+        "label_th": "เอาไปขายร้านมือถือ",
+        "label_en": "Sell it at a phone shop",
+        "effects": {
+          "cash": [
+            6,
+            9
+          ],
+          "hope": -10,
+          "heat": 8
+        },
+        "text_th": "ร้านให้ราคาต่ำกว่าครึ่ง และจดหน้าคุณไว้ คืนนั้นคุณฝันว่ามือถือยังดังอยู่",
+        "text_en": "The shop pays less than half and takes a good look at your face. That night you dream the phone is still ringing."
       }
     ]
   }

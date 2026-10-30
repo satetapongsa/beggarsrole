@@ -3,9 +3,12 @@
 // every player name with how many lives it started and its bests, and the survivors' hall: players
 // who got off the street alive, ranked by how many days their longest surviving life lasted. &name= limits the lives to one player.
 // GET ?life=<runId>  → one life's full story: where it ended, why, its timeline and final stats.
+// GET ?day=YYYY-MM-DD  → the daily survival board: lives finished that Bangkok day, one row per name
+// (their longest life that day, whether it escaped or died), longest first. Each day starts empty.
 // Unlike /api/leaderboard this does not fold a name into one row: each life is its own entry.
 
 import { DATA } from "@/lib/data";
+import { isDailyDate } from "@/lib/daily";
 import { getDb, json, offline } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -88,6 +91,21 @@ export interface LifeStory {
   at: number;
 }
 
+/** One player's longest life on a given day. */
+export interface DayRow {
+  id: string;
+  rank: number;
+  name: string;
+  days: number;
+  age: number;
+  score: number;
+  endingId: string;
+  cityId: string;
+  /** lives this name finished that day */
+  lives: number;
+  at: number;
+}
+
 export interface Records {
   totalDays: number;
   avgDays: number;
@@ -147,6 +165,39 @@ export async function GET(req: Request) {
       story: (r.story as LifeStory["story"]) ?? null, at: e.at,
     };
     return json({ ok: true, life });
+  }
+  const day = params.get("day");
+  if (day !== null) {
+    if (!isDailyDate(day)) return json({ ok: false, error: "bad_request" }, 400);
+    // a Bangkok calendar day, as on the rest of the boards
+    const [rows, [totals]] = await sql.transaction([
+      sql`select id, name, days, age, score, ending_id, city_id, created_at, lives from (
+            select distinct on (lower(name)) id, name, days, age, score, ending_id, city_id, created_at,
+                   count(*) over (partition by lower(name))::int as lives
+            from runs
+            where name is not null and not hidden
+              and created_at >= ${day}::date::timestamp at time zone 'Asia/Bangkok'
+              and created_at < (${day}::date + 1)::timestamp at time zone 'Asia/Bangkok'
+            order by lower(name), days desc, score desc, created_at
+          ) best order by days desc, score desc, created_at limit ${TOP}`,
+      sql`select count(*)::int as lives, count(distinct lower(name))::int as players from runs
+          where not hidden
+            and created_at >= ${day}::date::timestamp at time zone 'Asia/Bangkok'
+            and created_at < (${day}::date + 1)::timestamp at time zone 'Asia/Bangkok'`,
+    ]);
+    const entries: DayRow[] = rows.map((r, i) => ({
+      id: String(r.id),
+      rank: i + 1,
+      name: String(r.name),
+      days: Number(r.days),
+      age: Number(r.age),
+      score: Number(r.score),
+      endingId: String(r.ending_id),
+      cityId: String(r.city_id),
+      lives: Number(r.lives),
+      at: new Date(String(r.created_at)).getTime(),
+    }));
+    return json({ ok: true, day, entries, lives: Number(totals.lives), players: Number(totals.players) });
   }
   const sort = params.get("sort") ?? "score";
   const name = params.get("name") || null;

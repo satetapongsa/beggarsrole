@@ -12,6 +12,12 @@ export interface Release {
 
 export const CHANGELOG: Release[] = [
   {
+    version: "1.24",
+    date: "2026-10-30",
+    th: "สถิติรายวัน: ใครรอดนานสุดในแต่ละวัน เริ่มนับใหม่ทุกเที่ยงคืน ดูย้อนหลังได้ 7 วัน กระดานคะแนนแบ่งเป็นแท็บด้านบน ไม่ต้องเลื่อนยาว สถานที่ใหม่เมืองละ 1 แห่งพร้อมฉากของตัวเอง ตัวละครที่จะเจอซ้ำ 3 คน (เด็กข้างถนน ยายขายดอกไม้ อดีตตำรวจ) ตอนจบใหม่ 2 แบบ เหตุการณ์ใหม่กว่า 30 อัน และปรับหน้าจอให้พอดีทุกขนาด",
+    en: "Daily stats: the longest survivor of each day, reset every midnight, with the last 7 days to browse. The leaderboard is now split into tabs at the top. A new real place in every city with its own scene, 3 recurring characters (a street kid, an old flower seller, an ex-policeman), 2 new endings, 30+ new events, and layouts checked to fit every screen size.",
+  },
+  {
     version: "1.23",
     date: "2026-10-28",
     th: "ประวัติชีวิตบนกระดานคะแนน กดที่ผู้รอดชีวิตหรือชีวิตไหนก็ได้ เพื่อดูว่ารอดกี่วัน เหลือเงินเท่าไหร่ จบเกมที่สถานที่ไหน ฉากจบเป็นอย่างไร จบเพราะอะไร และไทม์ไลน์ทั้งชีวิต ผู้รอดชีวิตอันดับ 1 เปิดให้ดูเลย",

@@ -317,9 +317,10 @@ export default function PlayPage() {
             label={lang === "th" ? spot.name_th : spot.name_en}
           />
 
-          <div className="flex items-center justify-between gap-2 text-xs text-stone-400">
-            <span>📍 {lang === "th" ? spot.name_th : spot.name_en}</span>
-            <div className="flex items-center gap-1" aria-label="phase">
+          {/* on narrow screens the place name takes its own line so nothing wraps mid-word */}
+          <div className="flex flex-wrap items-center gap-2 text-xs text-stone-400">
+            <span className="min-w-0 basis-full truncate sm:flex-1 sm:basis-auto">📍 {lang === "th" ? spot.name_th : spot.name_en}</span>
+            <div className="flex items-center gap-1 whitespace-nowrap" aria-label="phase">
               {(["morning", "afternoon", "night"] as const).map((p) => (
                 <span
                   key={p}
@@ -329,7 +330,7 @@ export default function PlayPage() {
                 </span>
               ))}
             </div>
-            <button type="button" className="rounded border border-night-600 px-2 py-0.5 lg:hidden" onClick={() => setShowDetails((v) => !v)}>
+            <button type="button" className="ml-auto whitespace-nowrap rounded border border-night-600 px-2 py-0.5 lg:hidden" onClick={() => setShowDetails((v) => !v)}>
               {showDetails ? t("hud.hide") : t("hud.details")}
             </button>
           </div>

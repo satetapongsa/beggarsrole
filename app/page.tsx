@@ -152,7 +152,7 @@ export default function TitlePage() {
         </button>
         {daily &&
           (dailyDone ? (
-            <button type="button" onClick={() => router.push("/leaderboard?board=daily")} className="rounded-lg border border-sky-800 bg-sky-950/40 px-6 py-2.5 text-sm text-sky-200 hover:bg-sky-900/40">
+            <button type="button" onClick={() => router.push("/leaderboard?tab=daily")} className="rounded-lg border border-sky-800 bg-sky-950/40 px-6 py-2.5 text-sm text-sky-200 hover:bg-sky-900/40">
               📅 {t("daily.done", { n: daily.number })}
             </button>
           ) : (

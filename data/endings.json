@@ -668,5 +668,39 @@
     "epitaph_en": "The morning news mentions a fire in the cardboard shelters under the bridge. No names. The friend whose things you ran back for made it out. He comes back to the spot every year and leaves a bottle of water, because that night was so hot.",
     "line_th": "ฉันวิ่งกลับไปเพราะของพวกนั้นคือทั้งชีวิตของเขา",
     "line_en": "I ran back because those things were his whole life."
+  },
+  {
+    "id": "big_sibling",
+    "title_th": "พี่ใหญ่ของใครสักคน",
+    "title_en": "Somebody's Big Sibling",
+    "rarity": "epic",
+    "icon": "🎒",
+    "priority": 90,
+    "conditions": {
+      "flags": [
+        "big_sibling"
+      ]
+    },
+    "epitaph_th": "คุณดูแลหอพักเด็กชายสามสิบคน ทุกคนเรียกคุณว่าพี่ เด็กที่เคยเดินตามคุณสามช่วงตึกตอนนี้สอนการบ้านน้องๆ ในหอ และยังเก็บรองเท้าข้างนั้นไว้ใต้เตียง",
+    "epitaph_en": "You look after a dorm of thirty boys, and every one of them calls you big brother or sister. The kid who once followed you for three blocks now helps the little ones with homework — and still keeps that odd shoe under his bed.",
+    "line_th": "ฉันไม่มีอะไรให้เขาเลย นอกจากไม่ไล่เขาไป",
+    "line_en": "I had nothing to give him, except not sending him away."
+  },
+  {
+    "id": "flower_cart",
+    "title_th": "รถดอกไม้ของยาย",
+    "title_en": "Grandma's Flower Cart",
+    "rarity": "rare",
+    "icon": "🌼",
+    "priority": 79,
+    "conditions": {
+      "flags": [
+        "flower_cart"
+      ]
+    },
+    "epitaph_th": "ทุกสายคุณเข็นรถดอกไม้ขึ้นเนินเดิม ลูกค้าประจำของยายกลายเป็นลูกค้าประจำของคุณ มาลัยทุกพวงร้อยด้วยปมแบบของยาย ทุกเดือนคุณส่งรูปรถเข็นไปให้ยายดูที่ต่างจังหวัด",
+    "epitaph_en": "Every late morning you push the flower cart up the same hill. Her regulars are your regulars now. Every garland is tied with her knot, and every month you send her a photo of the cart in the countryside.",
+    "line_th": "ฉันขายดอกไม้ แต่สิ่งที่ยายให้มาคือคนทั้งถนน",
+    "line_en": "I sell flowers, but what she really gave me was the whole street."
   }
 ]

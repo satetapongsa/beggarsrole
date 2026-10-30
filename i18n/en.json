@@ -521,5 +521,22 @@
   "cause.storm": "a storm",
   "cause.age": "old age",
   "cause.injury": "injuries",
-  "story.dog": "the dog"
+  "story.dog": "the dog",
+  "daybd.title": "Longest Survivor of the Day",
+  "daybd.subtitle": "Daily stats: lives finished that day, ranked by days survived, one row per name. Resets every midnight (Bangkok time).",
+  "daybd.today": "Today",
+  "daybd.yesterday": "Yesterday",
+  "daybd.counts": "{players} players finished {lives} lives that day",
+  "daybd.emptyToday": "Nobody has finished a life today yet. The daily crown is up for grabs!",
+  "daybd.empty": "Nobody finished a life that day",
+  "daybd.died": "died",
+  "daybd.escaped": "got out",
+  "daybd.lives": "{n} lives that day",
+  "tabs.label": "Leaderboard sections",
+  "tabs.overview": "Overview",
+  "tabs.hall": "Hall of Honour",
+  "tabs.daily": "Daily",
+  "tabs.players": "Players",
+  "tabs.lives": "All lives",
+  "more.show": "Show more ({n} left)"
 }

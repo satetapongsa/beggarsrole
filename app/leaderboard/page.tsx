@@ -5,6 +5,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import DailyBoard from "@/components/DailyBoard";
 import Flag from "@/components/Flag";
 import LifeStoryPanel from "@/components/LifeStoryPanel";
 import type { LifeEntry, PlayerRow, Records, SurvivorRow } from "@/app/api/records/route";
@@ -15,6 +16,16 @@ import { loadNickname } from "@/lib/storage";
 
 type Sort = "score" | "days" | "money";
 
+// the page is split into tabs so nobody has to scroll past everything to find one board
+type Tab = "overview" | "hall" | "daily" | "players" | "lives";
+const TABS: { id: Tab; icon: string }[] = [
+  { id: "overview", icon: "📊" },
+  { id: "hall", icon: "🏛️" },
+  { id: "daily", icon: "🗓️" },
+  { id: "players", icon: "👥" },
+  { id: "lives", icon: "📜" },
+];
+
 /** Honour medals by how many days the surviving life lasted, highest first. */
 const MEDALS = [
   { min: 365, icon: "💎", key: "diamond", cls: "border-cyan-400/60 bg-cyan-900/30 text-cyan-200" },
@@ -23,6 +34,8 @@ const MEDALS = [
   { min: 0, icon: "🥉", key: "bronze", cls: "border-orange-700/60 bg-orange-950/40 text-orange-200" },
 ] as const;
 const medalFor = (days: number) => MEDALS.find((m) => days >= m.min)!;
+/** Rows a long list shows before "show more". */
+const PAGE = 25;
 const SORTS: Sort[] = ["score", "days", "money"];
 
 interface Stats {
@@ -47,6 +60,9 @@ export default function LeaderboardPage() {
   const [allPlayers, setAllPlayers] = useState(false);
   // a player picked from the players list: the lives list shows only their lives
   const [who, setWho] = useState<string | null>(null);
+  const [tab, setTab] = useState<Tab>("overview");
+  const [livesShown, setLivesShown] = useState(PAGE);
+  const [hallShown, setHallShown] = useState(PAGE);
   // life stories opened from the record cards and from the survivors' hall (the champion's opens by itself)
   const [cardStory, setCardStory] = useState<string | null>(null);
   const [hallStory, setHallStory] = useState<string | null | undefined>(undefined);
@@ -54,6 +70,8 @@ export default function LeaderboardPage() {
   useEffect(() => {
     const s = new URLSearchParams(window.location.search).get("sort") as Sort | null;
     if (s && SORTS.includes(s)) setSort(s);
+    const tb = new URLSearchParams(window.location.search).get("tab") as Tab | null;
+    if (tb && TABS.some((x) => x.id === tb)) setTab(tb);
     setMine(loadNickname());
     fetch("/api/stats")
       .then((r) => r.json())
@@ -64,6 +82,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     let alive = true;
     setEntries(null);
+    setLivesShown(PAGE);
     setOpen(null);
     const q = new URLSearchParams({ sort, ...(who ? { name: who } : {}) });
     fetch(`/api/records?${q}`)
@@ -83,9 +102,18 @@ export default function LeaderboardPage() {
     };
   }, [sort, who]);
 
+  // switching tabs keeps the address shareable (?tab=daily) without reloading the page
+  const openTab = (next: Tab) => {
+    setTab(next);
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", next);
+    window.history.replaceState(null, "", url);
+  };
+
   const pickPlayer = (name: string) => {
     setWho(who === name ? null : name);
-    document.getElementById("lives")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    openTab("lives");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const cityName = (id: string) => {
@@ -131,8 +159,25 @@ export default function LeaderboardPage() {
         <p className="mt-8 text-center text-sm text-stone-400">{t("lb.offline")}</p>
       ) : (
         <>
+          <nav className="sticky top-0 z-20 -mx-4 mt-5 border-b border-night-700 bg-night-950/90 px-4 py-2 backdrop-blur" aria-label={t("tabs.label")}>
+            <div className="flex gap-1.5 overflow-x-auto">
+              {TABS.map((tb) => (
+                <button
+                  key={tb.id}
+                  type="button"
+                  onClick={() => openTab(tb.id)}
+                  aria-current={tab === tb.id ? "page" : undefined}
+                  className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm ${tab === tb.id ? "bg-lamp-500 font-semibold text-black" : "border border-night-600 text-stone-300 hover:bg-night-800"}`}
+                >
+                  {tb.icon} {t(`tabs.${tb.id}`)}
+                </button>
+              ))}
+            </div>
+          </nav>
+          {tab === "overview" && (
+            <>
           {stats && (
-            <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {(
                 [
                   ["👥", t("lb.stat.players"), stats.players],
@@ -200,9 +245,13 @@ export default function LeaderboardPage() {
               <LifeStoryPanel id={cardStory} />
             </section>
           )}
+            </>
+          )}
 
+          {tab === "hall" && (
+            <>
           {survivors && (
-            <section className="mt-6 overflow-hidden rounded-xl border-2 border-amber-500/50 bg-gradient-to-b from-amber-950/40 to-night-900 shadow-lg shadow-amber-900/20">
+            <section className="mt-4 overflow-hidden rounded-xl border-2 border-amber-500/50 bg-gradient-to-b from-amber-950/40 to-night-900 shadow-lg shadow-amber-900/20">
               <div className="px-4 pt-4 text-center">
                 <h2 className="font-pixel text-2xl font-bold text-amber-300">🏛️ {t("hall.title")}</h2>
                 <p className="mt-1 text-xs text-stone-400">{t("hall.subtitle")}</p>
@@ -218,7 +267,7 @@ export default function LeaderboardPage() {
                 <p className="p-6 text-center text-sm text-stone-400">{t("hall.empty")}</p>
               ) : (
                 <ol className="mt-3">
-                  {survivors.map((sv) => {
+                  {survivors.slice(0, hallShown).map((sv) => {
                     const m = medalFor(sv.days);
                     return (
                       <li key={sv.name} className={`border-t border-amber-900/40 ${isMine(sv.name) ? "bg-lamp-500/10" : ""}`}>
@@ -259,9 +308,24 @@ export default function LeaderboardPage() {
                   })}
                 </ol>
               )}
+              {survivors.length > hallShown && (
+                <button type="button" onClick={() => setHallShown((n) => n + PAGE)} className="w-full border-t border-amber-900/40 py-2.5 text-sm text-amber-200 hover:bg-amber-950/30">
+                  {t("more.show", { n: formatNumber(survivors.length - hallShown) })}
+                </button>
+              )}
             </section>
           )}
+            </>
+          )}
 
+          {tab === "daily" && (
+            <>
+          <DailyBoard mine={mine} />
+            </>
+          )}
+
+          {tab === "players" && (
+            <>
           {players && players.length > 0 && (
             <section className="mt-6 overflow-hidden rounded-xl border border-night-700 bg-night-900">
               <h2 className="px-4 pt-4 text-sm font-semibold uppercase tracking-wider text-lamp-300">
@@ -294,8 +358,12 @@ export default function LeaderboardPage() {
               )}
             </section>
           )}
+            </>
+          )}
 
-          <div id="lives" className="mt-6 flex scroll-mt-4 flex-wrap items-center gap-2">
+          {tab === "lives" && (
+            <>
+          <div id="lives" className="mt-4 flex flex-wrap items-center gap-2">
             {who && (
               <button type="button" onClick={() => setWho(null)} className="rounded-full bg-sky-800 px-4 py-1.5 text-sm text-sky-100 hover:bg-sky-700">
                 {t("rec.livesOf", { name: who })} ✕
@@ -320,7 +388,7 @@ export default function LeaderboardPage() {
               <p className="p-6 text-center text-sm text-stone-400">{t("lb.empty")}</p>
             ) : (
               <ol>
-                {entries.map((e) => {
+                {entries.slice(0, livesShown).map((e) => {
                   const isOpen = open === e.rank;
                   const origin = e.originId ? DATA.origin[e.originId] : null;
                   const charName = lang === "th" ? e.charTh : e.charEn;
@@ -372,9 +440,18 @@ export default function LeaderboardPage() {
                 })}
               </ol>
             )}
+            {entries && entries.length > livesShown && (
+              <button type="button" onClick={() => setLivesShown((n) => n + PAGE)} className="w-full border-t border-night-800 py-2.5 text-sm text-stone-300 hover:bg-night-800">
+                {t("more.show", { n: formatNumber(entries.length - livesShown) })}
+              </button>
+            )}
           </section>
           <p className="mt-2 text-center text-[11px] text-stone-500">{t("rec.note")}</p>
+            </>
+          )}
 
+          {tab === "overview" && (
+            <>
           {stats && stats.endings.length > 0 && (
             <section className="mt-6 rounded-xl border border-night-700 bg-night-900 p-5">
               <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-lamp-300">{t("lb.commonEndings")}</h2>
@@ -390,6 +467,8 @@ export default function LeaderboardPage() {
           )}
 
           <p className="mt-6 text-center text-[11px] leading-relaxed text-stone-500">{t("lb.howScore")}</p>
+            </>
+          )}
         </>
       )}
     </main>

@@ -12,6 +12,12 @@ export interface Release {
 
 export const CHANGELOG: Release[] = [
   {
+    version: "1.25",
+    date: "2026-10-30",
+    th: "🏮 ตัวละครลับปรากฏตัวแล้ว! บางคืน ถ้าหัวใจยังไม่ยอมแพ้ คุณอาจเห็นใครบางคนที่คนอื่นมองไม่เห็น พร้อมตอนจบลับระดับตำนาน ปลดล็อกตัวเลือกที่เคยต้องมีอาชีพเดิม (เล่นดนตรี สอนหนังสือ และอื่นๆ ใครก็ทำได้แล้ว) และแก้กรอบหัวกระดานคะแนน",
+    en: "🏮 A secret character has arrived! On some nights, if your heart hasn't given up, you may see someone nobody else can — with a hidden legendary ending. Choices that needed a past profession are open to everyone (busking, teaching and more), and the leaderboard header frame is fixed.",
+  },
+  {
     version: "1.24",
     date: "2026-10-30",
     th: "สถิติรายวัน: ใครรอดนานสุดในแต่ละวัน เริ่มนับใหม่ทุกเที่ยงคืน ดูย้อนหลังได้ 7 วัน กระดานคะแนนแบ่งเป็นแท็บด้านบน ไม่ต้องเลื่อนยาว สถานที่ใหม่เมืองละ 1 แห่งพร้อมฉากของตัวเอง ตัวละครที่จะเจอซ้ำ 3 คน (เด็กข้างถนน ยายขายดอกไม้ อดีตตำรวจ) ตอนจบใหม่ 2 แบบ เหตุการณ์ใหม่กว่า 30 อัน และปรับหน้าจอให้พอดีทุกขนาด",

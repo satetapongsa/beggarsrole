@@ -82,11 +82,6 @@
       {
         "label_th": "วาดรูปเธอให้กลับ",
         "label_en": "Draw her one back",
-        "requires": {
-          "anyTraits": [
-            "artist"
-          ]
-        },
         "effects": {
           "items": {
             "drawing": 1
@@ -827,13 +822,8 @@
         "text_en": "Two hundred pages. Two hundred pages somewhere else."
       },
       {
-        "label_th": "คุยเรื่องหนังสือที่เคยสอน",
-        "label_en": "Talk about the books you used to teach",
-        "requires": {
-          "traits": [
-            "former_teacher"
-          ]
-        },
+        "label_th": "คุยเรื่องหนังสือที่เคยอ่าน",
+        "label_en": "Talk about the books you've read",
         "effects": {
           "items": {
             "book": 2
@@ -845,7 +835,7 @@
           }
         },
         "text_th": "ลุงฟังจนลืมขายของ แล้วให้หนังสืออีกเล่ม “มาคุยอีกนะ ครู”",
-        "text_en": "He forgets to sell anything while you talk, then hands you another book. “Come talk again, teacher.”"
+        "text_en": "He forgets to sell anything while you talk, then hands you another book. “Come talk again, professor.”"
       }
     ]
   },
@@ -1706,11 +1696,6 @@
       {
         "label_th": "เล่นดนตรีประกอบ",
         "label_en": "Accompany them",
-        "requires": {
-          "traits": [
-            "musician"
-          ]
-        },
         "effects": {
           "hope": 14,
           "rep": 7
@@ -1925,11 +1910,6 @@
       {
         "label_th": "แกล้งพลิกตัวทับกระเป๋า",
         "label_en": "Roll over onto your pocket",
-        "requires": {
-          "traits": [
-            "street_smart"
-          ]
-        },
         "effects": {
           "hope": 2
         },
@@ -2516,11 +2496,6 @@
       {
         "label_th": "นั่งลงช้าๆ ยื่นขนมปัง",
         "label_en": "Sit down slowly, offer some bread",
-        "requires": {
-          "traits": [
-            "animal_lover"
-          ]
-        },
         "effects": {
           "counters": {
             "dogCare": 1
@@ -2708,11 +2683,6 @@
       {
         "label_th": "คุณย้ายที่ซ่อนไปแล้วตั้งแต่เมื่อวาน",
         "label_en": "You already moved it yesterday",
-        "requires": {
-          "traits": [
-            "street_smart"
-          ]
-        },
         "effects": {
           "hope": 5
         },
@@ -2936,11 +2906,6 @@
       {
         "label_th": "สังเกตว่ารองเท้าเขาไม่ใช่ของตำรวจ",
         "label_en": "Notice his shoes aren't police issue",
-        "requires": {
-          "traits": [
-            "street_smart"
-          ]
-        },
         "effects": {
           "rep": 5,
           "hope": 4
@@ -3412,11 +3377,6 @@
       {
         "label_th": "วิ่งหนี",
         "label_en": "Run",
-        "requires": {
-          "traits": [
-            "undocumented"
-          ]
-        },
         "chance": 0.5,
         "success": {
           "text_th": "คุณหายเข้าไปในตลาด หัวใจเต้นแรง ตอนนี้พวกเขาจำหน้าคุณได้",
@@ -4625,9 +4585,6 @@
       "afterActions": [
         "busk"
       ],
-      "traits": [
-        "artist"
-      ],
       "counters": {
         "busks": 5
       }
@@ -5408,9 +5365,6 @@
       "afterActions": [
         "busk"
       ],
-      "traits": [
-        "musician"
-      ],
       "counters": {
         "busks": 25,
         "viral": 1
@@ -5457,9 +5411,6 @@
     "once": true,
     "major": true,
     "conditions": {
-      "traits": [
-        "former_teacher"
-      ],
       "counters": {
         "taught": 20
       }
@@ -5903,9 +5854,6 @@
     "conditions": {
       "afterActions": [
         "busk"
-      ],
-      "traits": [
-        "artist"
       ]
     },
     "title_th": "ภาพชอล์กดังข้ามคืน",
@@ -6885,11 +6833,6 @@
       {
         "label_th": "เกาคางให้",
         "label_en": "Scratch its chin",
-        "requires": {
-          "traits": [
-            "animal_lover"
-          ]
-        },
         "effects": {
           "cash": [
             2,
@@ -7309,11 +7252,6 @@
       {
         "label_th": "ขอให้ดูเรื่องโชคลาภ",
         "label_en": "Ask about luck",
-        "requires": {
-          "traits": [
-            "lucky"
-          ]
-        },
         "effects": {
           "hope": 14,
           "items": {
@@ -8194,9 +8132,6 @@
       ],
       "cities": [
         "mexico_city"
-      ],
-      "traits": [
-        "musician"
       ]
     },
     "title_th": "วงมาเรียชีขาดคน",
@@ -8534,12 +8469,6 @@
       {
         "label_th": "ขึ้นเล่นบนบันได",
         "label_en": "Play on the steps",
-        "requires": {
-          "anyTraits": [
-            "musician",
-            "artist"
-          ]
-        },
         "effects": {
           "cash": [
             6,
@@ -13324,6 +13253,206 @@
         },
         "text_th": "ร้านให้ราคาต่ำกว่าครึ่ง และจดหน้าคุณไว้ คืนนั้นคุณฝันว่ามือถือยังดังอยู่",
         "text_en": "The shop pays less than half and takes a good look at your face. That night you dream the phone is still ringing."
+      }
+    ]
+  },
+  {
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "absurd"
+    ],
+    "weight": 3,
+    "id": "lamp_first",
+    "icon": "🏮",
+    "once": true,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "minDay": 20,
+      "min": {
+        "hope": 40
+      }
+    },
+    "title_th": "ชายผู้จุดตะเกียง",
+    "title_en": "The Man Who Lights the Lamps",
+    "text_th": "ไฟถนนทั้งซอยดับพร้อมกัน แล้วชายชราในเสื้อคลุมยาวก็ปรากฏตัว ถือบันไดไม้กับตะเกียงน้ำมัน เขาปีนขึ้นเสาทีละต้น ไฟกลับมาสว่างทีละดวง ไม่มีใครเห็นเขานอกจากคุณ",
+    "text_en": "Every streetlight on the lane goes out at once. Then an old man in a long coat appears, carrying a wooden ladder and an oil lamp. He climbs each post in turn, and the lights come back one by one. Nobody seems to see him but you.",
+    "choices": [
+      {
+        "label_th": "ช่วยจับบันไดให้",
+        "label_en": "Hold the ladder for him",
+        "effects": {
+          "hope": 10,
+          "counters": {
+            "lampBond": 1
+          }
+        },
+        "text_th": "ถึงเสาต้นสุดท้าย เขามองคุณนานแล้วพูดว่า “คุณมองเห็นผม แปลว่าคุณยังไม่ยอมแพ้” แล้วเดินหายไปในหมอก",
+        "text_en": "At the last post he studies you for a long moment. “You can see me. That means you haven't given up.” Then he walks off into the mist."
+      },
+      {
+        "label_th": "ขยี้ตาแล้วมองใหม่",
+        "label_en": "Rub your eyes and look again",
+        "effects": {
+          "hope": 4
+        },
+        "text_th": "ไฟสว่างครบทุกดวง แต่ชายคนนั้นหายไปแล้ว เหลือแค่กลิ่นน้ำมันตะเกียงจางๆ",
+        "text_en": "Every light is on again, but the man is gone. Only a faint smell of lamp oil remains."
+      }
+    ]
+  },
+  {
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "absurd"
+    ],
+    "weight": 3,
+    "id": "lamp_stories",
+    "icon": "🏮",
+    "once": true,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "counters": {
+        "lampBond": 1
+      }
+    },
+    "title_th": "เรื่องเล่าใต้แสงตะเกียง",
+    "title_en": "Stories Under the Lamp",
+    "text_th": "ชายชราผู้จุดตะเกียงนั่งพักอยู่ใต้เสาไฟ เขาเล่าว่าจุดไฟถนนสายนี้มาร้อยปี และจำได้ทุกคนที่เคยนอนใต้แสงของมัน ทั้งคนที่จากไป และคนที่ลุกขึ้นเดินออกไปได้",
+    "text_en": "The lamplighter rests beneath a post. He says he has lit this street for a hundred years and remembers everyone who ever slept under its light — those who died, and those who got up and walked away.",
+    "choices": [
+      {
+        "label_th": "ขอฟังเรื่องคนที่เดินออกไปได้",
+        "label_en": "Ask about the ones who got out",
+        "effects": {
+          "hope": 15,
+          "counters": {
+            "lampBond": 1
+          }
+        },
+        "text_th": "เขาเล่าจนฟ้าสาง ทุกเรื่องเริ่มเหมือนเรื่องของคุณ และไม่มีเรื่องไหนจบเหมือนกันสักเรื่อง",
+        "text_en": "He talks until dawn. Every story begins like yours, and no two end the same way."
+      },
+      {
+        "label_th": "ถามว่าทำไมไม่มีใครเห็นเขา",
+        "label_en": "Ask why nobody else sees him",
+        "effects": {
+          "hope": 6,
+          "counters": {
+            "lampBond": 1
+          }
+        },
+        "text_th": "“คนที่รีบเดินผ่านไม่เคยเงยหน้ามองไฟถนน” เขายิ้ม “คนที่นอนใต้มันทุกคืนต่างหากที่มองเห็น”",
+        "text_en": "“People in a hurry never look up at streetlights,” he smiles. “The ones who sleep beneath them every night do.”"
+      }
+    ]
+  },
+  {
+    "trigger": "any",
+    "tags": [
+      "kindness",
+      "absurd"
+    ],
+    "weight": 3,
+    "id": "lamp_test",
+    "icon": "🏮",
+    "once": true,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "counters": {
+        "lampBond": 2
+      }
+    },
+    "title_th": "คืนที่ตะเกียงริบหรี่",
+    "title_en": "The Night the Lamp Flickers",
+    "text_th": "คืนนี้หนาวผิดปกติ ตะเกียงของชายชราริบหรี่จนเกือบดับ ใต้เสาไฟต้นสุดท้ายมีแม่ลูกนอนกอดกันตัวสั่น เขาไม่พูดอะไร แค่มองคุณ แล้วมองผ้าห่มของคุณ",
+    "text_en": "It's unusually cold tonight, and the old man's lamp is flickering almost out. Under the last post a mother and child huddle together, shivering. He says nothing — just looks at you, then at your blanket.",
+    "choices": [
+      {
+        "label_th": "ห่มผ้าให้แม่ลูกคู่นั้น",
+        "label_en": "Wrap them in your blanket",
+        "effects": {
+          "hope": 12,
+          "rep": 6,
+          "health": -4,
+          "counters": {
+            "lampBond": 1,
+            "helped": 1
+          },
+          "items": {
+            "blanket": -1
+          }
+        },
+        "text_th": "ตะเกียงในมือชายชราสว่างขึ้นทันทีเหมือนมีใครเติมน้ำมัน คืนนั้นคุณหนาวจนฟันกระทบกัน แต่ไม่ได้หนาวในใจเลย",
+        "text_en": "The lamp in his hand flares bright, as if someone refilled it. You shiver until your teeth chatter that night, but not on the inside."
+      },
+      {
+        "label_th": "นั่งกอดเข่าเฝ้าพวกเขาไว้ทั้งคืน",
+        "label_en": "Sit up and keep watch over them",
+        "effects": {
+          "hope": 8,
+          "energy": -15,
+          "counters": {
+            "lampBond": 1
+          }
+        },
+        "text_th": "คุณนั่งข้างพวกเขาจนเช้า ตะเกียงไม่ดับ แต่ก็ไม่ได้สว่างขึ้น",
+        "text_en": "You sit with them until morning. The lamp doesn't go out, but it doesn't brighten either."
+      }
+    ]
+  },
+  {
+    "trigger": "any",
+    "tags": [
+      "opportunity",
+      "absurd"
+    ],
+    "weight": 6,
+    "id": "lamp_key",
+    "icon": "🗝️",
+    "once": true,
+    "major": true,
+    "conditions": {
+      "phases": [
+        "night"
+      ],
+      "counters": {
+        "lampBond": 3,
+        "helped": 5
+      }
+    },
+    "title_th": "กุญแจตะเกียง",
+    "title_en": "The Lamp Key",
+    "text_th": "ชายชรายื่นกุญแจทองเหลืองเก่าๆ ให้คุณ “ผมจุดไฟมานานพอแล้ว เมืองนี้ต้องการคนที่รู้ว่าความมืดบนถนนมันเป็นยังไง คนที่จะเห็นคนที่คนอื่นมองไม่เห็น”",
+    "text_en": "The old man holds out a worn brass key. “I've lit these lamps long enough. This city needs someone who knows what the dark on the street feels like. Someone who sees the people others don't.”",
+    "choices": [
+      {
+        "label_th": "รับกุญแจ",
+        "label_en": "Take the key",
+        "effects": {
+          "flags": [
+            "lamplighter"
+          ],
+          "hope": 40
+        },
+        "text_th": "ทันทีที่กุญแจแตะมือ ไฟถนนทั้งเมืองสว่างขึ้นพร้อมกัน ชายชราโค้งให้ แล้วกลายเป็นแสงไฟดวงหนึ่ง",
+        "text_en": "The moment the key touches your palm, every streetlight in the city blazes on at once. The old man bows — and becomes one of the lights."
+      },
+      {
+        "label_th": "ยังไม่พร้อม",
+        "label_en": "Not yet",
+        "effects": {
+          "hope": 10
+        },
+        "text_th": "เขาเก็บกุญแจกลับเข้ากระเป๋า “ผมจะรอ ผมรอเก่ง”",
+        "text_en": "He slips the key back into his pocket. “I'll wait. I'm good at waiting.”"
       }
     ]
   }

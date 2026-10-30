@@ -159,15 +159,15 @@ export default function LeaderboardPage() {
         <p className="mt-8 text-center text-sm text-stone-400">{t("lb.offline")}</p>
       ) : (
         <>
-          <nav className="sticky top-0 z-20 -mx-4 mt-5 border-b border-night-700 bg-night-950/90 px-4 py-2 backdrop-blur" aria-label={t("tabs.label")}>
-            <div className="flex gap-1.5 overflow-x-auto">
+          <nav className="sticky top-0 z-20 mt-5 border-b border-night-700 bg-night-950/95 py-2 backdrop-blur" aria-label={t("tabs.label")}>
+            <div className="flex gap-1.5 overflow-x-auto sm:grid sm:grid-cols-5 sm:overflow-visible">
               {TABS.map((tb) => (
                 <button
                   key={tb.id}
                   type="button"
                   onClick={() => openTab(tb.id)}
                   aria-current={tab === tb.id ? "page" : undefined}
-                  className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm ${tab === tb.id ? "bg-lamp-500 font-semibold text-black" : "border border-night-600 text-stone-300 hover:bg-night-800"}`}
+                  className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm ${tab === tb.id ? "bg-lamp-500 font-semibold text-black" : "border border-night-600 text-stone-300 hover:bg-night-800"}`}
                 >
                   {tb.icon} {t(`tabs.${tb.id}`)}
                 </button>
@@ -255,7 +255,7 @@ export default function LeaderboardPage() {
               <div className="px-4 pt-4 text-center">
                 <h2 className="font-pixel text-2xl font-bold text-amber-300">🏛️ {t("hall.title")}</h2>
                 <p className="mt-1 text-xs text-stone-400">{t("hall.subtitle")}</p>
-                <div className="mt-3 flex flex-wrap justify-center gap-1.5 text-[11px]">
+                <div className="mt-3 grid grid-cols-2 gap-1.5 text-[11px] sm:grid-cols-4">
                   {MEDALS.map((m) => (
                     <span key={m.key} className={`rounded-full border px-2 py-0.5 ${m.cls}`}>
                       {m.icon} {t(`hall.medal.${m.key}`)} · {m.min > 0 ? t("hall.medalMin", { days: m.min }) : t("hall.medalAny")}

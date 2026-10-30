@@ -702,5 +702,23 @@
     "epitaph_en": "Every late morning you push the flower cart up the same hill. Her regulars are your regulars now. Every garland is tied with her knot, and every month you send her a photo of the cart in the countryside.",
     "line_th": "ฉันขายดอกไม้ แต่สิ่งที่ยายให้มาคือคนทั้งถนน",
     "line_en": "I sell flowers, but what she really gave me was the whole street."
+  },
+  {
+    "id": "lamplighter",
+    "title_th": "ผู้จุดตะเกียงคนใหม่",
+    "title_en": "The New Lamplighter",
+    "rarity": "legendary",
+    "icon": "🏮",
+    "priority": 96,
+    "hidden": true,
+    "conditions": {
+      "flags": [
+        "lamplighter"
+      ]
+    },
+    "epitaph_th": "ทุกคืนเมื่อฟ้ามืด ไฟถนนสายนี้จะสว่างทีละดวง ไม่มีใครเห็นว่าใครเป็นคนจุด แต่คนที่นอนอยู่ใต้เสาไฟรู้ดี มีบางคนเฝ้ามองพวกเขาอยู่ และไม่เคยปล่อยให้คืนไหนมืดสนิท",
+    "epitaph_en": "Every night when the sky goes dark, the lamps on this street come on one by one. Nobody sees who lights them — but the people sleeping beneath them know. Someone is watching over them, and never lets a night go completely dark.",
+    "line_th": "ฉันเคยนอนอยู่ใต้แสงนี้ ตอนนี้ฉันเป็นคนจุดมันเอง",
+    "line_en": "I used to sleep under this light. Now I'm the one who lights it."
   }
 ]

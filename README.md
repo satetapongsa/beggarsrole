@@ -30,6 +30,7 @@ entirely in the browser with no login; your life autosaves as you play.
   Every city has six real places to work, and scenes that only happen at one of them: a porter job when the
   launch docks at Sadarghat, chess hustlers in Washington Square, dawn hiring vans in Sanya, the
   candle sellers outside Quiapo Church. Moving between spots is how you find them.
+- **Open to everyone.** No choice or way of earning is locked behind a past profession: anyone can busk, teach, or take the talent offers that follow.
 - **People you meet again.** A street kid who starts following you, an old flower seller who needs help up the hill, a former policeman who knows when the sweeps come. Each turns up again and again, and each story can end with a way off the street.
 - **Every life ends.** There are 39 endings: 25 that take you off the street one way or another (a job and a flat, going
   home to family, becoming a monk, a record deal, a published memoir, a gallery show, a fishing boat — or prison and

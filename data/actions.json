@@ -46,10 +46,6 @@
     "energy": 15,
     "pickSpot": true,
     "requires": {
-      "anyTraits": [
-        "musician",
-        "artist"
-      ],
       "min": {
         "hope": 5
       }
@@ -609,9 +605,6 @@
     ],
     "energy": 12,
     "requires": {
-      "traits": [
-        "former_teacher"
-      ],
       "min": {
         "hope": 10
       }
@@ -867,11 +860,6 @@
       1.8,
       3
     ],
-    "requires": {
-      "min": {
-        "health": 35
-      }
-    },
     "effects": {
       "hygiene": -6,
       "counters": {
@@ -908,11 +896,6 @@
       0.8,
       1.6
     ],
-    "requires": {
-      "min": {
-        "hygiene": 25
-      }
-    },
     "effects": {
       "hope": -1,
       "counters": {
@@ -1022,11 +1005,6 @@
       "afternoon"
     ],
     "energy": 6,
-    "requires": {
-      "min": {
-        "hygiene": 30
-      }
-    },
     "effects": {
       "hope": 5,
       "heat": -2,
@@ -1092,11 +1070,6 @@
       "afternoon"
     ],
     "energy": 16,
-    "requires": {
-      "min": {
-        "health": 30
-      }
-    },
     "effects": {
       "hunger": 20,
       "thirst": 10,
@@ -1140,11 +1113,6 @@
       2.2,
       3.2
     ],
-    "requires": {
-      "min": {
-        "rep": 35
-      }
-    },
     "effects": {
       "hope": -1,
       "heat": -3,
